@@ -1,5 +1,5 @@
 <template>
-	<p class="title">HOME</p>
+	<p class="title">Cart</p>
 </template>
 
 
@@ -12,7 +12,7 @@
 .title {
 	color: red;
 	font-family: Arial, sans-serif;
-	font-size: 50px;
+    font-size: 50px;
 }
 
 </style>

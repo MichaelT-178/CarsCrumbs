@@ -1,5 +1,5 @@
 <template>
-	<p class="title">HOME</p>
+	<p class="title">Contact</p>
 </template>
 
 

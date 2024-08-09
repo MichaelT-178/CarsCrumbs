@@ -1,17 +1,21 @@
 <template>
-	<p class="test-header">TEST WEBSITE</p>
-	<router-view />
+  <div id="app">
+    <NavBar />
+    <main class="content">
+      <router-view />
+    </main>
+  </div>
 </template>
 
 
 <script setup>
-
+import NavBar from "./components/NavBar.vue";
 </script>
 
 
 <style scoped>
-.test-header {
-	font-size: 25px;
+.content {
+  padding-top: 60px;
 }
-
 </style>
+  

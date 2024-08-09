@@ -1,0 +1,40 @@
+{
+    "Menu": [
+        {
+            "Name": "Cookie", 
+            "Emoji": "🍪",
+            "Price": 0.99,
+            "Image": "Cookie.jpg"
+        },
+        {
+            "Name": "Cake", 
+            "Emoji": "🎂",
+            "Price": 6.99,
+            "Image": "Cookie.jpg"
+        },
+        {
+            "Name": "Piece of Cake", 
+            "Emoji": "🍰",
+            "Price": 1.99,
+            "Image": "Cookie.jpg"
+        },
+        {
+            "Name": "Donut", 
+            "Emoji": "🍩",
+            "Price": 1.99,
+            "Image": "Cookie.jpg"
+        },
+        {
+            "Name": "Cupcake", 
+            "Emoji": "🧁",
+            "Price": 1.99,
+            "Image": "Cookie.jpg"
+        },
+        {
+            "Name": "Pie", 
+            "Emoji": "🥧",
+            "Price": 5.99,
+            "Image": "Cookie.jpg"
+        }
+    ]
+}
