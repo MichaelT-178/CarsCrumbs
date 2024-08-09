@@ -2,39 +2,27 @@
     "Menu": [
         {
             "Name": "Cookie", 
-            "Emoji": "🍪",
-            "Price": 0.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🍪"
         },
         {
             "Name": "Cake", 
-            "Emoji": "🎂",
-            "Price": 6.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🎂"
         },
         {
             "Name": "Piece of Cake", 
-            "Emoji": "🍰",
-            "Price": 1.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🍰"
         },
         {
             "Name": "Donut", 
-            "Emoji": "🍩",
-            "Price": 1.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🍩"
         },
         {
             "Name": "Cupcake", 
-            "Emoji": "🧁",
-            "Price": 1.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🧁"
         },
         {
             "Name": "Pie", 
-            "Emoji": "🥧",
-            "Price": 5.99,
-            "Image": "Cookie.jpg"
+            "Emoji": "🥧"
         }
     ]
 }
