@@ -52,8 +52,8 @@ updateMenuItem();
 }
 
 .item-pic {
-  width: 500;
-  height: 300;
+  width: 500px;
+  height: 300px;
 }
 
 </style>

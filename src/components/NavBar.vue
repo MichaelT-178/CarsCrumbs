@@ -167,6 +167,10 @@ html, body {
   background-color: #FFFFA6;
 }
 
+.tabs {
+  margin-right: -15px; /* Adjust this value to move the tabs further to the right */
+}
+
 .tabs ul {
   display: flex;
   list-style-type: none;
