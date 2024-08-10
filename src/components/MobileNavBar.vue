@@ -38,10 +38,30 @@
         <span class="material-icons close-icon" @click="toggleSidebar">close</span>
       </div>
       <ul>
-        <li class="tab" @click="closeSidebar"><router-link to="/">Home</router-link></li>
-        <li class="tab" @click="closeSidebar"><router-link to="/Order">Order</router-link></li>
-        <li class="tab" @click="closeSidebar"><router-link to="/About">About</router-link></li>
-        <li class="tab" @click="closeSidebar"><router-link to="/ContactUs">Contact Us</router-link></li>
+        <li class="tab" @click="closeSidebar">
+          <router-link to="/">
+            <span class="material-symbols-outlined">home</span><span class="tab-text">Home</span>
+          </router-link>
+          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+        </li>
+        <li class="tab" @click="closeSidebar">
+          <router-link to="/Order">
+            <span class="material-symbols-outlined">cookie</span><span class="tab-text">Order</span>
+          </router-link>
+          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+        </li>
+        <li class="tab" @click="closeSidebar">
+          <router-link to="/About">
+            <span class="material-symbols-outlined">person</span><span class="tab-text">About</span>
+          </router-link>
+          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+        </li>
+        <li class="tab" @click="closeSidebar">
+          <router-link to="/ContactUs">
+            <span class="material-symbols-outlined">mail</span><span class="tab-text">Contact Us</span>
+          </router-link>
+          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+        </li>
       </ul>
     </div>
 
@@ -239,11 +259,11 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 310px;
   height: 100%;
-  background-color: #333;
+  background-color: pink;
   color: #fff;
-  padding: 20px;
+  padding: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1001;
   display: flex;
@@ -251,15 +271,23 @@ html, body {
 }
 
 .sidebar-header {
+  background-color: #007bff;
+  padding: 15px 20px; /* First is vertical */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+}
+
+.sidebar-header h3 {
+  font-size: 28px;
+  margin: 0;
+  color: white;
 }
 
 .close-icon {
   cursor: pointer;
   font-size: 36px;
+  color: white;
 }
 
 .close-icon:hover {
@@ -268,14 +296,48 @@ html, body {
 
 .sidebar ul {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
 .sidebar .tab {
-  padding: 20px;
-  background-color: #444;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  padding: 15px 20px;
+  background-color: purple;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+
+#arrow {
+  margin-right: -2px;
+}
+
+#arrow:hover {
+  cursor: pointer;
+}
+
+.tab-text {
+  position: relative;
+  top: -4.25px;
+  margin: 0;
+}
+
+.sidebar .tab span.material-symbols-outlined {
+  font-size: 24px;
+  margin-right: 12px; /* Space between icon and text */
+}
+
+.sidebar .tab:hover span.material-symbols-outlined {
+  color: #FFFFA6;
+}
+
+.sidebar .tab:hover span.tab-text {
+  color: #FFFFA6;
+}
+
+.sidebar .tab:hover {
+  background-color: green;
 }
 
 .sidebar .tab a {
@@ -283,10 +345,7 @@ html, body {
   text-decoration: none;
   font-size: 20px;
   display: block;
-}
-
-.sidebar .tab a:hover {
-  text-decoration: underline;
+  width: 100%;
 }
 
 </style>
