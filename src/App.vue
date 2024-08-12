@@ -2,7 +2,7 @@
   <div id="app">
     <component :is="isMobile ? MobileNavBar : NavBar" />
     <main :class="mainClass">
-      <router-view />
+      <router-view class="router-view" />
     </main>
   </div>
 </template>
@@ -34,12 +34,19 @@ const mainClass = computed(() => {
 </script>
 
 
-<style scoped>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .mobile-content {
-  padding-top: 75px;
+  padding-top: 105px;
 }
 
 .desktop-content {
-  padding-top: 60px;
+  padding-top: 85px;
 }
+
 </style>

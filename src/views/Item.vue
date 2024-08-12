@@ -45,6 +45,7 @@ updateMenuItem();
 
 
 <style scoped>
+
 .title {
 	color: red;
 	font-family: Arial, sans-serif;

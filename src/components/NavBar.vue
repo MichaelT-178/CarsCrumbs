@@ -27,7 +27,12 @@
         <ul>
           <li class="tab"><router-link to="/">Home</router-link></li>
           <li class="tab"><router-link to="/Order">Order</router-link></li>
-          <li class="tab"><router-link to="/Cart">Cart</router-link></li>
+          <li class="tab">
+            <router-link to="/Cart">
+              Cart
+              <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+            </router-link>
+          </li>
           <li class="tab"><router-link to="/About">About</router-link></li>
           <li class="tab"><router-link to="/ContactUs">Contact Us</router-link></li>
         </ul>
@@ -51,6 +56,10 @@ const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
+
+//DELETE THIS
+const cartItemCount = ref(0);
+
 
 const filterResults = () => {
   if (searchQuery.value) {
@@ -148,7 +157,7 @@ html, body {
   margin: 0;
   padding: 0;
   z-index: 1001;
-  width: 322px;
+  width: 300px;
 }
 
 .result {
@@ -182,6 +191,7 @@ html, body {
   margin-right: 30px;
   font-size: 22px;
   cursor: pointer;
+  position: relative;
 }
 
 .tab a {
@@ -196,6 +206,26 @@ html, body {
 
 .tab a:active {
   text-decoration: underline;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -15px;
+  background-color: #E50000;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px; /* Vertical horizontal */
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  height: 20px;
+}
+
+.cart-badge.hidden {
+  display: none;
 }
 
 </style>

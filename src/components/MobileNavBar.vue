@@ -63,9 +63,9 @@
           <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
         </li>
       </ul>
+      <p class="logo-tag">@CarsCrumbs</p>
     </div>
 
-    <!-- Menu and Cart Icons -->
     <span 
       class="material-icons menu-icon" 
       @click="toggleSidebar" 
@@ -75,6 +75,7 @@
     </span>
     <router-link to="/Cart">
       <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+      <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
     </router-link>
   </nav>
 </template>
@@ -95,7 +96,10 @@ const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
 const isSidebarOpen = ref(false);
-const menuIconColor = ref("#fff");
+const menuIconColor = ref("white");
+
+//DELETE THIS
+const cartItemCount = ref(0);
 
 const filterResults = () => {
   if (searchQuery.value) {
@@ -130,13 +134,14 @@ const hoverMenuIcon = () => {
 };
 
 const resetMenuIconColor = () => {
-  menuIconColor.value = "#fff";
+  menuIconColor.value = "white";
 };
 
 </script>
 
 
 <style scoped>
+
 html, body {
   margin: 0;
   padding: 0;
@@ -149,7 +154,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   background-color: #620086;
-  color: #fff;
+  color: white;
   width: 100%;
   box-sizing: border-box;
   position: fixed;
@@ -182,8 +187,8 @@ html, body {
 }
 
 .menu-icon {
-  left: 15px;
-  color: var(--menu-icon-color, #fff);
+  left: 25px;
+  color: var(--menu-icon-color, white);
   transition: color 0.3s ease;
 }
 
@@ -192,13 +197,35 @@ html, body {
 }
 
 .cart-icon {
-  right: 15px;
-  color: #fff;
+  right: 25px;
+  color: white;
   transition: color 0.3s ease;
 }
 
 .cart-icon:hover {
   color: #FFD700;
+}
+
+
+.cart-badge {
+  position: absolute;
+  top: 23.5px;  /* Larger numbers move it down */
+  right: 16px;  /* Larger numbers move it to the left */
+  background-color: #E50000;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 6px;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  height: 20px;
+  z-index: 1001;
+}
+
+.cart-badge.hidden {
+  display: none;
 }
 
 .center-section {
@@ -227,7 +254,7 @@ html, body {
 
 .dropdown {
   position: absolute;
-  top: 100%;
+  top: 95%;
   left: 0;
   width: 100%;
   background-color: white;
@@ -261,18 +288,19 @@ html, body {
   left: 0;
   width: 310px;
   height: 100%;
-  background-color: pink;
-  color: #fff;
+  background-color: lightskyblue;
+  color: white;
   padding: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1001;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar-header {
-  background-color: #007bff;
-  padding: 15px 20px; /* First is vertical */
+  background-color: purple;
+  padding: 15px 20px; /* First is vertical second is horizontal*/
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -302,7 +330,7 @@ html, body {
 
 .sidebar .tab {
   padding: 15px 20px;
-  background-color: purple;
+  background-color: lightskyblue;
   transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
@@ -321,30 +349,41 @@ html, body {
   position: relative;
   top: -4.25px;
   margin: 0;
+  color: #FFFFA6;
 }
 
 .sidebar .tab span.material-symbols-outlined {
   font-size: 24px;
   margin-right: 12px; /* Space between icon and text */
+  color: #FFFFA6;
 }
 
 .sidebar .tab:hover span.material-symbols-outlined {
-  color: #FFFFA6;
+  color: white;
 }
 
 .sidebar .tab:hover span.tab-text {
-  color: #FFFFA6;
+  color: white;
 }
 
 .sidebar .tab:hover {
-  background-color: green;
+  background-color: darkblue;
 }
 
 .sidebar .tab a {
-  color: #fff;
+  color: white;
   text-decoration: none;
   font-size: 20px;
   display: block;
+  width: 100%;
+}
+
+.logo-tag {
+  font-size: 22px;
+  text-align: center;
+  padding: 5px 0;
+  color: white;
+  margin-top: auto;
   width: 100%;
 }
 
