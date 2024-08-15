@@ -1,38 +1,86 @@
 {
-    "Cookie": {
-        "Name": "Cookie",
+    "Brown_Butter_Chocolate_Chip": {
+        "Name": "Brown Butter Chocolate Chip",
         "Emoji": "🍪",
-        "Price": 0.99,
-        "Image": "Cookie.jpg"
+        "Price": 0.0,
+        "Image": "Brown_Butter_Chocolate_Chip.jpg"
     },
-    "Cake": {
-        "Name": "Cake",
+    "Sugar": {
+        "Name": "Sugar",
+        "Emoji": "🍪",
+        "Price": 0.0,
+        "Image": "Sugar.jpg"
+    },
+    "Snickerdoodle": {
+        "Name": "Snickerdoodle",
+        "Emoji": "🍪",
+        "Price": 0.0,
+        "Image": "Snickerdoodle.jpg"
+    },
+    "Ginger_Molasses": {
+        "Name": "Ginger Molasses",
+        "Emoji": "🍪",
+        "Price": 0.0,
+        "Image": "Ginger_Molasses.jpg"
+    },
+    "Double_Chocolate": {
+        "Name": "Double Chocolate",
+        "Emoji": "🍪",
+        "Price": 0.0,
+        "Image": "Double_Chocolate.jpg"
+    },
+    "Fudge_Brownies": {
+        "Name": "Fudge Brownies",
+        "Emoji": "🍫",
+        "Price": 0.0,
+        "Image": "Fudge_Brownies.jpg"
+    },
+    "S'mores_Brownies": {
+        "Name": "S'mores Brownies",
+        "Emoji": "☁️",
+        "Price": 0.0,
+        "Image": "Smores_Brownies.jpg"
+    },
+    "Caramel_Pretzel_Brownies": {
+        "Name": "Caramel Pretzel Brownies",
+        "Emoji": "🥨",
+        "Price": 0.0,
+        "Image": "Caramel_Pretzel_Brownies.jpg"
+    },
+    "Crunchy_Italian_Loaf": {
+        "Name": "Crunchy Italian Loaf",
+        "Emoji": "🥖",
+        "Price": 0.0,
+        "Image": "Crunchy_Italian_Loaf.jpg"
+    },
+    "Everything_Bagel": {
+        "Name": "Everything Bagel",
+        "Emoji": "🥯",
+        "Price": 0.0,
+        "Image": "Everything_Bagel.jpg"
+    },
+    "Plain_Bagel": {
+        "Name": "Plain Bagel",
+        "Emoji": "🥯",
+        "Price": 0.0,
+        "Image": "Plain_Bagel.jpg"
+    },
+    "Cinnamon_Sugar": {
+        "Name": "Cinnamon Sugar",
+        "Emoji": "🥯",
+        "Price": 0.0,
+        "Image": "Cinnamon_Sugar.jpg"
+    },
+    "Chocolate_Cake": {
+        "Name": "Chocolate Cake",
         "Emoji": "🎂",
-        "Price": 6.99,
-        "Image": "Cake.jpg"
+        "Price": 0.0,
+        "Image": "Chocolate_Cake.jpg"
     },
-    "Piece_of_Cake": {
-        "Name": "Piece of Cake", 
-        "Emoji": "🍰",
-        "Price": 1.99,
-        "Image": "Piece_of_Cake.jpg"
-    },
-    "Donut": {
-        "Name": "Donut", 
-        "Emoji": "🍩",
-        "Price": 1.99,
-        "Image": "Donut.jpg"
-    },
-    "Cupcake": {
-        "Name": "Cupcake", 
-        "Emoji": "🧁",
-        "Price": 1.99,
-        "Image": "Cupcake.jpg"
-    },
-    "Pie": {
-        "Name": "Pie", 
-        "Emoji": "🥧",
-        "Price": 5.99,
-        "Image": "Pie.jpg"
+    "Vanilla_Cake": {
+        "Name": "Vanilla Cake",
+        "Emoji": "🎂",
+        "Price": 0.0,
+        "Image": "Vanilla_Cake.jpg"
     }
 }

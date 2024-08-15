@@ -1,28 +1,60 @@
 {
     "Menu": [
         {
-            "Name": "Cookie", 
+            "Name": "Brown Butter Chocolate Chip", 
             "Emoji": "🍪"
         },
         {
-            "Name": "Cake", 
+            "Name": "Sugar", 
+            "Emoji": "🍪"
+        },
+        {
+            "Name": "Snickerdoodle", 
+            "Emoji": "🍪"
+        },
+        {
+            "Name": "Ginger Molasses", 
+            "Emoji": "🍪"
+        },
+        {
+            "Name": "Double Chocolate", 
+            "Emoji": "🍪"
+        },
+        {
+            "Name": "Fudge Brownies", 
+            "Emoji": "🍫"
+        },
+        {
+            "Name": "S'mores Brownies", 
+            "Emoji": "☁️"
+        },
+        {
+            "Name": "Caramel Pretzel Brownies", 
+            "Emoji": "🥨"
+        },
+        {
+            "Name": "Crunchy Italian Loaf", 
+            "Emoji": "🥖"
+        },
+        {
+            "Name": "Everything Bagel", 
+            "Emoji": "🥯"
+        },
+        {
+            "Name": "Plain Bagel", 
+            "Emoji": "🥯"
+        },
+        {
+            "Name": "Cinnamon Sugar", 
+            "Emoji": "🥯"
+        },
+        {
+            "Name": "Chocolate Cake", 
             "Emoji": "🎂"
         },
         {
-            "Name": "Piece of Cake", 
-            "Emoji": "🍰"
-        },
-        {
-            "Name": "Donut", 
-            "Emoji": "🍩"
-        },
-        {
-            "Name": "Cupcake", 
-            "Emoji": "🧁"
-        },
-        {
-            "Name": "Pie", 
-            "Emoji": "🥧"
+            "Name": "Vanilla Cake", 
+            "Emoji": "🎂"
         }
     ]
 }

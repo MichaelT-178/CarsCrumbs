@@ -19,7 +19,7 @@
             class="result" 
             @click="handleItemClick(result.Name)"
           >
-            {{ result.Emoji }} {{ result.Name }}
+            <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
           </li>
         </ul>
       </div>
@@ -151,7 +151,6 @@ html, body {
   left: 0;
   width: 100%;
   background-color: white;
-  max-height: 200px;
   overflow-y: auto;
   list-style: none;
   margin: 0;
@@ -174,6 +173,10 @@ html, body {
 
 .result:hover {
   background-color: #FFFFA6;
+}
+
+.result span.result-text {
+  margin-left: 8px;
 }
 
 .tabs {
