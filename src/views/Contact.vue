@@ -95,7 +95,7 @@
 	  </div>
 	</div>
 	<div class="bottom-section">
-	  <p>@CarsCrumbs</p>
+	  <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
 	</div>
 </template>
   

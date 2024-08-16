@@ -1,86 +1,114 @@
 {
     "Brown_Butter_Chocolate_Chip": {
-        "Name": "Brown Butter Chocolate Chip",
+        "Name": "Brown Butter Chocolate Chip Cookies",
         "Emoji": "🍪",
         "Price": 0.0,
-        "Image": "Brown_Butter_Chocolate_Chip.jpg"
+        "Image": "Brown_Butter_Chocolate_Chip.jpg",
+        "Route": "/Cookies/Brown_Butter_Chocolate_Chip",
+        "Tags": ["🍪 Cookie"]
     },
     "Sugar": {
-        "Name": "Sugar",
+        "Name": "Sugar Cookies",
         "Emoji": "🍪",
         "Price": 0.0,
-        "Image": "Sugar.jpg"
+        "Image": "Sugar.jpg",
+        "Route": "/Cookies/Sugar",
+        "Tags": ["🍪 Cookie"]
     },
     "Snickerdoodle": {
         "Name": "Snickerdoodle",
         "Emoji": "🍪",
         "Price": 0.0,
-        "Image": "Snickerdoodle.jpg"
+        "Image": "Snickerdoodle.jpg",
+        "Route": "/Cookies/Snickerdoodle",
+        "Tags": ["🍪 Cookie"]
     },
     "Ginger_Molasses": {
-        "Name": "Ginger Molasses",
+        "Name": "Ginger Molasses Cookies",
         "Emoji": "🍪",
         "Price": 0.0,
-        "Image": "Ginger_Molasses.jpg"
+        "Image": "Ginger_Molasses.jpg",
+        "Route": "/Cookies/Ginger_Molasses",
+        "Tags": ["🍪 Cookie"]
     },
     "Double_Chocolate": {
-        "Name": "Double Chocolate",
+        "Name": "Double Chocolate Cookies",
         "Emoji": "🍪",
         "Price": 0.0,
-        "Image": "Double_Chocolate.jpg"
+        "Image": "Double_Chocolate.jpg",
+        "Route": "/Cookies/Double_Chocolate",
+        "Tags": ["🍪 Cookie"]
     },
     "Fudge_Brownies": {
         "Name": "Fudge Brownies",
         "Emoji": "🍫",
         "Price": 0.0,
-        "Image": "Fudge_Brownies.jpg"
+        "Image": "Fudge_Brownies.jpg",
+        "Route": "/Brownies/Fudge_Brownies",
+        "Tags": ["🍫 Brownie"]
     },
-    "S'mores_Brownies": {
+    "Smores_Brownies": {
         "Name": "S'mores Brownies",
         "Emoji": "☁️",
         "Price": 0.0,
-        "Image": "Smores_Brownies.jpg"
+        "Image": "Smores_Brownies.jpg",
+        "Route": "/Brownies/Smores_Brownies",
+        "Tags": ["🍫 Brownie"]
     },
     "Caramel_Pretzel_Brownies": {
         "Name": "Caramel Pretzel Brownies",
         "Emoji": "🥨",
         "Price": 0.0,
-        "Image": "Caramel_Pretzel_Brownies.jpg"
+        "Image": "Caramel_Pretzel_Brownies.jpg",
+        "Route": "/Brownies/Caramel_Pretzel_Brownies",
+        "Tags": ["🍫 Brownie"]
     },
     "Crunchy_Italian_Loaf": {
         "Name": "Crunchy Italian Loaf",
         "Emoji": "🥖",
         "Price": 0.0,
-        "Image": "Crunchy_Italian_Loaf.jpg"
+        "Image": "Crunchy_Italian_Loaf.jpg",
+        "Route": "/Bread/Crunchy_Italian_Loaf",
+        "Tags": ["🥖 Bread"]
     },
     "Everything_Bagel": {
         "Name": "Everything Bagel",
         "Emoji": "🥯",
         "Price": 0.0,
-        "Image": "Everything_Bagel.jpg"
+        "Image": "Everything_Bagel.jpg",
+        "Route": "/Bagels/Everything_Bagel",
+        "Tags": ["🥯 Bagel", "🥖 Bread"]
     },
     "Plain_Bagel": {
         "Name": "Plain Bagel",
         "Emoji": "🥯",
         "Price": 0.0,
-        "Image": "Plain_Bagel.jpg"
+        "Image": "Plain_Bagel.jpg",
+        "Route": "/Bagels/Plain_Bagel",
+        "Tags": ["🥯 Bagel", "🥖 Bread"]
     },
     "Cinnamon_Sugar": {
         "Name": "Cinnamon Sugar",
         "Emoji": "🥯",
         "Price": 0.0,
-        "Image": "Cinnamon_Sugar.jpg"
+        "Image": "Cinnamon_Sugar.jpg",
+        "Route": "/Bagels/Cinnamon_Sugar",
+        "Tags": ["🥯 Bagel", "🥖 Bread"]
     },
     "Chocolate_Cake": {
         "Name": "Chocolate Cake",
         "Emoji": "🎂",
         "Price": 0.0,
-        "Image": "Chocolate_Cake.jpg"
+        "Image": "Chocolate_Cake.jpg",
+        "Route": "/Cake/Chocolate_Cake",
+        "Tags": ["🎂 Cake"]
     },
     "Vanilla_Cake": {
         "Name": "Vanilla Cake",
         "Emoji": "🎂",
         "Price": 0.0,
-        "Image": "Vanilla_Cake.jpg"
+        "Image": "Vanilla_Cake.jpg",
+        "Route": "/Cake/Vanilla_Cake",
+        "Tags": ["🎂 Cake"]
     }
 }

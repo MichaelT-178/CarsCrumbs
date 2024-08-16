@@ -11,6 +11,7 @@
           @input="filterResults" 
           @focus="showDropdown = true" 
           @blur="hideDropdown"
+          @keydown.enter="handleSearchEnter"
         />
         <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
           <li 
@@ -63,7 +64,7 @@ const cartItemCount = ref(0);
 
 const filterResults = () => {
   if (searchQuery.value) {
-    filteredResults.value = menu.filter(item => item.Name.toLowerCase().includes(searchQuery.value.toLowerCase()));
+    filteredResults.value = menu.filter(item => item.Name.toLowerCase().includes(searchQuery.value.toLowerCase())).slice(0, 5);
   } else {
     filteredResults.value = [];
   }
@@ -76,7 +77,18 @@ const hideDropdown = () => {
 };
 
 const handleItemClick = (itemName) => {
-  router.push({ name: 'ItemView', params: { ItemName: itemName } });
+  const selectedItem = menu.find(item => item.Name === itemName);
+
+  if (selectedItem && selectedItem.Route) {
+    router.push(selectedItem.Route);
+  }
+  
+  hideDropdown();
+  searchInput.value.blur();
+};
+
+const handleSearchEnter = () => {
+  router.push({ name: 'SearchResults', params: { SearchQuery: searchQuery.value.trim() } });
   hideDropdown();
   searchInput.value.blur();
 };

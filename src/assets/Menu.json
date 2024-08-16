@@ -2,59 +2,73 @@
     "Menu": [
         {
             "Name": "Brown Butter Chocolate Chip", 
-            "Emoji": "🍪"
+            "Emoji": "🍪",
+            "Route": "/Cookies/Brown_Butter_Chocolate_Chip"
         },
         {
             "Name": "Sugar", 
-            "Emoji": "🍪"
+            "Emoji": "🍪",
+            "Route": "/Cookies/Sugar"
         },
         {
             "Name": "Snickerdoodle", 
-            "Emoji": "🍪"
+            "Emoji": "🍪",
+            "Route": "/Cookies/Snickerdoodle"
         },
         {
             "Name": "Ginger Molasses", 
-            "Emoji": "🍪"
+            "Emoji": "🍪",
+            "Route": "/Cookies/Ginger_Molasses"
         },
         {
             "Name": "Double Chocolate", 
-            "Emoji": "🍪"
+            "Emoji": "🍪",
+            "Route": "/Cookies/Double_Chocolate"
         },
         {
             "Name": "Fudge Brownies", 
-            "Emoji": "🍫"
+            "Emoji": "🍫",
+            "Route": "/Brownies/Fudge_Brownies"
         },
         {
             "Name": "S'mores Brownies", 
-            "Emoji": "☁️"
+            "Emoji": "☁️",
+            "Route": "/Brownies/Smores_Brownies"
         },
         {
             "Name": "Caramel Pretzel Brownies", 
-            "Emoji": "🥨"
+            "Emoji": "🥨",
+            "Route": "/Brownies/Caramel_Pretzel_Brownies"
         },
         {
             "Name": "Crunchy Italian Loaf", 
-            "Emoji": "🥖"
+            "Emoji": "🥖",
+            "Route": "/Bread/Crunchy_Italian_Loaf"
         },
         {
             "Name": "Everything Bagel", 
-            "Emoji": "🥯"
+            "Emoji": "🥯",
+            "Route": "/Bagels/Everything_Bagel"
         },
         {
             "Name": "Plain Bagel", 
-            "Emoji": "🥯"
+            "Emoji": "🥯",
+            "Route": "/Bagels/Plain_Bagel"
         },
         {
             "Name": "Cinnamon Sugar", 
-            "Emoji": "🥯"
+            "Emoji": "🥯",
+            "Route": "/Bagels/Cinnamon_Sugar"
         },
         {
             "Name": "Chocolate Cake", 
-            "Emoji": "🎂"
+            "Emoji": "🎂",
+            "Route": "/Cake/Chocolate_Cake"
         },
         {
             "Name": "Vanilla Cake", 
-            "Emoji": "🎂"
+            "Emoji": "🎂",
+            "Route": "/Cake/Vanilla_Cake"
         }
     ]
 }

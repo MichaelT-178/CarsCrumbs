@@ -16,6 +16,7 @@
             @input="filterResults" 
             @focus="showDropdown = true" 
             @blur="hideDropdown"
+            @keydown.enter="handleSearchEnter"
           />
           <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
             <li 
@@ -118,13 +119,24 @@ const closeSidebar = () => {
 };
 
 const hideDropdown = () => {
-  setTimeout(() => {
-    showDropdown.value = false;
-  }, 200);
+  showDropdown.value = false;
+  searchQuery.value = "";
+  filteredResults.value = [];
 };
 
 const handleItemClick = (itemName) => {
-  router.push({ name: 'ItemView', params: { ItemName: itemName } });
+  const selectedItem = menu.find(item => item.Name === itemName);
+
+  if (selectedItem && selectedItem.Route) {
+    router.push(selectedItem.Route);
+  }
+  
+  hideDropdown();
+  searchInput.value.blur();
+};
+
+const handleSearchEnter = () => {
+  router.push({ name: 'SearchResults', params: { SearchQuery: searchQuery.value.trim() } });
   hideDropdown();
   searchInput.value.blur();
 };
