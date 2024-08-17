@@ -3,72 +3,86 @@
         {
             "Name": "Brown Butter Chocolate Chip", 
             "Emoji": "🍪",
-            "Route": "/Cookies/Brown_Butter_Chocolate_Chip"
+            "Route": "/Cookies/Brown_Butter_Chocolate_Chip",
+            "Type": "Cookie"
         },
         {
-            "Name": "Sugar", 
+            "Name": "Sugar Cookie", 
             "Emoji": "🍪",
-            "Route": "/Cookies/Sugar"
+            "Route": "/Cookies/Sugar",
+            "Type": "Cookie"
         },
         {
             "Name": "Snickerdoodle", 
             "Emoji": "🍪",
-            "Route": "/Cookies/Snickerdoodle"
+            "Route": "/Cookies/Snickerdoodle",
+            "Type": "Cookie"
         },
         {
-            "Name": "Ginger Molasses", 
+            "Name": "Ginger Molasses Cookie", 
             "Emoji": "🍪",
-            "Route": "/Cookies/Ginger_Molasses"
+            "Route": "/Cookies/Ginger_Molasses",
+            "Type": "Cookie"
         },
         {
-            "Name": "Double Chocolate", 
+            "Name": "Double Chocolate Cookie", 
             "Emoji": "🍪",
-            "Route": "/Cookies/Double_Chocolate"
+            "Route": "/Cookies/Double_Chocolate",
+            "Type": "Cookie"
         },
         {
             "Name": "Fudge Brownies", 
             "Emoji": "🍫",
-            "Route": "/Brownies/Fudge_Brownies"
+            "Route": "/Brownies/Fudge_Brownies",
+            "Type": "Brownie"
         },
         {
             "Name": "S'mores Brownies", 
             "Emoji": "☁️",
-            "Route": "/Brownies/Smores_Brownies"
+            "Route": "/Brownies/Smores_Brownies",
+            "Type": "Brownie"
         },
         {
             "Name": "Caramel Pretzel Brownies", 
             "Emoji": "🥨",
-            "Route": "/Brownies/Caramel_Pretzel_Brownies"
+            "Route": "/Brownies/Caramel_Pretzel_Brownies",
+            "Type": "Brownie"
         },
         {
             "Name": "Crunchy Italian Loaf", 
             "Emoji": "🥖",
-            "Route": "/Bread/Crunchy_Italian_Loaf"
+            "Route": "/Bread/Crunchy_Italian_Loaf",
+            "Type": "Bread"
         },
         {
             "Name": "Everything Bagel", 
             "Emoji": "🥯",
-            "Route": "/Bagels/Everything_Bagel"
+            "Route": "/Bagels/Everything_Bagel",
+            "Type": "Bagel Bread"
         },
         {
             "Name": "Plain Bagel", 
             "Emoji": "🥯",
-            "Route": "/Bagels/Plain_Bagel"
+            "Route": "/Bagels/Plain_Bagel",
+            "Type": "Bagel Bread"
         },
         {
             "Name": "Cinnamon Sugar", 
             "Emoji": "🥯",
-            "Route": "/Bagels/Cinnamon_Sugar"
+            "Route": "/Bagels/Cinnamon_Sugar",
+            "Type": "Bagel Bread"
         },
         {
             "Name": "Chocolate Cake", 
             "Emoji": "🎂",
-            "Route": "/Cake/Chocolate_Cake"
+            "Route": "/Cake/Chocolate_Cake",
+            "Type": "Cake"
         },
         {
             "Name": "Vanilla Cake", 
             "Emoji": "🎂",
-            "Route": "/Cake/Vanilla_Cake"
+            "Route": "/Cake/Vanilla_Cake",
+            "Type": "Cake"
         }
     ]
 }

@@ -104,7 +104,14 @@ const cartItemCount = ref(0);
 
 const filterResults = () => {
   if (searchQuery.value) {
-    filteredResults.value = menu.filter(item => item.Name.toLowerCase().includes(searchQuery.value.toLowerCase()));
+    const queryWords = searchQuery.value.toLowerCase().split(' ');
+    
+    filteredResults.value = menu.filter(item => 
+      queryWords.some(word => 
+        item.Name.toLowerCase().includes(word) || 
+        item.Type.toLowerCase().includes(word)
+      )
+    ).slice(0, 5);
   } else {
     filteredResults.value = [];
   }
@@ -218,11 +225,10 @@ html, body {
   color: #FFD700;
 }
 
-
 .cart-badge {
   position: absolute;
-  top: 23.5px;  /* Larger numbers move it down */
-  right: 16px;  /* Larger numbers move it to the left */
+  top: 23.5px;  /* Increase number to move it down */
+  right: 16px;  /* Increase number to move it to the left */
   background-color: #E50000;
   color: white;
   border-radius: 50%;

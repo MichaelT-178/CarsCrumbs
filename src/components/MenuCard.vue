@@ -53,7 +53,7 @@ const tagClicked = (tag) => {
 <style scoped>
 
 .menu-card {
-	border: 1px solid #3D3D3D;
+	border: 1.5px solid #3D3D3D;
 	padding-bottom: 12px;
 	max-width: 230px;
 	text-align: center;
@@ -123,6 +123,13 @@ const tagClicked = (tag) => {
 
 .order-button:hover {
 	background-color: #0056b3;
+}
+
+@media (max-width: 550px) {
+	.menu-card {
+		max-width: 500px;
+		width: 300px;
+	}
 }
 
 </style>

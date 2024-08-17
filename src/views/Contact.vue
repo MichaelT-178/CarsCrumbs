@@ -1,10 +1,12 @@
 <template>
+	<h1 class="main-title">Get in Touch</h1>
+
 	<div class="contact-container">
 
 	  <!-- Left side -->
 	  <div class="form-container">
 		<h2 class="contact-title">Contact Us</h2>
-		<p class="dm-info">You can also DM us on Instagram @crumbs</p>
+		<p class="dm-info">You can also DM us on Instagram <a href="https://www.example.com" class="insta-link" target="_blank">@crumbs</a></p>
 		<form @submit.prevent="submitForm">
 		  <div class="form-group">
 			<label for="name">Name<span style="color: #EF0000;"> *</span></label>
@@ -61,9 +63,9 @@
 		  referrerpolicy="no-referrer-when-downgrade"
 		></iframe>
 		<div class="contact-info">
-		  <p><span class="material-symbols-outlined purple-icon">location_on</span> Washington Ave 2910</p>
-		  <p><span class="material-symbols-outlined purple-icon">call</span> +1 (704) 999-9999</p>
-		  <p><span class="material-symbols-outlined purple-icon">mail</span> crumbs@gmail.com</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">location_on</span> Washington Ave 2910</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">call</span> +1 (704) 999-9999</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">mail</span> crumbs@gmail.com</p>
 		</div>
 		<div class="social-section">
 		  <h2>Socials</h2>
@@ -162,6 +164,7 @@ const submitForm = () => {
 
 
 <style scoped>
+
 .contact-container {
 	display: flex;
 	justify-content: center;
@@ -170,12 +173,35 @@ const submitForm = () => {
 	padding: 40px;
 	box-sizing: border-box;
 	flex-wrap: wrap;
+	margin-top: -25px; /* .main-title */
+}
+
+.main-title {
+  text-align: center;
+  margin-right: 840px;
+  font-size: 32px;
+  color: red;
+  margin-top: 10px;
+}
+
+.insta-link {
+	color: purple;
+	text-decoration: none;
+}
+
+.insta-link:hover {
+	color: #610061;
+	text-decoration: underline;
+}
+
+.insta-link:active {
+	color: #D400D4;
 }
 
 .form-container {
 	width: 500px;
 	height: 600px;
-	border: 1px solid purple;
+	border: 1.5px solid purple;
 	border-radius: 10px;
 	padding: 20px;
 	box-sizing: border-box;
@@ -183,9 +209,14 @@ const submitForm = () => {
 }
 
 .info-container {
-	width: 500px;
-	margin-left: 40px;
-	margin-top: 30px;
+    width: 500px;
+    margin-left: 40px;
+    margin-top: 30px;
+    background-color: lightgreen;
+    border: 1.5px solid purple;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .google-map {
@@ -276,24 +307,33 @@ button.clicked {
 	font-size: 18px;
 }
 
+.info-txt {
+	color: black;
+}
+
 .material-symbols-outlined.purple-icon {
 	vertical-align: middle;
 	margin-right: 8px;
 	color: purple;
 }
 
-.social-section {
-	text-align: left;
+.social-section, .location-section {
+    background-color: Beige;
+    border: 1px solid purple;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    box-sizing: border-box;
 }
-  
-.social-section h2 {
-	margin-top: 30px;
-	margin-bottom: 10px;
+
+.social-section h2, .location-section h2 {
+    margin-top: 0;
 }
-  
+
 .social-icons {
+	margin-top: 6px;
 	display: flex;
-	gap: 10px;
+	gap: 15px;
 }
   
 .social-button {
@@ -324,24 +364,16 @@ button.clicked {
 	fill: white;
 }
   
-.location-section {
-	margin-top: 10px;
-}
-  
-.location-section h2 {
-	margin-top: 30px;
-}
-  
 .location-section p {
 	font-size: 19px;
 	margin-bottom: 10px;
-	margin-top: 8px;
+	margin-top: 6px;
 }
   
 .bottom-section {
 	background-color: #F3E7A4;
 	text-align: center;
-	height: 60px;
+	height: 80px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -349,6 +381,14 @@ button.clicked {
 
 .bottom-section p {
 	font-size: 17px;
+}
+
+@media (max-width: 1119px) {
+	.main-title {
+		margin-right: 0px;
+		margin-bottom: -25px;
+		color: magenta;
+	}
 }
 
 @media (max-width: 940px) {
@@ -361,6 +401,12 @@ button.clicked {
 		margin-left: 0;
 		margin-top: 30px;
 	}
+
+	.main-title {
+		color: paleturquoise;
+		margin-bottom: -25px;
+		margin-top: 5px;
+	}
 }
 
 @media (max-width: 575px) {
@@ -369,18 +415,22 @@ button.clicked {
 		align-items: center;
 		padding: 0 10px;
 	}
+
+	.info-container {
+		width: 100%;
+		max-width: 90%;
+	}
 	
 	.form-container {
 		width: 100%;
 		max-width: 90%;
 		margin: 0 auto;
-		margin-top: 15px;
+		margin-top: 35px; /* .main-title */
 	}
 	
 	.bottom-section {
-		margin-top: 10px;
+		margin-top: 20px;
 	}
 }
 
 </style>
-  

@@ -61,10 +61,16 @@ const searchInput = ref(null);
 //DELETE THIS
 const cartItemCount = ref(0);
 
-
 const filterResults = () => {
   if (searchQuery.value) {
-    filteredResults.value = menu.filter(item => item.Name.toLowerCase().includes(searchQuery.value.toLowerCase())).slice(0, 5);
+    const queryWords = searchQuery.value.toLowerCase().split(' ');
+    
+    filteredResults.value = menu.filter(item => 
+      queryWords.some(word => 
+        item.Name.toLowerCase().includes(word) || 
+        item.Type.toLowerCase().includes(word)
+      )
+    ).slice(0, 5);
   } else {
     filteredResults.value = [];
   }
@@ -120,7 +126,7 @@ html, body {
 }
 
 .logo {
-  height: 60px; /* Increased logo height */
+  height: 60px;
 }
 
 .menu ul {
@@ -192,7 +198,7 @@ html, body {
 }
 
 .tabs {
-  margin-right: -15px; /* Adjust this value to move the tabs further to the right */
+  margin-right: -15px; /* Decrease this value to move the tabs further to the right */
 }
 
 .tabs ul {
