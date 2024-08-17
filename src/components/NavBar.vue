@@ -31,7 +31,7 @@
           <li class="tab">
             <router-link to="/Cart">
               Cart
-              <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+              <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
             </router-link>
           </li>
           <li class="tab"><router-link to="/About">About</router-link></li>
@@ -45,11 +45,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import logo from "../assets/logo.png";
 import MenuData from "../assets/Menu.json";
+import { useRouter } from 'vue-router';
+import { useCartStore } from "../stores/cart.js";
 
 const router = useRouter();
+const cart = useCartStore();
 
 const jsonData = ref(MenuData);
 const menu = jsonData.value["Menu"];
@@ -58,8 +60,6 @@ const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
 
-//DELETE THIS
-const cartItemCount = ref(0);
 
 const filterResults = () => {
   if (searchQuery.value) {

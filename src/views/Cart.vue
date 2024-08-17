@@ -1,5 +1,15 @@
 <template>
 	<p class="title">Cart</p>
+
+	<!-- Loop through all items in the cart and display each one using the ItemCard component -->
+	<div class="item-list">
+		<ItemCard
+			v-for="(item, index) in cart.items"
+			:key="index"
+			:item="item"
+		/>
+	</div>
+
 	<a href="https://venmo.com/johndoe?txn=pay&amount=15.00"
 	   class="venmo-btn"
 	   target="_blank">
@@ -9,18 +19,25 @@
 	<p>Dm <a href="https://target.com" class="insta-link" target="_blank">@crumbs</a> on Instagram to discuss alternative payment methods.</p>
 </template>
 
-
 <script setup>
 import VenmoLogo from "../assets/Venmo.png";
+import ItemCard from "../components/ItemCard.vue";
+import { useCartStore } from '../stores/cart.js';
 
+const cart = useCartStore();
 </script>
-
 
 <style scoped>
 .title {
 	color: red;
 	font-family: Arial, sans-serif;
 	font-size: 50px;
+}
+
+.item-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
 }
 
 .venmo-btn {

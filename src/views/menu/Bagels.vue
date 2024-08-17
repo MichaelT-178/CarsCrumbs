@@ -8,13 +8,18 @@
     <div v-else>
       <p>Item not found</p>
     </div>
+
+    <!-- Store -->
+    <button @click="addItem">Print Menu Item</button>
   </template>
   
   
   <script setup>
   import { ref, watch } from "vue";
   import MenuItems from "../../assets/MenuItems.json";
-
+  import { useCartStore } from "../../stores/cart.js";
+  
+  const cart = useCartStore();
   
   const props = defineProps({
     ItemName: {
@@ -36,6 +41,11 @@
     }
   };
   
+  const addItem = () => {
+    cart.addItem(menuItem.value)
+    alert("Item Successfully Added to Cart!")
+  };
+
   watch(() => props.ItemName, () => {
     updateMenuItem();
   }, { immediate: true });

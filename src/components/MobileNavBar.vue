@@ -76,7 +76,7 @@
     </span>
     <router-link to="/Cart">
       <span class="material-symbols-outlined cart-icon">shopping_cart</span>
-      <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+      <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
     </router-link>
   </nav>
 </template>
@@ -84,11 +84,13 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import logoTwo from "../assets/logoTwoYellow.png";
 import MenuData from "../assets/Menu.json";
+import { useRouter } from 'vue-router';
+import { useCartStore } from "../stores/cart.js";
 
 const router = useRouter();
+const cart = useCartStore();
 
 const jsonData = ref(MenuData);
 const menu = jsonData.value["Menu"];
