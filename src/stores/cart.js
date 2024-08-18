@@ -1,10 +1,23 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 export const useCartStore = defineStore('cart', () => {
-
   const items = ref([]);
   let currentId = ref(0);
+
+  // Load items from localStorage when the store is created
+  const loadItems = () => {
+    const storedItems = JSON.parse(localStorage.getItem('cartItems'));
+    if (storedItems && Array.isArray(storedItems)) {
+      items.value = storedItems;
+      currentId.value = storedItems.length > 0 
+                        // Convert storedItems to id's and take the max. Then add 1. If empty its 0.
+                      ? Math.max(...storedItems.map(item => item.id)) + 1 
+                      : 0;
+    }
+  };
+
+  loadItems();
 
   function addItem(item) {
     item.id = currentId.value++;
@@ -20,39 +33,40 @@ export const useCartStore = defineStore('cart', () => {
   }
   
   function getTotal() {
-    // return items.value.reduce((total, item) => total + item.Price, 0);
-
-    let total = 0;
-
-    for (const item in items.value) {
-      total += item.Price;
-    }
-
-    return total;
+    return items.value.reduce((total, item) => total + item.Price, 0);
   }
 
-  // Returns a string that will be used in email
   function getCartDetails() {
-    let bodyContent = `<h1>Order Summary</h1><ul>`;
+    let bodyContent = `<h1>Order Summary</h1><br/><br/>`;
     
     items.value.forEach(item => {
       bodyContent += `
-        <li>
-          <strong>Product:</strong> ${item.name}<br />
-          <strong>Price:</strong> $${item.Price.toFixed(2)}<br />
-          <strong>Quantity:</strong> ${item.quantity || 1}<br />
-        </li>`;
+      <div>
+        <strong>Product:</strong> ${item.Name}<br/>
+        <strong>Price:</strong> $${item.Price.toFixed(2)}<br/>
+        <strong>Quantity:</strong> ${item.quantity || 1}<br/>
+      </div><br/>`;
     });
-  
-    bodyContent += `</ul>`;
-    bodyContent += `<p><strong>Total:</strong> $${getTotal().toFixed(2)}</p>`;
+    
+    bodyContent += `<div><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
     
     return bodyContent;
   }
+
+  function getReceipt() {
+
+  }
   
+  function resetCart() {
+
+  }
 
   const allItems = computed(() => items.value);
   
-  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, allItems };
+  watch(items, (newItems) => {
+    localStorage.setItem('cartItems', JSON.stringify(newItems));
+  }, { deep: true });
+
+  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, getReceipt, resetCart, allItems };
 
 });
