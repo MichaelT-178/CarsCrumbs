@@ -16,6 +16,9 @@ import Cakes from '../views/menu/Cakes.vue';
 //SearchResults
 import SearchResults from '../views/SearchResults.vue';
 
+//Checkout
+import Checkout from '../views/Checkout.vue';
+
 const routes = [
 	{
 		path: '/',
@@ -72,7 +75,11 @@ const routes = [
         name: 'SearchResults',
         component: SearchResults,
         props: true
-    }
+    },
+    {
+		path: '/Cart/Checkout',
+		component: Checkout
+	}
 ]
 
 const router = createRouter({

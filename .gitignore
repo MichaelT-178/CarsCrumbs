@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 Changes.txt
+
+Check for HTML injection in both Contact.vue and Checkout.vue

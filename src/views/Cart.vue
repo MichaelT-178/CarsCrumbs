@@ -10,6 +10,14 @@
 		/>
 	</div>
 
+
+	<a href="https://venmo.com/johndoe?txn=pay&amount=15.00"
+	   class="gray-venmo-btn"
+	   target="_blank">
+	   <img :src="GrayVenmoLogo" alt="Logo" class="venmo-logo" />
+	   Pay Us On Venmo
+	</a>
+
 	<a href="https://venmo.com/johndoe?txn=pay&amount=15.00"
 	   class="venmo-btn"
 	   target="_blank">
@@ -21,6 +29,7 @@
 
 <script setup>
 import VenmoLogo from "../assets/Venmo.png";
+import GrayVenmoLogo from "../assets/GrayVenmo.png";
 import ItemCard from "../components/ItemCard.vue";
 import { useCartStore } from '../stores/cart.js';
 
@@ -38,6 +47,20 @@ const cart = useCartStore();
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
+}
+
+.gray-venmo-btn {
+	display: inline-flex;
+	align-items: center;
+	background-color: #808080;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 50px;
+	font-size: 18px;
+	font-family: Arial, sans-serif;
+	text-decoration: none;
+	transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
 .venmo-btn {

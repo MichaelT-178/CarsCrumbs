@@ -26,6 +26,15 @@
 			  required 
 			/>
 		  </div>
+			<div class="form-group">
+			<label for="phone">Phone Number<span style="color: #EF0000;"> *</span></label>
+			<input 
+			  type="phone" 
+			  id="phone" 
+			  v-model="formData.phone" 
+			  required 
+			/>
+		  </div>
 		  <div class="form-group">
 			<label for="message">Message<span style="color: #EF0000;"> *</span></label>
 			<textarea 
@@ -110,6 +119,7 @@ import Swal from 'sweetalert2';
 const formData = ref({
 	name: '',
 	email: '',
+	phone: '',
 	message: ''
 });
 
@@ -122,6 +132,7 @@ const isFormValid = computed(() => {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	return formData.value.name.trim() !== '' &&
 		   formData.value.email.match(emailRegex) &&
+		   formData.value.phone.trim() !== '' &&
 		   formData.value.message.trim() !== '';
 });
 
@@ -131,15 +142,29 @@ const submitForm = () => {
   
 	isButtonClicked.value = true;
 	buttonText.value = "Sending...";
-  
+
+	const sanitizeHTML = (str) => {
+		const whitelist = ['b', 'i', 'em', 'strong', 'u', 'p', 'br', 'ul', 'ol', 'li', 'a'];
+		
+		return str.replace(/<\/?([a-zA-Z0-9]+)(?:\s[^>]*)?>/g, (match, tagName) => {
+			return whitelist.includes(tagName.toLowerCase()) ? match : '';
+		});
+	};
+
+  const sanitizedMessage = sanitizeHTML(formData.value.message);
+
 	const templateParams = {
+		subject: "Message from Cars Crumbs",
+		start_message: `"${formData.value.name}" sent you a message on the Cars Crumbs website.`,
+		main_message: sanitizedMessage, 
 		from_name: formData.value.name,
 		from_email: formData.value.email,
-		message: formData.value.message,
+		phone_number: formData.value.phone,
+		additional_details: "No additional details"
 	};
-  
+
 	const serviceID = 'service_feq974e';
-	const templateID = 'template_cowiwh7';
+	const templateID = 'template_62iha9a';
 	
 	emailjs.send(serviceID, templateID, templateParams)
 		.then((response) => {
@@ -200,7 +225,7 @@ const submitForm = () => {
 
 .form-container {
 	width: 500px;
-	height: 600px;
+	height: 685px;
 	border: 1.5px solid purple;
 	border-radius: 10px;
 	padding: 20px;
@@ -284,12 +309,12 @@ button.default {
 }
 
 button.valid {
-	background-color: rgb(0, 68, 255);
+	background-color: #C600C6;
 	border-radius: 25px;
 }
 
 button.valid:hover {
-	background-color: darkblue;
+	background-color: purple;
 	border-radius: 25px;
 }
 

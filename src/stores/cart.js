@@ -31,8 +31,28 @@ export const useCartStore = defineStore('cart', () => {
     return total;
   }
 
+  // Returns a string that will be used in email
+  function getCartDetails() {
+    let bodyContent = `<h1>Order Summary</h1><ul>`;
+    
+    items.value.forEach(item => {
+      bodyContent += `
+        <li>
+          <strong>Product:</strong> ${item.name}<br />
+          <strong>Price:</strong> $${item.Price.toFixed(2)}<br />
+          <strong>Quantity:</strong> ${item.quantity || 1}<br />
+        </li>`;
+    });
+  
+    bodyContent += `</ul>`;
+    bodyContent += `<p><strong>Total:</strong> $${getTotal().toFixed(2)}</p>`;
+    
+    return bodyContent;
+  }
+  
+
   const allItems = computed(() => items.value);
   
-  return { items, addItem, deleteItem, getItemCount, getTotal, allItems };
+  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, allItems };
 
 });
