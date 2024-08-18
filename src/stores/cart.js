@@ -54,11 +54,13 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function getReceipt() {
-
+    return "This is the receipt";
   }
-  
-  function resetCart() {
 
+  function resetCart() {
+    items.value = [];
+    currentId.value = 0;
+    localStorage.removeItem('cartItems');
   }
 
   const allItems = computed(() => items.value);

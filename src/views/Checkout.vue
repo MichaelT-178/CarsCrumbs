@@ -91,7 +91,7 @@
            Pay Us On Venmo
         </a>
       </div>
-      <p class="clear-cart" @click="deleteCart">Clear Cart</p>
+      <p class="clear-cart" @click="deleteCart">Reset Cart</p>
     </div>
   </div>
 </template>
@@ -105,8 +105,10 @@ import VenmoLogo from "../assets/Venmo.png";
 import GrayVenmoLogo from "../assets/GrayVenmo.png";
 import ItemCard from "../components/ItemCard.vue";
 import { useCartStore } from "../stores/cart.js";
+import { useRouter } from 'vue-router';
 
 const cart = useCartStore();
+const router = useRouter();
 
 const formData = ref({
   name: '',
@@ -175,6 +177,7 @@ const submitForm = () => {
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.cancel) {
           console.log("Hello");
+          downloadTxtFile()
         }
       }); 
 
@@ -197,8 +200,25 @@ const submitForm = () => {
     });
 };
 
-const deleteCart = () => {
-  console.log('Delete');
+
+function downloadTxtFile() {
+  const blob = new Blob([cart.getReceipt()], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'CarsCrumbsReceipt.txt';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function deleteCart() {
+  cart.resetCart();
+
+  const goBackToHome = confirm('Your cart has been cleared. Do you want to go back to the home page?');
+
+  if (goBackToHome) {
+    router.push({ path: '/' });
+  }
 };
 
 </script>
