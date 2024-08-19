@@ -1,10 +1,6 @@
 <template>
-  <div class="checkout-circle-wrapper">
-		<img class="checkout-circle" :src="WordPressCircle" alt="About Circle" />
-		<hr class="circle-line" />
-	</div>
 
-	<p class="title">Checkout</p>
+  <Header titleText="Checkout" />
 
   <div class="checkout-container">
     
@@ -113,8 +109,8 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import VenmoLogo from "../assets/Venmo.png";
 import GrayVenmoLogo from "../assets/GrayVenmo.png";
-import WordPressCircle from "../assets/WordPressCircle.png";
 import ItemCard from "../components/ItemCard.vue";
+import Header from "../components/Header.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
 
@@ -258,47 +254,6 @@ function deleteCart() {
 
 
 <style scoped>
-.checkout-circle-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  /* max-width: 400px; */
-	max-width: 30%;
-  min-width: 230px;
-  margin: 20px auto 20px auto;
-}
-
-.checkout-circle {
-  width: 40px;
-  height: auto;
-  margin-bottom: 10px; /* Padding below the About text */
-	top: -100px;
-	z-index: 1;
-}
-
-.circle-line {
-  position: absolute;
-  top: 43%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-	border-width: 0px;
-  /* background-color: gray; */
-  background-color: white;
-  z-index: 0;
-}
-
-.title {
-  color: #1a1c1e;
-  font-family: Georgia, serif;
-  font-size: 36px;
-  text-align: center;
-  font-weight: 700;
-  margin-top: 0;
-  padding-bottom: 20px; /* Padding below About */
-  margin-top: -15px; /* Moves the About title up  */
-}
 
 .checkout-container {
   display: flex;
@@ -448,6 +403,14 @@ button.clicked {
 
 .venmo-btn {
   background-color: #008AFF;
+}
+
+.venmo-btn:hover {
+  filter: brightness(0.7);
+}
+
+.venmo-btn:active {
+  filter: brightness(0.9);
 }
 
 .venmo-logo {

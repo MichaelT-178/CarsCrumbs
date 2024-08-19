@@ -1,10 +1,6 @@
 <template>
-  <div class="about-circle-wrapper">
-    <img class="about-circle" :src="WordPressCircle" alt="About Circle" />
-    <hr class="circle-line" />
-  </div>
 
-  <p class="title">About</p>
+  <Header titleText="About" />
 
   <div class="content-wrapper">
     <p class="about-text">
@@ -12,11 +8,22 @@
     </p>
 
     <div class="image-container">
-      <img :src="Carly1" alt="New Hampshire Cookies" />
-      <img :src="Carly2" alt="Carly2" />
-      <img :src="Carly3" alt="NH Cookies 2" />
+      <img :src="Carly1" alt="New Hampshire Cookies" @click="() => openImageView(0)" />
+      <img :src="Carly2" alt="Carly2" @click="() => openImageView(1)" />
+      <img :src="Carly3" alt="NH Cookies 2" @click="() => openImageView(2)" />
     </div>
   </div>
+  
+  <transition name="fade">
+    <ImageView
+      v-if="isImageViewOpen"
+      :images="[Carly1, Carly2, Carly3]"
+      :captions="['New Hampshire Cookies', 'Carleigh Making Bread', 'Baking New Hampshire Cookies']"
+      :initialImage="currentImage"
+      :isOpen="isImageViewOpen"
+      @close="isImageViewOpen = false"
+    />
+  </transition>
 
   <div class="bottom-section">
     <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
@@ -25,56 +32,25 @@
 
 
 <script setup>
+import { ref } from 'vue';
+import Header from "../components/Header.vue";
+import ImageView from "./ImageView.vue";
 import Carly1 from "../assets/Carly1.jpg";
 import Carly2 from "../assets/Carly2.jpg";
 import Carly3 from "../assets/Carly3.jpg";
-import WordPressCircle from "../assets/WordPressCircle.png";
+
+const isImageViewOpen = ref(false);
+const currentImage = ref(0);
+
+const openImageView = (imageIndex) => {
+  currentImage.value = imageIndex;
+  isImageViewOpen.value = true;
+};
 
 </script>
 
 
 <style scoped>
-
-.about-circle-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  max-width: 30%;
-  min-width: 230px;
-  margin: 20px auto 20px auto;
-}
-
-.about-circle {
-  width: 40px;
-  height: auto;
-  margin-bottom: 10px; /* Padding below the About text */
-	top: -100px;
-	z-index: 1;
-}
-
-.circle-line {
-  position: absolute;
-  top: 43%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-	border-width: 0px;
-  /* background-color: gray; */
-  background-color: white;
-  z-index: 0;
-}
-
-.title {
-  color: #1a1c1e;
-  font-family: Georgia, serif;
-  font-size: 36px;
-  text-align: center;
-  font-weight: 700;
-  margin-top: 0;
-  padding-bottom: 20px; /* Padding below About */
-  margin-top: -15px; /* Moves the About title up  */
-}
 
 .content-wrapper {
   display: flex;
@@ -111,6 +87,10 @@ import WordPressCircle from "../assets/WordPressCircle.png";
   height: auto;
 }
 
+.image-container img:hover {
+  cursor: pointer;
+}
+
 .bottom-section {
 	background-color: #F3E7A4;
 	text-align: center;
@@ -136,7 +116,7 @@ import WordPressCircle from "../assets/WordPressCircle.png";
 
   .image-container img:nth-child(3) {
     max-width: 100%;
-		width: 121%;
+		width: 100%;
   }
 }
 

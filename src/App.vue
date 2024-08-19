@@ -41,9 +41,9 @@ const mainClass = computed(() => {
   box-sizing: border-box;
 }
 
-/* html, body {
+html, body {
 	background-color: #00b3ad;
-} */
+}
  
 .mobile-content {
   padding-top: 105px;

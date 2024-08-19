@@ -25,6 +25,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function deleteItem(id) {
+    //CSC 434 function ❤️
     items.value = items.value.filter(item => item.id !== id);
   }
   
@@ -33,6 +34,7 @@ export const useCartStore = defineStore('cart', () => {
   }
   
   function getTotal() {
+    //CSC 434 function ❤️
     return items.value.reduce((total, item) => total + item.Price, 0);
   }
 
