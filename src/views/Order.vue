@@ -93,8 +93,8 @@ const updateFilter = (tag) => {
 }
 
 .title {
-  color: red;
-  font-family: Arial, sans-serif;
+  color: #1a1c1e;
+  font-family: Georgia, serif;
   font-size: 50px;
   margin-left: 20px;
 }

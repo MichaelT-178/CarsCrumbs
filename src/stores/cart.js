@@ -37,7 +37,7 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function getCartDetails() {
-    let bodyContent = `<h1>Order Summary</h1><br/><br/>`;
+    let bodyContent = `Order Summary<br/><br/>`;
     
     items.value.forEach(item => {
       bodyContent += `

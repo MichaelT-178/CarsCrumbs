@@ -1,6 +1,13 @@
 <template>
-  <div class="checkout-container">
+  <div class="checkout-circle-wrapper">
+		<img class="checkout-circle" :src="WordPressCircle" alt="About Circle" />
+		<hr class="circle-line" />
+	</div>
 
+	<p class="title">Checkout</p>
+
+  <div class="checkout-container">
+    
     <!-- Left side: Check Out-->
     <div class="form-container">
       <h2 class="contact-title">Check Out</h2>
@@ -48,10 +55,10 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="details">Additional Details</label>
+          <label for="notes">Additional Notes</label>
           <textarea 
-            id="details" 
-            v-model="formData.details" 
+            id="notes" 
+            v-model="formData.notes" 
           ></textarea>
         </div>
         <div class="button-container">
@@ -94,6 +101,9 @@
       <p class="clear-cart" @click="deleteCart">Reset Cart</p>
     </div>
   </div>
+  <div class="bottom-section">
+	  <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
+	</div>
 </template>
 
 
@@ -103,6 +113,7 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import VenmoLogo from "../assets/Venmo.png";
 import GrayVenmoLogo from "../assets/GrayVenmo.png";
+import WordPressCircle from "../assets/WordPressCircle.png";
 import ItemCard from "../components/ItemCard.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
@@ -115,7 +126,7 @@ const formData = ref({
   email: '',
   phone: '',
   pickupTime: '',
-  details: ''
+  notes: ''
 });
 
 const isButtonClicked = ref(false);
@@ -154,7 +165,7 @@ const submitForm = () => {
     from_email: formData.value.email,
     pickup_time: `Pickup time is between: <b>${formData.value.pickupTime}</b>`,
     phone_number: formData.value.phone,
-    additional_details: formData.value.details || "No additional details"
+    additional_details: formData.value.notes || "No additional details"
   };
 
   const serviceID = 'service_feq974e';
@@ -164,12 +175,13 @@ const submitForm = () => {
     .then((response) => {
       Swal.fire({
         title: 'Sent!',
-        text: 'Your message has been sent successfully!',
+        text: 'Your order has been sent to Cars Crumbs!',
         icon: 'success',
         confirmButtonText: 'Close',
+        confirmButtonColor: '#FF4141', //red
         showCancelButton: true,
         cancelButtonText: 'Download Receipt',
-        cancelButtonColor: '#FFAA5E',
+        cancelButtonColor: '#7066e0', //Orange: #FFAA5E
         reverseButtons: true,
         customClass: {
           actions: 'swal2-actions-custom',
@@ -185,7 +197,7 @@ const submitForm = () => {
       formData.value.name = '';
       formData.value.email = '';
       formData.value.phone = '';
-      formData.value.details = '';
+      formData.value.notes = '';
       formData.value.pickupTime = '';
       return response;
     })
@@ -228,6 +240,7 @@ function deleteCart() {
 /* Styles need to be Global to work in the alert */
 
 .swal2-actions-custom {
+  margin-top: 6px;
   display: flex;
   flex-direction: column;
 }
@@ -245,117 +258,68 @@ function deleteCart() {
 
 
 <style scoped>
+.checkout-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* max-width: 400px; */
+	max-width: 30%;
+  min-width: 230px;
+  margin: 20px auto 20px auto;
+}
+
+.checkout-circle {
+  width: 40px;
+  height: auto;
+  margin-bottom: 10px; /* Padding below the About text */
+	top: -100px;
+	z-index: 1;
+}
+
+.circle-line {
+  position: absolute;
+  top: 43%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+	border-width: 0px;
+  /* background-color: gray; */
+  background-color: white;
+  z-index: 0;
+}
+
+.title {
+  color: #1a1c1e;
+  font-family: Georgia, serif;
+  font-size: 36px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 0;
+  padding-bottom: 20px; /* Padding below About */
+  margin-top: -15px; /* Moves the About title up  */
+}
 
 .checkout-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
+  flex-wrap: wrap;
   width: 100%;
-  padding: 20px;
+  padding: 40px;
   box-sizing: border-box;
+  margin-top: -25px;
 }
 
 .form-container {
-	width: 500px;
-	height: 685px;
-	border: 1.5px solid purple;
-	border-radius: 10px;
-	padding: 20px;
-	box-sizing: border-box;
-	background-color: #FFE4E6;
-}
-
-.contact-title {
-	margin-bottom: 8px;
-}
-
-.dm-info {
-	font-size: 16px;
-	margin-bottom: 20px;
-}
-
-.form-group {
-	margin-bottom: 30px;
-}
-
-.form-group label {
-	display: block;
-	margin-bottom: 5px;
-}
-
-.form-group select {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  width: 500px;
+  height: 685px;
+  border: 1.5px solid purple;
+  border-radius: 10px;
+  padding: 20px;
   box-sizing: border-box;
-}
-
-.form-group input,
-.form-group textarea {
-	width: 100%;
-	padding: 8px;
-	font-size: 16px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	box-sizing: border-box;
-}
-
-.form-group textarea {
-	height: 100px;
-}
-
-.insta-link {
-	color: purple;
-	text-decoration: none;
-}
-
-.insta-link:hover {
-	color: #610061;
-	text-decoration: underline;
-}
-
-.insta-link:active {
-	color: #D400D4;
-}
-
-.button-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: -5px;
-}
-
-button {
-	width: 80%;
-	color: white;
-	cursor: pointer;
-	border: none;
-	padding: 11px 40px;
-	margin-top: 5px;
-	font-size: 16.5px;
-	border-radius: 25px;
-}
-
-button.default {
-	background-color: gray;
-	border-radius: 25px;
-}
-
-button.valid {
-	background-color: #3FC76C;
-	border-radius: 25px;
-}
-
-button.valid:hover {
-	background-color: #179140;
-	border-radius: 25px;
-}
-
-button.clicked {
-	background-color: #00B7FF;
-	border-radius: 25px;
+  background-color: #FFE4E6;
+  margin-bottom: 30px; 
 }
 
 .order-summary {
@@ -369,9 +333,89 @@ button.clicked {
   box-sizing: border-box;
 }
 
-.summary-title {
-  margin-bottom: 15px;
-  font-size: 24px;
+.contact-title {
+  margin-bottom: 8px;
+}
+
+.dm-info {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+.insta-link {
+  color: purple;
+  text-decoration: none;
+}
+
+.insta-link:hover {
+  color: #610061;
+  text-decoration: underline;
+}
+
+.insta-link:active {
+  color: #D400D4;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
+}
+
+button {
+  width: 80%;
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 11px 40px;
+  margin-top: 5px;
+  font-size: 16.5px;
+  border-radius: 25px;
+}
+
+button.default {
+  background-color: gray;
+  border-radius: 25px;
+}
+
+button.valid {
+  background-color: #3FC76C;
+  border-radius: 25px;
+}
+
+button.valid:hover {
+  background-color: #179140;
+  border-radius: 25px;
+}
+
+button.clicked {
+  background-color: #00B7FF;
+  border-radius: 25px;
 }
 
 .item-list {
@@ -384,10 +428,10 @@ button.clicked {
   margin-top: 20px;
 }
 
-.gray-venmo-btn {
+.gray-venmo-btn,
+.venmo-btn {
   display: inline-flex;
   align-items: center;
-  background-color: #808080;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -398,18 +442,12 @@ button.clicked {
   transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
+.gray-venmo-btn {
+  background-color: #808080;
+}
+
 .venmo-btn {
-  display: inline-flex;
-  align-items: center;
   background-color: #008AFF;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50px;
-  font-size: 18px;
-  font-family: Arial, sans-serif;
-  text-decoration: none;
-  transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
 .venmo-logo {
@@ -436,4 +474,54 @@ button.clicked {
   text-decoration: none;
 }
 
+.bottom-section {
+	background-color: #F3E7A4;
+	text-align: center;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bottom-section p {
+	font-size: 17px;
+}
+
+@media (max-width: 940px) {
+  .checkout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .order-summary {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 575px) {
+	.checkout-container {
+		justify-content: center;
+		align-items: center;
+		padding: 0 10px;
+	}
+
+	.order-summary {
+		width: 100%;
+		max-width: 90%;
+	}
+	
+	.form-container {
+		width: 100%;
+		max-width: 90%;
+		margin: 0 auto;
+		margin-top: 35px;
+	}
+	
+	.bottom-section {
+		margin-top: 20px;
+	}
+}
+
 </style>
+

@@ -1,5 +1,10 @@
 <template>
-	<h1 class="main-title">Get in Touch</h1>
+	<div class="contact-circle-wrapper">
+		<img class="contact-circle" :src="WordPressCircle" alt="About Circle" />
+		<hr class="circle-line" />
+	</div>
+
+	<p class="title">Contact Us</p>
 
 	<div class="contact-container">
 
@@ -115,6 +120,7 @@
 import { ref, computed } from 'vue';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
+import WordPressCircle from "../assets/WordPressCircle.png";
 
 const formData = ref({
 	name: '',
@@ -190,6 +196,48 @@ const submitForm = () => {
 
 <style scoped>
 
+.contact-circle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* max-width: 400px; */
+	max-width: 30%;
+  min-width: 230px;
+  margin: 20px auto 20px auto;
+}
+
+.contact-circle {
+  width: 40px;
+  height: auto;
+  margin-bottom: 10px; /* Padding below the About text */
+	top: -100px;
+	z-index: 1;
+}
+
+.circle-line {
+  position: absolute;
+  top: 43%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+	border-width: 0px;
+  /* background-color: gray; */
+  background-color: white;
+  z-index: 0;
+}
+
+.title {
+  color: #1a1c1e;
+  font-family: Georgia, serif;
+  font-size: 36px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 0;
+  padding-bottom: 20px; /* Padding below About */
+  margin-top: -15px; /* Moves the About title up  */
+}
+
 .contact-container {
 	display: flex;
 	justify-content: center;
@@ -198,15 +246,7 @@ const submitForm = () => {
 	padding: 40px;
 	box-sizing: border-box;
 	flex-wrap: wrap;
-	margin-top: -25px; /* .main-title */
-}
-
-.main-title {
-  text-align: center;
-  margin-right: 840px;
-  font-size: 32px;
-  color: red;
-  margin-top: 10px;
+	margin-top: -30px;
 }
 
 .insta-link {
@@ -343,16 +383,16 @@ button.clicked {
 }
 
 .social-section, .location-section {
-    background-color: Beige;
-    border: 1px solid purple;
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 20px;
-    box-sizing: border-box;
+	background-color: Beige;
+  border: 1px solid purple;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  box-sizing: border-box;
 }
 
 .social-section h2, .location-section h2 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .social-icons {
@@ -408,14 +448,6 @@ button.clicked {
 	font-size: 17px;
 }
 
-@media (max-width: 1119px) {
-	.main-title {
-		margin-right: 0px;
-		margin-bottom: -25px;
-		color: magenta;
-	}
-}
-
 @media (max-width: 940px) {
 	.contact-container {
 		flex-direction: column;
@@ -427,11 +459,6 @@ button.clicked {
 		margin-top: 30px;
 	}
 
-	.main-title {
-		color: paleturquoise;
-		margin-bottom: -25px;
-		margin-top: 5px;
-	}
 }
 
 @media (max-width: 575px) {
@@ -450,12 +477,13 @@ button.clicked {
 		width: 100%;
 		max-width: 90%;
 		margin: 0 auto;
-		margin-top: 35px; /* .main-title */
+		margin-top: 35px;
 	}
 	
 	.bottom-section {
 		margin-top: 20px;
 	}
+
 }
 
 </style>
