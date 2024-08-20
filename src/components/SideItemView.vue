@@ -1,12 +1,16 @@
 <template>
-  <div class="side-content">
-    <button class="close-btn" @click="handleClose">X</button>
+  <div class="side-content" @keydown="handleKeydown">
+    <button class="close-btn" @click="handleClose">
+      <span class="material-symbols-outlined">close</span>
+    </button>
     <h2>{{ item.Name }}</h2>
   </div>
 </template>
 
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue';
+
 const props = defineProps({
   item: Object
 });
@@ -16,6 +20,21 @@ const emit = defineEmits(['close']);
 const handleClose = () => {
   emit('close');
 };
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    handleClose();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
+
 </script>
 
 
@@ -31,7 +50,7 @@ const handleClose = () => {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .close-btn {
@@ -40,13 +59,16 @@ const handleClose = () => {
   right: 20px;
   background: none;
   border: none;
-  color: black;
-  font-size: 20px;
+  padding: 0;
   cursor: pointer;
 }
 
-.close-btn:hover {
-  background-color: gray;
+.material-symbols-outlined {
+  font-size: 24px;
+}
+
+.material-symbols-outlined:hover {
+  color: red;
 }
 
 h2 {

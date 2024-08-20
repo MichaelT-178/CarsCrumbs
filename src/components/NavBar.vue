@@ -1,4 +1,8 @@
 <template>
+
+  <!-- Dark overlay -->
+  <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
+
   <nav class="navbar">
     <img :src="logo" alt="Logo" class="logo" />
     <div class="right-section">
@@ -44,7 +48,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import logo from "../assets/logo.png";
 import MenuData from "../assets/Menu.json";
 import { useRouter } from 'vue-router';
@@ -59,7 +63,6 @@ const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
-
 
 const filterResults = () => {
   if (searchQuery.value) {
@@ -99,6 +102,24 @@ const handleSearchEnter = () => {
   searchInput.value.blur();
 };
 
+const closeSearchBar = () => {
+  searchInput.value.blur();
+}
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    closeSearchBar();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
+
 </script>
 
 
@@ -122,6 +143,16 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1001;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 1000;
 }
 

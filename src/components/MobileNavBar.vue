@@ -1,5 +1,11 @@
 <template>
-  <nav class="navbar">
+  <!-- Search bar Dark overlay -->
+  <div v-if="showDropdown" class="search-overlay" @click="toggleSidebar"></div>
+
+  <nav class="navbar" @keydown="handleKeydown">
+
+    <!-- Dark overlay -->
+    <div v-if="isSidebarOpen" class="overlay" @click="toggleSidebar"></div>
 
     <div class="top-navbar">
       <img :src="logoTwo" alt="Logo" class="logo" />
@@ -18,16 +24,6 @@
             @blur="hideDropdown"
             @keydown.enter="handleSearchEnter"
           />
-          <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
-            <li 
-              v-for="(result, index) in filteredResults" 
-              :key="index" 
-              class="result" 
-              @mousedown="handleItemClick(result.Name)"
-            >
-              <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -67,6 +63,18 @@
       <p class="logo-tag">@CarsCrumbs</p>
     </div>
 
+    <!-- Dropdown search results -->
+    <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
+      <li 
+        v-for="(result, index) in filteredResults" 
+        :key="index" 
+        class="result" 
+        @mousedown="handleItemClick(result.Name)"
+      >
+        <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
+      </li>
+    </ul>
+
     <span 
       class="material-icons menu-icon" 
       @click="toggleSidebar" 
@@ -83,7 +91,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import logoTwo from "../assets/logoTwoYellow.png";
 import MenuData from "../assets/Menu.json";
 import { useRouter } from 'vue-router';
@@ -100,9 +108,6 @@ const filteredResults = ref([]);
 const searchInput = ref(null);
 const isSidebarOpen = ref(false);
 const menuIconColor = ref("white");
-
-//DELETE THIS
-const cartItemCount = ref(0);
 
 const filterResults = () => {
   if (searchQuery.value) {
@@ -135,7 +140,7 @@ const hideDropdown = () => {
 
 const handleItemClick = (itemName) => {
   const selectedItem = menu.find(item => item.Name === itemName);
-
+  
   if (selectedItem && selectedItem.Route) {
     router.push(selectedItem.Route);
   }
@@ -157,6 +162,25 @@ const hoverMenuIcon = () => {
 const resetMenuIconColor = () => {
   menuIconColor.value = "white";
 };
+
+const closeSearchBar = () => {
+  searchInput.value.blur();
+}
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    closeSidebar();
+    closeSearchBar();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
 
 </script>
 
@@ -181,12 +205,33 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; 
+  z-index: 1003; 
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
 }
 
 .top-navbar, .bottom-navbar {
   width: 100%;
   padding: 4px 40px;
+  position: relative;
 }
 
 .logo {
@@ -214,7 +259,7 @@ html, body {
 }
 
 .menu-icon:hover {
-  color: #FFD700;
+ color: #FFD700;
 }
 
 .cart-icon {
@@ -274,15 +319,16 @@ html, body {
 
 .dropdown {
   position: absolute;
-  top: 95%;
+  top: 100%;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background-color: white;
   overflow-y: auto;
   list-style: none;
   margin: 0;
   padding: 0;
   z-index: 1001;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .result {
@@ -290,6 +336,7 @@ html, body {
   cursor: pointer;
   background: lightskyblue;
   color: black;
+  font-size: 20px;
   border-bottom: 1px solid #3C3B3B;
 }
 
@@ -302,7 +349,7 @@ html, body {
 }
 
 .result span.result-text {
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
 .sidebar {
@@ -323,7 +370,7 @@ html, body {
 
 .sidebar-header {
   background-color: purple;
-  padding: 15px 20px; /* First is vertical second is horizontal*/
+  padding: 15px 20px; /* First is vertical, second is horizontal */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -410,4 +457,16 @@ html, body {
   width: 100%;
 }
 
+@media (max-width: 500px) {
+  .result {
+    font-size: 18px;
+  }
+
+  .result span.result-text {
+    margin-left: 10px;
+  }
+}
+
 </style>
+
+

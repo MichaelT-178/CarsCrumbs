@@ -188,7 +188,7 @@ const closeSideView = () => {
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
+  z-index: 1001;
   transition: opacity 0.3s ease;
 }
 

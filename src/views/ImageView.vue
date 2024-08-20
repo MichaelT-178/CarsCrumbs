@@ -1,6 +1,10 @@
 <template>
   <div v-if="isOpen" class="overlay" @keydown="handleKeydown" tabindex="0">
-    <button class="close-btn" @click="closeImageView">X</button>
+    <button class="close-btn" @click="closeImageView">
+      <div class="icon-container">
+        <span class="material-symbols-outlined">close</span>
+      </div>
+    </button>
     <div class="image-container">
       <div class="image-background">
         <transition name="fade">
@@ -53,6 +57,8 @@ const handleKeydown = (event) => {
     nextImage();
   } else if (event.key === 'ArrowLeft') {
     prevImage();
+  } else if (event.key === 'Escape') {
+    closeImageView()
   }
 };
 
@@ -91,7 +97,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1001;
 }
 
 .overlay:focus {
@@ -104,17 +110,29 @@ onMounted(() => {
   right: 40px;
   background: none;
   border: none;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 10px;
+  padding: 0;
   z-index: 1001;
+  cursor: pointer;
 }
 
-.close-btn:hover {
-  background-color: gray;
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.1s ease;
+}
+
+.icon-container:hover {
+  background-color: gray;
+}
+
+.icon-container .material-symbols-outlined {
+  font-size: 24px;
+  color: white;
 }
 
 .image-container {
@@ -216,6 +234,16 @@ onMounted(() => {
   .close-btn {
     right: 20px;
   }
+
+  .icon-container {
+    width: 30px;
+    height: 30px;
+  }
+
+  .icon-container .material-symbols-outlined {
+    font-size: 20px;
+  }
+
 }
 
 </style>
