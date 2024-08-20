@@ -1,51 +1,55 @@
 <template>
-	<div class="menu-card">
-	  <img :src="pic" :alt="item.Name" class="menu-image" />
-	  <h2 class="menu-name">{{ item.Name }}</h2>
-	  <div class="menu-tags">
-		<span
-		  v-for="tag in item.Tags"
-		  :key="tag"
-		  class="menu-tag"
-		  @click="tagClicked(tag)"
-		  @mouseover="hovered = tag"
-		  @mouseleave="hovered = null"
-		  :class="{ 'tag-hovered': hovered === tag }"
-		>{{ tag }}</span>
-	  </div>
-	  <p class="menu-price">{{ item.Price === 0.0 ? 'Prices Vary' : `$${item.Price.toFixed(2)}` }}</p>
-	  <router-link :to="item.Route" class="order-button">Order Now</router-link>
-	</div>
+  <div class="menu-card">
+    <img :src="pic" :alt="item.Name" class="menu-image" />
+    <h2 class="menu-name">{{ item.Name }}</h2>
+    <div class="menu-tags">
+      <span
+        v-for="tag in item.Tags"
+        :key="tag"
+        class="menu-tag"
+        @click="tagClicked(tag)"
+        @mouseover="hovered = tag"
+        @mouseleave="hovered = null"
+        :class="{ 'tag-hovered': hovered === tag }"
+      >{{ tag }}</span>
+    </div>
+    <p class="menu-price">{{ item.Price === 0.0 ? 'Prices Vary' : `$${item.Price.toFixed(2)}` }}</p>
+    <button class="order-button" @click="openSideView">Order Now</button>
+  </div>
 </template>
 
 
 <script setup>
 import { ref } from 'vue';
-  
+
 const props = defineProps({
-	item: {
-	  type: Object,
-	  required: true,
-	  default: () => ({
-	    Name: '',
-		Emoji: '',
-		Price: 0.0,
-		Image: '',
-		Route: '',
-		Tags: [],
-	  }),
-	},
+  item: {
+    type: Object,
+    required: true,
+    default: () => ({
+      Name: '',
+      Emoji: '',
+      Price: 0.0,
+      Image: '',
+      Route: '',
+      Tags: [],
+    }),
+  },
 });
 
 const pic = ref(new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
 
 const hovered = ref(null);
 
-const emit = defineEmits(['tag-clicked']);
+const emit = defineEmits(['tag-clicked', 'open-side-view']);
 
 const tagClicked = (tag) => {
-	emit('tag-clicked', tag);
-}
+  emit('tag-clicked', tag);
+};
+
+const openSideView = () => {
+  emit('open-side-view', props.item);
+};
 
 </script>
 

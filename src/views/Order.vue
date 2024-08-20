@@ -27,8 +27,18 @@
         :key="key"
         :item="item"
         @tag-clicked="updateFilter"
+        @open-side-view="openSideView"
       />
     </div>
+    
+    <!-- SideView and dark overlay -->
+    <transition name="fade">
+      <div v-if="showSideView" class="overlay" @click="closeSideView"></div>
+    </transition>
+    <transition name="slide">
+      <SideView v-if="showSideView" :item="selectedItem" @close="closeSideView" />
+    </transition>
+
     <div class="bottom-section">
       <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
     </div>
@@ -40,9 +50,12 @@
 import { ref, computed } from 'vue';
 import AllData from '../assets/MenuItems.json';
 import MenuCard from '../components/MenuCard.vue';
+import SideView from '../components/SideItemView.vue';
 
 const selectedTag = ref('No Filter');
 const searchQuery = ref('');
+const showSideView = ref(false);
+const selectedItem = ref(null);
 
 const filteredItems = computed(() => {
   let items = AllData;
@@ -68,7 +81,17 @@ const filteredItems = computed(() => {
 
 const updateFilter = (tag) => {
   selectedTag.value = tag.replace(/[🍪🍫🥖🥯🎂]/g, '').trim();
-}
+};
+
+const openSideView = (item) => {
+  selectedItem.value = item;
+  showSideView.value = true;
+};
+
+const closeSideView = () => {
+  showSideView.value = false;
+  selectedItem.value = null;
+};
 
 </script>
 
@@ -78,6 +101,7 @@ const updateFilter = (tag) => {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 .header-container {
@@ -157,6 +181,49 @@ const updateFilter = (tag) => {
   margin-top: auto;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.2s ease;
+}
+
+.slide-enter-from {
+  transform: translateX(100%);
+}
+
+.slide-enter-to {
+  transform: translateX(0);
+}
+
+.slide-leave-from {
+  transform: translateX(0);
+}
+
+.slide-leave-to {
+  transform: translateX(100%);
+}
+
 @media (max-width: 610px) {
   .search-bar {
     display: none;
@@ -207,13 +274,4 @@ const updateFilter = (tag) => {
     gap: 35px;
   }
 }
-
 </style>
-
-<!-- @media (max-width: 550px) {
-  .menu-container {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 35px;
-  }
-} -->
