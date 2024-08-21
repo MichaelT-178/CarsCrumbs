@@ -50,6 +50,23 @@
             <option>6:00pm - 7:00pm</option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label for="pickup-date">Pickup Date<span style="color: #EF0000;"> *</span></label>
+          <Datepicker 
+            v-model="formData.pickupDate" 
+            id="pickup-date" 
+            :required="true"
+            :enable-time="false" 
+            :month-change-on-scroll="false"
+            :enable-time-picker="false"
+            format="MM-dd-yyyy"
+            auto-apply
+            :min-date="minPickupDate"
+            :max-date="new Date(new Date().getFullYear(), 11, 31)"
+          />
+        </div>
+
         <div class="form-group">
           <label for="notes">Additional Notes</label>
           <textarea 
@@ -113,15 +130,29 @@ import ItemCard from "../components/ItemCard.vue";
 import Header from "../components/Header.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
+import { format } from 'date-fns';
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const cart = useCartStore();
 const router = useRouter();
+
+// Min pickup date will be days after current date 
+// If date is 8-21 min-pickup will be 8-23
+const calculateMinDate = () => {
+  const today = new Date();
+  today.setDate(today.getDate() + 2);
+  return today;
+}
+
+const minPickupDate = ref(calculateMinDate());
 
 const formData = ref({
   name: '',
   email: '',
   phone: '',
   pickupTime: '',
+  pickupDate: '',
   notes: ''
 });
 
@@ -135,7 +166,8 @@ const isFormValid = computed(() => {
   return formData.value.name.trim() !== '' &&
          formData.value.email.match(emailRegex) &&
          formData.value.phone.trim() !== '' && 
-         formData.value.pickupTime !== '';
+         formData.value.pickupTime !== '' &&
+         formData.value.pickupDate !== '';
 });
 
 const sanitizeHTML = (str) => {
@@ -153,15 +185,22 @@ const submitForm = () => {
 
   buttonText.value = "Sending...";
 
+  const formValues = formData.value;
+
+  console.log(formValues.pickupDate);
+  
+  //08-22-2024 becomes Thursday, August 22nd
+  const formattedDate = format(formValues.pickupDate, 'EEEE, MMMM do');
+
   const templateParams = {
     subject: "Order for Cars Crumbs",
-    start_message: `A person named "${formData.value.name}" made a purchase at Cars Crumbs.`,
+    start_message: `A person named "${formValues.name}" made a purchase at Cars Crumbs.`,
     main_message: sanitizedOrderSummary, 
-    from_name: formData.value.name,
-    from_email: formData.value.email,
-    pickup_time: `Pickup time is between: <b>${formData.value.pickupTime}</b>`,
-    phone_number: formData.value.phone,
-    additional_details: formData.value.notes || "No additional details"
+    from_name: formValues.name,
+    from_email: formValues.email,
+    pickup_time: `<b><u>Pickup time</u></b>: Between <b>${formValues.pickupTime}</b> on <u><i>${formattedDate}</i></u>.`,
+    phone_number: formValues.phone,
+    additional_details: formValues.notes || "No additional details"
   };
 
   const serviceID = 'service_feq974e';
@@ -195,6 +234,7 @@ const submitForm = () => {
       formData.value.phone = '';
       formData.value.notes = '';
       formData.value.pickupTime = '';
+      formData.value.pickupDate = '';
       return response;
     })
     .catch((err) => {
@@ -268,7 +308,7 @@ function deleteCart() {
 
 .form-container {
   width: 500px;
-  height: 685px;
+  height: 785px;
   border: 1.5px solid purple;
   border-radius: 10px;
   padding: 20px;
