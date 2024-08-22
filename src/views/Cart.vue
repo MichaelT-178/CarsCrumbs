@@ -44,7 +44,7 @@ const deleteCart = () => {
 };
 
 const checkoutText = computed(() => {
-  return cart.getItemCount() === 0 ? 'Go to Menu' : 'Checkout';
+  return cart.getItemCount() === 0 ? 'Start Order' : 'Checkout';
 });
 
 const handleCheckout = () => {

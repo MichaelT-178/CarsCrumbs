@@ -10,9 +10,13 @@
 
 <script setup>
 import { onMounted, onUnmounted } from 'vue';
+import { useCartStore } from "../stores/cart.js";
+
+const cart = useCartStore();
 
 const props = defineProps({
-  item: Object
+  item: Object,
+  required: true
 });
 
 const emit = defineEmits(['close']);
@@ -50,7 +54,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  z-index: 1001;
+  z-index: 2000;
 }
 
 .close-btn {

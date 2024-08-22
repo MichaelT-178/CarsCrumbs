@@ -13,7 +13,7 @@
 		  :class="{ 'tag-hovered': hovered === tag }"
 		>{{ tag }}</span>
 	  </div>
-	  <p class="menu-price">{{ item.Price === 0.0 ? 'Prices Vary' : `$${item.Price.toFixed(2)}` }}</p>
+	  <p class="menu-price">{{ `$${item.Cost}.00 (${item.Description})` }}</p>
 	  <button @click="deleteItem" class="order-button">Delete</button>
 	</div>
 </template>
@@ -32,11 +32,11 @@ const props = defineProps({
 	  default: () => ({
 			id: 0,
 	    Name: '',
-		Emoji: '',
-		Price: 0.0,
-		Image: '',
-		Route: '',
-		Tags: [],
+			Emoji: '',
+			Price: 0.0,
+			Image: '',
+			Route: '',
+			Tags: [],
 	  }),
 	},
 });
@@ -54,7 +54,6 @@ const tagClicked = (tag) => {
 
 const deleteItem = () => {
 	if (confirm("Are you sure you want to delete this item?")) {
-		console.log(props.item.id);
 		cart.deleteItem(props.item.id);
 	}
 }

@@ -35,28 +35,25 @@ export const useCartStore = defineStore('cart', () => {
   
   function getTotal() {
     //CSC 434 function ❤️
-    return items.value.reduce((total, item) => total + item.Price, 0);
+    return items.value.reduce((total, item) => total + item.Cost, 0);
   }
 
-  function getCartDetails() {
-    let bodyContent = `Order Summary<br/><br/>`;
-    
+  function getCartDetails(date = null) {
+    //Include date for receipt
+    let bodyContent = `Order Summary<br/>${date !== null ? `${date}<br/>` : ""}<br/>`;
+  
     items.value.forEach(item => {
       bodyContent += `
       <div>
         <strong>Product:</strong> ${item.Name}<br/>
-        <strong>Price:</strong> $${item.Price.toFixed(2)}<br/>
-        <strong>Quantity:</strong> ${item.quantity || 1}<br/>
+        <strong>Quantity:</strong> ${item.Description }<br/>
+        <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
       </div><br/>`;
     });
     
-    bodyContent += `<div><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
+    bodyContent += `<div><strong>Cart:</strong> ${getItemCount()} items<br/><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
     
     return bodyContent;
-  }
-
-  function getReceipt() {
-    return "This is the receipt";
   }
 
   function resetCart() {
@@ -71,6 +68,6 @@ export const useCartStore = defineStore('cart', () => {
     localStorage.setItem('cartItems', JSON.stringify(newItems));
   }, { deep: true });
 
-  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, getReceipt, resetCart, allItems };
+  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, resetCart, allItems };
 
 });

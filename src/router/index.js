@@ -6,12 +6,8 @@ import Cart from '../views/Cart.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
 
-//Menu
-import Cookies from '../views/menu/Cookies.vue';
-import Brownies from '../views/menu/Brownies.vue';
-import Bread from '../views/menu/Bread.vue';
-import Bagels from '../views/menu/Bagels.vue';
-import Cakes from '../views/menu/Cakes.vue';
+//Item
+import Item from '../views/Item.vue';
 
 //SearchResults
 import SearchResults from '../views/SearchResults.vue';
@@ -41,33 +37,9 @@ const routes = [
 		component: Contact
 	},
 	{
-        path: '/Cookies/:ItemName',
-        name: 'CookieView',
-        component: Cookies,
-        props: true
-    },
-	{
-        path: '/Brownies/:ItemName',
-        name: 'BrownieView',
-        component: Brownies,
-        props: true
-    },
-	{
-        path: '/Bread/:ItemName',
-        name: 'BreadView',
-        component: Bread,
-        props: true
-    },
-	{
-        path: '/Bagels/:ItemName',
-        name: 'BagelView',
-        component: Bagels,
-        props: true
-    },
-	{
-        path: '/Cake/:ItemName',
-        name: 'CakeView',
-        component: Cakes,
+        path: '/Item/:ItemName',
+        name: 'ItemView',
+        component: Item,
         props: true
     },
 	{

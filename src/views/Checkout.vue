@@ -131,6 +131,7 @@ import Header from "../components/Header.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
 import { format } from 'date-fns';
+import html2pdf from 'html2pdf.js';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -186,8 +187,6 @@ const submitForm = () => {
   buttonText.value = "Sending...";
 
   const formValues = formData.value;
-
-  console.log(formValues.pickupDate);
   
   //08-22-2024 becomes Thursday, August 22nd
   const formattedDate = format(formValues.pickupDate, 'EEEE, MMMM do');
@@ -223,8 +222,7 @@ const submitForm = () => {
         }
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.cancel) {
-          console.log("Hello");
-          downloadTxtFile()
+          downloadReceiptPDF()
         }
       }); 
 
@@ -248,16 +246,36 @@ const submitForm = () => {
     });
 };
 
+//Returns 8-14 if August 14th
+function getReceiptDate() {
+  const now = new Date();
+  const month = now.getMonth() + 1; // getMonth returns 0-11 so add 1
+  const day = now.getDate();
 
-function downloadTxtFile() {
-  const blob = new Blob([cart.getReceipt()], { type: 'text/plain' });
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = 'CarsCrumbsReceipt.txt';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  return `${month}-${day}`;
 }
+
+
+function downloadReceiptPDF() {
+  const element = document.createElement('div');
+
+  //Wednesday, August 21st
+  const formattedDate = format(Date.now(), 'EEEE, MMMM do');
+
+  element.innerHTML = cart.getCartDetails(formattedDate);
+
+  html2pdf()
+    .from(element)
+    .set({
+      margin: 1,
+      filename: `CarsCrumbsReceipt${getReceiptDate()}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, logging: true, dpi: 192, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    })
+    .save();
+}
+
 
 function deleteCart() {
   cart.resetCart();
