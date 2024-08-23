@@ -37,18 +37,18 @@ const routes = [
 		component: Contact
 	},
 	{
-        path: '/Item/:ItemName',
-        name: 'ItemView',
-        component: Item,
-        props: true
-    },
+		path: '/Item/:ItemName',
+		name: 'ItemView',
+		component: Item,
+		props: true
+  },
 	{
-        path: '/Results/:SearchQuery?',
-        name: 'SearchResults',
-        component: SearchResults,
-        props: true
-    },
-    {
+		path: '/Results/:SearchQuery?',
+		name: 'SearchResults',
+		component: SearchResults,
+		props: true
+	},
+	{
 		path: '/Cart/Checkout',
 		component: Checkout
 	}

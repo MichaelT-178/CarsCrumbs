@@ -2,7 +2,7 @@
   <div v-if="cart.getItemCount() === 0" class="empty-cart">
     <Header titleText="Empty Cart" />
     <img class="logo" :src="CrumbsLogo" alt="logo" />
-    <p class="empty-message">Your cart is empty 🤷🏻‍♂️</p>
+    <p class="empty-message">Your Cart Is Empty</p>
     <router-link
       to="/Order"
       class="order-button"
@@ -156,6 +156,7 @@ const deleteCart = () => {
   background-color: #f8f9fa;
   border-radius: 8px;
   word-wrap: break-word;
+  border: 1.5px solid #3D3D3D;
 }
 
 .item-list {

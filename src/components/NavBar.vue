@@ -187,11 +187,11 @@ html, body {
   border-radius: 5px;
   border: 1px solid black;
   margin-right: 30px;
-  transition: width 0.3s ease-in-out;
 }
 
 .search-bar input:focus {
   width: 300px;
+  transition: width 0.3s ease-in-out; /* Move back into .search-bar input to add transition on close */
 }
 
 .dropdown {

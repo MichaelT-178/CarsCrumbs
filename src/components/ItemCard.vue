@@ -19,9 +19,11 @@
       </div>
       <p class="item-price">{{ `$${item.Cost}.00` }}</p>
     </div>
+    <div>
     <span class="material-symbols-outlined delete-icon" @click="deleteItem">
       delete
     </span>
+    </div>
   </div>
 </template>
 

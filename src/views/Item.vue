@@ -63,7 +63,7 @@ const addItem = () => {
     const option = selectedOption.value;
 
     cart.addItem({ ...menuItem.value, Cost: option.price, Description: option.description });
-    alert(`Item Successfully Added to Cart: ${menuItem.value.DisplayName} - ${selectedOption.value.description} ($${selectedOption.value.price})`);
+    alert("Item Successfully Added to Cart!");
   }
 };
 
