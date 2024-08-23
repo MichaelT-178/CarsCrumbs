@@ -1,21 +1,28 @@
 <template>
-	<div class="menu-card">
-	  <img :src="pic" :alt="item.Name" class="menu-image" />
-	  <h2 class="menu-name">{{ item.Name }}</h2>
-	  <div class="menu-tags">
-		<span
-		  v-for="tag in item.Tags"
-		  :key="tag"
-		  class="menu-tag"
-		  @click="tagClicked(tag)"
-		  @mouseover="hovered = tag"
-		  @mouseleave="hovered = null"
-		  :class="{ 'tag-hovered': hovered === tag }"
-		>{{ tag }}</span>
-	  </div>
-	  <p class="menu-price">{{ `$${item.Cost}.00 (${item.Description})` }}</p>
-	  <button @click="deleteItem" class="order-button">Delete</button>
-	</div>
+  <div class="item-card">
+    <img :src="pic" :alt="item.DisplayName" class="item-image" />
+    <div class="item-info">
+      <h2 class="item-name">{{ item.DisplayName }}</h2>
+      <p class="item-quantity">{{ item.Description }}</p>
+      <div class="item-tags">
+        <span
+          v-for="tag in item.Tags"
+          :key="tag"
+          class="item-tag"
+          @click="tagClicked(tag)"
+          @mouseover="hovered = tag"
+          @mouseleave="hovered = null"
+          :class="{ 'tag-hovered': hovered === tag }"
+        >
+          {{ tag }}
+        </span>
+      </div>
+      <p class="item-price">{{ `$${item.Cost}.00` }}</p>
+    </div>
+    <span class="material-symbols-outlined delete-icon" @click="deleteItem">
+      delete
+    </span>
+  </div>
 </template>
 
 
@@ -24,21 +31,21 @@ import { ref } from 'vue';
 import { useCartStore } from "../stores/cart.js";
 
 const cart = useCartStore();
-  
+
 const props = defineProps({
-	item: {
-	  type: Object,
-	  required: true,
-	  default: () => ({
-			id: 0,
-	    Name: '',
-			Emoji: '',
-			Price: 0.0,
-			Image: '',
-			Route: '',
-			Tags: [],
-	  }),
-	},
+  item: {
+    type: Object,
+    required: true,
+    default: () => ({
+      id: 0,
+      Name: '',
+      Quantity: 1,
+      Cost: 0.0,
+      Image: '',
+      Description: '',
+      Tags: [],
+    }),
+  },
 });
 
 const pic = ref(new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
@@ -47,101 +54,85 @@ const hovered = ref(null);
 
 const emit = defineEmits(['tag-clicked']);
 
-
 const tagClicked = (tag) => {
-	emit('tag-clicked', tag);
-}
+  emit('tag-clicked', tag);
+};
 
 const deleteItem = () => {
-	if (confirm("Are you sure you want to delete this item?")) {
-		cart.deleteItem(props.item.id);
-	}
-}
+  if (confirm("Are you sure you want to delete this item?")) {
+    cart.deleteItem(props.item.id);
+  }
+};
 
 </script>
 
 
 <style scoped>
-
-.menu-card {
-	border: 1.5px solid #3D3D3D;
-	padding-bottom: 12px;
-	max-width: 230px;
-	text-align: center;
-	border-radius: 8px;
-	background-color: white;
+.item-card {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #3D3D3D;
+  padding: 12px;
+  max-width: 500px;
+  border-radius: 8px;
+  background-color: white;
+  justify-content: space-between;
+  position: relative;
+	width: 410px;
 }
 
-.menu-image {
-	width: 100%;
-	height: 150px;
-	object-fit: cover;
-	border-radius: 8px 8px 0 0;
+.item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.menu-name {
-	font-weight: bold;
-	margin-top: 8px;
-}
-  
-.menu-tags {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	margin: 8px 0;
-}
-  
-.menu-tag {
-	background-color: #f0f0f0;
-	border-radius: 50px;
-	padding: 4px 12px;
-	margin: 4px 4px;
-	font-size: 13px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, border 0.3s ease;
-}
-  
-.menu-tag:hover,
-.menu-tag.tag-hovered {
-	background-color: #A5A5A5;
-	color: white;
+.item-info {
+  flex-grow: 1;
+  margin-left: 12px;
 }
 
-.menu-tag:active {
-	background-color: lightseagreen;
-	color: white;
+.item-name {
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-.menu-price {
-	margin-top: 8px;
-	font-weight: bold;
-}
-  
-.order-button {
-	margin-top: 8px;
-	padding: 6px 22px;
-	background-color: red;
-	color: white;
-	border: none;
-	border-radius: 25px;
-	cursor: pointer;
-	text-decoration: none;
-	display: inline-block;
-	text-align: center;
-	width: 65%;
-	transition: background-color 0.3s ease;
+.item-quantity {
+  font-size: 16px;
+  margin-bottom: 4px;
 }
 
-.order-button:hover {
-	background-color: darkred;
+.item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
 }
 
-@media (max-width: 550px) {
-	.menu-card {
-		max-width: 500px;
-		width: 300px;
-	}
+.item-tag {
+  background-color: #f0f0f0;
+  border-radius: 50px;
+  padding: 4px 12px;
+  margin: 4px 4px;
+  font-size: 13px;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.item-price {
+  font-weight: bold;
+  margin-top: 4px;
+	font-size: 18px;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: red;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.delete-icon:hover {
+  color: darkred;
 }
 
 </style>
-  

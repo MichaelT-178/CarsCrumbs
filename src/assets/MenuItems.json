@@ -1,6 +1,7 @@
 {
     "Brown_Butter_Chocolate_Chip": {
-        "Name": "Brown Butter Chocolate Chip",
+        "DisplayName": "Brown Butter Chocolate Chip",
+        "Name": "Brown_Butter_Chocolate_Chip",
         "Emoji": "🍪",
         "Price": 0.0,
         "DisplayPrice": "$15.00 - $25.00",
@@ -20,7 +21,8 @@
         ]
     },
     "Sugar": {
-        "Name": "Sugar Cookies",
+        "DisplayName": "Sugar Cookies",
+        "Name": "Sugar",
         "Emoji": "🍪",
         "Price": 0.0,
         "DisplayPrice": "$15.00 - $25.00",
@@ -40,7 +42,8 @@
         ]
     },
     "Snickerdoodle": {
-        "Name": "Snickerdoodles",
+        "DisplayName": "Snickerdoodles",
+        "Name": "Snickerdoodle",
         "Emoji": "🍪",
         "Price": 0.0,
         "DisplayPrice": "$15.00 - $25.00",
@@ -60,7 +63,8 @@
         ]
     },
     "Ginger_Molasses": {
-        "Name": "Ginger Molasses Cookies",
+        "DisplayName": "Ginger Molasses Cookies",
+        "Name": "Ginger_Molasses",
         "Emoji": "🍪",
         "Price": 0.0,
         "DisplayPrice": "$15.00 - $25.00",
@@ -80,7 +84,8 @@
         ]
     },
     "Double_Chocolate": {
-        "Name": "Double Chocolate Cookies",
+        "DisplayName": "Double Chocolate Cookies",
+        "Name": "Double_Chocolate",
         "Emoji": "🍪",
         "Price": 0.0,
         "DisplayPrice": "$15.00 - $25.00",
@@ -100,7 +105,8 @@
         ]
     },
     "Fudge_Brownies": {
-        "Name": "Fudge Brownies",
+        "DisplayName": "Fudge Brownies",
+        "Name": "Fudge_Brownies",
         "Emoji": "🍫",
         "Price": 0.0,
         "DisplayPrice": "$15.00",
@@ -116,7 +122,8 @@
         ]
     },
     "Smores_Brownies": {
-        "Name": "S'mores Brownies",
+        "DisplayName": "S'mores Brownies",
+        "Name": "Smores_Brownies",
         "Emoji": "☁️",
         "Price": 0.0,
         "DisplayPrice": "$15.00",
@@ -132,7 +139,8 @@
         ]
     },
     "Caramel_Pretzel_Brownies": {
-        "Name": "Caramel Pretzel Brownies",
+        "DisplayName": "Caramel Pretzel Brownies",
+        "Name": "Caramel_Pretzel_Brownies",
         "Emoji": "🥨",
         "Price": 0.0,
         "DisplayPrice": "$15.00",
@@ -148,7 +156,8 @@
         ]
     },
     "Crunchy_Italian_Loaf": {
-        "Name": "Crunchy Italian Loaf",
+        "DisplayName": "Crunchy Italian Loaf",
+        "Name": "Crunchy_Italian_Loaf",
         "Emoji": "🥖",
         "Price": 0.0,
         "DisplayPrice": "$12.00",
@@ -164,7 +173,8 @@
         ]
     },
     "Everything_Bagel": {
-        "Name": "Everything Bagels",
+        "DisplayName": "Everything Bagels",
+        "Name": "Everything_Bagel",
         "Emoji": "🥯",
         "Price": 0.0,
         "DisplayPrice": "$20.00 - $30.00",
@@ -184,7 +194,8 @@
         ]
     },
     "Plain_Bagel": {
-        "Name": "Plain Bagels",
+        "DisplayName": "Plain Bagels",
+        "Name": "Plain_Bagel",
         "Emoji": "🥯",
         "Price": 0.0,
         "DisplayPrice": "$20.00 - $30.00",
@@ -204,7 +215,8 @@
         ]
     },
     "Cinnamon_Sugar": {
-        "Name": "Cinnamon Sugar",
+        "DisplayName": "Cinnamon Sugar",
+        "Name": "Cinnamon_Sugar",
         "Emoji": "🥯",
         "Price": 0.0,
         "DisplayPrice": "$20.00 - $30.00",
@@ -224,7 +236,8 @@
         ]
     },
     "Chocolate_Cake": {
-        "Name": "Chocolate Cake",
+        "DisplayName": "Chocolate Cake",
+        "Name": "Chocolate_Cake",
         "Emoji": "🎂",
         "Price": 0.0,
         "DisplayPrice": "$15.00",
@@ -240,7 +253,8 @@
         ]
     },
     "Vanilla_Cake": {
-        "Name": "Vanilla Cake",
+        "DisplayName": "Vanilla Cake",
+        "Name": "Vanilla_Cake",
         "Emoji": "🎂",
         "Price": 0.0,
         "DisplayPrice": "$15.00",

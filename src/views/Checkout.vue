@@ -93,8 +93,9 @@
     <!-- Right side: Order Summary -->
     <div class="order-summary">
       <h2 class="summary-title">Order Summary</h2>
+      <p>{{ cart.getItemCount() }} Items</p>
       <div class="item-list">
-        <ItemCard v-for="item in cart.items" :key="item.id" :item="item" />
+        <p v-html="cart.getOrderSummary()"></p>
       </div>
       <div class="venmo-container">
         <a v-if="!isButtonClicked" 
@@ -126,7 +127,6 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import VenmoLogo from "../assets/Venmo.png";
 import GrayVenmoLogo from "../assets/GrayVenmo.png";
-import ItemCard from "../components/ItemCard.vue";
 import Header from "../components/Header.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
@@ -255,7 +255,6 @@ function getReceiptDate() {
   return `${month}-${day}`;
 }
 
-
 function downloadReceiptPDF() {
   const element = document.createElement('div');
 
@@ -377,6 +376,9 @@ function deleteCart() {
 
 .form-group textarea {
   height: 100px;
+  resize: none;
+  font-family: arial;
+  color: black;
 }
 
 .insta-link {
@@ -409,6 +411,7 @@ button {
   margin-top: 5px;
   font-size: 16.5px;
   border-radius: 25px;
+  margin-top: -5px;
 }
 
 button.default {
@@ -439,6 +442,8 @@ button.clicked {
 
 .venmo-container {
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .gray-venmo-btn,

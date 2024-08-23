@@ -36,7 +36,7 @@
       <div v-if="showSideView" class="overlay" @click="closeSideView"></div>
     </transition>
     <transition name="slide">
-      <SideView v-if="showSideView" :item="selectedItem" @close="closeSideView" />
+      <SideView v-if="showSideView" :ItemName="selectedItem.Name" @close="closeSideView" />
     </transition>
 
     <div class="bottom-section">
@@ -71,7 +71,7 @@ const filteredItems = computed(() => {
   if (searchQuery.value.trim()) {
     items = Object.fromEntries(
       Object.entries(items).filter(([key, item]) =>
-        item.Name.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
+        item.DisplayName.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
       )
     );
   }

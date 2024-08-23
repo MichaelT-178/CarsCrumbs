@@ -38,8 +38,8 @@ const filteredItems = computed(() => {
   const query = searchQuery.value.toLowerCase();
 
   return Object.values(jsonData.value).filter(item => 
-      item.Name.toLowerCase().includes(query) ||
-      item.Name.toLowerCase().includes(query.slice(0, -1)) || //Remove possible s at the end
+      item.DisplayName.toLowerCase().includes(query) ||
+      item.DisplayName.toLowerCase().includes(query.slice(0, -1)) || //Remove possible s at the end
       item.Alternative.toLowerCase().includes(query.slice(0, -1)) || //Remove possible s at the end
       item.Tags.some(tag => tag.toLowerCase().includes(query)) ||
       item.Tags.some(tag => tag.toLowerCase().includes(query.slice(0, -1))) //Remove possible s at the end

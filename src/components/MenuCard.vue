@@ -1,7 +1,7 @@
 <template>
   <div class="menu-card">
-    <img :src="pic" :alt="item.Name" class="menu-image" />
-    <h2 class="menu-name">{{ item.Name }}</h2>
+    <img :src="pic" :alt="item.DisplayName" class="menu-image" />
+    <h2 class="menu-name">{{ item.DisplayName }}</h2>
     <div class="menu-tags">
       <span
         v-for="tag in item.Tags"

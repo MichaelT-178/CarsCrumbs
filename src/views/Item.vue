@@ -1,8 +1,8 @@
 <template>
   <div v-if="menuItem">
-    <p>{{ menuItem.Name }} 😋 (BREAD.vue)</p>
+    <p>{{ menuItem.DisplayName }} 😋 (BREAD.vue)</p>
     <img :src="pic" class="item-pic">
-    <p>Name: {{ menuItem.Name }} {{ menuItem.Emoji }}</p>
+    <p>Name: {{ menuItem.DisplayName }} {{ menuItem.Emoji }}</p>
     <p>Price: {{ menuItem.DisplayPrice }}</p>
 
     <!-- Radio buttons -->
@@ -63,7 +63,7 @@ const addItem = () => {
     const option = selectedOption.value;
 
     cart.addItem({ ...menuItem.value, Cost: option.price, Description: option.description });
-    alert(`Item Successfully Added to Cart: ${menuItem.value.Name} - ${selectedOption.value.description} ($${selectedOption.value.price})`);
+    alert(`Item Successfully Added to Cart: ${menuItem.value.DisplayName} - ${selectedOption.value.description} ($${selectedOption.value.price})`);
   }
 };
 
@@ -104,4 +104,5 @@ button:disabled {
 button:hover:enabled {
   background-color: #45a049;
 }
+
 </style>

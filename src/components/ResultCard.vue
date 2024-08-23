@@ -2,7 +2,7 @@
   <div class="menu-card" @click="navigateToRoute">
     <img :src="pic" alt="Menu item image" class="menu-image" />
     <div class="item-details">
-      <h3 class="item-name">{{ item.Name }}</h3>
+      <h3 class="item-name">{{ item.DisplayName }}</h3>
       <p class="item-price">{{ item.Price === 0.0 ? 'Prices Vary' : `$${item.Price.toFixed(2)}` }}</p>
     </div>
   </div>
@@ -19,7 +19,7 @@ const props = defineProps({
     required: true,
     default: () => ({
       id: 0,
-      Name: '',
+      DisplayName: '',
       Emoji: '',
       Price: 0.0,
       Image: '',

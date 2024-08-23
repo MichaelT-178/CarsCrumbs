@@ -45,8 +45,28 @@ export const useCartStore = defineStore('cart', () => {
     items.value.forEach(item => {
       bodyContent += `
       <div>
-        <strong>Product:</strong> ${item.Name}<br/>
+        <strong>Product:</strong> ${item.DisplayName}<br/>
         <strong>Quantity:</strong> ${item.Description }<br/>
+        ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
+        <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
+      </div><br/>`;
+    });
+    
+    bodyContent += `<div><strong>Cart:</strong> ${getItemCount()} items<br/><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
+    
+    return bodyContent;
+  }
+
+  function getOrderSummary() {
+    //Include date for receipt
+    let bodyContent = `<br/>`;
+  
+    items.value.forEach(item => {
+      bodyContent += `
+      <div>
+        <strong>Product:</strong> ${item.DisplayName}<br/>
+        <strong>Quantity:</strong> ${item.Description }<br/>
+        ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
         <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
       </div><br/>`;
     });
@@ -68,6 +88,6 @@ export const useCartStore = defineStore('cart', () => {
     localStorage.setItem('cartItems', JSON.stringify(newItems));
   }, { deep: true });
 
-  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, resetCart, allItems };
+  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, getOrderSummary, resetCart, allItems };
 
 });
