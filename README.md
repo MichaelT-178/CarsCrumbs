@@ -1,6 +1,27 @@
 # Crumbs
 Crumbs Website
 
+## Commands to run when you clone
+
+```
+git clone git@github.com:MichaelT-178/Crumbs.git
+```
+
+```
+cd Crumbs
+```
+<br>
+
+**This might take a while, just be patient. Give it like 5 minutes.**
+```
+npm install vite --save-dev
+```
+
+<br>
+
+```
+npm run dev
+```
 
 ### How to Add a Menu Item
 

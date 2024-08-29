@@ -29,7 +29,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useCartStore } from "../stores/cart.js";
 
 const cart = useCartStore();
@@ -50,7 +50,7 @@ const props = defineProps({
   },
 });
 
-const pic = ref(new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
+const pic = computed(() => new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
 
 const hovered = ref(null);
 

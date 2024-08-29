@@ -1,32 +1,33 @@
 <template>
-
   <Header titleText="About" />
 
-  <div class="content-wrapper">
-    <p class="about-text">
-      My name is Carleigh, I am a junior at NC State University majoring in psychology. I started this business because I am passionate about baking. I grew up baking with my mom and my sister in Charlotte, NC and created Car’s Crumbs to turn my dream of starting a bakery into a reality. My favorite things to bake are cookies, breads, and brownies.
-    </p>
+  <div class="page-container">
+    <div class="content-wrapper">
+      <p class="about-text">
+        My name is Carleigh, I am a junior at NC State University majoring in psychology. I started this business because I am passionate about baking. I grew up baking with my mom and my sister in Charlotte, NC and created Car’s Crumbs to turn my dream of starting a bakery into a reality. My favorite things to bake are cookies, breads, and brownies.
+      </p>
 
-    <div class="image-container">
-      <img :src="Carly1" alt="New Hampshire Cookies" @click="() => openImageView(0)" />
-      <img :src="Carly2" alt="Carly2" @click="() => openImageView(1)" />
-      <img :src="Carly3" alt="NH Cookies 2" @click="() => openImageView(2)" />
+      <div class="image-container">
+        <img :src="Carly1" alt="New Hampshire Cookies" @click="() => openImageView(0)" />
+        <img :src="Carly2" alt="Carly2" @click="() => openImageView(1)" />
+        <img :src="Carly3" alt="NH Cookies 2" @click="() => openImageView(2)" />
+      </div>
     </div>
-  </div>
   
-  <transition name="fade">
-    <ImageView
-      v-if="isImageViewOpen"
-      :images="[Carly1, Carly2, Carly3]"
-      :captions="['New Hampshire Cookies', 'Carleigh Making Bread', 'Baking New Hampshire Cookies']"
-      :initialImage="currentImage"
-      :isOpen="isImageViewOpen"
-      @close="isImageViewOpen = false"
-    />
-  </transition>
+    <transition name="fade">
+      <ImageView
+        v-if="isImageViewOpen"
+        :images="[Carly1, Carly2, Carly3]"
+        :captions="['New Hampshire Cookies', 'Carleigh Making Bread', 'Baking New Hampshire Cookies']"
+        :initialImage="currentImage"
+        :isOpen="isImageViewOpen"
+        @close="isImageViewOpen = false"
+      />
+    </transition>
 
-  <div class="bottom-section">
-    <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
+    <div class="bottom-section">
+      <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
+    </div>
   </div>
 </template>
 
@@ -51,6 +52,11 @@ const openImageView = (imageIndex) => {
 
 
 <style scoped>
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 .content-wrapper {
   display: flex;
@@ -59,12 +65,12 @@ const openImageView = (imageIndex) => {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-	padding: 0 22px; /* 22px increase padding to the left and right of the sides */
+  padding: 0 22px;
+  flex: 1;
 }
 
 .about-text {
   text-align: left;
-	/* color: #6a6c6e; og color */
   color: black;
   font-size: 20px;
   line-height: 1.5;
@@ -78,7 +84,7 @@ const openImageView = (imageIndex) => {
   justify-content: flex-start;
   gap: 9px;
   width: 93.75%;
-  padding-bottom: 20px; /* Add padding below the image container */
+  padding-bottom: 20px;
 }
 
 .image-container img {
@@ -92,16 +98,17 @@ const openImageView = (imageIndex) => {
 }
 
 .bottom-section {
-	background-color: #F3E7A4;
-	text-align: center;
-	height: 80px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: #F3E7A4;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .bottom-section p {
-	font-size: 17px;
+  font-size: 17px;
 }
 
 @media (max-width: 600px) {
@@ -116,7 +123,7 @@ const openImageView = (imageIndex) => {
 
   .image-container img:nth-child(3) {
     max-width: 100%;
-		width: 100%;
+    width: 100%;
   }
 }
 
