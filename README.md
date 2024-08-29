@@ -4,7 +4,7 @@ Crumbs Website
 ## Commands to run when you clone
 
 ```
-git clone git@github.com:MichaelT-178/Crumbs.git
+git clone https://github.com/MichaelT-178/Crumbs.git
 ```
 
 ```
