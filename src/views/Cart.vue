@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    <div class="bottom-section">
+    <div class="bottom-section" v-if="cart.getItemCount() !== 0 && !isMobileScreen">
       <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
     </div>
   </div>
@@ -105,8 +105,6 @@ onUnmounted(() => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
   padding: 0 22px;
   box-sizing: border-box;
 }
@@ -371,6 +369,7 @@ onUnmounted(() => {
 
   .cart-container {
     width: 100%;
+    margin-bottom: 125px;
   }
 
   .item-list {
