@@ -93,7 +93,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import logoTwo from "../assets/logoTwoYellow.png";
-import MenuData from "../assets/Menu.json";
+import MenuData from "../assets/menu_items/Menu.json";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 

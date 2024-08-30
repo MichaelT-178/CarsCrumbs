@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import MenuItems from "../assets/MenuItems.json";
+import MenuItems from "../assets/menu_items/MenuItems.json";
 import { useCartStore } from "../stores/cart.js";
 
 const cart = useCartStore();

@@ -47,8 +47,8 @@
 
 
 <script setup>
-import { ref, computed } from 'vue';
-import AllData from '../assets/MenuItems.json';
+import { ref, computed, onMounted, watch } from 'vue';
+import AllData from '../assets/menu_items/MenuItems.json';
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 
@@ -93,7 +93,25 @@ const closeSideView = () => {
   selectedItem.value = null;
 };
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+watch(selectedTag, (newTag) => {
+  const hash = newTag === 'No Filter' ? '' : `#${newTag.toLowerCase()}`;
+  window.location.hash = hash;
+});
+
+onMounted(() => {
+  const hash = window.location.hash.replace('#', '');
+
+  if (hash) {
+    selectedTag.value = capitalizeFirstLetter(hash);
+  }
+});
+
 </script>
+
 
 
 <style scoped>

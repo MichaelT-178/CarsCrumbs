@@ -1,5 +1,4 @@
 <template>
-
   <!-- Dark overlay -->
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
@@ -21,7 +20,7 @@
           <li 
             v-for="(result, index) in filteredResults" 
             :key="index" 
-            class="result" 
+            class="search-result" 
             @click="handleItemClick(result.Name)"
           >
             <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
@@ -30,16 +29,32 @@
       </div>
       <div class="tabs">
         <ul>
-          <li class="tab"><router-link to="/">Home</router-link></li>
-          <li class="tab"><router-link to="/Order">Order</router-link></li>
           <li class="tab">
-            <router-link to="/Cart">
-              Cart
+            <router-link to="/" class="tab-link">
+              <p>Home</p>
+            </router-link>
+          </li>
+          <li class="tab">
+            <router-link to="/Order" class="tab-link">
+              <p>Order</p>
+            </router-link>
+          </li>
+          <li class="tab">
+            <router-link to="/Cart" class="tab-link">
+              <p>Cart</p>
               <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
             </router-link>
           </li>
-          <li class="tab"><router-link to="/About">About</router-link></li>
-          <li class="tab"><router-link to="/ContactUs">Contact Us</router-link></li>
+          <li class="tab">
+            <router-link to="/About" class="tab-link">
+              <p>About</p>
+            </router-link>
+          </li>
+          <li class="tab">
+            <router-link to="/ContactUs" class="tab-link">
+              <p>Contact Us</p>
+            </router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -50,7 +65,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import logo from "../assets/logo.png";
-import MenuData from "../assets/Menu.json";
+import MenuData from "../assets/menu_items/Menu.json";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 
@@ -124,7 +139,6 @@ onUnmounted(() => {
 
 
 <style scoped>
-
 html, body {
   margin: 0;
   padding: 0;
@@ -135,7 +149,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 40px; /* Increase the first padding value to increase navbars vertical size */
+  padding: 7px 35px; /* Increased first padding to increase navbar height */
   background-color: #620086;
   color: #fff;
   width: 100%;
@@ -144,6 +158,8 @@ html, body {
   top: 0;
   left: 0;
   z-index: 1001;
+  font-size: 18px;
+  height: 94px;
 }
 
 .overlay {
@@ -157,7 +173,7 @@ html, body {
 }
 
 .logo {
-  height: 60px;
+  height: 80px;
 }
 
 .menu ul {
@@ -182,54 +198,54 @@ html, body {
 }
 
 .search-bar input {
-  width: 170px;
-  padding: 10px; 
+  width: 200px;
+  padding: 12px;
+  font-size: 16px;
   border-radius: 5px;
   border: 1px solid black;
-  margin-right: 30px;
+  margin-right: 15px;
 }
 
 .search-bar input:focus {
-  width: 300px;
-  transition: width 0.3s ease-in-out; /* Move back into .search-bar input to add transition on close */
+  width: 350px;
+  transition: width 0.3s ease-in-out;
 }
 
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
   background-color: white;
   overflow-y: auto;
   list-style: none;
   margin: 0;
   padding: 0;
   z-index: 1001;
-  width: 300px;
+  width: 350px;
 }
 
-.result {
-  padding: 10px;
+.search-result {
+  padding: 12px;
   cursor: pointer;
   background: lightskyblue;
   color: black;
   border-bottom: 1px solid #3C3B3B;
 }
 
-.result:last-child {
+.search-result:last-child {
   border-bottom: none;
 }
 
-.result:hover {
+.search-result:hover {
   background-color: #FFFFA6;
 }
 
-.result span.result-text {
+.search-result span.result-text {
   margin-left: 8px;
 }
 
 .tabs {
-  margin-right: -15px; /* Decrease this value to move the tabs further to the right */
+  margin-right: -10px; /* Smaller values move all tabs right */
 }
 
 .tabs ul {
@@ -240,10 +256,22 @@ html, body {
 }
 
 .tab {
-  margin-right: 30px;
-  font-size: 22px;
+  font-size: 24px;
   cursor: pointer;
   position: relative;
+  height: 100%;
+}
+
+.tab-link {
+  height: 94px; /* Should be same height as .navbar */
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-link:hover {
+  background-color: lightskyblue;
 }
 
 .tab a {
@@ -262,13 +290,13 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: -7px;
-  right: -15px;
+  top: 25px; /* Increase number to move down */
+  right: 1.5px; /* Increase value to move left, decrease to move right*/
   background-color: #E50000;
   color: white;
   border-radius: 50%;
-  padding: 3px 6px; /* Vertical horizontal */
-  font-size: 13px;
+  padding: 3px 6px;
+  font-size: 14px; /* Slightly increased font size for badge */
   display: flex;
   justify-content: center;
   align-items: center;

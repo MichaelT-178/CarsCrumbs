@@ -23,7 +23,7 @@ import { useRoute } from 'vue-router';
 import Header from "../components/Header.vue";
 import ResultCard from "../components/ResultCard.vue";
 import ShrugGuy from "../assets/Shrug.png";
-import MenuItems from "../assets/MenuItems.json";
+import MenuItems from "../assets/menu_items/MenuItems.json";
 
 const jsonData = ref(MenuItems);
 
