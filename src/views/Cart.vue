@@ -1,54 +1,55 @@
 <template>
-  <div class="page-container">
-    <div v-if="cart.getItemCount() === 0" class="empty-cart">
-      <Header titleText="Empty Cart" />
-      <img class="logo" :src="CrumbsLogo" alt="logo" />
-      <p class="empty-message">Your Cart Is Empty</p>
-      <router-link to="/Order" class="order-button">Order Now</router-link>
-    </div>
+  <div class="page">
+    <div class="page-container">
+      <div v-if="cart.getItemCount() === 0" class="empty-cart">
+        <Header titleText="Empty Cart" />
+        <img class="logo" :src="CrumbsLogo" alt="logo" />
+        <p class="empty-message">Your Cart Is Empty</p>
+        <router-link to="/Order" class="order-button">Order Now</router-link>
+      </div>
 
-    <div class="cart-page" v-else>
-      <div class="cart-container">
-        <div class="cart-header">
-          <div>
-            <h1 class="cart-title">Cart</h1>
-            <p class="cart-summary">
-              <span class="cart-summary-total">${{ cart.getTotal() }}.00 total</span> •
-              <span class="cart-summary-items">{{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</span>
-            </p>
-            <div class="cart-header-underline"></div>
+      <div class="cart-page" v-else>
+        <div class="cart-container">
+          <div class="cart-header">
+            <div>
+              <h1 class="cart-title">Cart</h1>
+              <p class="cart-summary">
+                <span class="cart-summary-total">${{ cart.getTotal() }}.00 total</span> •
+                <span class="cart-summary-items">{{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</span>
+              </p>
+              <div class="cart-header-underline"></div>
+            </div>
+          </div>
+          
+          <div :class="{'item-list': !isMobileScreen, 'item-list-mobile-screen': isMobileScreen}">
+            <ItemCard
+              v-for="(item, index) in cart.items"
+              :key="index"
+              :item="item"
+            />
           </div>
         </div>
-        
-        <div :class="{'item-list': !isMobileScreen, 'item-list-mobile-screen': isMobileScreen}">
-          <ItemCard
-            v-for="(item, index) in cart.items"
-            :key="index"
-            :item="item"
-          />
+
+        <!-- Order Summary for mobile screens  -->
+        <div v-if="!isMobileScreen" class="order-summary">
+          <h2>Order Summary</h2>
+          <p>Total: ${{ cart.getTotal() }}.00</p>
+          <p>Items: {{ cart.getItemCount() }}</p>
+          <router-link to="/Cart/Checkout" class="checkout-button">Checkout</router-link>
+          <p class="reset-cart" @click="deleteCart">Reset Cart</p>
+          <p class="insta-message">
+            Dm <a href="https://target.com" class="insta-link" target="_blank">@crumbs</a> on Instagram to discuss alternative payment methods.
+          </p>
         </div>
 
-      </div>
-
-      <!-- Order Summary for mobile screens  -->
-      <div v-if="!isMobileScreen" class="order-summary">
-        <h2>Order Summary</h2>
-        <p>Total: ${{ cart.getTotal() }}.00</p>
-        <p>Items: {{ cart.getItemCount() }}</p>
-        <router-link to="/Cart/Checkout" class="checkout-button">Checkout</router-link>
-        <p class="reset-cart" @click="deleteCart">Reset Cart</p>
-        <p class="insta-message">
-          Dm <a href="https://target.com" class="insta-link" target="_blank">@crumbs</a> on Instagram to discuss alternative payment methods.
-        </p>
-      </div>
-
-      <div v-if="isMobileScreen" class="order-summary-mobile-screen">
-        <p class="summary-text">${{ cart.getTotal() }}.00 total • {{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</p>
-        <router-link to="/Cart/Checkout" class="checkout-button-mobile-screen">Checkout</router-link>
+        <div v-if="isMobileScreen" class="order-summary-mobile-screen">
+          <p class="summary-text">${{ cart.getTotal() }}.00 total • {{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</p>
+          <router-link to="/Cart/Checkout" class="checkout-button-mobile-screen">Checkout</router-link>
+        </div>
       </div>
     </div>
 
-    <div class="bottom-section" v-if="!isMobileScreen">
+    <div class="bottom-section">
       <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
     </div>
   </div>
@@ -94,10 +95,20 @@ onUnmounted(() => {
 
 
 <style scoped>
-.page-container {
+.page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
+  min-height: calc(100vh - 85px);
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 22px;
+  box-sizing: border-box;
 }
 
 .empty-cart {
@@ -372,7 +383,6 @@ onUnmounted(() => {
     width: 90%;
     margin: 0 auto;
   }
-
 }
 
 </style>

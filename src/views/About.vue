@@ -5,7 +5,10 @@
     <div class="page-container">
       <div class="content-wrapper">
         <p class="about-text">
-          My name is Carleigh, I am a junior at NC State University majoring in psychology. I started this business because I am passionate about baking. I grew up baking with my mom and my sister in Charlotte, NC and created Car’s Crumbs to turn my dream of starting a bakery into a reality. My favorite things to bake are cookies, breads, and brownies.
+          My name is Carleigh, I am a junior at NC State University majoring in psychology. 
+          I started this business because I am passionate about baking. I grew up baking with 
+          my mom and my sister in Charlotte, NC and created Car’s Crumbs to turn my dream of 
+          starting a bakery into a reality. My favorite things to bake are cookies, breads, and brownies.
         </p>
 
         <div class="image-container">
@@ -34,8 +37,6 @@
 </template>
 
 
-
-
 <script setup>
 import { ref } from 'vue';
 import Header from "../components/Header.vue";
@@ -59,7 +60,7 @@ const openImageView = (imageIndex) => {
 .page {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 85px);
 }
 
 .page-container {
@@ -71,11 +72,17 @@ const openImageView = (imageIndex) => {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 22px;
+  box-sizing: border-box;
 }
 
 .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  margin-bottom: 20px;
+  max-width: 750px;
+  margin: 0 auto 20px auto;
+  box-sizing: border-box;
 }
 
 .about-text {
@@ -83,21 +90,20 @@ const openImageView = (imageIndex) => {
   color: black;
   font-size: 20px;
   line-height: 1.5;
-  width: 93.75%;
-  max-width: 750px;
+  width: 100%;
   margin-bottom: 20px;
 }
 
 .image-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 9px;
-  width: 93.75%;
-  padding-bottom: 20px;
+  width: 100%;
+  padding-bottom: 25px;
 }
 
 .image-container img {
-  width: 93.75%;
+  width: 100%;
   max-width: 32.25%;
   height: auto;
 }
@@ -134,5 +140,5 @@ const openImageView = (imageIndex) => {
     width: 100%;
   }
 }
-</style>
 
+</style>
