@@ -1,5 +1,4 @@
 <template>
-
   <!-- Dark overlay -->
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
@@ -151,7 +150,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 40px; /* Increase the first padding value to increase navbars vertical size */
+  padding: 10px 30px; /* Increase first increases vertical, increase second increases closeness */
   background-color: #620086;
   color: #fff;
   width: 100%;
@@ -160,7 +159,7 @@ html, body {
   top: 0;
   left: 0;
   z-index: 1001;
-  height: 74px;
+  height: 80px;
 }
 
 .overlay {
@@ -174,7 +173,7 @@ html, body {
 }
 
 .logo {
-  height: 60px;
+  height: 70px;
 }
 
 .menu ul {
@@ -185,7 +184,7 @@ html, body {
 }
 
 .menu li {
-  margin-right: 30px;
+  margin-right: 40px;
   cursor: pointer;
 }
 
@@ -199,16 +198,16 @@ html, body {
 }
 
 .search-bar input {
-  width: 170px;
-  padding: 10px; 
+  width: 180px;
+  padding: 12px;
   border-radius: 5px;
   border: 1px solid black;
-  margin-right: 12px;
+  margin-right: 15px;
 }
 
 .search-bar input:focus {
-  width: 300px;
-  transition: width 0.3s ease-in-out; /* Move back into .search-bar input to add transition on close */
+  width: 290px;
+  transition: width 0.3s ease-in-out;
 }
 
 .dropdown {
@@ -222,15 +221,16 @@ html, body {
   margin: 0;
   padding: 0;
   z-index: 1001;
-  width: 300px;
+  width: 290px;
 }
 
 .result {
-  padding: 10px;
+  padding: 11px;
   cursor: pointer;
   background: lightskyblue;
   color: black;
   border-bottom: 1px solid #3C3B3B;
+  font-size: 17.5px;
 }
 
 .result:last-child {
@@ -242,11 +242,11 @@ html, body {
 }
 
 .result span.result-text {
-  margin-left: 8px;
+  margin-left: 10px;
 }
 
 .tabs {
-  margin-right: -15px; /* Decrease this value to move the tabs further to the right */
+  margin-right: 0px;
 }
 
 .tabs ul {
@@ -257,14 +257,14 @@ html, body {
 }
 
 .tab {
-  font-size: 22px;
+  font-size: 24px;
   cursor: pointer;
   position: relative;
 }
 
 .tab-link {
-  height: 74px; /* Should be same height as .navbar */
-  padding: 0 16px;
+  height: 80px;
+  padding: 0 12px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,18 +290,18 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 16px; /* Increase number to move down */
-  right: 2.5px; /* Increase value to move left, decrease to move right*/
+  top: 14.75px; /* Increase number to move down */
+  right: -2px; /* Increase value to move left, decrease to move right*/
   background-color: #E50000;
   color: white;
   border-radius: 50%;
-  padding: 3px 6px; /* Vertical horizontal */
-  font-size: 13px;
+  padding: 4px 8px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 20px;
-  height: 20px;
+  min-width: 24px; 
+  height: 24px;
 }
 
 .cart-badge.hidden {
