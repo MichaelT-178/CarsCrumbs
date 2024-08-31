@@ -1,4 +1,5 @@
 <template>
+
   <!-- Dark overlay -->
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
@@ -20,7 +21,7 @@
           <li 
             v-for="(result, index) in filteredResults" 
             :key="index" 
-            class="search-result" 
+            class="result" 
             @click="handleItemClick(result.Name)"
           >
             <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
@@ -139,6 +140,7 @@ onUnmounted(() => {
 
 
 <style scoped>
+
 html, body {
   margin: 0;
   padding: 0;
@@ -149,7 +151,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 35px; /* Increased first padding to increase navbar height */
+  padding: 7px 40px; /* Increase the first padding value to increase navbars vertical size */
   background-color: #620086;
   color: #fff;
   width: 100%;
@@ -158,8 +160,7 @@ html, body {
   top: 0;
   left: 0;
   z-index: 1001;
-  font-size: 18px;
-  height: 94px;
+  height: 74px;
 }
 
 .overlay {
@@ -173,7 +174,7 @@ html, body {
 }
 
 .logo {
-  height: 80px;
+  height: 60px;
 }
 
 .menu ul {
@@ -198,54 +199,54 @@ html, body {
 }
 
 .search-bar input {
-  width: 200px;
-  padding: 12px;
-  font-size: 16px;
+  width: 170px;
+  padding: 10px; 
   border-radius: 5px;
   border: 1px solid black;
-  margin-right: 15px;
+  margin-right: 12px;
 }
 
 .search-bar input:focus {
-  width: 350px;
-  transition: width 0.3s ease-in-out;
+  width: 300px;
+  transition: width 0.3s ease-in-out; /* Move back into .search-bar input to add transition on close */
 }
 
 .dropdown {
   position: absolute;
   top: 100%;
   left: 0;
+  width: 100%;
   background-color: white;
   overflow-y: auto;
   list-style: none;
   margin: 0;
   padding: 0;
   z-index: 1001;
-  width: 350px;
+  width: 300px;
 }
 
-.search-result {
-  padding: 12px;
+.result {
+  padding: 10px;
   cursor: pointer;
   background: lightskyblue;
   color: black;
   border-bottom: 1px solid #3C3B3B;
 }
 
-.search-result:last-child {
+.result:last-child {
   border-bottom: none;
 }
 
-.search-result:hover {
+.result:hover {
   background-color: #FFFFA6;
 }
 
-.search-result span.result-text {
+.result span.result-text {
   margin-left: 8px;
 }
 
 .tabs {
-  margin-right: -10px; /* Smaller values move all tabs right */
+  margin-right: -15px; /* Decrease this value to move the tabs further to the right */
 }
 
 .tabs ul {
@@ -256,15 +257,14 @@ html, body {
 }
 
 .tab {
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   position: relative;
-  height: 100%;
 }
 
 .tab-link {
-  height: 94px; /* Should be same height as .navbar */
-  padding: 0 15px;
+  height: 74px; /* Should be same height as .navbar */
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,13 +290,13 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 25px; /* Increase number to move down */
-  right: 1.5px; /* Increase value to move left, decrease to move right*/
+  top: 16px; /* Increase number to move down */
+  right: 2.5px; /* Increase value to move left, decrease to move right*/
   background-color: #E50000;
   color: white;
   border-radius: 50%;
-  padding: 3px 6px;
-  font-size: 14px; /* Slightly increased font size for badge */
+  padding: 3px 6px; /* Vertical horizontal */
+  font-size: 13px;
   display: flex;
   justify-content: center;
   align-items: center;

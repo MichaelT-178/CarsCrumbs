@@ -13,10 +13,10 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import NavBar from "./components/NavBar.vue";
 import MobileNavBar from "./components/MobileNavBar.vue";
 
-const isMobile = ref(window.innerWidth <= 1000);
+const isMobile = ref(window.innerWidth <= 940);
 
 const updateWindowSize = () => {
-  isMobile.value = window.innerWidth <= 1000;
+  isMobile.value = window.innerWidth <= 940;
 };
 
 onMounted(() => {
@@ -50,7 +50,7 @@ html, body {
 }
 
 .desktop-content {
-  padding-top: 100px;
+  padding-top: 85px;
 }
 
 </style>
