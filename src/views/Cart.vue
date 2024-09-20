@@ -382,6 +382,13 @@ onUnmounted(() => {
     width: 90%;
     margin: 0 auto;
   }
+
+}
+
+@media (max-width: 600px) {
+  .empty-cart .logo {
+    width: 300px;
+  }
 }
 
 </style>

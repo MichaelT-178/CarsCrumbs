@@ -47,10 +47,11 @@ export const useCartStore = defineStore('cart', () => {
       <div>
         <strong>Product:</strong> ${item.DisplayName}<br/>
         <strong>Quantity:</strong> ${item.Description }<br/>
-        ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
         <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
       </div><br/>`;
     });
+
+    // ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
     
     bodyContent += `<div><strong>Cart:</strong> ${getItemCount()} items<br/><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
     

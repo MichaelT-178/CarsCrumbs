@@ -150,7 +150,7 @@ const handleItemClick = (itemName) => {
 };
 
 const handleSearchEnter = () => {
-  router.push({ name: 'SearchResults', params: { SearchQuery: searchQuery.value.trim() } });
+  router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() }});
   hideDropdown();
   searchInput.value.blur();
 };

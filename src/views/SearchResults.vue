@@ -28,7 +28,7 @@ import MenuItems from "../assets/menu_items/MenuItems.json";
 const jsonData = ref(MenuItems);
 
 const route = useRoute();
-const searchQuery = ref(route.params.SearchQuery);
+const searchQuery = ref(route.query.search_query || '');
 
 const resultText = computed(() => `Search Results for "${searchQuery.value || ''}"`);
 
@@ -46,7 +46,7 @@ const filteredItems = computed(() => {
   );
 });
 
-watch(() => route.params.SearchQuery, (newQuery) => {
+watch(() => route.query.search_query, (newQuery) => {
   searchQuery.value = newQuery;
 });
 

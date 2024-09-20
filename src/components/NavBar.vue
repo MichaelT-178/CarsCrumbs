@@ -112,7 +112,7 @@ const handleItemClick = (itemName) => {
 };
 
 const handleSearchEnter = () => {
-  router.push({ name: 'SearchResults', params: { SearchQuery: searchQuery.value.trim() } });
+  router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() }});
   hideDropdown();
   searchInput.value.blur();
 };
@@ -290,18 +290,18 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 14.75px; /* Increase number to move down */
-  right: -2px; /* Increase value to move left, decrease to move right*/
+  top: 16.25px; /* Increase number to move down */
+  right: -1.75px; /* Increase value to move left, decrease to move right*/
   background-color: #E50000;
   color: white;
   border-radius: 50%;
-  padding: 4px 8px;
-  font-size: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 24px; 
-  height: 24px;
+  padding: 3px 6px;
+  font-size: 14px;
+  min-width: 22px; 
+  height: 22px;
 }
 
 .cart-badge.hidden {
