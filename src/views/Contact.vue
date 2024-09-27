@@ -235,14 +235,14 @@ const submitForm = () => {
 }
 
 .info-container {
-    width: 500px;
-    margin-left: 40px;
-    margin-top: 30px;
-    background-color: lightgreen;
-    border: 1.5px solid purple;
-    border-radius: 10px;
-    padding: 20px;
-    box-sizing: border-box;
+	width: 500px;
+  margin-left: 40px;
+  margin-top: 30px;
+  background-color: lightgreen;
+  border: 1.5px solid purple;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .google-map {
@@ -445,6 +445,15 @@ button.clicked {
 		margin-top: 20px;
 	}
 
+}
+
+@media (max-width: 400px) {
+	.button-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: -20px;
+	}
 }
 
 </style>

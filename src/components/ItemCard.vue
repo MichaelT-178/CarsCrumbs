@@ -1,28 +1,36 @@
 <template>
   <div class="item-card">
-    <img :src="pic" :alt="item.DisplayName" class="item-image" />
-    <div class="item-info">
-      <h2 class="item-name">{{ item.DisplayName }}</h2>
-      <p class="item-quantity">{{ item.Description }}</p>
-      <div class="item-tags">
-        <span
-          v-for="tag in item.Tags"
-          :key="tag"
-          class="item-tag"
-          @click="tagClicked(tag)"
-          @mouseover="hovered = tag"
-          @mouseleave="hovered = null"
-          :class="{ 'tag-hovered': hovered === tag }"
-        >
-          {{ tag }}
-        </span>
+    <div class="item-content">
+      <img :src="pic" :alt="item.DisplayName" class="item-image" />
+      <div class="item-info">
+        <h2 class="item-name">{{ item.DisplayName }}</h2>
+        <p class="item-quantity">{{ item.Description }}</p>
+        <div class="item-tags">
+          <span
+            v-for="tag in item.Tags"
+            :key="tag"
+            class="item-tag"
+            @click="tagClicked(tag)"
+            @mouseover="hovered = tag"
+            @mouseleave="hovered = null"
+            :class="{ 'tag-hovered': hovered === tag }"
+          >
+            {{ tag }}
+          </span>
+        </div>
+        <p class="item-price">{{ `$${item.Cost}.00` }}</p>
       </div>
-      <p class="item-price">{{ `$${item.Cost}.00` }}</p>
     </div>
-    <div>
-    <span class="material-symbols-outlined delete-icon" @click="deleteItem">
-      delete
-    </span>
+    <div
+      class="right-side"
+      :class="{ 'hovered': hoverDelete }"
+      @mouseover="hoverDelete = true"
+      @mouseleave="hoverDelete = false"
+      @click="deleteItem"
+    > <!-- trash icon -->
+      <span class="material-symbols-outlined delete-icon">
+        delete
+      </span>
     </div>
   </div>
 </template>
@@ -53,6 +61,7 @@ const props = defineProps({
 const pic = computed(() => new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
 
 const hovered = ref(null);
+const hoverDelete = ref(false);
 
 const emit = defineEmits(['tag-clicked']);
 
@@ -74,13 +83,19 @@ const deleteItem = () => {
   display: flex;
   align-items: center;
   border: 1.5px solid #3D3D3D;
-  padding: 12px;
   max-width: 500px;
   border-radius: 8px;
   background-color: white;
   justify-content: space-between;
   position: relative;
-	width: 410px;
+  width: 410px;
+  overflow: hidden;
+}
+
+.item-content {
+  display: flex;
+  padding: 12px 0 12px 12px; /* Padding top, bottom, and left */
+  flex-grow: 1;
 }
 
 .item-image {
@@ -93,6 +108,7 @@ const deleteItem = () => {
 .item-info {
   flex-grow: 1;
   margin-left: 12px;
+  padding: 12px 0;
 }
 
 .item-name {
@@ -123,7 +139,24 @@ const deleteItem = () => {
 .item-price {
   font-weight: bold;
   margin-top: 4px;
-	font-size: 18px;
+  font-size: 18px;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  background-color: white;
+  transition: background-color 0.3s ease;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.right-side.hovered {
+  background-color: red;
+  cursor: pointer;
 }
 
 .delete-icon {
@@ -133,8 +166,8 @@ const deleteItem = () => {
   transition: color 0.3s ease;
 }
 
-.delete-icon:hover {
-  color: darkred;
+.right-side:hover .delete-icon {
+  color: white;
 }
 
 </style>

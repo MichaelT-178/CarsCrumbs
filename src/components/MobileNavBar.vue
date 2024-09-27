@@ -467,6 +467,12 @@ html, body {
   }
 }
 
+@media (max-width: 400px) {
+  .sidebar {
+    width: 100%;
+  }
+}
+
 </style>
 
 
