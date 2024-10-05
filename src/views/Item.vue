@@ -1,17 +1,14 @@
 <template>
   <div v-if="menuItem" class="menu-item-container">
-    <!-- Image on the left -->
+
     <img :src="pic" class="item-pic" />
 
-    <!-- Information on the right -->
     <div class="item-info">
       <p class="title">{{ menuItem.DisplayName }} 😋</p>
       <p class="price">Price: {{ menuItem.DisplayPrice }}</p>
 
-      <!-- Quantity Label -->
       <label class="quantity-label">Quantity:</label>
       
-      <!-- Radio buttons -->
       <div class="options-row">
         <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
           <label class="radio-label">
@@ -31,37 +28,40 @@
     <p>Item not found</p>
   </div>
 
-  <!-- "Try our Other Cookies" section -->
-  <div v-if="relatedItems.length > 0" class="related-items-container">
+  <div class="related-items-container">
     <p class="related-title">Try our Other Items</p>
     <div class="scrollable-container">
-      <!-- Left arrow to scroll -->
+
       <button class="scroll-button left-arrow" @click="scrollLeft">❮</button>
       
-      <!-- Scrollable recommended items -->
       <div class="related-items-grid">
         <MenuCard
           v-for="(item, index) in relatedItems"
           :key="index"
           :item="item"
+          :disableTagHover="true"
+          @click="goToItemPage(item)"
         />
       </div>
       
-      <!-- Right arrow to scroll -->
       <button class="scroll-button right-arrow" @click="scrollRight">❯</button>
     </div>
   </div>
+  <div class="bottom-section">
+    <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
+  </div>
 </template>
-
 
 
 <script setup>
 import { ref, watch } from "vue";
 import MenuItems from "../assets/menu_items/MenuItems.json";
 import MenuCard from '../components/MenuCard.vue';
+import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 
 const cart = useCartStore();
+const router = useRouter();
 
 const props = defineProps({
   ItemName: {
@@ -87,26 +87,23 @@ const updateMenuItem = () => {
 };
 
 const findRelatedItems = (currentItem) => {
-  // First, filter the items that share tags with the current item
   const taggedItems = Object.values(jsonData.value).filter(item => {
     return item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name;
   });
 
-  // Then, filter the items that do not share any tags with the current item
   const otherItems = Object.values(jsonData.value).filter(item => {
     return !item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name;
   });
 
-  // Combine the two arrays, with related items appearing first
   relatedItems.value = [...taggedItems, ...otherItems];
 };
 
-// Watch for changes in the item and update accordingly
 watch(() => props.ItemName, () => {
   updateMenuItem();
 }, { immediate: true });
 
 updateMenuItem();
+
 
 const addItem = () => {
   if (selectedOption.value) {
@@ -117,25 +114,32 @@ const addItem = () => {
   }
 };
 
-// Scroll the related items grid left
+
 const scrollLeft = () => {
   const container = document.querySelector('.related-items-grid');
+  const cardWidth = container.offsetWidth / 2;
   container.scrollBy({
-    left: -1000, // Adjust scroll amount as needed
+    left: -cardWidth - 1000,
     behavior: 'smooth'
   });
 };
 
-// Scroll the related items grid right
 const scrollRight = () => {
   const container = document.querySelector('.related-items-grid');
+  const cardWidth = container.offsetWidth / 2;
   container.scrollBy({
-    left: 1000, // Adjust scroll amount as needed
+    left: cardWidth,
     behavior: 'smooth'
   });
 };
-</script>
 
+const goToItemPage = (item) => {
+  router.push(item.Route).then(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+</script>
 
 
 <style scoped>
@@ -145,14 +149,14 @@ const scrollRight = () => {
   justify-content: center;
   gap: 40px;
   padding: 20px;
-  background-color: lightskyblue;
+  background-color: lightblue;
   border-radius: 0;
   margin-top: -13px;
 }
 
 .item-pic {
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 300px;
   border: 1.5px solid black;
 }
 
@@ -175,7 +179,7 @@ const scrollRight = () => {
   padding-top: 5px;
   padding-bottom: 20px;
   font-weight: 600;
-  color: white;
+  color: navy;
   text-align: left;
 }
 
@@ -244,12 +248,10 @@ button:hover:enabled {
   background-color: #ff4500;
 }
 
-/* Related Items Section */
 .related-items-container {
-  margin-top: 50px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   padding: 20px;
-  background-color: #F3E7A4;
-  border-radius: 5px;
   text-align: left;
 }
 
@@ -269,21 +271,21 @@ button:hover:enabled {
 
 .related-items-grid {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   scroll-behavior: smooth;
   gap: 20px;
   width: 100%;
   padding: 10px 0;
+  scroll-snap-type: x mandatory;
 }
 
-/* Make all MenuCards the same width */
 .menu-card {
-  width: 250px; /* Set the fixed width for each card */
-  flex-shrink: 0; /* Prevent the cards from shrinking */
+  width: 250px;
+  flex-shrink: 0;
 }
 
 .related-items-grid::-webkit-scrollbar {
-  display: none; /* Hide the scrollbar */
+  display: none;
 }
 
 .scroll-button {
@@ -301,6 +303,20 @@ button:hover:enabled {
 
 .right-arrow {
   right: 0;
+}
+
+.bottom-section {
+  background-color: #F3E7A4;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.bottom-section p {
+  font-size: 17px;
 }
 
 @media (max-width: 800px) {
@@ -322,17 +338,18 @@ button:hover:enabled {
 
   .title {
     margin-bottom: 5px;
+    text-align: center;
   }
 
   .price {
     font-size: 22px;
+    text-align: center;
   }
   
   .item-pic {
     margin-bottom: -40px;
-    width: 100%;
-    max-width: 360px;
-    height: auto;
+    height: 275px;
+    width: 275px;
   }
 
   .options-row {
@@ -348,20 +365,15 @@ button:hover:enabled {
     margin: 10px 0;
   }
 
-  .related-items-grid {
-    justify-content: center;
-  }
-
   .related-title {
     text-align: center;
   }
   
   .menu-card {
     width: 100%;
-    max-width: 250px; /* Adjust max width for smaller screens */
+    max-width: 250px;
     height: auto;
   }
 }
-
 
 </style>

@@ -3,19 +3,19 @@
     <img :src="HomeCookies" class="tray-cookies" />
     <div class="dark-overlay"></div>
     <div class="text-overlay">
-      <div class="rectangle"></div> <!-- The yellow rectangle -->
+      <div class="rectangle"></div>
       <hr class="top-hr" />
       <p>We are a local bakery in Raleigh, NC specializing in pastries, cakes, and cookies.</p>
       <hr class="bottom-hr" />
     </div>
   </div>
 
-  <!-- Displaying menu items -->
   <div class="menu-items">
     <HomeMenuItem 
       v-for="(menuItem, index) in menu" 
       :key="index" 
       :item="menuItem" 
+      :index="index"
     />
   </div>
 
@@ -23,6 +23,7 @@
     <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from "vue";
@@ -35,8 +36,8 @@ const menu = jsonData.value["Items"];
 
 </script>
 
+
 <style scoped>
-/* Styles for Home component */
 .image-container {
   margin-top: -11px;
   position: relative;
@@ -100,18 +101,17 @@ const menu = jsonData.value["Items"];
   margin: 25px auto;
 }
 
-/* Styles for HomeMenuItem */
 .menu-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 0; /* No gap between items */
-  justify-content: space-between; /* Distribute space between items */
+  gap: 0;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
 }
 
 .menu-items > * {
-  flex: 1 1 50%; /* Each item takes up 50% width */
+  flex: 1 1 50%;
   box-sizing: border-box;
   margin: 0;
 }
@@ -159,10 +159,9 @@ const menu = jsonData.value["Items"];
   font-size: 17px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 1000px) {
   .menu-items > * {
-    flex: 1 1 100%; /* Each item takes up full width on smaller screens */
+    flex: 1 1 100%;
   }
 
   .text-overlay {
@@ -181,6 +180,18 @@ const menu = jsonData.value["Items"];
 
   .tray-cookies {
     height: 250px;
+  }
+}
+
+@media (max-width: 650px) {
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-items > * {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 

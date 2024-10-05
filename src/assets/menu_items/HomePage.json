@@ -27,7 +27,7 @@
         {   
             "id": 4,
             "Name": "Cake",
-            "Description": "",
+            "Description": "Indulge in our rich and moist cake baked to perfection and perfect for any celebration!",
             "Color": "teal",
             "Link": "Order#cake",
             "Picture": "Vanilla_Cake.jpg"

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'menu-item': true, 'border-purple': isHovered}">
+  <div :class="menuItemClasses">
     <div class="item-image">
       <img :src="pic" :alt="item.Name" />
     </div>
@@ -21,34 +21,51 @@
 
 
 <script setup>
-import { computed, ref } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
   item: {
     type: Object,
+    required: true
+  },
+  index: {
+    type: Number,
     required: true
   }
 });
 
 const pic = computed(() => new URL(`../assets/menu/${props.item.Picture}`, import.meta.url).href);
 const isHovered = ref(false);
+const isSmallScreen = ref(window.innerWidth < 650);
+
+const handleResize = () => {
+  isSmallScreen.value = window.innerWidth < 650;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
+
+const menuItemClasses = computed(() => ({
+  'menu-item': true,
+  'border-purple': isHovered.value,
+  'reverse-layout': isSmallScreen.value && props.index % 2 !== 0,
+}));
 
 </script>
 
 
 <style scoped>
-
 .menu-item {
   display: flex;
   width: 100%;
   max-width: 50%;
   margin: 20px;
   border: 1px solid #e0e0e0;
-  overflow: hidden;
-  /* teal lightskyblue #F3E7A4*/
-  /* background-color: lightskyblue; */
-  /* background-color: white; */
-  /* background-color: #F3E7A4;  */
   background-color: #F0EBC8;
   height: 300px;
 }
@@ -64,7 +81,6 @@ const isHovered = ref(false);
 
 .item-image img {
   width: 100%;
-  height: auto;
   height: 100%;
   object-fit: cover;
 }
@@ -102,6 +118,16 @@ p {
 
 .order-link:hover {
   background-color: blue;
+}
+
+.reverse-layout {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 650px) {
+  .reverse-layout {
+    flex-direction: row-reverse;
+  }
 }
 
 </style>

@@ -278,8 +278,7 @@ onUnmounted(() => {
 
 .cart-summary {
   font-size: 18px;
-  color: gray;
-  /* color: black; */
+  color: navy;
 }
 
 .cart-header-underline {

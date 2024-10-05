@@ -7,10 +7,10 @@
         v-for="tag in item.Tags"
         :key="tag"
         class="menu-tag"
+        :class="{'no-hover': disableTagHover, 'tag-hovered': hovered === tag && !disableTagHover}"
         @click="tagClicked(tag)"
-        @mouseover="hovered = tag"
-        @mouseleave="hovered = null"
-        :class="{ 'tag-hovered': hovered === tag }"
+        @mouseover="handleMouseOver(tag)"
+        @mouseleave="handleMouseLeave"
       >{{ tag }}</span>
     </div>
     <p class="menu-price">{{ item.DisplayPrice }}</p>
@@ -38,6 +38,10 @@ const props = defineProps({
       Tags: [],
     }),
   },
+  disableTagHover: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const pic = ref(new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
@@ -50,12 +54,23 @@ const tagClicked = (tag) => {
   emit('tag-clicked', tag);
 };
 
+const handleMouseOver = (tag) => {
+  if (!props.disableTagHover) {
+    hovered.value = tag;
+  }
+};
+
+const handleMouseLeave = () => {
+  if (!props.disableTagHover) {
+    hovered.value = null;
+  }
+};
+
 const openSideView = () => {
   emit('open-side-view', props.item);
 };
 
 </script>
-
 
 <style scoped>
 .menu-card {
@@ -109,6 +124,12 @@ const openSideView = () => {
   color: white;
 }
 
+.menu-tag.no-hover:hover {
+  background-color: #f0f0f0;
+  color: black;
+  cursor: default;
+}
+
 .menu-price {
   margin-top: -3px;
   font-family: 'Comic Sans MS', 'Comic Sans', cursive;
@@ -148,4 +169,3 @@ const openSideView = () => {
 }
 
 </style>
-  
