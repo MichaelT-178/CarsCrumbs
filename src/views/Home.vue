@@ -9,19 +9,34 @@
       <hr class="bottom-hr" />
     </div>
   </div>
+
+  <!-- Displaying menu items -->
+  <div class="menu-items">
+    <HomeMenuItem 
+      v-for="(menuItem, index) in menu" 
+      :key="index" 
+      :item="menuItem" 
+    />
+  </div>
+
   <div class="bottom-section">
     <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
   </div>
 </template>
 
-
 <script setup>
+import { ref } from "vue";
 import HomeCookies from "../assets/HomeCookies.png";
+import MenuData from "../assets/menu_items/HomePage.json";
+import HomeMenuItem from "../components/HomeMenuItem.vue";
+
+const jsonData = ref(MenuData);
+const menu = jsonData.value["Items"];
 
 </script>
 
-
 <style scoped>
+/* Styles for Home component */
 .image-container {
   margin-top: -11px;
   position: relative;
@@ -68,21 +83,66 @@ import HomeCookies from "../assets/HomeCookies.png";
   background-color: #FFFC7C;
   margin: 0 auto;
   position: relative;
-  top: 14px; /* Increase to move down */
+  top: 14px;
 }
 
 .top-hr {
   border: none;
   border-top: 1px solid white;
   width: 70%;
-  margin: 10px auto 20px; /* Decrease 2nd number to move down */
+  margin: 10px auto 20px;
 }
 
 .bottom-hr {
   border: none;
   border-top: 1px solid white;
   width: 30%;
-  margin: 25px auto; /* Increase number to move down */
+  margin: 25px auto;
+}
+
+/* Styles for HomeMenuItem */
+.menu-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0; /* No gap between items */
+  justify-content: space-between; /* Distribute space between items */
+  margin: 0;
+  padding: 0;
+}
+
+.menu-items > * {
+  flex: 1 1 50%; /* Each item takes up 50% width */
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.home-menu-item {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-menu-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-menu-item .item-details {
+  padding: 10px;
+}
+
+.home-menu-item h3 {
+  margin: 10px 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.home-menu-item p {
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
 }
 
 .bottom-section {
@@ -99,7 +159,12 @@ import HomeCookies from "../assets/HomeCookies.png";
   font-size: 17px;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 1000px) {
+  .menu-items > * {
+    flex: 1 1 100%; /* Each item takes up full width on smaller screens */
+  }
+
   .text-overlay {
     font-size: 2rem;
     width: 70%;
@@ -137,7 +202,7 @@ import HomeCookies from "../assets/HomeCookies.png";
   }
 
   .bottom-hr {
-    margin: 15px auto; /* Increase number to move down */
+    margin: 15px auto;
   }
 }
 

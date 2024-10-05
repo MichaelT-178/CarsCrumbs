@@ -1,24 +1,36 @@
 {
     "Items": [
-        {
+        {   
+            "id": 1,
             "Name": "Cookies",
-            "Link": "Order#cookie"
+            "Description": "Enjoy our soft, chewy, fresh, homemade cookies straight out of the oven!",
+            "Color": "purple",
+            "Link": "Order#cookie",
+            "Picture": "Snickerdoodle.jpg"
         },
-        {
+        {   
+            "id": 2,
             "Name": "Brownies",
-            "Link": "Order#brownie"
+            "Description": "Try our warm, gooey brownies, baked to perfection and ready to melt in your mouth!",
+            "Color": "red",
+            "Link": "Order#brownie",
+            "Picture": "Caramel_Pretzel_Brownies.jpg"
         },
-        {
+        {   
+            "id": 3,
             "Name": "Bread",
-            "Link": "Order#bread"
+            "Description": "Savor our assortment of soft, fluffy, freshly baked bread and bagels.",
+            "Color": "green",
+            "Link": "Order#bread",
+            "Picture": "Plain_Bagel.jpg"
         },
-        {
-            "Name": "Bagel",
-            "Link": "Order#bagel"
-        },
-        {
+        {   
+            "id": 4,
             "Name": "Cake",
-            "Link": "Order#cake"
+            "Description": "",
+            "Color": "teal",
+            "Link": "Order#cake",
+            "Picture": "Vanilla_Cake.jpg"
         }
     ]
 }

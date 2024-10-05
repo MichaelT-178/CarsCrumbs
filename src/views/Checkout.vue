@@ -158,7 +158,7 @@ const formData = ref({
 });
 
 const isButtonClicked = ref(false);
-const buttonText = ref("Send Message");
+const buttonText = ref("Place Order");
 
 emailjs.init('bCe2UFI1L7SfXITtA');
 

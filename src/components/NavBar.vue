@@ -151,6 +151,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 10px 30px; /* Increase first increases vertical, increase second increases closeness */
+  /* background-color: #620086; */
   background-color: #620086;
   color: #fff;
   width: 100%;
