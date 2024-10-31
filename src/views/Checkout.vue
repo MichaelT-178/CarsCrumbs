@@ -40,16 +40,6 @@
             required 
           />
         </div>
-        <div class="form-group">
-          <label for="pickup-time">Pickup Time<span style="color: #EF0000;"> *</span></label>
-          <select id="pickup-time" v-model="formData.pickupTime" required>
-            <option disabled value="">Select a time slot</option>
-            <option>3:00pm - 4:00pm</option>
-            <option>4:00pm - 5:00pm</option>
-            <option>5:00pm - 6:00pm</option>
-            <option>6:00pm - 7:00pm</option>
-          </select>
-        </div>
 
         <div class="form-group">
           <label for="pickup-date">Pickup Date<span style="color: #EF0000;"> *</span></label>
@@ -65,6 +55,17 @@
             :min-date="minPickupDate"
             :max-date="new Date(new Date().getFullYear(), 11, 31)"
           />
+        </div>
+
+        <div class="form-group">
+          <label for="pickup-time">Pickup Time<span style="color: #EF0000;"> *</span></label>
+          <select id="pickup-time" v-model="formData.pickupTime" required>
+            <option disabled value="">Select a time slot</option>
+            <option>3:00pm - 4:00pm</option>
+            <option>4:00pm - 5:00pm</option>
+            <option>5:00pm - 6:00pm</option>
+            <option>6:00pm - 7:00pm</option>
+          </select>
         </div>
 
         <div class="form-group">
