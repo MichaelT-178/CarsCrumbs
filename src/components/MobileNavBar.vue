@@ -225,7 +225,7 @@ html, body {
   width: 100vw;
   height: 100vh;
   background-color: #F2F2F2;
-  z-index: 999;
+  z-index: 1003;
 }
 
 .top-navbar, .bottom-navbar {
