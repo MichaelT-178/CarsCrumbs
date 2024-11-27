@@ -224,7 +224,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #F2F2F2;
   z-index: 999;
 }
 
@@ -334,7 +334,7 @@ html, body {
 .result {
   padding: 10px;
   cursor: pointer;
-  background: lightskyblue;
+  background: #F2F2F2;
   color: black;
   font-size: 20px;
   border-bottom: 1px solid #3C3B3B;
@@ -345,7 +345,7 @@ html, body {
 }
 
 .result:hover {
-  background-color: #FFFFA6;
+  background-color: lightskyblue;
 }
 
 .result span.result-text {
