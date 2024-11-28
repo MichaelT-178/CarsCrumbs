@@ -1,11 +1,16 @@
 <template>
+  <!-- Pink line with "cool" text -->
+  <div class="top-line">
+    <span class="cool-text">cool</span>
+  </div>
+
   <!-- Dark overlay -->
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
   <nav class="navbar">
     <img :src="logo" alt="Logo" class="logo" />
     <div class="right-section">
-      <div class="search-bar">
+      <!-- <div class="search-bar">
         <input 
           ref="searchInput" 
           type="text" 
@@ -26,7 +31,7 @@
             <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="tabs">
         <ul>
           <li class="tab">
@@ -39,12 +44,12 @@
               <p>Order</p>
             </router-link>
           </li>
-          <li class="tab">
+          <!-- <li class="tab">
             <router-link to="/Cart" class="tab-link">
               <p>Cart</p>
               <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
             </router-link>
-          </li>
+          </li> -->
           <li class="tab">
             <router-link to="/About" class="tab-link">
               <p>About</p>
@@ -55,6 +60,15 @@
               <p>Contact Us</p>
             </router-link>
           </li>
+
+
+          <router-link to="/Cart">
+            <span class="material-symbols-outlined cart-icon" style="color: white">shopping_cart</span>
+            <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
+          </router-link>
+
+
+
         </ul>
       </div>
     </div>
@@ -146,6 +160,26 @@ html, body {
   width: 100%;
 }
 
+.top-line {
+  width: 100%;
+  height: 40px;
+  background-color: #3E0054;
+  position: fixed;
+  top: 0;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align text to the right */
+  padding: 0 20px; /* Add some padding to the right */
+  box-sizing: border-box;
+}
+
+.cool-text {
+  font-size: 16px;
+  color: white;
+  text-transform: uppercase;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -157,8 +191,8 @@ html, body {
   width: 100%;
   box-sizing: border-box;
   position: fixed;
-  top: 0;
   left: 0;
+  top: 35px;
   z-index: 1001;
   height: 80px;
 }
@@ -269,13 +303,19 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.tab-link:hover {
+/* .tab-link:hover {
   background-color: lightskyblue;
-}
+} */
 
-.tab a {
+/* .tab a {
   color: #fff;
   text-decoration: none;
   transition: color 0.2s ease-in-out;
@@ -283,16 +323,53 @@ html, body {
 
 .tab a:hover {
   color: #FFFF7A;
+  text-decoration: underline;
+} */
+
+/* .tab a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
 
-.tab a:active {
+.tab a:hover {
+  color: #FFFF7A;
   text-decoration: underline;
+  text-decoration-color: #FFFF7A;
+} */
+
+.tab a {
+  color: #fff;
+  text-decoration: none; /* No default underline */
+  position: relative; /* Required for the pseudo-element */
+}
+
+.tab a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Place the underline at the bottom */
+  left: 0;
+  width: 0; /* Initially no width */
+  height: 2.5px; /* Thickness of the underline */
+  background-color: #FFFF7A; /* Color of the underline */
+  transition: width 0.25s ease; /* Smooth transition for width */
+}
+
+.tab a:hover::after {
+  width: 100%; /* Expand to full width on hover */
+}
+
+.cart-icon {
+  font-size: 28px; /* Increase the size of the cart icon */
+  position: relative; /* Ensure the badge is positioned relative to the icon */
+  top: 25px;
+  margin-left: 8px; /* Add some space between the icon and adjacent elements */
 }
 
 .cart-badge {
   position: absolute;
-  top: 16.25px; /* Increase number to move down */
-  right: -1.75px; /* Increase value to move left, decrease to move right*/
+  top: 10px; /* Adjust to position the badge at the top-right */
+  right: 20px; /* Adjust for better alignment */
   background-color: #E50000;
   color: white;
   border-radius: 50%;
@@ -303,6 +380,7 @@ html, body {
   font-size: 14px;
   min-width: 22px; 
   height: 22px;
+  font-weight: bold; /* Make the text bold for better readability */
 }
 
 .cart-badge.hidden {

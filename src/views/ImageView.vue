@@ -97,7 +97,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1001;
+  z-index: 1005;
 }
 
 .overlay:focus {

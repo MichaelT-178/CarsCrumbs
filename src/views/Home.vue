@@ -7,6 +7,7 @@
       <hr class="top-hr" />
       <p>We are a local bakery in Raleigh, NC specializing in pastries, cakes, and cookies.</p>
       <hr class="bottom-hr" />
+      <router-link to="/Order" class="order-button">Order Now</router-link>
     </div>
   </div>
 
@@ -19,9 +20,7 @@
     />
   </div>
 
-  <div class="bottom-section">
-    <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
-  </div>
+  <CrumbsFooter></CrumbsFooter>
 </template>
 
 
@@ -30,6 +29,7 @@ import { ref } from "vue";
 import HomeCookies from "../assets/HomeCookies.png";
 import MenuData from "../assets/menu_items/HomePage.json";
 import HomeMenuItem from "../components/HomeMenuItem.vue";
+import CrumbsFooter from "../components/Footer.vue";
 
 const jsonData = ref(MenuData);
 const menu = jsonData.value["Items"];
@@ -39,7 +39,7 @@ const menu = jsonData.value["Items"];
 
 <style scoped>
 .image-container {
-  margin-top: -11px;
+  margin-top: 23px;
   position: relative;
   width: 100%;
   height: auto;
@@ -48,7 +48,7 @@ const menu = jsonData.value["Items"];
 
 .tray-cookies {
   width: 100%;
-  height: auto;
+  height: 500px;
   display: block;
 }
 
@@ -72,10 +72,29 @@ const menu = jsonData.value["Items"];
   color: white;
   font-size: 2.4rem;
   font-weight: bold;
-  font-family: "Noto Serif", Georgia, serif;
+  /* font-family: "Noto Serif", Georgia, serif; */
+  font-family: Amatic SC;
+  font-weight: 700;
+  font-style: normal;
   padding: 10px;
   border-radius: 5px;
   z-index: 2;
+}
+
+.order-button {
+  display: inline-block;
+  padding: 12px 125px;
+  margin-top: 10px;
+  background-color: #0084ff;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.order-button:hover {
+  background-color: darkblue;
 }
 
 .rectangle {
@@ -110,111 +129,11 @@ const menu = jsonData.value["Items"];
   padding: 0;
 }
 
-.menu-items > * {
-  flex: 1 1 50%;
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.home-menu-item {
-  width: 100%;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.home-menu-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.home-menu-item .item-details {
-  padding: 10px;
-}
-
-.home-menu-item h3 {
-  margin: 10px 0;
-  font-size: 1.6rem;
-  text-align: center;
-}
-
-.home-menu-item p {
-  font-size: 1.2rem;
-  color: #333;
-  text-align: center;
-}
-
-.bottom-section {
-  background-color: #F3E7A4;
-  text-align: center;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.bottom-section p {
-  font-size: 17px;
-}
-
-@media (max-width: 1000px) {
-  .menu-items > * {
-    flex: 1 1 100%;
-  }
-
-  .text-overlay {
-    font-size: 2rem;
-    width: 70%;
-    bottom: -1%;
-  }
-}
-
-@media (max-width: 750px) {
-  .text-overlay {
-    font-size: 1.8rem;
-    width: 80%;
-    bottom: -1%;
-  }
-
-  .tray-cookies {
-    height: 250px;
-  }
-}
-
-@media (max-width: 650px) {
-  .menu-items {
-    display: flex;
-    flex-direction: column;
+@media (max-width:  920px) {
+  .image-container {
+    margin-top: -6px;
   }
   
-  .menu-items > * {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .text-overlay {
-    width: 90%;
-  }
-}
-
-@media (max-width: 400px) {
-  .text-overlay {
-    font-size: 1.4rem;
-    bottom: -5%;
-    width: 80%;
-  }
-
-  .tray-cookies {
-    height: 220px;
-  }
-
-  .bottom-hr {
-    margin: 15px auto;
-  }
 }
 
 </style>

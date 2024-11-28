@@ -82,21 +82,17 @@
 		  <div class="social-icons">
 			<!-- Instagram -->
 			<a href="https://instagram.com" target="_blank" class="social-button instagram">
-			  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="social-icon">
-				<path :d="instagramImagePath"/>
-			  </svg>
+				<img src="/instagram.svg" class="social-icon"/>
 			</a>
+
 			<!-- X (Twitter) -->
 			<a href="https://twitter.com" target="_blank" class="social-button twitter">
-			  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="social-icon">
-				<path :d="twitterImagePath"/>
-			  </svg>
+				<img src="/twitter.svg" class="social-icon"/>
 			</a>
+
 			<!-- Facebook -->
 			<a href="https://facebook.com" target="_blank" class="social-button facebook">
-			  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="social-icon">
-				<path :d="facebookImagePath"/>
-			  </svg>
+				<img src="/facebook.svg" class="social-icon"/>
 			</a>
 		  </div>
 		</div>

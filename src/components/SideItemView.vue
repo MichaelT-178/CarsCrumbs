@@ -69,7 +69,7 @@ const updateMenuItem = () => {
   menuItem.value = jsonData.value[itemName] || null;
   
   if (menuItem.value) {
-    pic.value = new URL(`../assets/menu/${menuItem.value.Image}`, import.meta.url).href;
+    pic.value = new URL(`../assets/example_pics/menu/${menuItem.value.Image}`, import.meta.url).href;
   }
 };
 
