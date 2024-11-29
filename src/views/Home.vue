@@ -85,7 +85,7 @@ const menu = jsonData.value["Items"];
   display: inline-block;
   padding: 12px 125px;
   margin-top: 10px;
-  background-color: #0084ff;
+  background-color: navy;
   color: white;
   font-size: 20px;
   font-weight: 700;
@@ -94,7 +94,7 @@ const menu = jsonData.value["Items"];
 }
 
 .order-button:hover {
-  background-color: darkblue;
+  background-color: blue;
 }
 
 .rectangle {

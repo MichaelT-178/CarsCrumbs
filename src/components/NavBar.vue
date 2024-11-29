@@ -1,37 +1,33 @@
 <template>
-  <!-- Pink line with "cool" text -->
   <div class="top-line">
+    <div class="search-bar-container">
+      <span class="material-icons search-icon">search</span>
+      <input 
+        type="text" 
+        ref="searchInput"
+        v-model="searchQuery" 
+        class="top-search-bar" 
+        placeholder="Search"
+        @input="filterResults"
+      />
+      <span 
+        v-if="searchQuery" 
+        class="material-icons close-icon" 
+        @click="clearSearchField"
+      >
+        close
+      </span>
+      <span v-else class="shortcut-text">[Option+S]</span>
+    </div>
     <span class="cool-text">cool</span>
   </div>
 
-  <!-- Dark overlay -->
+
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
   <nav class="navbar">
     <img :src="logo" alt="Logo" class="logo" />
     <div class="right-section">
-      <!-- <div class="search-bar">
-        <input 
-          ref="searchInput" 
-          type="text" 
-          v-model="searchQuery" 
-          placeholder="Search..." 
-          @input="filterResults" 
-          @focus="showDropdown = true" 
-          @blur="hideDropdown"
-          @keydown.enter="handleSearchEnter"
-        />
-        <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
-          <li 
-            v-for="(result, index) in filteredResults" 
-            :key="index" 
-            class="result" 
-            @click="handleItemClick(result.Name)"
-          >
-            <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
-          </li>
-        </ul>
-      </div> -->
       <div class="tabs">
         <ul>
           <li class="tab">
@@ -44,12 +40,6 @@
               <p>Order</p>
             </router-link>
           </li>
-          <!-- <li class="tab">
-            <router-link to="/Cart" class="tab-link">
-              <p>Cart</p>
-              <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
-            </router-link>
-          </li> -->
           <li class="tab">
             <router-link to="/About" class="tab-link">
               <p>About</p>
@@ -60,15 +50,10 @@
               <p>Contact Us</p>
             </router-link>
           </li>
-
-
           <router-link to="/Cart">
             <span class="material-symbols-outlined cart-icon" style="color: white">shopping_cart</span>
             <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
           </router-link>
-
-
-
         </ul>
       </div>
     </div>
@@ -76,9 +61,10 @@
 </template>
 
 
+
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import logo from "../assets/logo.png";
+import logo from "../assets/purple-logo.png";
 import MenuData from "../assets/menu_items/Menu.json";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
@@ -92,6 +78,7 @@ const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
+
 
 const filterResults = () => {
   if (searchQuery.value) {
@@ -114,39 +101,44 @@ const hideDropdown = () => {
   filteredResults.value = [];
 };
 
-const handleItemClick = (itemName) => {
-  const selectedItem = menu.find(item => item.Name === itemName);
-
-  if (selectedItem && selectedItem.Route) {
-    router.push(selectedItem.Route);
-  }
-  
-  hideDropdown();
+const clearSearchField = () => {
+  searchQuery.value = "";
   searchInput.value.blur();
 };
 
-const handleSearchEnter = () => {
-  router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() }});
-  hideDropdown();
-  searchInput.value.blur();
-};
-
-const closeSearchBar = () => {
-  searchInput.value.blur();
-}
+const keysPressed = new Set();
 
 const handleKeydown = (event) => {
-  if (event.key === 'Escape') {
-    closeSearchBar();
+  keysPressed.add(event.code);
+
+  if (
+        (keysPressed.has('AltLeft') || keysPressed.has('AltRight') 
+     || keysPressed.has('MetaLeft') || keysPressed.has('MetaRight'))
+
+     && keysPressed.has('KeyS')
+  ) {
+    event.preventDefault();
+
+    if (searchInput.value) {
+      searchInput.value.focus();
+    } else {
+      console.error("searchInput is null");
+    }
   }
+};
+
+const handleKeyup = (event) => {
+  keysPressed.delete(event.code);
 };
 
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown);
+  window.addEventListener('keyup', handleKeyup);
 });
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener('keyup', handleKeyup);
 });
 
 </script>
@@ -169,9 +161,53 @@ html, body {
   z-index: 1002;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align text to the right */
-  padding: 0 20px; /* Add some padding to the right */
+  justify-content: space-between;
+  padding: 0 20px;
   box-sizing: border-box;
+  gap: 10px;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  background-color: #3E0054;
+  border-radius: 6px;
+  padding: 2px 12px;
+  gap: 8px;
+  border: 1px solid #B0B0B0;
+  width: 225px;
+}
+
+.search-bar-container:focus-within {
+  border: 1px solid blue;
+}
+
+.shortcut-text {
+  font-size: 14px;
+  color: #B0B0B0;
+  margin-left: auto;
+}
+
+.close-icon {
+  font-size: 18px;
+  color: #B0B0B0;
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  font-size: 18px;
+  color: #B91212;
+  cursor: pointer;
+}
+
+.top-search-bar::placeholder {
+  color: #B0B0B0;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #B0B0B0;
 }
 
 .cool-text {
@@ -184,8 +220,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px; /* Increase first increases vertical, increase second increases closeness */
-  /* background-color: #620086; */
+  padding: 10px 30px;
   background-color: #620086;
   color: #fff;
   width: 100%;
@@ -195,6 +230,17 @@ html, body {
   top: 35px;
   z-index: 1001;
   height: 80px;
+}
+
+.top-search-bar {
+  width: 100%;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #B0B0B0;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s, width 0.3s;
 }
 
 .overlay {
@@ -208,7 +254,7 @@ html, body {
 }
 
 .logo {
-  height: 70px;
+  height: 80px;
 }
 
 .menu ul {
@@ -311,65 +357,38 @@ html, body {
   text-transform: uppercase;
 }
 
-/* .tab-link:hover {
-  background-color: lightskyblue;
-} */
-
-/* .tab a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-.tab a:hover {
-  color: #FFFF7A;
-  text-decoration: underline;
-} */
-
-/* .tab a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease, text-decoration-color 0.3s ease;
-}
-
-.tab a:hover {
-  color: #FFFF7A;
-  text-decoration: underline;
-  text-decoration-color: #FFFF7A;
-} */
-
 .tab a {
   color: #fff;
-  text-decoration: none; /* No default underline */
-  position: relative; /* Required for the pseudo-element */
+  text-decoration: none;
+  position: relative;
 }
 
 .tab a::after {
   content: '';
   position: absolute;
-  bottom: 0; /* Place the underline at the bottom */
+  bottom: 0;
   left: 0;
-  width: 0; /* Initially no width */
-  height: 2.5px; /* Thickness of the underline */
-  background-color: #FFFF7A; /* Color of the underline */
-  transition: width 0.25s ease; /* Smooth transition for width */
+  width: 0;
+  height: 2.5px;
+  background-color: #FFFF7A;
+  transition: width 0.25s ease;
 }
 
 .tab a:hover::after {
-  width: 100%; /* Expand to full width on hover */
+  width: 100%;
 }
 
 .cart-icon {
-  font-size: 28px; /* Increase the size of the cart icon */
-  position: relative; /* Ensure the badge is positioned relative to the icon */
+  font-size: 28px;
+  position: relative;
   top: 25px;
-  margin-left: 8px; /* Add some space between the icon and adjacent elements */
+  margin-left: 8px;
 }
 
 .cart-badge {
   position: absolute;
-  top: 10px; /* Adjust to position the badge at the top-right */
-  right: 20px; /* Adjust for better alignment */
+  top: 10px;
+  right: 20px;
   background-color: #E50000;
   color: white;
   border-radius: 50%;
@@ -380,7 +399,7 @@ html, body {
   font-size: 14px;
   min-width: 22px; 
   height: 22px;
-  font-weight: bold; /* Make the text bold for better readability */
+  font-weight: bold;
 }
 
 .cart-badge.hidden {
