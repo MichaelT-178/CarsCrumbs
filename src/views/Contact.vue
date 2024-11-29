@@ -94,6 +94,11 @@
 			<a href="https://facebook.com" target="_blank" class="social-button facebook">
 				<img src="/facebook.svg" class="social-icon"/>
 			</a>
+
+			<!-- tiktok -->
+			<a href="https://tiktok.com" target="_blank" class="social-button tiktok">
+				<img src="/tiktok.svg" class="social-icon"/>
+			</a>
 		  </div>
 		</div>
 		<div class="location-section">
@@ -379,11 +384,20 @@ button.clicked {
 .social-button.facebook {
 	background-color: #0866FF;
 }
+
+.social-button.tiktok {
+	background-color: black;
+}
   
 .social-icon {
 	width: 30px;
 	height: 30px;
 	fill: white;
+}
+
+.social-button.tiktok .social-icon {
+  width: 32px;
+  height: 32px;
 }
   
 .location-section p {

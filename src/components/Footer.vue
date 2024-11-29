@@ -28,6 +28,9 @@
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
           <img src="/facebook.svg" alt="Facebook" />
         </a>
+        <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+          <img src="/tiktok.svg" alt="Tiktok" />
+        </a>
       </div>
       <router-link to="/ContactUs" class="contact-button">Contact Us</router-link>
     </div>

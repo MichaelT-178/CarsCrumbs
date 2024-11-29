@@ -59,7 +59,7 @@
             </router-link>
           </li>
           <router-link to="/Cart">
-            <span class="material-symbols-outlined cart-icon" style="color: white">shopping_cart</span>
+            <span class="material-symbols-outlined cart-icon">shopping_cart</span>
             <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
           </router-link>
         </ul>
@@ -388,6 +388,24 @@ html, body {
   position: relative;
   top: 25px;
   margin-left: 8px;
+  color: white;
+}
+
+.cart-icon:active {
+  color: #FFFF7A;
+}
+
+.cart-icon:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 50%;
+  z-index: -1;
 }
 
 .cart-badge {

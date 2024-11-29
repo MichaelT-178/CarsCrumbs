@@ -39,7 +39,7 @@ const menu = jsonData.value["Items"];
 
 <style scoped>
 .image-container {
-  margin-top: 23px;
+  margin-top: -11px;
   position: relative;
   width: 100%;
   height: auto;

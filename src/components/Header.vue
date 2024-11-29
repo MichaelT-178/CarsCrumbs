@@ -37,7 +37,7 @@ const props = defineProps({
 .circle {
   width: 40px;
   height: auto;
-  margin-bottom: 10px; /* Padding below the About text */
+  margin-bottom: 10px;
 	top: -100px;
 	z-index: 1;
 }
@@ -49,8 +49,7 @@ const props = defineProps({
   width: 100%;
   height: 1px;
 	border-width: 0px;
-  /* background-color: gray; */
-  background-color: white;
+  background-color: #ACACAC;
   z-index: 0;
 }
 
