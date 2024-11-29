@@ -8,7 +8,8 @@
         v-model="searchQuery" 
         class="top-search-bar" 
         placeholder="Search"
-        @input="filterResults"
+        @focus="showDropdown = true"
+        @keydown.enter="handleSearchEnter"
       />
       <span 
         v-if="searchQuery" 
@@ -18,10 +19,17 @@
         close
       </span>
       <span v-else class="shortcut-text">[Option+S]</span>
+
+      <Dropdown
+        :query="searchQuery"
+        :show="showDropdown"
+        @close="hideDropdown"
+        @keydown.enter="handleSearchEnter"
+      />
+
     </div>
     <span class="cool-text">cool</span>
   </div>
-
 
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
 
@@ -61,39 +69,21 @@
 </template>
 
 
-
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import logo from "../assets/purple-logo.png";
-import MenuData from "../assets/menu_items/Menu.json";
 import { useRouter } from 'vue-router';
+import logo from "../assets/purple-logo.png";
+import Dropdown from "../components/DropdownMenu.vue";
 import { useCartStore } from "../stores/cart.js";
 
-const router = useRouter();
 const cart = useCartStore();
 
-const jsonData = ref(MenuData);
-const menu = jsonData.value["Menu"];
+const router = useRouter();
+
 const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
 const searchInput = ref(null);
-
-
-const filterResults = () => {
-  if (searchQuery.value) {
-    const queryWords = searchQuery.value.toLowerCase().split(' ');
-    
-    filteredResults.value = menu.filter(item => 
-      queryWords.some(word => 
-        item.Name.toLowerCase().includes(word) || 
-        item.Type.toLowerCase().includes(word)
-      )
-    ).slice(0, 5);
-  } else {
-    filteredResults.value = [];
-  }
-};
 
 const hideDropdown = () => {
   showDropdown.value = false;
@@ -112,10 +102,9 @@ const handleKeydown = (event) => {
   keysPressed.add(event.code);
 
   if (
-        (keysPressed.has('AltLeft') || keysPressed.has('AltRight') 
-     || keysPressed.has('MetaLeft') || keysPressed.has('MetaRight'))
-
-     && keysPressed.has('KeyS')
+    (keysPressed.has('AltLeft') || keysPressed.has('AltRight') 
+    || keysPressed.has('MetaLeft') || keysPressed.has('MetaRight'))
+    && keysPressed.has('KeyS')
   ) {
     event.preventDefault();
 
@@ -128,7 +117,22 @@ const handleKeydown = (event) => {
 };
 
 const handleKeyup = (event) => {
-  keysPressed.delete(event.code);
+  if (keysPressed.has(event.code)) {
+    keysPressed.delete(event.code);
+    keysPressed.clear();
+  }
+};
+
+const handleSearchEnter = () => {
+  if (searchQuery.value.trim()) {
+    router.push({
+      name: 'SearchResults',
+      query: { search_query: searchQuery.value.trim() },
+    });
+
+    hideDropdown();
+    searchInput.value.blur();
+  }
 };
 
 onMounted(() => {
@@ -177,6 +181,7 @@ html, body {
   gap: 8px;
   border: 1px solid #B0B0B0;
   width: 225px;
+  position: relative;
 }
 
 .search-bar-container:focus-within {

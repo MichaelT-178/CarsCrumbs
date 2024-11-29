@@ -2,7 +2,7 @@
   <div id="app">
     <component :is="isMobile ? MobileNavBar : NavBar" />
     <main :class="mainClass">
-      <router-view class="router-view" />
+      <router-view />
     </main>
   </div>
 </template>

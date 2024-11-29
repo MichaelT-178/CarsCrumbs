@@ -136,7 +136,9 @@ onMounted(() => {
 
 .title {
   color: #1a1c1e;
-  font-family: Georgia, serif;
+  /* font-family: Georgia, serif; */
+  /* font-family: "Lobster", cursive; */
+  font-family: "Poppins", cursive;
   font-size: 50px;
   margin-left: 20px;
 }

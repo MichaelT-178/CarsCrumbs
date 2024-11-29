@@ -31,13 +31,14 @@ const props = defineProps({
 
 const router = useRouter();
 
-const pic = ref(new URL(`../assets/menu/${props.item.Image}`, import.meta.url).href);
+const pic = ref(new URL(`../assets/example_pics/menu/${props.item.Image}`, import.meta.url).href);
 
 const navigateToRoute = () => {
   if (props.item.Route) {
     router.push(props.item.Route);
   }
 };
+
 </script>
 
 
