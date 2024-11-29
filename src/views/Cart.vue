@@ -60,7 +60,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import ItemCard from "../components/ItemCard.vue";
 import Header from "../components/Header.vue";
-import CrumbsLogo from "../assets/logoTwoYellow.png";
+import CrumbsLogo from "../assets/crumbs-logo.png";
 import { useCartStore } from '../stores/cart.js';
 import { useRouter } from 'vue-router';
 

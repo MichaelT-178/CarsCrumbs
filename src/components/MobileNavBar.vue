@@ -1,6 +1,6 @@
 <template>
   <!-- Search bar Dark overlay -->
-  <div v-if="showDropdown" class="search-overlay" @click="toggleSidebar"></div>
+  <div v-if="showDropdown" class="search-overlay" @click="hideDropdown"></div>
 
   <nav class="navbar" @keydown="handleKeydown">
 
@@ -21,7 +21,6 @@
             placeholder="Search..." 
             @input="filterResults" 
             @focus="showDropdown = true" 
-            @blur="hideDropdown"
             @keydown.enter="handleSearchEnter"
           />
         </div>
@@ -64,14 +63,14 @@
     </div>
 
     <!-- Dropdown search results -->
-    <ul v-if="showDropdown" class="dropdown" @mousedown.prevent>
+    <ul v-if="showDropdown && filteredResults.length" class="dropdown" @mousedown.prevent>
       <li 
         v-for="(result, index) in filteredResults" 
         :key="index" 
         class="result" 
-        @mousedown="handleItemClick(result.Name)"
+        @mousedown="handleItemClick(result)"
       >
-        <span>{{ result.Emoji }}</span><span class="result-text">{{ result.Name }}</span>
+        <span>{{ result.Emoji }}</span><span class="result-text">{{ result.DisplayName }}</span>
       </li>
     </ul>
 
@@ -92,16 +91,15 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import logoTwo from "../assets/logoTwoYellow.png";
-import MenuData from "../assets/menu_items/Menu.json";
+import logoTwo from "../assets/crumbs-logo.png";
+import MenuData from "../assets/menu_items/MenuItems.json";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 
 const router = useRouter();
 const cart = useCartStore();
 
-const jsonData = ref(MenuData);
-const menu = jsonData.value["Menu"];
+const menu = ref(Object.values(MenuData));
 const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
@@ -112,11 +110,12 @@ const menuIconColor = ref("white");
 const filterResults = () => {
   if (searchQuery.value) {
     const queryWords = searchQuery.value.toLowerCase().split(' ');
-    
-    filteredResults.value = menu.filter(item => 
+
+    filteredResults.value = menu.value.filter(item => 
       queryWords.some(word => 
-        item.Name.toLowerCase().includes(word) || 
-        item.Type.toLowerCase().includes(word)
+        item.DisplayName.toLowerCase().includes(word) ||
+        (item.Tags && item.Tags.some(tag => tag.toLowerCase().includes(word))) ||
+        (item.Alternative && item.Alternative.toLowerCase().includes(word))
       )
     ).slice(0, 5);
   } else {
@@ -138,21 +137,14 @@ const hideDropdown = () => {
   filteredResults.value = [];
 };
 
-const handleItemClick = (itemName) => {
-  const selectedItem = menu.find(item => item.Name === itemName);
-  
-  if (selectedItem && selectedItem.Route) {
-    router.push(selectedItem.Route);
-  }
-  
+const handleItemClick = (item) => {
+  router.push(item.Route);
   hideDropdown();
-  searchInput.value.blur();
 };
 
 const handleSearchEnter = () => {
   router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() }});
   hideDropdown();
-  searchInput.value.blur();
 };
 
 const hoverMenuIcon = () => {
@@ -165,7 +157,7 @@ const resetMenuIconColor = () => {
 
 const closeSearchBar = () => {
   searchInput.value.blur();
-}
+};
 
 const handleKeydown = (event) => {
   if (event.key === 'Escape') {

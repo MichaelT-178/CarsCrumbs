@@ -10,9 +10,9 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-  
+
 const props = defineProps({
   item: {
     type: Object,
@@ -22,7 +22,7 @@ const props = defineProps({
       DisplayName: '',
       Emoji: '',
       Price: 0.0,
-      Image: '',
+      Images: [],
       Route: '',
       Tags: [],
     }),
@@ -30,8 +30,18 @@ const props = defineProps({
 });
 
 const router = useRouter();
+const pic = ref('');
 
-const pic = ref(new URL(`../assets/example_pics/menu/${props.item.Image}`, import.meta.url).href);
+const updatePic = () => {
+  pic.value = new URL(`../assets/example_pics/menu/${props.item.Images[0]}`, import.meta.url).href;
+};
+
+updatePic();
+
+watch(() => props.item.Images[0], () => {
+    updatePic();
+  }
+);
 
 const navigateToRoute = () => {
   if (props.item.Route) {

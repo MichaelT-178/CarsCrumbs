@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import AllData from '../assets/menu_items/MenuItems.json';
+import AllData from "../assets/menu_items/MenuItems.json";
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 
@@ -113,7 +113,6 @@ onMounted(() => {
 </script>
 
 
-
 <style scoped>
 .page-container {
   display: flex;
@@ -138,7 +137,8 @@ onMounted(() => {
   color: #1a1c1e;
   /* font-family: Georgia, serif; */
   /* font-family: "Lobster", cursive; */
-  font-family: "Poppins", cursive;
+  /* font-family: "Dancing Script", cursive; */
+  font-family: "Roboto Slab", cursive;
   font-size: 50px;
   margin-left: 20px;
 }
@@ -160,7 +160,7 @@ onMounted(() => {
   border-color: blue;
 }
 
-.filter-container {
+/* .filter-container {
   display: flex;
   justify-content: flex-end;
   margin-right: 50px;
@@ -181,6 +181,34 @@ onMounted(() => {
 .styled-select:focus {
   background-color: #e1d89f;
   border-color: #b5a85e;
+} */
+
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 50px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding-right: 10px;
+  background-color: white;
+}
+
+.styled-select {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  border: none;
+  width: 150px;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-select:focus {
+  background-color: white;
+  border-color: #999;
 }
 
 .menu-container {

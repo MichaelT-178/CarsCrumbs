@@ -28,10 +28,10 @@ const props = defineProps({
   flex-direction: column;
   align-items: center;
   position: relative;
-  /* max-width: 400px; */
-	max-width: 30%;
+  width: 100%;
+  max-width: 375px;
   min-width: 230px;
-  margin: 20px auto 20px auto;
+  margin: 20px auto;
 }
 
 .circle {

@@ -17,7 +17,7 @@
       <p class="details">(555) 555-5555</p>
     </div>
     <div class="footer-right">
-      <h2>Contact Us</h2>
+      <h2>Social Links</h2>
       <div class="social-icons">
         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
           <img src="/instagram.svg" alt="Instagram" />
@@ -79,6 +79,11 @@ const linkedin = "https://www.linkedin.com/in/michael-totaro-72857722a/";
   width: 40px;
   height: 40px;
   margin: 0 10px;
+}
+
+.social-icons a:hover img {
+  filter: brightness(0.8);
+  transform: scale(1.1);
 }
 
 .contact-button {

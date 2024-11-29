@@ -51,14 +51,14 @@ const props = defineProps({
       Name: '',
       Quantity: 1,
       Cost: 0.0,
-      Image: '',
+      Images: [],
       Description: '',
       Tags: [],
     }),
   },
 });
 
-const pic = computed(() => new URL(`../assets/example_pics/menu/${props.item.Image}`, import.meta.url).href);
+const pic = computed(() => new URL(`../assets/example_pics/menu/${props.item.Images[0]}`, import.meta.url).href);
 
 const hovered = ref(null);
 const hoverDelete = ref(false);

@@ -10,7 +10,7 @@
         class="dropdown-item"
         @click="handleClick(item)"
       >
-        {{ item.Name }}
+        {{ item.DisplayName }}
       </li>
     </ul>
   </div>
@@ -18,9 +18,9 @@
 
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import MenuData from "../assets/menu_items/Menu.json";
+import MenuItems from "../assets/menu_items/MenuItems.json";
 
 const props = defineProps({
   query: {
@@ -34,19 +34,23 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close']);
-
 const router = useRouter();
 
-const menu = MenuData.Menu;
+const menu = ref([]);
+
+onMounted(() => {
+  menu.value = Object.values(MenuItems);
+});
 
 const filteredItems = computed(() => {
   if (!props.query) return [];
   const queryWords = props.query.toLowerCase().split(' ');
 
-  return menu.filter(item =>
+  return menu.value.filter(item =>
     queryWords.some(word =>
-      item.Name.toLowerCase().includes(word) ||
-      item.Type?.toLowerCase().includes(word)
+      item.DisplayName.toLowerCase().includes(word) ||
+      item.Tags.some(tag => tag.toLowerCase().includes(word)) ||
+      (item.Alternative && item.Alternative.toLowerCase().includes(word))
     )
   ).slice(0, 5);
 });
@@ -54,7 +58,7 @@ const filteredItems = computed(() => {
 const handleClick = (item) => {
   router.push({
     name: 'SearchResults',
-    query: { search_query: item.Name.trim() },
+    query: { search_query: item.DisplayName.trim() },
   });
 
   emit('close');
@@ -97,4 +101,5 @@ const handleClick = (item) => {
   background-color: #f0f0f0;
   color: black;
 }
+
 </style>
