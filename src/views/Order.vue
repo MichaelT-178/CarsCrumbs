@@ -48,7 +48,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import AllData from "../assets/menu_items/MenuItems.json";
+import AllData from "../assets/test_menu/MenuItems.json";
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 
@@ -159,29 +159,6 @@ onMounted(() => {
 .search-bar:focus {
   border-color: blue;
 }
-
-/* .filter-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 50px;
-}
-
-.styled-select {
-  padding: 8px 16px;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  background-color: #f3e7a4;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.styled-select:focus {
-  background-color: #e1d89f;
-  border-color: #b5a85e;
-} */
 
 .filter-container {
   display: flex;

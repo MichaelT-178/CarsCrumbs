@@ -92,7 +92,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import logoTwo from "../assets/crumbs-logo.png";
-import MenuData from "../assets/menu_items/MenuItems.json";
+import MenuData from "../assets/test_menu/MenuItems.json";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 

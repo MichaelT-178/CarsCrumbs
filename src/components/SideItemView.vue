@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import MenuItems from "../assets/menu_items/MenuItems.json";
+import MenuItems from "../assets/test_menu/MenuItems.json";
 import { useCartStore } from "../stores/cart.js";
 
 const cart = useCartStore();
@@ -69,7 +69,7 @@ const updateMenuItem = () => {
   menuItem.value = jsonData.value[itemName] || null;
   
   if (menuItem.value) {
-    pic.value = new URL(`../assets/example_pics/menu/${menuItem.value.Images[0]}`, import.meta.url).href;
+    pic.value = new URL(`../assets/test_menu/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
   }
 };
 

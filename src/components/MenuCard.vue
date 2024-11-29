@@ -44,7 +44,7 @@ const props = defineProps({
   },
 });
 
-const pic = ref(new URL(`../assets/example_pics/menu/${props.item.Images[0]}`, import.meta.url).href);
+const pic = ref(new URL(`../assets/test_menu/pics/${props.item.Images[0]}`, import.meta.url).href);
 
 const hovered = ref(null);
 

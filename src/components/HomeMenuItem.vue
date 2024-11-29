@@ -34,7 +34,7 @@ const props = defineProps({
   }
 });
 
-const pic = computed(() => new URL(`../assets/example_pics/menu/${props.item.Picture}`, import.meta.url).href);
+const pic = computed(() => new URL(`../assets/test_menu/pics/${props.item.Picture}`, import.meta.url).href);
 const isHovered = ref(false);
 const isSmallScreen = ref(window.innerWidth < 650);
 

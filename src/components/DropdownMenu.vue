@@ -20,7 +20,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import MenuItems from "../assets/menu_items/MenuItems.json";
+import MenuItems from "../assets/test_menu/MenuItems.json";
 
 const props = defineProps({
   query: {
