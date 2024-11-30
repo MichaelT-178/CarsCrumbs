@@ -1,0 +1,163 @@
+{
+    "Banana_Bread": {
+        "DisplayName": "Banana Bread",
+        "Name": "Banana_Bread",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "BananaBread/BananaBread1.jpg",
+            "BananaBread/BananaBread2.jpg",
+            "BananaBread/BananaBread3.jpg"
+        ],
+        "Route": "/Item/Banana_Bread",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Blueberry_Zucchini": {
+        "DisplayName": "Blueberry Zucchini",
+        "Name": "Blueberry_Zucchini",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "BlueberryZucchini/BlueberryZucchini.jpg"
+        ],
+        "Route": "/Item/Blueberry_Zucchini",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Brown_Butter_Cookies": {
+        "DisplayName": "Brown Butter Cookies",
+        "Name": "Brown_Butter_Cookies",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "BrownButterCookies/BrownButterCookies1.jpg",
+            "BrownButterCookies/BrownButterCookies2.jpg",
+            "BrownButterCookies/BrownButterCookies3.jpg"
+        ],
+        "Route": "/Item/Brown_Butter_Cookies",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Cinnamon_Rolls": {
+        "DisplayName": "Cinnamon Rolls",
+        "Name": "Cinnamon_Rolls",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "CinnamonRolls/CinnamonRolls1.jpg",
+            "CinnamonRolls/CinnamonRolls2.jpg"
+        ],
+        "Route": "/Item/Cinnamon_Rolls",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Gingerbread_Latte_Cookies": {
+        "DisplayName": "Gingerbread Latte Cookies",
+        "Name": "Gingerbread_Latte_Cookies",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "GingerbreadLatte/GingerbreadLatte.jpg"
+        ],
+        "Route": "/Item/Gingerbread_Latte_Cookies",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Ginger_Molasses_Cookies": {
+        "DisplayName": "Ginger Molasses Cookies",
+        "Name": "Ginger_Molasses_Cookies",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "GingerMolasses/GingerMolasses.jpg"
+        ],
+        "Route": "/Item/Ginger_Molasses_Cookies",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Italian_Bread": {
+        "DisplayName": "Italian Bread",
+        "Name": "Italian_Bread",
+        "Emoji": "☁️",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "ItalianBread/ItalianBread1.jpg",
+            "ItalianBread/ItalianBread2.jpg",
+            "ItalianBread/ItalianBread3.jpg"
+        ],
+        "Route": "/Item/Italian_Bread",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    },
+    "Pumpkin_Donuts": {
+        "DisplayName": "Pumpkin Donuts",
+        "Name": "Pumpkin_Donuts",
+        "Emoji": "",
+        "Price": 0.0,
+        "DisplayPrice": "",
+        "Images": [
+            "PumpkinDonuts/PumpkinDonuts1.jpg",
+            "PumpkinDonuts/PumpkinDonuts2.jpg",
+            "PumpkinDonuts/PumpkinDonuts3.jpg"
+        ],
+        "Route": "/Item/Pumpkin_Donuts",
+        "Tags": [],
+        "Alternative": "",
+        "Options": [
+            {
+                "price": 0.0,
+                "description": ""
+            }
+        ]
+    }
+}
