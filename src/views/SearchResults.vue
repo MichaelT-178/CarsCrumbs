@@ -23,6 +23,7 @@ import { useRoute } from 'vue-router';
 import Header from "../components/Header.vue";
 import ResultCard from "../components/ResultCard.vue";
 import ShrugGuy from "../assets/other/Shrug.png";
+import { folderRealOrTest } from "../data.config";
 
 const jsonData = ref([]);
 
@@ -52,7 +53,7 @@ watch(() => route.query.search_query, (newQuery) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = Object.values(MenuData.default);
+    jsonData.value = Object.values(MenuData.default);
   } catch (error) {
     console.error("Error loading menu data:", error);
   }

@@ -391,7 +391,7 @@ html, body {
   color: white;
 }
 
-.cart-icon:active {
+.cart-icon:hover {
   color: #FFFF7A;
 }
 

@@ -99,6 +99,12 @@
 			<a href="https://tiktok.com" target="_blank" class="social-button tiktok">
 				<img src="/tiktok.svg" class="social-icon"/>
 			</a>
+
+			<!-- LinkedIn -->
+			<a href="https://tiktok.com" target="_blank" class="social-button tiktok">
+				<img src="/tiktok.svg" class="social-icon"/>
+			</a>
+			
 		  </div>
 		</div>
 		<div class="location-section">

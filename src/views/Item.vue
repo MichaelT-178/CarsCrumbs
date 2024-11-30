@@ -1,4 +1,5 @@
 <template>
+
   <div v-if="menuItem" class="menu-item-container">
 
     <img :src="pic" class="item-pic" />
@@ -54,14 +55,15 @@
 
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import MenuCard from '../components/MenuCard.vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config.js";
 
 const cart = useCartStore();
 const router = useRouter();
+const route = useRoute();
 
 const props = defineProps({
   ItemName: {
@@ -149,6 +151,11 @@ onMounted(async () => {
   updateMenuItem();
 });
 
+watch(() => route.params.ItemName, () => {
+    updateMenuItem();
+  }
+);
+
 </script>
 
 
@@ -159,7 +166,7 @@ onMounted(async () => {
   justify-content: center;
   gap: 40px;
   padding: 20px;
-  background-color: lightblue;
+  /* background-color: lightblue; */
   border-radius: 0;
   margin-top: -13px;
 }
@@ -189,7 +196,7 @@ onMounted(async () => {
   padding-top: 5px;
   padding-bottom: 20px;
   font-weight: 600;
-  color: navy;
+  /* color: navy; */
   text-align: left;
 }
 
@@ -232,14 +239,14 @@ onMounted(async () => {
 }
 
 .radio-input:checked + .custom-radio {
-  background-color: #fdbe0f;
+  background-color: #FFFC7C;
   color: white;
-  border: 1px solid purple;
+  border: 1px solid black;
 }
 
 button {
   padding: 10px 20px;
-  background-color: #ff6347;
+  background-color: #007bff;
   color: white;
   border: none;
   font-size: 20px;
@@ -255,7 +262,7 @@ button:disabled {
 }
 
 button:hover:enabled {
-  background-color: #ff4500;
+  background-color: #0056b3;
 }
 
 .related-items-container {

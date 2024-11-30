@@ -52,11 +52,7 @@ const filteredItems = computed(() => {
 });
 
 const handleClick = (item) => {
-  router.push({
-    name: 'SearchResults',
-    query: { search_query: item.DisplayName.trim() },
-  });
-
+  router.push(item.Route);
   emit('close');
 };
 
