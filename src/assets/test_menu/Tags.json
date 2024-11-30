@@ -1,0 +1,29 @@
+{
+    "Tags": [
+        {
+            "id": 1,
+            "emoji": "🍪",
+            "name": "Cookie"
+        },
+        {
+            "id": 2,
+            "emoji": "🍫",
+            "name": "Brownie"
+        },
+        {
+            "id": 3,
+            "emoji": "🥖",
+            "name": "Bread"
+        },
+        {
+            "id": 4,
+            "emoji": "🥯",
+            "name": "Bagel"
+        },
+        {
+            "id": 5,
+            "emoji": "🎂",
+            "name": "Cake"
+        }
+    ]
+}

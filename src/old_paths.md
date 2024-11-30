@@ -65,6 +65,7 @@
 
 ### Order.vue
 - import AllData from "../assets/menu_items/MenuItems.json"; ✅
+- import TagData from "../assets/test_menu/Tags.json"; ✅
 
 ### SearchResults.vue
 - import ShrugGuy from "../assets/Shrug.png"; ✅
@@ -108,9 +109,11 @@
     - test_menu/
         - pics/
         - MenuItems.json
+        - Tags.json
     - real_menu/
         - pics/
         - MenuItems.json
+        - Tags.json
     - unused 
         - circleLogo.png
         - logotwo.png (rename: white-square-logo.png)

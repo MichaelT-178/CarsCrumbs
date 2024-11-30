@@ -13,11 +13,18 @@
       <div class="filter-container">
         <select id="tag-filter" v-model="selectedTag" class="styled-select">
           <option value="No Filter">❌ No Filter</option>
-          <option value="Cookie">🍪 Cookie</option>
+          <option 
+            v-for="tag in tagsData" 
+            :key="tag.id" 
+            :value="tag.name"
+          >
+            {{ tag.emoji }} {{ tag.name }}
+          </option>
+          <!-- <option value="Cookie">🍪 Cookie</option>
           <option value="Brownie">🍫 Brownie</option>
           <option value="Bread">🥖 Bread</option>
           <option value="Bagel">🥯 Bagel</option>
-          <option value="Cake">🎂 Cake</option>
+          <option value="Cake">🎂 Cake</option> -->
         </select>
       </div>
     </div>
@@ -49,9 +56,11 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import AllData from "../assets/test_menu/MenuItems.json";
+import TagData from "../assets/test_menu/Tags.json";
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 
+const tagsData = TagData["Tags"];
 const selectedTag = ref('No Filter');
 const searchQuery = ref('');
 const showSideView = ref(false);

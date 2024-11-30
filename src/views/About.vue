@@ -41,9 +41,9 @@
 import { ref } from 'vue';
 import Header from "../components/Header.vue";
 import ImageView from "./ImageView.vue";
-import Carly1 from "../assets/real_menu_pics/CarlyPics/Carly1.jpg";
-import Carly2 from "../assets/real_menu_pics/CarlyPics/Carly2.jpg";
-import Carly3 from "../assets/real_menu_pics/CarlyPics/Carly3.jpg";
+import Carly1 from "../assets/example_pics/Carly1.jpg";
+import Carly2 from "../assets/example_pics/Carly2.jpg";
+import Carly3 from "../assets/example_pics/Carly3.jpg";
 
 const isImageViewOpen = ref(false);
 const currentImage = ref(0);

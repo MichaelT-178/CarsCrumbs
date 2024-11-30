@@ -127,7 +127,7 @@ import { ref, computed } from 'vue';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import VenmoLogo from "../assets/Venmo.png";
-import GrayVenmoLogo from "../assets/real_menu_pics/logos/GrayVenmo.png";
+import GrayVenmoLogo from "../assets/GrayVenmo.png";
 import Header from "../components/Header.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
