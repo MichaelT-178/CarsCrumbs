@@ -92,14 +92,15 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import logoTwo from "../assets/logos/yellow-square-logo.png";
-import MenuData from "../assets/test_menu/MenuItems.json";
+import { folderRealOrTest } from '../data.config.js';
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 
 const router = useRouter();
 const cart = useCartStore();
 
-const menu = ref(Object.values(MenuData));
+// const menu = ref(Object.values(MenuData));
+const menu = ref([]);
 const searchQuery = ref('');
 const showDropdown = ref(false);
 const filteredResults = ref([]);
@@ -166,7 +167,17 @@ const handleKeydown = (event) => {
   }
 };
 
+const loadMenuData = async () => {
+  try {
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    menu.value = Object.values(MenuData.default);
+  } catch (error) {
+    console.error("Error loading menu data:", error);
+  }
+};
+
 onMounted(() => {
+  loadMenuData();
   window.addEventListener('keydown', handleKeydown);
 });
 
@@ -416,7 +427,7 @@ html, body {
 
 .sidebar .tab span.material-symbols-outlined {
   font-size: 24px;
-  margin-right: 12px; /* Space between icon and text */
+  margin-right: 12px;
   color: #FFFFA6;
 }
 

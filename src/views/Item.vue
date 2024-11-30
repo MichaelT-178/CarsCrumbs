@@ -54,11 +54,11 @@
 
 
 <script setup>
-import { ref, watch } from "vue";
-import MenuItems from "../assets/test_menu/MenuItems.json";
+import { ref, onMounted } from "vue";
 import MenuCard from '../components/MenuCard.vue';
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
+import { folderRealOrTest } from "../data.config.js";
 
 const cart = useCartStore();
 const router = useRouter();
@@ -70,15 +70,16 @@ const props = defineProps({
   }
 });
 
-const jsonData = ref(MenuItems);
+const jsonData = ref([]);
 const menuItem = ref(null);
 const pic = ref("");
 const selectedOption = ref(null);
 const relatedItems = ref([]);
 
 const updateMenuItem = () => {
-  const itemName = props.ItemName.replace(/ /g, "_");
-  menuItem.value = jsonData.value[itemName] || null;
+  const itemName = props.ItemName;
+  
+  menuItem.value = jsonData.value[itemName];
 
   if (menuItem.value) {
     pic.value = new URL(`../assets/test_menu/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
@@ -98,12 +99,7 @@ const findRelatedItems = (currentItem) => {
   relatedItems.value = [...taggedItems, ...otherItems];
 };
 
-watch(() => props.ItemName, () => {
-  updateMenuItem();
-}, { immediate: true });
-
 updateMenuItem();
-
 
 const addItem = () => {
   if (selectedOption.value) {
@@ -138,6 +134,20 @@ const goToItemPage = (item) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+const loadMenuData = async () => {
+  try {
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    jsonData.value = MenuData.default;
+  } catch (error) {
+    console.error("Error loading menu data:", error);
+  }
+};
+
+onMounted(async () => {
+  await loadMenuData();
+  updateMenuItem();
+});
 
 </script>
 

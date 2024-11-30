@@ -1,58 +1,74 @@
 <template>
-  <div v-if="menuItem">
-    <div class="side-content" @keydown="handleKeydown">
-      <button class="close-btn" @click="handleClose">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-      <h2>{{ menuItem.DisplayName }}</h2>
-      <img :src="pic" class="item-pic">
-      <p>
-        Name: 
-        <router-link :to="{ name: 'ItemView', params: { ItemName: ItemName } }" class="router-link">
-          {{ menuItem.DisplayName }} {{ menuItem.Emoji }}
-        </router-link>
-      </p>
-      <p>Price: {{ menuItem.DisplayPrice }} </p>
+  <div class="side-view-wrapper">
+    <button class="close-btn" @click="handleClose">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <transition name="slide">
+      <div v-if="contentVisible" class="side-content" @keydown="handleKeydown">
+        <h2>{{ menuItem.DisplayName }}</h2>
 
-      <!-- Radio Buttons -->
-      <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
-        <label>
-          <input type="radio" v-model="selectedOption" :value="option">
-          {{ option.description }} - ${{ option.price }}
-        </label>
+        <div class="image-container">
+          <img
+            :src="pic"
+            class="item-pic"
+            alt="Item Image"
+            @load="onImageLoaded"
+          />
+        </div>
+
+        <p v-if="menuItem">
+          Name:
+          <router-link
+            :to="{ name: 'ItemView', params: { ItemName: menuItem.Name } }"
+            class="router-link"
+          >
+            {{ menuItem.DisplayName }} {{ menuItem.Emoji }}
+          </router-link>
+        </p>
+        <p v-if="menuItem">Price: {{ menuItem.DisplayPrice }}</p>
+
+        <div v-if="menuItem.Options">
+          <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
+            <label>
+              <input type="radio" v-model="selectedOption" :value="option" />
+              {{ option.description }} - ${{ option.price }}
+            </label>
+          </div>
+        </div>
+
+        <button
+          @click="addItem"
+          :disabled="!selectedOption"
+          class="add-item-btn"
+        >
+          Add to Cart
+        </button>
       </div>
-
-      <button @click="addItem" :disabled="!selectedOption" class="add-item-btn">
-        Add to Cart
-      </button>
-    </div>
-  </div>
-  <div v-else>
-    <p>Item not found</p>
+    </transition>
   </div>
 </template>
 
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
-import MenuItems from "../assets/test_menu/MenuItems.json";
-import { useCartStore } from "../stores/cart.js";
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useCartStore } from '../stores/cart.js';
 
 const cart = useCartStore();
 
 const props = defineProps({
-  ItemName: {
-    type: String,
-    required: true
-  }
+  item: {
+    type: Object,
+    required: true,
+  },
 });
 
-const jsonData = ref(MenuItems);
-const menuItem = ref(null);
-const pic = ref("");
-const selectedOption = ref(null);
-
 const emit = defineEmits(['close']);
+
+const menuItem = ref(null);
+const pic = ref('');
+const picLoaded = ref(false);
+const selectedOption = ref(null);
+const contentVisible = ref(false);
 
 const handleClose = () => {
   emit('close');
@@ -65,39 +81,35 @@ const handleKeydown = (event) => {
 };
 
 const updateMenuItem = () => {
-  const itemName = props.ItemName.replace(/ /g, "_");
-  menuItem.value = jsonData.value[itemName] || null;
-  
-  if (menuItem.value) {
-    pic.value = new URL(`../assets/test_menu/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
+  if (props.item) {
+    menuItem.value = props.item;
+    pic.value = new URL(`../assets/test_menu/pics/${props.item.Images[0]}`, import.meta.url).href;
   }
+};
+
+const onImageLoaded = () => {
+  picLoaded.value = true;
 };
 
 const addItem = () => {
   if (selectedOption.value) {
     const option = selectedOption.value;
 
-    cart.addItem({ 
-      ...menuItem.value, 
-      Cost: option.price, 
-      Description: option.description 
+    cart.addItem({
+      ...menuItem.value,
+      Cost: option.price,
+      Description: option.description,
     });
-    
-    alert("Item Successfully Added to Cart!");
+
+    alert('Item Successfully Added to Cart!');
     handleClose();
   }
 };
 
-watch(selectedOption, (newOption) => {
-  menuItem.value.DisplayPrice = newOption ? `$${newOption.price}.00` : menuItem.value.DisplayPrice;
-});
-
-watch(() => props.ItemName, () => {
-  updateMenuItem();
-}, { immediate: true });
-
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown);
+  updateMenuItem();
+  contentVisible.value = true;
 });
 
 onUnmounted(() => {
@@ -108,7 +120,7 @@ onUnmounted(() => {
 
 
 <style scoped>
-.side-content {
+.side-view-wrapper {
   position: fixed;
   top: 0;
   right: 0;
@@ -120,6 +132,29 @@ onUnmounted(() => {
   align-items: flex-start;
   padding: 20px;
   z-index: 2000;
+}
+
+.side-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.image-container {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f2f2f2;
+  margin-bottom: 20px;
+}
+
+.item-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .close-btn {
@@ -147,19 +182,13 @@ h2 {
   align-self: flex-start;
 }
 
-.item-pic {
-  width: 300px;
-  height: 200px;
-  margin-bottom: 20px;
-}
-
 .option-radio {
   margin: 10px 0;
 }
 
 .add-item-btn {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   cursor: pointer;
@@ -183,16 +212,6 @@ h2 {
 
 .router-link:hover {
   text-decoration: underline;
-}
-
-@media (max-width: 680px) {
-  .side-content {
-    width: 100%;
-  }
-
-  .close-btn {
-    right: 10px;
-  }
 }
 
 </style>

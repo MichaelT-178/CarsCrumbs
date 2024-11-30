@@ -20,7 +20,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import MenuItems from "../assets/test_menu/MenuItems.json";
+import { folderRealOrTest } from '../data.config';
 
 const props = defineProps({
   query: {
@@ -37,10 +37,6 @@ const emit = defineEmits(['close']);
 const router = useRouter();
 
 const menu = ref([]);
-
-onMounted(() => {
-  menu.value = Object.values(MenuItems);
-});
 
 const filteredItems = computed(() => {
   if (!props.query) return [];
@@ -63,6 +59,19 @@ const handleClick = (item) => {
 
   emit('close');
 };
+
+const loadMenuData = async () => {
+  try {
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    menu.value = Object.values(MenuData.default);
+  } catch (error) {
+    console.error("Error loading menu data:", error);
+  }
+};
+
+onMounted(() => {
+  loadMenuData();
+});
 
 </script>
 

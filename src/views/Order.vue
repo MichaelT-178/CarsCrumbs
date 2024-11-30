@@ -42,8 +42,12 @@
     <transition name="fade">
       <div v-if="showSideView" class="overlay" @click="closeSideView"></div>
     </transition>
-    <transition name="slide">
-      <SideView v-if="showSideView" :ItemName="selectedItem.Name" @close="closeSideView" />
+
+    <transition name="slide" appear>
+      <SideView 
+        v-if="showSideView" 
+        :item="selectedItem"
+        @close="closeSideView" />
     </transition>
 
     <div class="bottom-section">
@@ -55,11 +59,12 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import AllData from "../assets/test_menu/MenuItems.json";
 import TagData from "../assets/test_menu/Tags.json";
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
+import { folderRealOrTest } from '../data.config';
 
+const menu = ref([]);
 const tagsData = TagData["Tags"];
 const selectedTag = ref('No Filter');
 const searchQuery = ref('');
@@ -67,7 +72,7 @@ const showSideView = ref(false);
 const selectedItem = ref(null);
 
 const filteredItems = computed(() => {
-  let items = AllData;
+  let items = menu.value;
 
   if (selectedTag.value !== 'No Filter') {
     items = Object.fromEntries(
@@ -111,7 +116,18 @@ watch(selectedTag, (newTag) => {
   window.location.hash = hash;
 });
 
+const loadMenuData = async () => {
+  try {
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    menu.value = Object.values(MenuData.default);
+  } catch (error) {
+    console.error("Error loading menu data:", error);
+  }
+};
+
 onMounted(() => {
+  loadMenuData();
+  
   const hash = window.location.hash.replace('#', '');
 
   if (hash) {
@@ -238,22 +254,15 @@ onMounted(() => {
   opacity: 1;
 }
 
-.slide-enter-active, .slide-leave-active {
-  transition: transform 0.2s ease;
+.slide-enter-active {
+  transition: all 0.3s ease-out;
 }
 
-.slide-enter-from {
-  transform: translateX(100%);
+.slide-leave-active {
+  transition: all 0.8s;
 }
 
-.slide-enter-to {
-  transform: translateX(0);
-}
-
-.slide-leave-from {
-  transform: translateX(0);
-}
-
+.slide-enter-from,
 .slide-leave-to {
   transform: translateX(100%);
 }
