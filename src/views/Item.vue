@@ -82,7 +82,7 @@ const updateMenuItem = () => {
   menuItem.value = jsonData.value[itemName];
 
   if (menuItem.value) {
-    pic.value = new URL(`../assets/test_menu/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
+    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
     findRelatedItems(menuItem.value);
   }
 };

@@ -22,6 +22,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { folderRealOrTest } from "../data.config";
 
 const props = defineProps({
   item: {
@@ -34,7 +35,7 @@ const props = defineProps({
   }
 });
 
-const pic = computed(() => new URL(`../assets/test_menu/pics/${props.item.Picture}`, import.meta.url).href);
+const pic = computed(() => new URL(`../assets/${folderRealOrTest}/pics/${props.item.Picture}`, import.meta.url).href);
 const isHovered = ref(false);
 const isSmallScreen = ref(window.innerWidth < 650);
 

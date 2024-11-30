@@ -12,6 +12,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { folderRealOrTest } from "../data.config";
 
 const props = defineProps({
   item: {
@@ -33,7 +34,7 @@ const router = useRouter();
 const pic = ref('');
 
 const updatePic = () => {
-  pic.value = new URL(`../assets/test_menu/pics/${props.item.Images[0]}`, import.meta.url).href;
+  pic.value = new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
 };
 
 updatePic();

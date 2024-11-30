@@ -59,13 +59,12 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import TagData from "../assets/test_menu/Tags.json";
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 import { folderRealOrTest } from '../data.config';
 
 const menu = ref([]);
-const tagsData = TagData["Tags"];
+const tagsData = ref([])
 const selectedTag = ref('No Filter');
 const searchQuery = ref('');
 const showSideView = ref(false);
@@ -120,6 +119,9 @@ const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
     menu.value = Object.values(MenuData.default);
+
+    const TagData = await import(`../assets/${folderRealOrTest}/Tags.json`);
+    tagsData.value = Object.values(TagData.default.Tags);
   } catch (error) {
     console.error("Error loading menu data:", error);
   }

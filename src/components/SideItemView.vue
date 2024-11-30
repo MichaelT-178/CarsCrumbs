@@ -52,6 +52,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useCartStore } from '../stores/cart.js';
+import { folderRealOrTest } from "../data.config";
 
 const cart = useCartStore();
 
@@ -83,7 +84,7 @@ const handleKeydown = (event) => {
 const updateMenuItem = () => {
   if (props.item) {
     menuItem.value = props.item;
-    pic.value = new URL(`../assets/test_menu/pics/${props.item.Images[0]}`, import.meta.url).href;
+    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
   }
 };
 

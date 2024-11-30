@@ -18,14 +18,13 @@
 
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Header from "../components/Header.vue";
 import ResultCard from "../components/ResultCard.vue";
 import ShrugGuy from "../assets/other/Shrug.png";
-import MenuItems from "../assets/test_menu/MenuItems.json";
 
-const jsonData = ref(MenuItems);
+const jsonData = ref([]);
 
 const route = useRoute();
 const searchQuery = ref(route.query.search_query || '');
@@ -48,6 +47,19 @@ const filteredItems = computed(() => {
 
 watch(() => route.query.search_query, (newQuery) => {
   searchQuery.value = newQuery;
+});
+
+const loadMenuData = async () => {
+  try {
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    menu.value = Object.values(MenuData.default);
+  } catch (error) {
+    console.error("Error loading menu data:", error);
+  }
+};
+
+onMounted(() => {
+  loadMenuData();
 });
 
 </script>
