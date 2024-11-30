@@ -106,6 +106,9 @@
 # Sort the files like this 
 
 - assets/
+    - Home/ 
+        - HomeCookies.png
+        - HomePage.json
     - Other/
         - WordPressCircle.png
         - Shrug.png
@@ -128,11 +131,7 @@
         - crumbs-logo.png (rename: yellow-square-logo.png)
         - Venmo.png
         - purple-logo.png
-        - crumbs-logo.png
         - GrayVenmo.png
-    - Home/ 
-        - HomeCookies.png
-        - HomePage.json
 
         
 

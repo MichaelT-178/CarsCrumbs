@@ -72,7 +72,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import logo from "../assets/purple-logo.png";
+import logo from "../assets/logos/purple-logo.png";
 import Dropdown from "../components/DropdownMenu.vue";
 import { useCartStore } from "../stores/cart.js";
 
