@@ -106,11 +106,18 @@
 # Sort the files like this 
 
 - assets/
-    - test_menu/
+    - Other/
+        - WordPressCircle.png
+        - Shrug.png
+        - CarlyPics/
+            - Carly1.jpg
+            - Carly2.jpg
+            - Carly3.jpg
+    - real_menu/
         - pics/
         - MenuItems.json
         - Tags.json
-    - real_menu/
+    - test_menu/
         - pics/
         - MenuItems.json
         - Tags.json
@@ -126,13 +133,7 @@
     - Home/ 
         - HomeCookies.png
         - HomePage.json
-    - Other/
-        - WordPressCircle.png
-        - Shrug.png
-        - CarlyPics/
-            - Carly1.jpg
-            - Carly2.jpg
-            - Carly3.jpg
+
         
 
 

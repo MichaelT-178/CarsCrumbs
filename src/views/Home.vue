@@ -26,8 +26,8 @@
 
 <script setup>
 import { ref } from "vue";
-import HomeCookies from "../assets/HomeCookies.png";
-import MenuData from "../assets/menu_items/HomePage.json";
+import MenuData from "../assets/home/HomePage.json";
+import HomeCookies from "../assets/home/HomeCookies.png";
 import HomeMenuItem from "../components/HomeMenuItem.vue";
 import CrumbsFooter from "../components/Footer.vue";
 
