@@ -18,7 +18,7 @@
       >
         close
       </span>
-      <span v-else class="shortcut-text">[Option+S]</span>
+      <span v-else class="shortcut-text"></span>
 
       <Dropdown
         :query="searchQuery"
@@ -28,7 +28,45 @@
       />
 
     </div>
-    <span class="cool-text">cool</span>
+
+    <div class="profile-section">
+
+      <div class="profile-icons">
+
+        <div
+          class="cart-profile-group"
+          @mouseover="showCartHighlight = true"
+          @mouseleave="showCartHighlight = false"
+        >
+
+        <div class="cart-profile-inner-container">
+          <span class="material-symbols-outlined profile-cart-icon">shopping_cart</span>
+          <p class="profile-section-text">${{ cart.getTotal() }}.00</p>
+          <span v-if="showCartHighlight" class="material-symbols-outlined profile-down-arrow-icon">
+            keyboard_arrow_up
+          </span>
+          <span v-else class="material-symbols-outlined profile-down-arrow-icon">
+            keyboard_arrow_down
+          </span>
+        </div>
+        
+        <DropdownCart :visible="showCartHighlight" />
+
+
+      </div>
+
+      <section 
+        class="profile-person-group" 
+        @mouseover="showPersonHighlight = true" 
+        @mouseleave="showPersonHighlight = false"
+      >
+        <span class="material-symbols-outlined profile-person-icon">person</span>
+
+        <DropdownProfile :visible="showPersonHighlight" />
+      </section>
+    </div>
+  </div>
+
   </div>
 
   <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
@@ -73,12 +111,17 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import logo from "../assets/logos/purple-logo.png";
-import Dropdown from "../components/DropdownMenu.vue";
+import Dropdown from "./DropdownMenu.vue";
 import { useCartStore } from "../stores/cart.js";
+import DropdownCart from './DropdownCart.vue';
+import DropdownProfile from './DropdownProfile.vue';
 
 const cart = useCartStore();
 
 const router = useRouter();
+
+const showCartHighlight = ref(false);
+const showPersonHighlight = ref(false);
 
 const searchQuery = ref('');
 const showDropdown = ref(false);
@@ -166,7 +209,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 0 0 20px;
   box-sizing: border-box;
   gap: 10px;
 }
@@ -174,7 +217,7 @@ html, body {
 .search-bar-container {
   display: flex;
   align-items: center;
-  margin-left: 15px;
+  margin-left: 15px; /* Increase this number to push search-bar right */
   background-color: #3E0054;
   border-radius: 6px;
   padding: 2px 12px;
@@ -213,12 +256,6 @@ html, body {
 .search-icon {
   font-size: 18px;
   color: #B0B0B0;
-}
-
-.cool-text {
-  font-size: 16px;
-  color: white;
-  text-transform: uppercase;
 }
 
 .navbar {
@@ -260,6 +297,7 @@ html, body {
 
 .logo {
   height: 80px;
+  margin-left: 30px; /* Increase this number to push the logo right */
 }
 
 .menu ul {
@@ -279,8 +317,94 @@ html, body {
   align-items: center;
 }
 
-.search-bar {
+.cart-profile-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 100%;
   position: relative;
+  cursor: pointer;
+  gap: 5px;
+  /* background-color: red; */
+}
+
+.cart-profile-inner-container {
+  /* background-color: magenta; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.cart-profile-inner-container:hover .profile-cart-icon,
+.cart-profile-inner-container:hover .profile-section-text,
+.cart-profile-inner-container:hover .profile-down-arrow-icon {
+  color: #FFFF7A;
+}
+
+
+.profile-person-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* background-color: blue; */
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  color: white;
+  border-radius: 0 0px 0px 0;
+  padding-right: 20px; /* Increase this number to push left */
+}
+
+.profile-person-group:hover {
+  /* background-color: pink; */
+  cursor: pointer;
+}
+
+.profile-section {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.profile-section-text {
+  font-size: 17px;
+  color: white;
+  margin: 0;
+  white-space: nowrap;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 900px;
+}
+
+.profile-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-person-icon {
+  font-size: 29px;
+  /* color: #cfcece; */
+  color: white;
+  margin-left: 2px;
+  margin-right: 3px;
+}
+
+.profile-person-icon:hover {
+  color: #FFFF7A;
+}
+
+.profile-down-arrow-icon {
+  color: white;
+  font-size: 19px;
+  margin-left: -4px;
+}
+
+.profile-cart-icon {
+  color: white;
+  font-size: 20px;
+  margin-right: -0.5px;
 }
 
 .search-bar input {
@@ -296,29 +420,6 @@ html, body {
   transition: width 0.3s ease-in-out;
 }
 
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  overflow-y: auto;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  z-index: 1001;
-  width: 290px;
-}
-
-.result {
-  padding: 11px;
-  cursor: pointer;
-  background: lightskyblue;
-  color: black;
-  border-bottom: 1px solid #3C3B3B;
-  font-size: 17.5px;
-}
-
 .result:last-child {
   border-bottom: none;
 }
@@ -327,12 +428,8 @@ html, body {
   background-color: #FFFFA6;
 }
 
-.result span.result-text {
-  margin-left: 10px;
-}
-
 .tabs {
-  margin-right: 0px;
+  margin-right: 30px; /* Increase this number to push to the left */
 }
 
 .tabs ul {
@@ -354,7 +451,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-family: "Josefin Sans", sans-serif;
   font-size: 20px;
   letter-spacing: 0px;
@@ -411,7 +507,7 @@ html, body {
 .cart-badge {
   position: absolute;
   top: 10px;
-  right: 20px;
+  right: 50px;
   background-color: #E50000;
   color: white;
   border-radius: 50%;
@@ -423,10 +519,6 @@ html, body {
   min-width: 22px; 
   height: 22px;
   font-weight: bold;
-}
-
-.cart-badge.hidden {
-  display: none;
 }
 
 </style>

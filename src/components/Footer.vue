@@ -31,11 +31,14 @@
         <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
           <img src="/tiktok.svg" alt="Tiktok" />
         </a>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+          <img src="/linkedin.svg" alt="Linkedin" />
+        </a>
       </div>
       <router-link to="/ContactUs" class="contact-button">Contact Us</router-link>
     </div>
     <div class="footer-bottom">
-      <p>© 2024 Cars Crumbs | Developed by <a :href="linkedin" target="_blank" class="linkedin-link">Michael Totaro</a></p>
+      <p>© 2024 Cars Crumbs | Developed by <a :href="linkedin" target="_blank" class="bottom-linkedin-link">Michael Totaro</a></p>
     </div>
   </footer>
 </template>
@@ -108,7 +111,7 @@ const linkedin = "https://www.linkedin.com/in/michael-totaro-72857722a/";
   font-size: 17px;
 }
 
-.linkedin-link {
+.bottom-linkedin-link {
   color: #0000D8;
   text-decoration: none;
 }
@@ -120,7 +123,7 @@ const linkedin = "https://www.linkedin.com/in/michael-totaro-72857722a/";
   /* font-family: "Josefin Sans", sans-serif; */
 }
 
-.linkedin-link:hover {
+.bottom-linkedin-link:hover {
   color: darkblue;
   text-decoration: underline;
 }

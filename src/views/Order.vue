@@ -295,7 +295,6 @@ onMounted(() => {
   .filter-container {
     margin-right: 0;
     justify-content: center;
-    width: 100%;
     display: flex;
   }
 

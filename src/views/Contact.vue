@@ -101,8 +101,8 @@
 			</a>
 
 			<!-- LinkedIn -->
-			<a href="https://tiktok.com" target="_blank" class="social-button tiktok">
-				<img src="/tiktok.svg" class="social-icon"/>
+			<a href="https://linkedin.com" target="_blank" class="social-button linkedin">
+				<img src="/linkedin.svg" class="social-icon"/>
 			</a>
 			
 		  </div>
@@ -393,6 +393,10 @@ button.clicked {
 .social-button.tiktok {
 	background-color: black;
 }
+
+.social-button.linkedin {
+	background-color: #0a66c2;
+}
   
 .social-icon {
 	width: 30px;
@@ -403,6 +407,11 @@ button.clicked {
 .social-button.tiktok .social-icon {
   width: 32px;
   height: 32px;
+}
+
+.social-button.linkedin .social-icon {
+  width: 26.5px;
+  height: 26.5px;
 }
   
 .location-section p {
