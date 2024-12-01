@@ -2,28 +2,38 @@
     "Tags": [
         {
             "id": 1,
-            "emoji": "",
-            "name": ""
+            "emoji": "🥧",
+            "name": "Baked Good"
         },
         {
             "id": 2,
-            "emoji": "",
-            "name": ""
+            "emoji": "🍪",
+            "name": "Cookie"
         },
         {
             "id": 3,
-            "emoji": "",
-            "name": ""
+            "emoji": "🥖",
+            "name": "Bread"
         },
         {
             "id": 4,
-            "emoji": "",
-            "name": ""
+            "emoji": "🍩",
+            "name": "Donut"
         },
         {
             "id": 5,
-            "emoji": "",
-            "name": ""
+            "emoji": "🥯",
+            "name": "Bagel"
+        },
+        {
+            "id": 6,
+            "emoji": "🎂",
+            "name": "Cake"
+        },
+        {
+            "id": 7,
+            "emoji": "🍭",
+            "name": "Sweets"
         }
     ]
 }
