@@ -5,7 +5,7 @@
     <img :src="pic" class="item-pic" />
 
     <div class="item-info">
-      <p class="title">{{ menuItem.DisplayName }} 😋</p>
+      <p class="title">{{ menuItem.DisplayName }}</p>
       <p class="price">Price: {{ menuItem.DisplayPrice }}</p>
 
       <label class="quantity-label">Quantity:</label>
@@ -234,14 +234,16 @@ watch(() => route.params.ItemName, () => {
   border-radius: 50px;
   background-color: #f0f0f0;
   cursor: pointer;
+  font-family: "Helvetica";
+  font-size: 15px;
   transition: background-color 0.3s;
   border: 1px solid #ccc;
 }
 
 .radio-input:checked + .custom-radio {
-  background-color: #FFFC7C;
+  background-color: #620086;
   color: white;
-  border: 1px solid black;
+  border: 1.5px solid black;
 }
 
 button {

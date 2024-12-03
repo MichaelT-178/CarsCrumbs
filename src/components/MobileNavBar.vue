@@ -28,39 +28,41 @@
     </div>
 
     <!-- Sidebar -->
-    <div v-if="isSidebarOpen" class="sidebar">
-      <div class="sidebar-header">
-        <h3>Menu</h3>
-        <span class="material-icons close-icon" @click="toggleSidebar">close</span>
+    <transition name="slide">
+      <div v-if="isSidebarOpen" class="sidebar">
+        <div class="sidebar-header">
+          <h3>Menu</h3>
+          <span class="material-icons close-icon" @click="toggleSidebar">close</span>
+        </div>
+        <ul>
+          <li class="tab" @click="closeSidebar">
+            <router-link to="/">
+              <span class="material-symbols-outlined">home</span><span class="tab-text">Home</span>
+            </router-link>
+            <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+          </li>
+          <li class="tab" @click="closeSidebar">
+            <router-link to="/Order">
+              <span class="material-symbols-outlined">cookie</span><span class="tab-text">Order</span>
+            </router-link>
+            <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+          </li>
+          <li class="tab" @click="closeSidebar">
+            <router-link to="/About">
+              <span class="material-symbols-outlined">person</span><span class="tab-text">About</span>
+            </router-link>
+            <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+          </li>
+          <li class="tab" @click="closeSidebar">
+            <router-link to="/ContactUs">
+              <span class="material-symbols-outlined">mail</span><span class="tab-text">Contact Us</span>
+            </router-link>
+            <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
+          </li>
+        </ul>
+        <p class="logo-tag">@CarsCrumbs</p>
       </div>
-      <ul>
-        <li class="tab" @click="closeSidebar">
-          <router-link to="/">
-            <span class="material-symbols-outlined">home</span><span class="tab-text">Home</span>
-          </router-link>
-          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
-        </li>
-        <li class="tab" @click="closeSidebar">
-          <router-link to="/Order">
-            <span class="material-symbols-outlined">cookie</span><span class="tab-text">Order</span>
-          </router-link>
-          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
-        </li>
-        <li class="tab" @click="closeSidebar">
-          <router-link to="/About">
-            <span class="material-symbols-outlined">person</span><span class="tab-text">About</span>
-          </router-link>
-          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
-        </li>
-        <li class="tab" @click="closeSidebar">
-          <router-link to="/ContactUs">
-            <span class="material-symbols-outlined">mail</span><span class="tab-text">Contact Us</span>
-          </router-link>
-          <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
-        </li>
-      </ul>
-      <p class="logo-tag">@CarsCrumbs</p>
-    </div>
+    </transition>
 
     <!-- Dropdown search results -->
     <ul v-if="showDropdown && filteredResults.length" class="dropdown" @mousedown.prevent>
@@ -91,7 +93,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import logoTwo from "../assets/logos/yellow-square-logo.png";
+import logoTwo from "../assets/logos/purple-logo.png";
 import { folderRealOrTest } from '../data.config.js';
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
@@ -125,6 +127,7 @@ const filterResults = () => {
 };
 
 const toggleSidebar = () => {
+  hideDropdown();
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 
@@ -238,11 +241,11 @@ html, body {
 }
 
 .logo {
-  height: 40px;
-  width: 150px;
+  height: auto;
+  width: 100px;
   margin: 0 auto;
   display: block;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   border-radius: 5px;
   margin-top: 3px;
 }
@@ -289,7 +292,7 @@ html, body {
   align-items: center;
   min-width: 20px;
   height: 20px;
-  z-index: 1001;
+  z-index: 1000;
 }
 
 .cart-badge.hidden {
@@ -310,7 +313,7 @@ html, body {
   display: flex;
   justify-content: center;
   width: 75%;
-  padding-bottom: 3px;
+  padding-bottom: 6px;
 }
 
 .search-bar input {
@@ -361,7 +364,7 @@ html, body {
   left: 0;
   width: 310px;
   height: 100%;
-  background-color: lightskyblue;
+  background-color: #F2F2F2;
   color: white;
   padding: 0;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
@@ -372,7 +375,7 @@ html, body {
 }
 
 .sidebar-header {
-  background-color: purple;
+  background-color: #620086;
   padding: 15px 20px; /* First is vertical, second is horizontal */
   display: flex;
   align-items: center;
@@ -403,11 +406,24 @@ html, body {
 
 .sidebar .tab {
   padding: 15px 20px;
-  background-color: lightskyblue;
+  background-color: #F2F2F2;
   transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #2b2b2b; /* black */
+}
+
+.tab-text {
+  position: relative;
+  top: -4.25px;
+  margin: 0;
+  color: #242424; /* black */
+}
+
+.sidebar .tab span.material-symbols-outlined {
+  font-size: 24px;
+  margin-right: 12px;
+  color: #242424; /* black */
 }
 
 #arrow {
@@ -418,29 +434,12 @@ html, body {
   cursor: pointer;
 }
 
-.tab-text {
-  position: relative;
-  top: -4.25px;
-  margin: 0;
-  color: #FFFFA6;
-}
-
-.sidebar .tab span.material-symbols-outlined {
-  font-size: 24px;
-  margin-right: 12px;
-  color: #FFFFA6;
-}
-
 .sidebar .tab:hover span.material-symbols-outlined {
-  color: white;
+  color: purple;
 }
 
 .sidebar .tab:hover span.tab-text {
-  color: white;
-}
-
-.sidebar .tab:hover {
-  background-color: darkblue;
+  color: purple
 }
 
 .sidebar .tab a {
@@ -451,12 +450,34 @@ html, body {
   width: 100%;
 }
 
+/* Slide Transition */
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.3s ease-out;
+}
+
+.slide-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-enter-to {
+  transform: translateX(0);
+}
+
+.slide-leave-from {
+  transform: translateX(0);
+}
+
+.slide-leave-to {
+  transform: translateX(-100%);
+}
+
 .logo-tag {
   font-size: 22px;
   text-align: center;
   padding: 5px 0;
-  color: white;
+  color: #2b2b2b; /* Black */
   margin-top: auto;
+  margin-bottom: 15px;
   width: 100%;
 }
 

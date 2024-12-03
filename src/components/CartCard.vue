@@ -174,4 +174,28 @@ const deleteItem = () => {
   color: white;
 }
 
+@media (max-width: 450px) {
+  .item-card {
+    max-width: 330px;
+    width: 330px;
+  }
+
+  .item-image {
+    width: 115px;
+    height: 115px;
+  }
+
+  .item-content {
+    padding: 12px 0 0px 12px; /* Padding top, bottom, and left */
+  }
+
+  .item-name {
+    font-size: 19px;
+  }
+  
+  .item-description {
+    font-size: 14px;
+  }
+}
+
 </style>
