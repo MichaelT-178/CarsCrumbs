@@ -111,8 +111,7 @@ onUnmounted(() => {
 
 .empty-cart {
   text-align: center;
-  padding: 50px;
-  margin-top: -50px;
+  /* margin-top: 50px; */
   flex: 1; 
 }
 
@@ -396,5 +395,6 @@ onUnmounted(() => {
     width: 300px;
   }
 }
+
 
 </style>

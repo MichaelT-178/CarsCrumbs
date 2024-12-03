@@ -246,4 +246,14 @@ onMounted(() => {
 
 }
 
+@media (max-width: 420px) {
+  .nav-btn.left {
+    left: 0px;
+  }
+  
+  .nav-btn.right {
+    right: 0px;
+  }
+}
+
 </style>

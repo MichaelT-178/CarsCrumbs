@@ -198,4 +198,28 @@ const deleteItem = () => {
   }
 }
 
+@media (max-width: 340px) {
+  .item-card {
+    max-width: 300px;
+    width: 300px;
+  }
+
+  .item-image {
+    width: 115px;
+    height: 115px;
+  }
+
+  .item-content {
+    padding: 12px 0 0px 12px;
+  }
+
+  .item-name {
+    font-size: 19px;
+  }
+  
+  .item-description {
+    font-size: 14px;
+  }
+}
+
 </style>

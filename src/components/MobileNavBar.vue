@@ -439,7 +439,7 @@ html, body {
 }
 
 .sidebar .tab:hover span.tab-text {
-  color: purple
+  color: purple;
 }
 
 .sidebar .tab a {

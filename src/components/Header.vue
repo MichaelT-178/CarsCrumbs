@@ -60,8 +60,21 @@ const props = defineProps({
   text-align: center;
   font-weight: 700;
   margin-top: 0;
-  padding-bottom: 20px; /* Padding below About */
-  margin-top: -15px; /* Moves the About title up  */
+  padding-bottom: 20px;
+  margin-top: -15px;
+}
+
+@media (max-width: 420px) {
+  .circle-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 275px;
+    min-width: 230px;
+    margin: 20px auto;
+  }
 }
 
 </style>

@@ -235,4 +235,11 @@ h2 {
 .slide-leave-to {
   transform: translateX(100%);
 }
+
+@media (max-width: 400px) {
+  .side-view-wrapper {
+    width: 350px;
+  }
+}
+
 </style>

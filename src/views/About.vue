@@ -141,4 +141,25 @@ const openImageView = (imageIndex) => {
   }
 }
 
+@media (max-width: 452px) {
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .image-container img {
+    max-width: 48.5%;
+    flex: 0 0 48.5%;
+    height: auto;
+  }
+}
+
+@media (max-width: 343px) {
+  .image-container img {
+    max-width: 47.5%;
+  }
+}
+
+
 </style>
