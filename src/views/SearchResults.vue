@@ -3,7 +3,24 @@
     <div>
       <Header :titleText="resultText" />
       <div v-if="filteredItems.length > 0" class="results-container">
-        <ResultCard v-for="(item, index) in filteredItems" :key="index" :item="item" />
+        <div
+          v-for="(item, index) in filteredItems"
+          :key="index"
+          class="menu-card"
+          @click="navigateToRoute(item.Route)"
+        >
+          <img
+            :src="getItemImage(item.Images[0])"
+            alt="Menu item image"
+            class="menu-image"
+          />
+          <div class="item-details">
+            <h3 class="item-name">{{ item.DisplayName }}</h3>
+            <p class="item-price">
+              {{ item.DisplayPrice }}
+            </p>
+          </div>
+        </div>
       </div>
       <div v-else class="no-results">
         <img :src="ShrugGuy" alt="No Results" />
@@ -18,37 +35,40 @@
 
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Header from "../components/Header.vue";
-import ResultCard from "../components/ResultCard.vue";
 import ShrugGuy from "../assets/other/Shrug.png";
 import { folderRealOrTest } from "../data.config";
 
 const jsonData = ref([]);
-
 const route = useRoute();
-const searchQuery = ref(route.query.search_query || '');
+const router = useRouter();
+const searchQuery = ref(route.query.search_query || "");
 
-const resultText = computed(() => `Search Results for "${searchQuery.value || ''}"`);
+const resultText = computed(() => `Search Results for "${searchQuery.value || ""}"`);
 
 const filteredItems = computed(() => {
-  if (!searchQuery.value) return [];
+  if (!searchQuery.value) {
+    return [];
+  }
 
   const query = searchQuery.value.toLowerCase();
 
-  return Object.values(jsonData.value).filter(item => 
+  return Object.values(jsonData.value).filter(
+    (item) =>
       item.DisplayName.toLowerCase().includes(query) ||
-      item.DisplayName.toLowerCase().includes(query.slice(0, -1)) || //Remove possible s at the end
-      item.Alternative.toLowerCase().includes(query.slice(0, -1)) || //Remove possible s at the end
-      item.Tags.some(tag => tag.toLowerCase().includes(query)) ||
-      item.Tags.some(tag => tag.toLowerCase().includes(query.slice(0, -1))) //Remove possible s at the end
+      item.DisplayName.toLowerCase().includes(query.slice(0, -1)) || // Remove possible "s" at the end
+      item.Alternative.toLowerCase().includes(query.slice(0, -1)) || // Remove possible "s" at the end
+      item.Tags.some((tag) => tag.toLowerCase().includes(query)) ||
+      item.Tags.some((tag) => tag.toLowerCase().includes(query.slice(0, -1))) // Remove possible "s" at the end
   );
 });
 
 watch(() => route.query.search_query, (newQuery) => {
-  searchQuery.value = newQuery;
-});
+    searchQuery.value = newQuery;
+  }
+);
 
 const loadMenuData = async () => {
   try {
@@ -56,6 +76,15 @@ const loadMenuData = async () => {
     jsonData.value = Object.values(MenuData.default);
   } catch (error) {
     console.error("Error loading menu data:", error);
+  }
+};
+
+const getItemImage = (imageName) =>
+  new URL(`../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+
+const navigateToRoute = (route) => {
+  if (route) {
+    router.push(route);
   }
 };
 
@@ -67,7 +96,6 @@ onMounted(() => {
 
 
 <style scoped>
-
 .flex-container {
   display: flex;
   flex-direction: column;
@@ -86,6 +114,45 @@ onMounted(() => {
   margin: 0 auto;
   margin-top: -15px;
   margin-bottom: 25px;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  padding: 16px;
+  width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.menu-card:hover {
+  border: 2px solid blue;
+}
+
+.menu-image {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+}
+
+.item-details {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.item-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.item-price {
+  color: #9e9e9e;
+  font-size: 16px;
 }
 
 .no-results {
@@ -109,16 +176,16 @@ onMounted(() => {
 }
 
 .bottom-section {
-	background-color: #F3E7A4;
-	text-align: center;
-	height: 80px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: #f3e7a4;
+  text-align: center;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bottom-section p {
-	font-size: 17px;
+  font-size: 17px;
 }
 
 @media (max-width: 600px) {
@@ -134,4 +201,3 @@ onMounted(() => {
 }
 
 </style>
-

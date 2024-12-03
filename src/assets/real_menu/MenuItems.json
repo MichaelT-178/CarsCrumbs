@@ -1,24 +1,24 @@
 {
-    "Apple_Pie": {
-        "DisplayName": "Apple Pie",
-        "Name": "Apple_Pie",
-        "Emoji": "🍎",
-        "DisplayPrice": "$3.00 - $10.00",
+    "Ginger_Molasses_Cookies": {
+        "DisplayName": "Ginger Molasses Cookies",
+        "Name": "Ginger_Molasses_Cookies",
+        "Emoji": "🍯",
+        "DisplayPrice": "$12.00 - $24.00",
         "Images": [
-            "ApplePie/ApplePie.jpg"
+            "GingerMolasses/GingerMolasses.jpg"
         ],
-        "Route": "/Item/Apple_Pie",
-        "Tags": ["🥧 Baked Good"],
+        "Route": "/Item/Ginger_Molasses_Cookies",
+        "Tags": ["🍪 Cookie"],
         "Alternative": "",
-        "Instagram": false,
+        "Instagram": true,
         "Options": [
             {
-                "price": 3.0,
-                "quantity": "One slice"
+                "price": 12.0,
+                "quantity": "Six cookies"
             },
             {
-                "price": 10.0,
-                "quantity": "One pie"
+                "price": 24.0,
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -91,27 +91,31 @@
             }
         ]
     },
-    "Cake_Pops": {
-        "DisplayName": "Cake Pops",
-        "Name": "Cake_Pops",
-        "Emoji": "🍰",
-        "DisplayPrice": "$10.00",
+    "Cinnamon_Rolls": {
+        "DisplayName": "Cinnamon Rolls",
+        "Name": "Cinnamon_Rolls",
+        "Emoji": "🍂",
+        "DisplayPrice": "$5.00 - $30.00",
         "Images": [
-            "CakePops/CakePop1.jpg",
-            "CakePops/CakePop2.jpg"
+            "CinnamonRolls/CinnamonRolls1.jpg",
+            "CinnamonRolls/CinnamonRolls2.jpg"
         ],
-        "Route": "/Item/Cake_Pops",
-        "Tags": ["🎂 Cake", "🍭 Sweets"],
+        "Route": "/Item/Cinnamon_Rolls",
+        "Tags": ["🥧 Baked Good"],
         "Alternative": "",
-        "Instagram": false,
+        "Instagram": true,
         "Options": [
             {
-                "price": 10.0,
-                "quantity": "Six chocolate"
+                "price": 5.0,
+                "quantity": "Six rolls"
             },
             {
-                "price": 10.0,
-                "quantity": "Six vanilla"
+                "price": 20.0,
+                "quantity": "Six rolls"
+            },
+            {
+                "price": 30.0,
+                "quantity": "Twelve rolls"
             }
         ]
     },
@@ -162,53 +166,6 @@
             }
         ]
     },
-    "Cinnamon_Rolls": {
-        "DisplayName": "Cinnamon Rolls",
-        "Name": "Cinnamon_Rolls",
-        "Emoji": "🍂",
-        "DisplayPrice": "$5.00 - $30.00",
-        "Images": [
-            "CinnamonRolls/CinnamonRolls1.jpg",
-            "CinnamonRolls/CinnamonRolls2.jpg"
-        ],
-        "Route": "/Item/Cinnamon_Rolls",
-        "Tags": ["🥧 Baked Good"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 5.0,
-                "quantity": "Six rolls"
-            },
-            {
-                "price": 20.0,
-                "quantity": "Six rolls"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Twelve rolls"
-            }
-        ]
-    },
-    "French_Bread": {
-        "DisplayName": "French Bread",
-        "Name": "French_Bread",
-        "Emoji": "☁️",
-        "DisplayPrice": "$5.00",
-        "Images": [
-            "FrenchBread/FrenchBread.jpg"
-        ],
-        "Route": "/Item/French_Bread",
-        "Tags": ["🥖 Bread"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 5.0,
-                "quantity": "One Loaf"
-            }
-        ]
-    },
     "Gingerbread_Latte_Cookies": {
         "DisplayName": "Gingerbread Latte Cookies",
         "Name": "Gingerbread_Latte_Cookies",
@@ -232,75 +189,22 @@
             }
         ]
     },
-    "Ginger_Molasses_Cookies": {
-        "DisplayName": "Ginger Molasses Cookies",
-        "Name": "Ginger_Molasses_Cookies",
-        "Emoji": "🍯",
-        "DisplayPrice": "$12.00 - $24.00",
-        "Images": [
-            "GingerMolasses/GingerMolasses.jpg"
-        ],
-        "Route": "/Item/Ginger_Molasses_Cookies",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 12.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 24.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Italian_Bread": {
-        "DisplayName": "Italian Bread",
-        "Name": "Italian_Bread",
+    "French_Bread": {
+        "DisplayName": "French Bread",
+        "Name": "French_Bread",
         "Emoji": "☁️",
-        "DisplayPrice": "$7.00 - $14.00",
+        "DisplayPrice": "$5.00",
         "Images": [
-            "ItalianBread/ItalianBread1.jpg",
-            "ItalianBread/ItalianBread2.jpg",
-            "ItalianBread/ItalianBread3.jpg"
+            "FrenchBread/FrenchBread.jpg"
         ],
-        "Route": "/Item/Italian_Bread",
+        "Route": "/Item/French_Bread",
         "Tags": ["🥖 Bread"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 7.0,
-                "quantity": "One Loaf"
-            },
-            {
-                "price": 14.0,
-                "quantity": "Two Loaves"
-            }
-        ]
-    },
-    "Plain_Bagel": {
-        "DisplayName": "Plain Bagels",
-        "Name": "Plain_Bagel",
-        "Emoji": "🥯",
-        "DisplayPrice": "$20.00 - $30.00",
-        "Images": [
-            "PlainBagel/PlainBagel1.jpg",
-            "PlainBagel/PlainBagel2.jpg"
-        ],
-        "Route": "/Item/Plain_Bagel",
-        "Tags": ["🥯 Bagel", "🥖 Bread"],
         "Alternative": "",
         "Instagram": false,
         "Options": [
             {
-                "price": 20.0,
-                "quantity": "Eight Bagels"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Sixteen Bagels"
+                "price": 5.0,
+                "quantity": "One Loaf"
             }
         ]
     },
@@ -330,6 +234,102 @@
             {
                 "price": 15.00,
                 "quantity": "Twenty Donuts"
+            }
+        ]
+    },
+    "Apple_Pie": {
+        "DisplayName": "Apple Pie",
+        "Name": "Apple_Pie",
+        "Emoji": "🍎",
+        "DisplayPrice": "$3.00 - $10.00",
+        "Images": [
+            "ApplePie/ApplePie.jpg"
+        ],
+        "Route": "/Item/Apple_Pie",
+        "Tags": ["🥧 Baked Good"],
+        "Alternative": "",
+        "Instagram": false,
+        "Options": [
+            {
+                "price": 3.0,
+                "quantity": "One slice"
+            },
+            {
+                "price": 10.0,
+                "quantity": "One pie"
+            }
+        ]
+    },
+    "Cake_Pops": {
+        "DisplayName": "Cake Pops",
+        "Name": "Cake_Pops",
+        "Emoji": "🍰",
+        "DisplayPrice": "$10.00",
+        "Images": [
+            "CakePops/CakePop1.jpg",
+            "CakePops/CakePop2.jpg"
+        ],
+        "Route": "/Item/Cake_Pops",
+        "Tags": ["🎂 Cake", "🍭 Sweets"],
+        "Alternative": "",
+        "Instagram": false,
+        "Options": [
+            {
+                "price": 10.0,
+                "quantity": "Six chocolate"
+            },
+            {
+                "price": 10.0,
+                "quantity": "Six vanilla"
+            }
+        ]
+    },
+    "Plain_Bagel": {
+        "DisplayName": "Plain Bagels",
+        "Name": "Plain_Bagel",
+        "Emoji": "🥯",
+        "DisplayPrice": "$20.00 - $30.00",
+        "Images": [
+            "PlainBagel/PlainBagel1.jpg",
+            "PlainBagel/PlainBagel2.jpg"
+        ],
+        "Route": "/Item/Plain_Bagel",
+        "Tags": ["🥯 Bagel", "🥖 Bread"],
+        "Alternative": "",
+        "Instagram": false,
+        "Options": [
+            {
+                "price": 20.0,
+                "quantity": "Eight Bagels"
+            },
+            {
+                "price": 30.0,
+                "quantity": "Sixteen Bagels"
+            }
+        ]
+    },
+    "Italian_Bread": {
+        "DisplayName": "Italian Bread",
+        "Name": "Italian_Bread",
+        "Emoji": "☁️",
+        "DisplayPrice": "$7.00 - $14.00",
+        "Images": [
+            "ItalianBread/ItalianBread1.jpg",
+            "ItalianBread/ItalianBread2.jpg",
+            "ItalianBread/ItalianBread3.jpg"
+        ],
+        "Route": "/Item/Italian_Bread",
+        "Tags": ["🥖 Bread"],
+        "Alternative": "",
+        "Instagram": true,
+        "Options": [
+            {
+                "price": 7.0,
+                "quantity": "One Loaf"
+            },
+            {
+                "price": 14.0,
+                "quantity": "Two Loaves"
             }
         ]
     },
