@@ -14,11 +14,11 @@
         "Options": [
             {
                 "price": 3.0,
-                "description": "One slice"
+                "quantity": "One slice"
             },
             {
                 "price": 10.0,
-                "description": "One pie"
+                "quantity": "One pie"
             }
         ]
     },
@@ -39,11 +39,11 @@
         "Options": [
             {
                 "price": 8.0,
-                "description": "One Loaf"
+                "quantity": "One Loaf"
             },
             {
                 "price": 16.0,
-                "description": "Two Loaves"
+                "quantity": "Two Loaves"
             }
         ]
     },
@@ -62,7 +62,7 @@
         "Options": [
             {
                 "price": 6.0,
-                "description": "One Loaf"
+                "quantity": "One Loaf"
             }
         ]
     },
@@ -83,11 +83,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -107,11 +107,11 @@
         "Options": [
             {
                 "price": 10.0,
-                "description": "Six chocolate"
+                "quantity": "Six chocolate"
             },
             {
                 "price": 10.0,
-                "description": "Six vanilla"
+                "quantity": "Six vanilla"
             }
         ]
     },
@@ -131,11 +131,11 @@
         "Options": [
             {
                 "price": 10.0,
-                "description": "Twelve Donuts"
+                "quantity": "Twelve Donuts"
             },
             {
                 "price": 20.0,
-                "description": "Twenty-four Donuts"
+                "quantity": "Twenty-four Donuts"
             }
         ]
     },
@@ -154,11 +154,11 @@
         "Options": [
             {
                 "price": 5.0,
-                "description": "50 Berries"
+                "quantity": "50 Berries"
             },
             {
                 "price": 10.0,
-                "description": "100 Berries"
+                "quantity": "100 Berries"
             }
         ]
     },
@@ -178,15 +178,15 @@
         "Options": [
             {
                 "price": 5.0,
-                "description": "Six rolls"
+                "quantity": "Six rolls"
             },
             {
                 "price": 20.0,
-                "description": "Six rolls"
+                "quantity": "Six rolls"
             },
             {
                 "price": 30.0,
-                "description": "Twelve rolls"
+                "quantity": "Twelve rolls"
             }
         ]
     },
@@ -205,7 +205,7 @@
         "Options": [
             {
                 "price": 5.0,
-                "description": "One Loaf"
+                "quantity": "One Loaf"
             }
         ]
     },
@@ -224,11 +224,11 @@
         "Options": [
             {
                 "price": 10.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 20.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -247,11 +247,11 @@
         "Options": [
             {
                 "price": 12.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 24.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -272,11 +272,11 @@
         "Options": [
             {
                 "price": 7.0,
-                "description": "One Loaf"
+                "quantity": "One Loaf"
             },
             {
                 "price": 14.0,
-                "description": "Two Loaves"
+                "quantity": "Two Loaves"
             }
         ]
     },
@@ -296,11 +296,11 @@
         "Options": [
             {
                 "price": 20.0,
-                "description": "Eight Bagels"
+                "quantity": "Eight Bagels"
             },
             {
                 "price": 30.0,
-                "description": "Sixteen Bagels"
+                "quantity": "Sixteen Bagels"
             }
         ]
     },
@@ -321,15 +321,15 @@
         "Options": [
             {
                 "price": 2.00,
-                "description": "One donut"
+                "quantity": "One donut"
             },
             {
                 "price": 8.00,
-                "description": "Twelve donuts"
+                "quantity": "Twelve donuts"
             },
             {
                 "price": 15.00,
-                "description": "Twenty Donuts"
+                "quantity": "Twenty Donuts"
             }
         ]
     },
@@ -348,11 +348,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -372,7 +372,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Cake"
+                "quantity": "One Cake"
             }
         ]
     }

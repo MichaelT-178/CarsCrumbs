@@ -23,3 +23,21 @@ for filename in os.listdir(directory):
             print(f"Resized and saved: {filename}")
 
 print("All images resized and saved successfully.")
+
+# import json
+
+
+# with open("test_menu/MenuItems.json", 'r') as file:
+#     data = json.load(file)
+
+
+
+# print(max(data.keys(), key=len))
+# print(len('Brown_Butter_Chocolate_Chip'))
+    
+
+# Gingerbread_Latte_Cookies
+# 25
+
+# Brown_Butter_Chocolate_Chip
+# 27

@@ -35,8 +35,8 @@
 
         <div
           class="cart-profile-group"
-          @mouseover="showCartHighlight = true"
-          @mouseleave="showCartHighlight = false"
+          @mouseover="toggleCartDropdown(true)"
+          @mouseleave="toggleCartDropdown(false)"
         >
 
         <div class="cart-profile-inner-container">
@@ -50,9 +50,11 @@
           </span>
         </div>
         
-        <DropdownCart :visible="showCartHighlight" />
-
-
+        <DropdownCart 
+          v-model:visible="showCartHighlight"
+          @close="hideDropdown"
+        />
+        
       </div>
 
       <section 
@@ -69,7 +71,11 @@
 
   </div>
 
-  <div v-if="showDropdown" class="overlay" @click="hideDropdown"></div>
+  <div 
+    v-if="showDropdown || showCartOverlay" 
+    class="overlay" 
+    @click="hideDropdown"
+  ></div>
 
   <nav class="navbar">
     <img :src="logo" alt="Logo" class="logo" />
@@ -120,6 +126,9 @@ const cart = useCartStore();
 
 const router = useRouter();
 
+const emit = defineEmits(['update:visible']);
+
+const showCartOverlay = ref(false);
 const showCartHighlight = ref(false);
 const showPersonHighlight = ref(false);
 
@@ -130,8 +139,16 @@ const searchInput = ref(null);
 
 const hideDropdown = () => {
   showDropdown.value = false;
+  showCartOverlay.value = false;
+  showCartHighlight.value = false;
   searchQuery.value = "";
   filteredResults.value = [];
+};
+
+const toggleCartDropdown = (state) => {
+  showCartHighlight.value = state;
+  // showCartOverlay.value = state; UNCOMMENT THIS LINE TO DISPLAY OVERLAY
+  emit('update:visible', state);
 };
 
 const clearSearchField = () => {
@@ -506,8 +523,8 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 10px;
-  right: 50px;
+  top: 12.5px; /* Increase to move down */
+  right: 50.5px; /* Increase to move left */
   background-color: #E50000;
   color: white;
   border-radius: 50%;
@@ -516,8 +533,8 @@ html, body {
   align-items: center;
   padding: 3px 6px;
   font-size: 14px;
-  min-width: 22px; 
-  height: 22px;
+  min-width: 20px; 
+  height: 20px;
   font-weight: bold;
 }
 

@@ -11,7 +11,8 @@ export const useCartStore = defineStore('cart', () => {
     if (storedItems && Array.isArray(storedItems)) {
       items.value = storedItems;
       currentId.value = storedItems.length > 0 
-                        // Convert storedItems to id's and take the max. Then add 1. If empty its 0.
+                      // Convert storedItems array to just ids and take the max id. Then add 1. 
+                      // If storedItems is empty its 0.
                       ? Math.max(...storedItems.map(item => item.id)) + 1 
                       : 0;
     }
@@ -25,10 +26,14 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   function deleteItem(id) {
-    //CSC 434 function ❤️
+    //CSC 434 ass function ❤️🥹🫶
     items.value = items.value.filter(item => item.id !== id);
   }
-  
+
+  function getItems() {
+    return items.value;
+  }  
+
   function getItemCount() {
     return items.value.length;
   }
@@ -46,12 +51,12 @@ export const useCartStore = defineStore('cart', () => {
       bodyContent += `
       <div>
         <strong>Product:</strong> ${item.DisplayName}<br/>
-        <strong>Quantity:</strong> ${item.Description }<br/>
+        <strong>Quantity:</strong> ${item.Quantity }<br/>
         <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
       </div><br/>`;
     });
 
-    // ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
+    // ${item.Quantity ? `<strong>Quantity:</strong> ${item.Quantity}<br/>` : ''}
     
     bodyContent += `<div><strong>Cart:</strong> ${getItemCount()} items<br/><strong>Total:</strong> $${getTotal().toFixed(2)}</div>`;
     
@@ -66,8 +71,8 @@ export const useCartStore = defineStore('cart', () => {
       bodyContent += `
       <div>
         <strong>Product:</strong> ${item.DisplayName}<br/>
-        <strong>Quantity:</strong> ${item.Description }<br/>
-        ${item.Description ? `<strong>Quantity:</strong> ${item.Description}<br/>` : ''}
+        <strong>Quantity:</strong> ${item.Quantity }<br/>
+        ${item.Quantity ? `<strong>Quantity:</strong> ${item.Quantity}<br/>` : ''}
         <strong>Price:</strong> $${item.Cost.toFixed(2)}<br/>
       </div><br/>`;
     });
@@ -89,6 +94,6 @@ export const useCartStore = defineStore('cart', () => {
     localStorage.setItem('cartItems', JSON.stringify(newItems));
   }, { deep: true });
 
-  return { items, addItem, deleteItem, getItemCount, getTotal, getCartDetails, getOrderSummary, resetCart, allItems };
+  return { items, addItem, deleteItem, getItems, getItemCount, getTotal, getCartDetails, getOrderSummary, resetCart, allItems };
 
 });

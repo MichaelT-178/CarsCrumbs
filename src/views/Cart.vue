@@ -22,8 +22,8 @@
           </div>
           
           <div :class="{'item-list': !isMobileScreen, 'item-list-mobile-screen': isMobileScreen}">
-            <ItemCard
-              v-for="(item, index) in cart.items"
+            <CartCard
+              v-for="(item, index) in cart.getItems()"
               :key="index"
               :item="item"
             />
@@ -33,8 +33,8 @@
         <!-- Order Summary for mobile screens  -->
         <div v-if="!isMobileScreen" class="order-summary">
           <h2>Order Summary</h2>
-          <p>Total: ${{ cart.getTotal() }}.00</p>
-          <p>Items: {{ cart.getItemCount() }}</p>
+          <p class="summary-total">Total: ${{ cart.getTotal() }}.00</p>
+          <p class="summary-items">Items: {{ cart.getItemCount() }}</p>
           <router-link to="/Cart/Checkout" class="checkout-button">Checkout</router-link>
           <p class="reset-cart" @click="deleteCart">Reset Cart</p>
           <p class="insta-message">
@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import ItemCard from "../components/ItemCard.vue";
+import CartCard from "../components/CartCard.vue";
 import Header from "../components/Header.vue";
 import CrumbsLogo from "../assets/logos/yellow-square-logo.png";
 import { useCartStore } from '../stores/cart.js';
@@ -279,6 +279,9 @@ onUnmounted(() => {
 .cart-summary {
   font-size: 18px;
   color: black;
+  font-family: "Helvetica";
+  margin-bottom: 5px;
+  margin-top: 2px;
 }
 
 .cart-header-underline {
@@ -295,9 +298,11 @@ onUnmounted(() => {
   margin-bottom: 20px;
 }
 
-.order-summary p {
+.summary-total, 
+.summary-items {
   font-size: 18px;
   margin-bottom: 10px;
+  font-family: "Helvetica";
 }
 
 .reset-cart {
@@ -321,8 +326,8 @@ onUnmounted(() => {
 }
 
 .insta-message {
-  margin-top: -10px;
   color: black;
+  font-size: 18px;
 }
 
 .insta-link {

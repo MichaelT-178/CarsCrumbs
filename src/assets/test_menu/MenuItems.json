@@ -11,11 +11,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -31,11 +31,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -51,11 +51,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -71,11 +71,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -91,11 +91,11 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "Six cookies"
+                "quantity": "Six cookies"
             },
             {
                 "price": 25.0,
-                "description": "Twelve cookies"
+                "quantity": "Twelve cookies"
             }
         ]
     },
@@ -111,7 +111,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Pan"
+                "quantity": "One Pan"
             }
         ]
     },
@@ -127,7 +127,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Pan"
+                "quantity": "One Pan"
             }
         ]
     },
@@ -143,7 +143,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Pan"
+                "quantity": "One Pan"
             }
         ]
     },
@@ -159,7 +159,7 @@
         "Options": [
             {
                 "price": 12.0,
-                "description": "One Loaf"
+                "quantity": "One Loaf"
             }
         ]
     },
@@ -175,11 +175,11 @@
         "Options": [
             {
                 "price": 20.0,
-                "description": "Eight Bagels"
+                "quantity": "Eight Bagels"
             },
             {
                 "price": 30.0,
-                "description": "Sixteen Bagels"
+                "quantity": "Sixteen Bagels"
             }
         ]
     },
@@ -195,11 +195,11 @@
         "Options": [
             {
                 "price": 20.0,
-                "description": "Eight Bagels"
+                "quantity": "Eight Bagels"
             },
             {
                 "price": 30.0,
-                "description": "Sixteen Bagels"
+                "quantity": "Sixteen Bagels"
             }
         ]
     },
@@ -215,11 +215,11 @@
         "Options": [
             {
                 "price": 20.0,
-                "description": "Eight Bagels"
+                "quantity": "Eight Bagels"
             },
             {
                 "price": 30.0,
-                "description": "Sixteen Bagels"
+                "quantity": "Sixteen Bagels"
             }
         ]
     },
@@ -235,7 +235,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Cake"
+                "quantity": "One Cake"
             }
         ]
     },
@@ -251,7 +251,7 @@
         "Options": [
             {
                 "price": 15.0,
-                "description": "One Cake"
+                "quantity": "One Cake"
             }
         ]
     }

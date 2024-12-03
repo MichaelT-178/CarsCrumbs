@@ -4,7 +4,6 @@
       <img :src="pic" :alt="item.DisplayName" class="item-image" />
       <div class="item-info">
         <h2 class="item-name">{{ item.DisplayName }}</h2>
-        <p class="item-quantity">{{ item.Description }}</p>
         <div class="item-tags">
           <span
             v-for="tag in item.Tags"
@@ -18,7 +17,8 @@
             {{ tag }}
           </span>
         </div>
-        <p class="item-price">{{ `$${item.Cost}.00` }}</p>
+        <p class="item-description">{{ item.Quantity }} • <span class="item-cost">${{ item.Cost }}.00</span></p>
+        <!-- <p class="item-price">{{ `$${item.Cost}.00` }}</p> -->
       </div>
     </div>
     <div
@@ -39,7 +39,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useCartStore } from "../stores/cart.js";
-import { folderRealOrTest } from "../data.config";
+import { folderRealOrTest } from "../data.config.js";
 
 const cart = useCartStore();
 
@@ -53,7 +53,7 @@ const props = defineProps({
       Quantity: 1,
       Cost: 0.0,
       Images: [],
-      Description: '',
+      Quantity: '',
       Tags: [],
     }),
   },
@@ -84,24 +84,24 @@ const deleteItem = () => {
   display: flex;
   align-items: center;
   border: 1.5px solid #3D3D3D;
-  max-width: 500px;
+  max-width: 460px;
   border-radius: 8px;
   background-color: white;
   justify-content: space-between;
   position: relative;
-  width: 410px;
+  width: 400px;
   overflow: hidden;
 }
 
 .item-content {
   display: flex;
-  padding: 12px 0 12px 12px; /* Padding top, bottom, and left */
+  padding: 12px 0 8px 12px; /* Padding top, bottom, and left */
   flex-grow: 1;
 }
 
 .item-image {
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -114,12 +114,15 @@ const deleteItem = () => {
 
 .item-name {
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-top: -6px;
+  margin-bottom: 5px;
+  font-size: 22px;
 }
 
-.item-quantity {
+.item-description {
   font-size: 16px;
   margin-bottom: 4px;
+  font-family: "Helvetica";
 }
 
 .item-tags {
@@ -132,7 +135,7 @@ const deleteItem = () => {
   background-color: #f0f0f0;
   border-radius: 50px;
   padding: 4px 12px;
-  margin: 4px 4px;
+  margin: 4px;
   font-size: 13px;
   transition: background-color 0.3s ease, border 0.3s ease;
 }

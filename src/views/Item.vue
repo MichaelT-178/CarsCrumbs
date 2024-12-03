@@ -14,7 +14,7 @@
         <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
           <label class="radio-label">
             <input type="radio" v-model="selectedOption" :value="option" class="radio-input">
-            <span class="custom-radio">{{ option.description }} - ${{ option.price }}</span>
+            <span class="custom-radio">{{ option.quantity }} - ${{ option.price }}</span>
           </label>
         </div>
       </div>
@@ -107,7 +107,7 @@ const addItem = () => {
   if (selectedOption.value) {
     const option = selectedOption.value;
 
-    cart.addItem({ ...menuItem.value, Cost: option.price, Description: option.description });
+    cart.addItem({ ...menuItem.value, Cost: option.price, Quantity: option.quantity });
     alert("Item Successfully Added to Cart!");
   }
 };

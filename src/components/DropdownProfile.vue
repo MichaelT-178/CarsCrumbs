@@ -3,9 +3,7 @@
     class="rectangle-background" 
     :class="{ 'is-visible': visible }"
   >
-    <slot>
-      <p style="color: black; font-size: 24px;">PROFILE</p>
-    </slot>
+    <p style="color: black; font-size: 24px;">PROFILE</p>
   </div>
 </template>
 
