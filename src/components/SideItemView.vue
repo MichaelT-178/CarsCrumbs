@@ -1,9 +1,10 @@
 <template>
-  <div class="side-view-wrapper">
-    <button class="close-btn" @click="handleClose">
-      <span class="material-symbols-outlined">close</span>
-    </button>
-    <transition name="slide">
+  <transition name="slide">
+    <div class="side-view-wrapper">
+      <button class="close-btn" @click="handleClose">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
       <div v-if="contentVisible" class="side-content" @keydown="handleKeydown">
         <h2>{{ menuItem.DisplayName }}</h2>
 
@@ -28,7 +29,11 @@
         <p v-if="menuItem">Price: {{ menuItem.DisplayPrice }}</p>
 
         <div v-if="menuItem.Options">
-          <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
+          <div
+            v-for="(option, index) in menuItem.Options"
+            :key="index"
+            class="option-radio"
+          >
             <label>
               <input type="radio" v-model="selectedOption" :value="option" />
               {{ option.quantity }} - ${{ option.price }}
@@ -44,14 +49,14 @@
           Add to Cart
         </button>
       </div>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { useCartStore } from '../stores/cart.js';
+import { ref, onMounted, onUnmounted } from "vue";
+import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config";
 
 const cart = useCartStore();
@@ -63,20 +68,20 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(["close"]);
 
 const menuItem = ref(null);
-const pic = ref('');
+const pic = ref("");
 const picLoaded = ref(false);
 const selectedOption = ref(null);
 const contentVisible = ref(false);
 
 const handleClose = () => {
-  emit('close');
+  emit("close");
 };
 
 const handleKeydown = (event) => {
-  if (event.key === 'Escape') {
+  if (event.key === "Escape") {
     handleClose();
   }
 };
@@ -84,7 +89,10 @@ const handleKeydown = (event) => {
 const updateMenuItem = () => {
   if (props.item) {
     menuItem.value = props.item;
-    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
+    pic.value = new URL(
+      `../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`,
+      import.meta.url
+    ).href;
   }
 };
 
@@ -102,19 +110,19 @@ const addItem = () => {
       Quantity: option.quantity,
     });
 
-    alert('Item Successfully Added to Cart!');
+    alert("Item Successfully Added to Cart!");
     handleClose();
   }
 };
 
 onMounted(() => {
-  window.addEventListener('keydown', handleKeydown);
+  window.addEventListener("keydown", handleKeydown);
   updateMenuItem();
   contentVisible.value = true;
 });
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown);
+  window.removeEventListener("keydown", handleKeydown);
 });
 
 </script>
@@ -215,4 +223,16 @@ h2 {
   text-decoration: underline;
 }
 
+.slide-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-leave-active {
+  transition: all 0.8s;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
+}
 </style>

@@ -20,11 +20,6 @@
           >
             {{ tag.emoji }} {{ tag.name }}
           </option>
-          <!-- <option value="Cookie">🍪 Cookie</option>
-          <option value="Brownie">🍫 Brownie</option>
-          <option value="Bread">🥖 Bread</option>
-          <option value="Bagel">🥯 Bagel</option>
-          <option value="Cake">🎂 Cake</option> -->
         </select>
       </div>
     </div>
@@ -43,7 +38,7 @@
       <div v-if="showSideView" class="overlay" @click="closeSideView"></div>
     </transition>
 
-    <transition name="slide" appear>
+    <transition name="slide">
       <SideView 
         v-if="showSideView" 
         :item="selectedItem"
@@ -254,19 +249,6 @@ onMounted(() => {
 
 .fade-enter-to, .fade-leave-from {
   opacity: 1;
-}
-
-.slide-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-leave-active {
-  transition: all 0.8s;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  transform: translateX(100%);
 }
 
 @media (max-width: 610px) {

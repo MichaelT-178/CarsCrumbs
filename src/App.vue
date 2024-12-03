@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <transition name="slide">
-      <component :is="isMobile ? MobileNavBar : NavBar" key="nav" />
-    </transition>
+    <component :is="isMobile ? MobileNavBar : NavBar" key="nav" />
     <main :class="mainClass">
       <router-view />
     </main>
