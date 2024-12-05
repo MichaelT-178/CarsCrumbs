@@ -281,7 +281,7 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 23.5px;  /* Increase number to move it down */
+  top: 27.15px;  /* Increase number to move it down */
   right: 16px;  /* Increase number to move it to the left */
   background-color: #E50000;
   color: white;

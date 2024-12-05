@@ -9,7 +9,7 @@
       <h2 class="contact-title">Check Out</h2>
       <p class="dm-info">
         You can also DM us on Instagram
-        <a href="https://www.example.com" class="insta-link" target="_blank">@crumbs</a>
+        <a href="https://ig.me/m/cars.crumbs" class="insta-link" target="_blank">@cars.crumbs</a>
       </p>
       <form @submit.prevent="submitForm">
         <!-- Form fields -->
@@ -95,9 +95,16 @@
     <div class="order-summary">
       <h2 class="summary-title">Order Summary</h2>
       <p>{{ cart.getItemCount() }} Items</p>
+
       <div class="item-list">
-        <p v-html="cart.getOrderSummary()"></p>
+        <div 
+          v-for="item in cart.getItems()" 
+          :key="item.id"
+        >
+          <ItemCard :item="item"></ItemCard>
+        </div>
       </div>
+
       <div class="venmo-container">
         <a v-if="!isButtonClicked" 
            class="gray-venmo-btn"
@@ -133,6 +140,7 @@ import { useCartStore } from "../stores/cart.js";
 import { useRouter } from 'vue-router';
 import { format } from 'date-fns';
 import html2pdf from 'html2pdf.js';
+import ItemCard from '../components/ItemCard.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -437,7 +445,11 @@ button.clicked {
 
 .item-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 5px;
+
+  /* flex-wrap: wrap; */
   gap: 10px;
 }
 

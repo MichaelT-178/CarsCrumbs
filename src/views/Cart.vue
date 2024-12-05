@@ -38,7 +38,7 @@
           <router-link to="/Cart/Checkout" class="checkout-button">Checkout</router-link>
           <p class="reset-cart" @click="deleteCart">Reset Cart</p>
           <p class="insta-message">
-            Dm <a href="https://target.com" class="insta-link" target="_blank">@crumbs</a> on Instagram to discuss alternative payment methods.
+            Dm <a href="https://ig.me/m/cars.crumbs" class="insta-link" target="_blank">@cars.crumbs</a> on Instagram to discuss alternative payment methods.
           </p>
         </div>
 
@@ -395,6 +395,5 @@ onUnmounted(() => {
     width: 300px;
   }
 }
-
 
 </style>

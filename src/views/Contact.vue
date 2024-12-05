@@ -2,12 +2,20 @@
 
 	<Header titleText="Contact Us" />
 
+	<p v-if="isSmallScreen" class="dm-info-header">
+		You can also DM us on Instagram&nbsp; 
+		<a href="https://ig.me/m/cars.crumbs" 
+		class="insta-link" 
+		target="_blank">@cars.crumbs
+		</a>
+	</p>
+
 	<div class="contact-container">
 
 	  <!-- Left side -->
 	  <div class="form-container">
-		<h2 class="contact-title">Contact Us</h2>
-		<p class="dm-info">You can also DM us on Instagram <a href="https://www.example.com" class="insta-link" target="_blank">@crumbs</a></p>
+		<h2 class="contact-title" v-if="!isSmallScreen">Contact Us</h2>
+		<p class="dm-info" v-if="!isSmallScreen">You can also DM us on Instagram <a href="https://ig.me/m/cars.crumbs" class="insta-link" target="_blank">@cars.crumbs</a></p>
 		<form @submit.prevent="submitForm">
 		  <div class="form-group">
 			<label for="name">Name<span style="color: #EF0000;"> *</span></label>
@@ -120,7 +128,7 @@
   
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import Header from '../components/Header.vue';
@@ -135,6 +143,7 @@ const formData = ref({
 
 const isButtonClicked = ref(false);
 const buttonText = ref("Send Message"); 
+const isSmallScreen = ref(window.innerWidth < 550);
 
 emailjs.init('bCe2UFI1L7SfXITtA');
 
@@ -195,6 +204,18 @@ const submitForm = () => {
 		})
 };
 
+const handleResize = () => {
+  isSmallScreen.value = window.innerWidth < 550;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
+
 </script>
 
 
@@ -228,22 +249,25 @@ const submitForm = () => {
 .form-container {
 	width: 500px;
 	height: 685px;
-	border: 1.5px solid purple;
 	border-radius: 10px;
 	padding: 20px;
 	box-sizing: border-box;
+	/* border: 1.5px solid #F2F2F2;
+	background-color: #F2F2F2; */
+	border: 1.5px solid purple;
 	background-color: lightskyblue;
 }
 
 .info-container {
 	width: 500px;
   margin-left: 40px;
-  margin-top: 30px;
-  background-color: lightgreen;
-  border: 1.5px solid purple;
   border-radius: 10px;
   padding: 20px;
   box-sizing: border-box;
+	/* border: 1.5px solid #F2F2F2;
+	background-color: #F2F2F2; */
+	background-color: lightgreen;
+  border: 1.5px solid purple;
 }
 
 .google-map {
@@ -446,27 +470,49 @@ button.clicked {
 
 }
 
-@media (max-width: 575px) {
+@media (max-width: 550px) {
 	.contact-container {
 		justify-content: center;
 		align-items: center;
 		padding: 0 10px;
 	}
 
-	.info-container {
-		width: 100%;
-		max-width: 90%;
+	.dm-info-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font-size: 16px;
+		margin: 10px 0;
+		margin-top: -10px;
+		line-height: 1.5;
 	}
 	
 	.form-container {
 		width: 100%;
-		max-width: 90%;
 		margin: 0 auto;
-		margin-top: 35px;
+		padding: 10px;
+		margin-top: 30px;
+		border: 1.5px solid #F2F2F2;
+		background-color: #F2F2F2;
+	}
+
+	/* Contact Information */
+	.info-container {
+		width: 100%;
+		margin-top: -55px;
+		padding: 15px;
+		border: 1.5px solid #F2F2F2;
+		background-color: #F2F2F2;
 	}
 	
 	.bottom-section {
 		margin-top: 20px;
+	}
+
+	.social-section, .location-section {
+		background-color: white;
+		border: 1px solid black;
 	}
 
 }

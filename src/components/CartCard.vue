@@ -183,19 +183,18 @@ const deleteItem = () => {
   .item-image {
     width: 115px;
     height: 115px;
+    aspect-ratio: 1 / 1;
   }
 
   .item-content {
-    padding: 12px 0 0px 12px; /* Padding top, bottom, and left */
+    align-items: center;
+    padding: 12px 0 10px 12px; /* Padding top, bottom, and left */
   }
 
   .item-name {
     font-size: 19px;
   }
-  
-  .item-description {
-    font-size: 14px;
-  }
+
 }
 
 @media (max-width: 340px) {
