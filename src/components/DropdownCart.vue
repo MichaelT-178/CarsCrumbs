@@ -39,6 +39,7 @@
         </div>
       </div>
       <!-- END: Cart-item card -->
+      <div class="cart-info-divider-two"></div>
 
       <div class="button-container">
         <div class="menu-btn cart-btn" @click="goToCartView">
@@ -191,6 +192,14 @@ const deleteItem = (itemId) => {
   margin-top: 40px;
 }
 
+.cart-info-divider-two {
+  width: 250px;
+  height: 1px;
+  background-color: #959595;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
 .cart-items {
   margin-top: 11px;
 }
@@ -212,7 +221,7 @@ const deleteItem = (itemId) => {
   border-bottom: 1.5px dashed #ddd;
 }
 
-.cart-item:last-of-type {
+.rectangle-background .cart-item:nth-last-child(3) {
   border-bottom: none;
 }
 
@@ -235,7 +244,7 @@ const deleteItem = (itemId) => {
   font-size: 16px;
   font-weight: bold;
   color: #333;
-  margin-top: -15px;
+  /* margin-top: -10px; */
   margin-bottom: 5px;
 }
 
@@ -246,7 +255,7 @@ const deleteItem = (itemId) => {
 
 .trash-icon {
   position: absolute;
-  top: 5px;
+  top: 4px;
   right: 5px;
   font-size: 19px;
   color: #7a7a7a;

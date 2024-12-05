@@ -199,7 +199,7 @@ onMounted(() => {
   font-family: Arial, sans-serif;
   background-color: white;
   border: none;
-  width: 150px;
+  width: 170px;
   border-radius: 8px;
   outline: none;
   cursor: pointer;
