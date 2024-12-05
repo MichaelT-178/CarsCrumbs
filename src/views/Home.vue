@@ -38,18 +38,20 @@ const menu = jsonData.value["Items"];
 
 
 <style scoped>
+
 .image-container {
-  margin-top: -11px;
   position: relative;
   width: 100%;
-  height: auto;
+  height: 650px;
   overflow: hidden;
+  display: flex;
 }
 
 .tray-cookies {
-  width: 100%;
-  height: 500px;
   display: block;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 .dark-overlay {
@@ -65,36 +67,40 @@ const menu = jsonData.value["Items"];
 
 .text-overlay {
   position: absolute;
-  bottom: 2%;
+  bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   color: white;
-  font-size: 2.4rem;
+  font-size: 46px;
   font-weight: bold;
-  /* font-family: "Noto Serif", Georgia, serif; */
   font-family: Amatic SC;
-  font-weight: 700;
+  font-weight: 600;
   font-style: normal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 10px;
   border-radius: 5px;
   z-index: 2;
+  width: 100%;
+  max-width: 850px;
 }
 
 .order-button {
   display: inline-block;
   padding: 12px 125px;
   margin-top: 10px;
-  background-color: navy;
+  background-color: #2525bd;
   color: white;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .order-button:hover {
   background-color: blue;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .rectangle {
@@ -129,11 +135,84 @@ const menu = jsonData.value["Items"];
   padding: 0;
 }
 
-@media (max-width:  920px) {
+@media (max-width: 920px) {
   .image-container {
-    margin-top: -6px;
+    height: 450px;
+  }
+
+  .text-overlay {
+    font-size: 35px;
+    max-width: 90%;
+  }
+
+  .order-button {
+    padding: 12px 100px;
+  }
+
+  .rectangle {
+    width: 100px;
   }
   
+  .top-hr {
+    width: 65%;
+  }
+  
+  .bottom-hr {
+    width: 35%;
+  }
+}
+
+@media (max-width: 620px) {
+  .image-container {
+    height: 380px;
+  }
+
+  .text-overlay {
+    font-size: 32px;
+    max-width: 95%;
+    top: 80px;
+  }
+
+  .order-button {
+    padding: 10px 90px;
+  }
+
+  .rectangle {
+    width: 100px;
+  }
+}
+
+@media (max-width: 450px) {
+  .image-container {
+    height: 300px;
+  }
+
+  .text-overlay {
+    font-size: 26.1px;
+    max-width: 100%;
+    top: 10px;
+  }
+
+  .order-button {
+    padding: 12px 35px;
+    font-size: 20px;
+    margin-top: -5px;
+  }
+
+  .rectangle {
+    width: 80px;
+    top: 44px;
+  }
+  
+  .top-hr {
+    width: 60%;
+    margin-top: 40px;
+  }
+  
+  .bottom-hr {
+    width: 25%;
+    margin-top: 15px;
+  }
 }
 
 </style>

@@ -212,6 +212,7 @@ html, body {
   top: 0;
   left: 0;
   z-index: 1003; 
+  height: 112px;
 }
 
 .overlay {

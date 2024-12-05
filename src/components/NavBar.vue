@@ -286,7 +286,7 @@ html, body {
   box-sizing: border-box;
   position: fixed;
   left: 0;
-  top: 35px;
+  top: 40px;
   z-index: 1001;
   height: 80px;
 }

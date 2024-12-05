@@ -6,7 +6,7 @@
 
     <!-- REPLACE WITH USER INFO -->
     <div v-if="true">
-      <p class="not-signed-in-text">Not signed in</p>
+      <p class="not-signed-in-text">Not logged in</p>
       <div class="sign-in-btn" @click="goToOrderView">
         <p>SIGN IN</p>
       </div>
@@ -45,7 +45,7 @@ defineProps({
   transition: opacity 0.3s, visibility 0.3s;
   visibility: hidden;
   opacity: 0;
-  margin-right: 2px;
+  margin-right: 15px;
 }
 
 .rectangle-background.is-visible {

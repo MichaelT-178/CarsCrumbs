@@ -47,11 +47,11 @@ html, body {
 }
  
 .mobile-content {
-  padding-top: 105px;
+  padding-top: 112px;
 }
 
 .desktop-content {
-  padding-top: 126px;
+  padding-top: 120px;
 }
 
 </style>
