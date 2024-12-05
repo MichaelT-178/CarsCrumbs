@@ -65,6 +65,8 @@ const searchQuery = ref('');
 const showSideView = ref(false);
 const selectedItem = ref(null);
 
+const allEmojis = computed(() => tagsData.value.map(tag => tag.emoji));
+
 const filteredItems = computed(() => {
   let items = menu.value;
 
@@ -88,7 +90,8 @@ const filteredItems = computed(() => {
 });
 
 const updateFilter = (tag) => {
-  selectedTag.value = tag.replace(/[🍪🍫🥖🥯🎂]/g, '').trim();
+  const emojiRegex = new RegExp(`[${allEmojis.value.join('')}]`, 'g');
+  selectedTag.value = tag.replace(emojiRegex, '').trim();
 };
 
 const openSideView = (item) => {
