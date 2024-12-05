@@ -1,5 +1,10 @@
 <template>
 
+  <WordpressHeader 
+    v-if="isSmallScreen" 
+    class="wordpress-header" 
+  />
+
   <div v-if="menuItem" class="menu-item-container">
 
     <img :src="pic" class="item-pic" />
@@ -55,9 +60,10 @@
 
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import MenuCard from '../components/MenuCard.vue';
-import { useRouter, useRoute } from 'vue-router';
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import MenuCard from "../components/MenuCard.vue";
+import WordpressHeader from "../components/Header.vue";
+import { useRouter, useRoute } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config.js";
 
@@ -68,8 +74,8 @@ const route = useRoute();
 const props = defineProps({
   ItemName: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const jsonData = ref([]);
@@ -77,84 +83,109 @@ const menuItem = ref(null);
 const pic = ref("");
 const selectedOption = ref(null);
 const relatedItems = ref([]);
+const isSmallScreen = ref(false);
+
+const updateScreenSize = () => {
+  isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
+};
 
 const updateMenuItem = () => {
   const itemName = props.ItemName;
-  
-  menuItem.value = jsonData.value[itemName];
+  menuItem.value = jsonData.value[itemName] || null;
 
   if (menuItem.value) {
-    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
+    pic.value = new URL(
+      `../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`,
+      import.meta.url
+    ).href;
+
     findRelatedItems(menuItem.value);
+
+    if (menuItem.value.Options.length === 1) {
+      selectedOption.value = menuItem.value.Options[0];
+    }
   }
 };
 
 const findRelatedItems = (currentItem) => {
-  const taggedItems = Object.values(jsonData.value).filter(item => {
-    return item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name;
-  });
+  const allItems = Object.values(jsonData.value);
 
-  const otherItems = Object.values(jsonData.value).filter(item => {
-    return !item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name;
-  });
+  const taggedItems = allItems.filter(
+    (item) =>
+      item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
+      item.Name !== currentItem.Name
+  );
+
+  const otherItems = allItems.filter(
+    (item) =>
+      !item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
+      item.Name !== currentItem.Name
+  );
 
   relatedItems.value = [...taggedItems, ...otherItems];
 };
 
-updateMenuItem();
-
 const addItem = () => {
   if (selectedOption.value) {
-    const option = selectedOption.value;
-
-    cart.addItem({ ...menuItem.value, Cost: option.price, Quantity: option.quantity });
+    cart.addItem({
+      ...menuItem.value,
+      Cost: selectedOption.value.price,
+      Quantity: selectedOption.value.quantity,
+    });
     alert("Item Successfully Added to Cart!");
   }
 };
 
-
 const scrollLeft = () => {
-  const container = document.querySelector('.related-items-grid');
+  const container = document.querySelector(".related-items-grid");
   const cardWidth = container.offsetWidth / 2;
   container.scrollBy({
-    left: -cardWidth - 1000,
-    behavior: 'smooth'
+    left: -cardWidth,
+    behavior: "smooth",
   });
 };
 
 const scrollRight = () => {
-  const container = document.querySelector('.related-items-grid');
+  const container = document.querySelector(".related-items-grid");
   const cardWidth = container.offsetWidth / 2;
   container.scrollBy({
     left: cardWidth,
-    behavior: 'smooth'
+    behavior: "smooth",
   });
 };
 
 const goToItemPage = (item) => {
   router.push(item.Route).then(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
-}
+};
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
+    const MenuData = await import(
+      `../assets/${folderRealOrTest}/MenuItems.json`
+    );
     jsonData.value = MenuData.default;
+    updateMenuItem();
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
 };
 
-onMounted(async () => {
-  await loadMenuData();
-  updateMenuItem();
+watch(
+  () => route.params.ItemName, 
+  () => updateMenuItem()
+);
+
+onMounted(() => {
+  updateScreenSize();
+  loadMenuData();
+  window.addEventListener("resize", updateScreenSize);
 });
 
-watch(() => route.params.ItemName, () => {
-    updateMenuItem();
-  }
-);
+onUnmounted(() => {
+  window.removeEventListener("resize", updateScreenSize);
+});
 
 </script>
 
@@ -166,15 +197,13 @@ watch(() => route.params.ItemName, () => {
   justify-content: center;
   gap: 40px;
   padding: 20px;
-  /* background-color: lightblue; */
   border-radius: 0;
-  margin-top: -13px;
 }
 
 .item-pic {
   width: 300px;
   height: 300px;
-  border: 1.5px solid black;
+  border: 1.5px solid gray;
 }
 
 .item-info {
@@ -195,14 +224,13 @@ watch(() => route.params.ItemName, () => {
   font-size: 20px;
   padding-top: 5px;
   padding-bottom: 20px;
-  font-weight: 600;
-  /* color: navy; */
   text-align: left;
+  font-family: "Helvetica";
 }
 
 .quantity-label {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
   color: black;
   margin-bottom: 0;
 }
@@ -241,8 +269,9 @@ watch(() => route.params.ItemName, () => {
 }
 
 .radio-input:checked + .custom-radio {
-  background-color: #620086;
+  background-color: #3E0054;
   color: white;
+  font-weight: 600;
   border: 1.5px solid black;
 }
 
@@ -338,60 +367,77 @@ button:hover:enabled {
   font-size: 17px;
 }
 
-@media (max-width: 800px) {
+.wordpress-header {
+  display: none;
+}
+
+@media (max-width: 650px) {
   .menu-item-container {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
+
+
+  .item-pic {
+    height: 305px;
+    width: 305px;
+    align-self: center;
+    margin-top: -40px;
+  }
+
+  .item-info {
+    text-align: left;
+    width: 100%;
+    margin-top: -25px;
   }
 
   .title {
     font-size: 30px;
-  }
-
-  .item-info {
-    text-align: center;
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  .title {
+    text-align: left;
     margin-bottom: 5px;
-    text-align: center;
   }
 
   .price {
     font-size: 22px;
-    text-align: center;
-  }
-  
-  .item-pic {
-    margin-bottom: -40px;
-    height: 275px;
-    width: 275px;
+    text-align: left;
   }
 
   .options-row {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
     width: 100%;
   }
 
-  .option-radio {
-    margin: 10px 0;
+  .quantity-label {
+    text-align: left;
   }
 
   .related-title {
-    text-align: center;
+    text-align: left;
+  }
+  
+  .related-items-container {
+    padding-left: 20px;
   }
   
   .menu-card {
     width: 100%;
     max-width: 250px;
     height: auto;
+  }
+
+  .bottom-section {
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  .related-title {
+    font-size: 35px;
   }
 }
 
