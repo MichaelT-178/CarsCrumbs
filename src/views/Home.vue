@@ -42,7 +42,7 @@ const menu = jsonData.value["Items"];
 .image-container {
   position: relative;
   width: 100%;
-  height: 650px;
+  height: 625px;
   overflow: hidden;
   display: flex;
 }
@@ -60,8 +60,7 @@ const menu = jsonData.value["Items"];
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.38);
   pointer-events: none;
 }
 
@@ -165,6 +164,10 @@ const menu = jsonData.value["Items"];
 @media (max-width: 620px) {
   .image-container {
     height: 380px;
+  }
+
+  .dark-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
   .text-overlay {
