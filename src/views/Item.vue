@@ -57,6 +57,20 @@
     </div>
   </div>
 
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+      <h2 class="related-title">Customer Reviews</h2>
+      <div v-if="filteredReviews.length" class="reviews-container">
+        <ReviewCard 
+          v-for="(review, index) in filteredReviews" 
+          :key="index" 
+          :review="review" 
+        />
+      </div>
+      <div v-else>
+        <p>No reviews for this item yet.</p>
+      </div>
+    </div>
 
   
   
@@ -71,9 +85,11 @@ import { ref, onMounted, onUnmounted, watch } from "vue";
 import MenuCard from "../components/MenuCard.vue";
 import WordpressHeader from "../components/Header.vue";
 import StarRating from "../components/StarRating.vue";
+import ReviewCard from "../components/ReviewCard.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config.js";
+import Reviews from "../assets/real_menu/Reviews.json";
 
 const cart = useCartStore();
 const router = useRouter();
@@ -92,6 +108,11 @@ const pic = ref("");
 const selectedOption = ref(null);
 const relatedItems = ref([]);
 const isSmallScreen = ref(false);
+const filteredReviews = ref([]);
+
+const loadAllReviews = () => {
+  filteredReviews.value = Reviews.Reviews;
+};
 
 const updateScreenSize = () => {
   isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
@@ -183,6 +204,7 @@ watch(
 onMounted(() => {
   updateScreenSize();
   loadMenuData();
+  loadAllReviews();
   window.addEventListener("resize", updateScreenSize);
 });
 
@@ -372,6 +394,13 @@ button:hover:enabled {
 
 .wordpress-header {
   display: none;
+}
+
+.reviews-section {
+  margin-top: -10px;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: left;
 }
 
 @media (max-width: 650px) {
