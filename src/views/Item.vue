@@ -11,6 +11,7 @@
 
     <div class="item-info">
       <p class="title">{{ menuItem.DisplayName }}</p>
+      <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
       <p class="price">Price: {{ menuItem.DisplayPrice }}</p>
 
       <label class="quantity-label">Quantity:</label>
@@ -34,6 +35,8 @@
     <p>Item not found</p>
   </div>
 
+
+  <!-- Try our Other Items -->
   <div class="related-items-container">
     <p class="related-title">Try our Other Items</p>
     <div class="scrollable-container">
@@ -53,6 +56,10 @@
       <button class="scroll-button right-arrow" @click="scrollRight">❯</button>
     </div>
   </div>
+
+
+  
+  
   <div class="bottom-section">
     <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
   </div>
@@ -63,6 +70,7 @@
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import MenuCard from "../components/MenuCard.vue";
 import WordpressHeader from "../components/Header.vue";
+import StarRating from "../components/StarRating.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config.js";
@@ -159,9 +167,7 @@ const goToItemPage = (item) => {
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(
-      `../assets/${folderRealOrTest}/MenuItems.json`
-    );
+    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
     jsonData.value = MenuData.default.MenuItems;
     updateMenuItem();
   } catch (error) {
@@ -219,7 +225,7 @@ onUnmounted(() => {
 
 .price {
   font-size: 20px;
-  padding-top: 5px;
+  margin-top: -1px;
   padding-bottom: 20px;
   text-align: left;
   font-family: "Helvetica";

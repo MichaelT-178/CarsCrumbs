@@ -5,6 +5,7 @@
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         class="star-icon"
+        :style="{ width: `${starSize}px`, height: `${starSize}px` }"
       >
         <defs>
           <linearGradient :id="'partial-fill-' + star">
@@ -39,6 +40,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  starSize: {
+    type: Number,
+    default: 18,
+  },
 });
 
 const getStarFill = (star) => {
@@ -57,7 +62,6 @@ const getStarFill = (star) => {
   return "#c9c9c9";
 };
 
-
 const getGradientOffset = (fraction) => `${fraction * 100}%`;
 
 const formattedRating = computed(() => props.rating.toFixed(1));
@@ -73,8 +77,6 @@ const formattedRating = computed(() => props.rating.toFixed(1));
 }
 
 .star-icon {
-  width: 18px;
-  height: 18px;
   margin-right: 2px;
 }
 
@@ -84,4 +86,5 @@ const formattedRating = computed(() => props.rating.toFixed(1));
   font-weight: 600;
   color: #414141;
 }
+
 </style>

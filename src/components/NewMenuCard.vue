@@ -33,7 +33,7 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import StarRating from "../components/StarRating.vue";
 import { folderRealOrTest } from "../data.config";
 
@@ -52,12 +52,13 @@ const props = defineProps({
   },
 });
 
-const pic = ref(
-  new URL(
-    `../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`,
-    import.meta.url
-  ).href
-);
+const pic = computed(() => {
+  if (props.item.Images && props.item.Images.length > 0) {
+    return new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
+  }
+
+  return "";
+});
 
 const isHearted = ref(false);
 

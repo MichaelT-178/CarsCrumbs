@@ -197,7 +197,20 @@ onMounted(() => {
 
 @media (max-width: 400px) {
   .results-container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+  }
+  
+  .menu-card {
+    width: 170px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 350px) {
+  .results-container {
     grid-template-columns: repeat(1, 1fr);
+    column-gap: 10px;
   }
 }
 

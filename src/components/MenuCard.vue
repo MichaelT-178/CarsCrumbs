@@ -23,7 +23,7 @@
 
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from "vue";
 import { folderRealOrTest } from "../data.config";
 
 const props = defineProps({
@@ -31,11 +31,11 @@ const props = defineProps({
     type: Object,
     required: true,
     default: () => ({
-      Name: '',
-      Emoji: '',
+      Name: "",
+      Emoji: "",
       Price: 0.0,
       Images: [],
-      Route: '',
+      Route: "",
       Tags: [],
     }),
   },
@@ -45,14 +45,20 @@ const props = defineProps({
   },
 });
 
-const pic = ref(new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href);
+const emit = defineEmits(["tag-clicked", "open-side-view"]);
+
+const pic = computed(() => {
+  if (props.item.Images && props.item.Images.length > 0) {
+    return new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
+  }
+
+  return new URL("../assets/placeholder.png", import.meta.url).href;
+});
 
 const hovered = ref(null);
 
-const emit = defineEmits(['tag-clicked', 'open-side-view']);
-
 const tagClicked = (tag) => {
-  emit('tag-clicked', tag);
+  emit("tag-clicked", tag);
 };
 
 const handleMouseOver = (tag) => {
@@ -68,10 +74,11 @@ const handleMouseLeave = () => {
 };
 
 const openSideView = () => {
-  emit('open-side-view', props.item);
+  emit("open-side-view", props.item);
 };
 
 </script>
+
 
 <style scoped>
 .menu-card {

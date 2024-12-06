@@ -10,11 +10,24 @@
         class="dropdown-item"
         @click="handleClick(item)"
       >
-        {{ item.DisplayName }}
+        <img 
+          :src="item.imageUrl" 
+          :alt="item.DisplayName" 
+          class="item-image" 
+        />
+        <div class="item-info">
+          <div class="item-name">
+            {{ item.DisplayName }} {{ item.Emoji }}
+          </div>
+          <div class="item-price">
+            {{ item.DisplayPrice }}
+          </div>
+        </div>
       </li>
     </ul>
   </div>
 </template>
+
 
 <script setup>
 import { computed, ref, onMounted } from 'vue';
@@ -49,6 +62,10 @@ const filteredItems = computed(() => {
         (item.Alternative && item.Alternative.toLowerCase().includes(word))
       )
     )
+    .map(item => ({
+      ...item,
+      imageUrl: new URL(`../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href,
+    }))
     .slice(0, 5);
 });
 
@@ -60,7 +77,7 @@ const handleClick = (item) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = MenuData.default.MenuItems; // Update to reference `MenuItems` array
+    menu.value = MenuData.default.MenuItems;
   } catch (error) {
     console.error('Error loading menu data:', error);
   }
@@ -69,7 +86,9 @@ const loadMenuData = async () => {
 onMounted(() => {
   loadMenuData();
 });
+
 </script>
+
 
 <style scoped>
 .dropdown-menu {
@@ -77,21 +96,24 @@ onMounted(() => {
   top: calc(100% + 5px);
   left: 0;
   width: 100%;
-  width: 500px;
-  background-color: darkblue;
+  width: 485px;
+  background-color: #F2F2F2;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   z-index: 1003;
   padding: 10px 0;
-  border: 1px solid darkblue;
+  /* border: 1px solid #F2F2F2; */
   border-radius: 4px;
 }
 
 .dropdown-item {
-  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
   cursor: pointer;
   font-size: 14px;
-  color: white;
+  color: black;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -102,7 +124,32 @@ onMounted(() => {
 }
 
 .dropdown-item:hover {
-  background-color: #f0f0f0;
+  background-color: #dbd8d8;
   color: black;
 }
+
+.item-image {
+  width: 70px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  right: 100px;
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item-price {
+  font-size: 14px;
+  color: #5a5959;
+  margin-top: 2px;
+}
+
 </style>
