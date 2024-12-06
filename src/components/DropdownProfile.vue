@@ -3,9 +3,9 @@
     class="rectangle-background" 
     :class="{ 'is-visible': visible }"
   >
-    <div v-if="true">
+    <div v-if="false">
       <p class="not-signed-in-text">Not logged in</p>
-      <div class="sign-in-btn" @click="goToOrderView">
+      <div class="profile-btn" @click="goToView('/Cart/Checkout')">
         <p>SIGN IN</p>
       </div>
     </div>
@@ -16,37 +16,45 @@
       </div>
 
 
-
       <div class="info-section">
-
-        <div class="info-item">
+        <div 
+          class="info-item" 
+          @click="goToView('/Order')"
+        >
           <span class="material-symbols-outlined favorite-icon">favorite</span>
           <p>Favorites</p>
         </div>
 
         <div class="divider"></div>
 
-        <div class="info-item">
+
+        <div 
+          class="info-item" 
+          @click="goToView('/About')"
+        >
           <span class="material-symbols-outlined order-history-icon">receipt_long</span>
           <p>Order History</p>
         </div>
+
         <div class="divider"></div>
         
-        <div class="info-item">
+        <div 
+          class="info-item" 
+          @click="goToView('/ContactUs')"
+        >
           <span class="material-symbols-outlined review-icon">reviews</span>
           <p>Reviews</p>
         </div>
         
         <div class="divider"></div>
-
       </div>
 
 
       <div class="button-container">
-        <div class="profile-btn view-account-btn" @click="goToCartView">
+        <div class="profile-btn view-account-btn" @click="goToView('/Cart')">
           <p>VIEW ACCOUNT</p>
         </div>
-        <div class="profile-btn sign-out-btn" @click="goToCheckoutView">
+        <div class="profile-btn sign-out-btn" @click="signOut">
           <p>SIGN OUT</p>
         </div>
       </div>
@@ -69,16 +77,13 @@ defineProps({
 
 const emit = defineEmits(['close']);
 
-const goToCartView = () => {
-  console.log('Navigating to Cart and emitting close event');
-  router.push('/Cart');
+const goToView = (path) => {
+  router.push(path);
   emit('close');
 };
 
-const goToCheckoutView = () => {
-  console.log('Navigating to Cart and emitting close event');
-  router.push('/Cart/Checkout');
-  emit('close');
+const signOut = () => {
+  console.error("SIGNED OUT");
 };
 
 </script>
@@ -94,8 +99,8 @@ const goToCheckoutView = () => {
   background-color: white;
   z-index: 999;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: opacity 0.3s, visibility 0.3s;
   visibility: hidden;
@@ -117,9 +122,8 @@ const goToCheckoutView = () => {
   height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 10px solid cyan;
+  border-bottom: 10px solid white;
 }
-
 
 .not-signed-in-text {
   position: absolute;
@@ -135,7 +139,7 @@ const goToCheckoutView = () => {
   margin-top: 6px;
 }
 
-.sign-in-btn {
+.profile-btn {
   width: 225px;
   height: 40px;
   background-color: #007BFF;
@@ -152,10 +156,9 @@ const goToCheckoutView = () => {
   margin-top: 35px;
 }
 
-.sign-in-btn:hover {
+.profile-btn:hover {
   background-color: #0056b3;
 }
-
 
 .account-section {
   display: flex;
@@ -172,7 +175,7 @@ const goToCheckoutView = () => {
 
 .info-section {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .info-item {
@@ -180,6 +183,8 @@ const goToCheckoutView = () => {
   align-items: center;
   padding: 10px 15px;
   cursor: pointer;
+  font-family: "Helvetica";
+  font-weight: 600;
 }
 
 .info-item:hover {
@@ -215,30 +220,10 @@ const goToCheckoutView = () => {
   width: 100%;
 }
 
-.profile-btn {
-  width: 225px;
-  height: 40px;
-  background-color: #007BFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  text-align: center;
-  color: #F2F2F2;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Josefin Sans;
-  text-transform: uppercase;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.profile-btn:hover {
-  background-color: #0056b3;
-}
-
 .view-account-btn {
   background-color: #efefef;
+  margin-top: -5px;
+  margin-bottom: 5px;
   color: #444;
 }
 
@@ -249,6 +234,7 @@ const goToCheckoutView = () => {
 
 .sign-out-btn {
   background-color: #007BFF;
+  margin-top: 5px;
   margin-bottom: 15px;
 }
 
