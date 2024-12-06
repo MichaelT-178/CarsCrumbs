@@ -117,7 +117,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import logo from "../assets/logos/purple-logo.png";
-import Dropdown from "./DropdownMenu.vue";
+import Dropdown from "./DropdownSearch.vue";
 import { useCartStore } from "../stores/cart.js";
 import DropdownCart from './DropdownCart.vue';
 import DropdownProfile from './DropdownProfile.vue';

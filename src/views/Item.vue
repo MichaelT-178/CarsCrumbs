@@ -91,13 +91,11 @@ const updateScreenSize = () => {
 
 const updateMenuItem = () => {
   const itemName = props.ItemName;
-  menuItem.value = jsonData.value[itemName] || null;
+
+  menuItem.value = jsonData.value.find((item) => item.Name === itemName) || null;
 
   if (menuItem.value) {
-    pic.value = new URL(
-      `../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`,
-      import.meta.url
-    ).href;
+    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
 
     findRelatedItems(menuItem.value);
 
@@ -108,15 +106,13 @@ const updateMenuItem = () => {
 };
 
 const findRelatedItems = (currentItem) => {
-  const allItems = Object.values(jsonData.value);
-
-  const taggedItems = allItems.filter(
+  const taggedItems = jsonData.value.filter(
     (item) =>
       item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
       item.Name !== currentItem.Name
   );
 
-  const otherItems = allItems.filter(
+  const otherItems = jsonData.value.filter(
     (item) =>
       !item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
       item.Name !== currentItem.Name
@@ -132,6 +128,7 @@ const addItem = () => {
       Cost: selectedOption.value.price,
       Quantity: selectedOption.value.quantity,
     });
+
     alert("Item Successfully Added to Cart!");
   }
 };
@@ -165,7 +162,7 @@ const loadMenuData = async () => {
     const MenuData = await import(
       `../assets/${folderRealOrTest}/MenuItems.json`
     );
-    jsonData.value = MenuData.default;
+    jsonData.value = MenuData.default.MenuItems;
     updateMenuItem();
   } catch (error) {
     console.error("Error loading menu data:", error);

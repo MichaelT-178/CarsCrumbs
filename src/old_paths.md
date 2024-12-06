@@ -1,6 +1,6 @@
 ## Component Paths
 
-### DropdownMenu.vue
+### DropdownSearch.vue
 - import MenuData from "../assets/menu_items/MenuItems.json"; ✅
 
 ### Footer.vue

@@ -54,12 +54,13 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import MenuCard from '../components/MenuCard.vue';
+// import MenuCard from '../components/MenuCard.vue';
+import MenuCard from '../components/NewMenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 import { folderRealOrTest } from '../data.config';
 
 const menu = ref([]);
-const tagsData = ref([])
+const tagsData = ref([]);
 const selectedTag = ref('No Filter');
 const searchQuery = ref('');
 const showSideView = ref(false);
@@ -71,18 +72,14 @@ const filteredItems = computed(() => {
   let items = menu.value;
 
   if (selectedTag.value !== 'No Filter') {
-    items = Object.fromEntries(
-      Object.entries(items).filter(([key, item]) =>
-        item.Tags.some(tag => tag.includes(selectedTag.value))
-      )
+    items = items.filter(item =>
+      item.Tags.some(tag => tag.includes(selectedTag.value))
     );
   }
 
   if (searchQuery.value.trim()) {
-    items = Object.fromEntries(
-      Object.entries(items).filter(([key, item]) =>
-        item.DisplayName.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
-      )
+    items = items.filter(item =>
+      item.DisplayName.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
     );
   }
 
@@ -108,31 +105,30 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-watch(selectedTag, (newTag) => {
-  const hash = newTag === 'No Filter' ? '' : `#${newTag.toLowerCase()}`;
-  window.location.hash = hash;
-});
-
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = Object.values(MenuData.default);
+    menu.value = MenuData.default.MenuItems;
 
     const TagData = await import(`../assets/${folderRealOrTest}/Tags.json`);
     tagsData.value = Object.values(TagData.default.Tags);
   } catch (error) {
-    console.error("Error loading menu data:", error);
+    console.error('Error loading menu data:', error);
   }
 };
 
 onMounted(() => {
   loadMenuData();
-  
-  const hash = window.location.hash.replace('#', '');
 
+  const hash = window.location.hash.replace('#', '');
   if (hash) {
     selectedTag.value = capitalizeFirstLetter(hash);
   }
+});
+
+watch(selectedTag, (newTag) => {
+  const hash = newTag === 'No Filter' ? '' : `#${newTag.toLowerCase()}`;
+  window.location.hash = hash;
 });
 
 </script>

@@ -3,7 +3,6 @@
   <div v-if="showDropdown" class="search-overlay" @click="hideDropdown"></div>
 
   <nav class="navbar" @keydown="handleKeydown">
-
     <!-- Dark overlay -->
     <div v-if="isSidebarOpen" class="overlay" @click="toggleSidebar"></div>
 
@@ -90,7 +89,6 @@
   </nav>
 </template>
 
-
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import logoTwo from "../assets/logos/purple-logo.png";
@@ -101,7 +99,6 @@ import { useCartStore } from "../stores/cart.js";
 const router = useRouter();
 const cart = useCartStore();
 
-// const menu = ref(Object.values(MenuData));
 const menu = ref([]);
 const searchQuery = ref('');
 const showDropdown = ref(false);
@@ -113,7 +110,6 @@ const menuIconColor = ref("white");
 const filterResults = () => {
   if (searchQuery.value) {
     const queryWords = searchQuery.value.toLowerCase().split(' ');
-
     filteredResults.value = menu.value.filter(item => 
       queryWords.some(word => 
         item.DisplayName.toLowerCase().includes(word) ||
@@ -147,7 +143,7 @@ const handleItemClick = (item) => {
 };
 
 const handleSearchEnter = () => {
-  router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() }});
+  router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() } });
   hideDropdown();
 };
 
@@ -173,7 +169,7 @@ const handleKeydown = (event) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = Object.values(MenuData.default);
+    menu.value = MenuData.default.MenuItems; // Updated to access the correct JSON structure
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
@@ -187,7 +183,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
 });
-
 </script>
 
 

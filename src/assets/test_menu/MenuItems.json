@@ -1,258 +1,288 @@
 {
-    "Brown_Butter_Chocolate_Chip": {
-        "DisplayName": "Brown Butter Chocolate Chip",
-        "Name": "Brown_Butter_Chocolate_Chip",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": ["Brown_Butter_Chocolate_Chip.jpg"],
-        "Route": "/Item/Brown_Butter_Chocolate_Chip",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "Brown Butter Chocolate Chip Cookies",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Sugar": {
-        "DisplayName": "Sugar Cookies",
-        "Name": "Sugar",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": ["Sugar.jpg"],
-        "Route": "/Item/Sugar",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Snickerdoodle": {
-        "DisplayName": "Snickerdoodles",
-        "Name": "Snickerdoodle",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": ["Snickerdoodle.jpg"],
-        "Route": "/Item/Snickerdoodle",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "Snickerdoodle Cookies",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Ginger_Molasses": {
-        "DisplayName": "Ginger Molasses Cookies",
-        "Name": "Ginger_Molasses",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": ["Ginger_Molasses.jpg"],
-        "Route": "/Item/Ginger_Molasses",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Double_Chocolate": {
-        "DisplayName": "Double Chocolate Cookies",
-        "Name": "Double_Chocolate",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": ["Double_Chocolate.jpg"],
-        "Route": "/Item/Double_Chocolate",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Fudge_Brownies": {
-        "DisplayName": "Fudge Brownies",
-        "Name": "Fudge_Brownies",
-        "Emoji": "🍫",
-        "DisplayPrice": "$15.00",
-        "Images": ["Fudge_Brownies.jpg"],
-        "Route": "/Item/Fudge_Brownies",
-        "Tags": ["🍫 Brownie"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Pan"
-            }
-        ]
-    },
-    "Smores_Brownies": {
-        "DisplayName": "S'mores Brownies",
-        "Name": "Smores_Brownies",
-        "Emoji": "☁️",
-        "DisplayPrice": "$15.00",
-        "Images": ["Smores_Brownies.jpg"],
-        "Route": "/Item/Smores_Brownies",
-        "Tags": ["🍫 Brownie"],
-        "Alternative": "Smore Brownies, Smores Brownies",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Pan"
-            }
-        ]
-    },
-    "Caramel_Pretzel_Brownies": {
-        "DisplayName": "Caramel Pretzel Brownies",
-        "Name": "Caramel_Pretzel_Brownies",
-        "Emoji": "🥨",
-        "DisplayPrice": "$15.00",
-        "Images": ["Caramel_Pretzel_Brownies.jpg"],
-        "Route": "/Item/Caramel_Pretzel_Brownies",
-        "Tags": ["🍫 Brownie"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Pan"
-            }
-        ]
-    },
-    "Crunchy_Italian_Loaf": {
-        "DisplayName": "Crunchy Italian Loaf",
-        "Name": "Crunchy_Italian_Loaf",
-        "Emoji": "🥖",
-        "DisplayPrice": "$12.00",
-        "Images": ["Crunchy_Italian_Loaf.jpg"],
-        "Route": "/Item/Crunchy_Italian_Loaf",
-        "Tags": ["🥖 Bread"],
-        "Alternative": "Crunchy Italian Bread, Italian Bread",
-        "Options": [
-            {
-                "price": 12.0,
-                "quantity": "One Loaf"
-            }
-        ]
-    },
-    "Everything_Bagel": {
-        "DisplayName": "Everything Bagels",
-        "Name": "Everything_Bagel",
-        "Emoji": "🥯",
-        "DisplayPrice": "$20.00 - $30.00",
-        "Images": ["Everything_Bagel.jpg"],
-        "Route": "/Item/Everything_Bagel",
-        "Tags": ["🥯 Bagel", "🥖 Bread"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 20.0,
-                "quantity": "Eight Bagels"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Sixteen Bagels"
-            }
-        ]
-    },
-    "Plain_Bagel": {
-        "DisplayName": "Plain Bagels",
-        "Name": "Plain_Bagel",
-        "Emoji": "🥯",
-        "DisplayPrice": "$20.00 - $30.00",
-        "Images": ["Plain_Bagel.jpg"],
-        "Route": "/Item/Plain_Bagel",
-        "Tags": ["🥯 Bagel", "🥖 Bread"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 20.0,
-                "quantity": "Eight Bagels"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Sixteen Bagels"
-            }
-        ]
-    },
-    "Cinnamon_Sugar": {
-        "DisplayName": "Cinnamon Sugar",
-        "Name": "Cinnamon_Sugar",
-        "Emoji": "🥯",
-        "DisplayPrice": "$20.00 - $30.00",
-        "Images": ["Cinnamon_Sugar.jpg"],
-        "Route": "/Item/Cinnamon_Sugar",
-        "Tags": ["🥯 Bagel", "🥖 Bread"],
-        "Alternative": "Cinnamon Sugar Bagels",
-        "Options": [
-            {
-                "price": 20.0,
-                "quantity": "Eight Bagels"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Sixteen Bagels"
-            }
-        ]
-    },
-    "Chocolate_Cake": {
-        "DisplayName": "Chocolate Cake",
-        "Name": "Chocolate_Cake",
-        "Emoji": "🎂",
-        "DisplayPrice": "$15.00",
-        "Images": ["Chocolate_Cake.jpg"],
-        "Route": "/Item/Chocolate_Cake",
-        "Tags": ["🎂 Cake"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Cake"
-            }
-        ]
-    },
-    "Vanilla_Cake": {
-        "DisplayName": "Vanilla Cake",
-        "Name": "Vanilla_Cake",
-        "Emoji": "🎂",
-        "DisplayPrice": "$15.00",
-        "Images": ["Vanilla_Cake.jpg"],
-        "Route": "/Item/Vanilla_Cake",
-        "Tags": ["🎂 Cake"],
-        "Alternative": "",
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Cake"
-            }
-        ]
-    }
+    "MenuItems": [
+        {
+            "id": 1,
+            "DisplayName": "Brown Butter Chocolate Chip",
+            "Name": "Brown_Butter_Chocolate_Chip",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": ["Brown_Butter_Chocolate_Chip.jpg"],
+            "Route": "/Item/Brown_Butter_Chocolate_Chip",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "Brown Butter Chocolate Chip Cookies",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "DisplayName": "Sugar Cookies",
+            "Name": "Sugar",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": ["Sugar.jpg"],
+            "Route": "/Item/Sugar",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "DisplayName": "Snickerdoodles",
+            "Name": "Snickerdoodle",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": ["Snickerdoodle.jpg"],
+            "Route": "/Item/Snickerdoodle",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "Snickerdoodle Cookies",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "DisplayName": "Ginger Molasses Cookies",
+            "Name": "Ginger_Molasses",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": ["Ginger_Molasses.jpg"],
+            "Route": "/Item/Ginger_Molasses",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "DisplayName": "Double Chocolate Cookies",
+            "Name": "Double_Chocolate",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": ["Double_Chocolate.jpg"],
+            "Route": "/Item/Double_Chocolate",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "DisplayName": "Fudge Brownies",
+            "Name": "Fudge_Brownies",
+            "Emoji": "🍫",
+            "DisplayPrice": "$15.00",
+            "Images": ["Fudge_Brownies.jpg"],
+            "Route": "/Item/Fudge_Brownies",
+            "Tags": ["🍫 Brownie"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Pan"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "DisplayName": "S'mores Brownies",
+            "Name": "Smores_Brownies",
+            "Emoji": "☁️",
+            "DisplayPrice": "$15.00",
+            "Images": ["Smores_Brownies.jpg"],
+            "Route": "/Item/Smores_Brownies",
+            "Tags": ["🍫 Brownie"],
+            "Alternative": "Smore Brownies, Smores Brownies",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Pan"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "DisplayName": "Caramel Pretzel Brownies",
+            "Name": "Caramel_Pretzel_Brownies",
+            "Emoji": "🥨",
+            "DisplayPrice": "$15.00",
+            "Images": ["Caramel_Pretzel_Brownies.jpg"],
+            "Route": "/Item/Caramel_Pretzel_Brownies",
+            "Tags": ["🍫 Brownie"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Pan"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "DisplayName": "Crunchy Italian Loaf",
+            "Name": "Crunchy_Italian_Loaf",
+            "Emoji": "🥖",
+            "DisplayPrice": "$12.00",
+            "Images": ["Crunchy_Italian_Loaf.jpg"],
+            "Route": "/Item/Crunchy_Italian_Loaf",
+            "Tags": ["🥖 Bread"],
+            "Alternative": "Crunchy Italian Bread, Italian Bread",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 12.0,
+                    "quantity": "One Loaf"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "DisplayName": "Everything Bagels",
+            "Name": "Everything_Bagel",
+            "Emoji": "🥯",
+            "DisplayPrice": "$20.00 - $30.00",
+            "Images": ["Everything_Bagel.jpg"],
+            "Route": "/Item/Everything_Bagel",
+            "Tags": ["🥯 Bagel", "🥖 Bread"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 20.0,
+                    "quantity": "Eight Bagels"
+                },
+                {
+                    "price": 30.0,
+                    "quantity": "Sixteen Bagels"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "DisplayName": "Plain Bagels",
+            "Name": "Plain_Bagel",
+            "Emoji": "🥯",
+            "DisplayPrice": "$20.00 - $30.00",
+            "Images": ["Plain_Bagel.jpg"],
+            "Route": "/Item/Plain_Bagel",
+            "Tags": ["🥯 Bagel", "🥖 Bread"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 20.0,
+                    "quantity": "Eight Bagels"
+                },
+                {
+                    "price": 30.0,
+                    "quantity": "Sixteen Bagels"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "DisplayName": "Cinnamon Sugar",
+            "Name": "Cinnamon_Sugar",
+            "Emoji": "🥯",
+            "DisplayPrice": "$20.00 - $30.00",
+            "Images": ["Cinnamon_Sugar.jpg"],
+            "Route": "/Item/Cinnamon_Sugar",
+            "Tags": ["🥯 Bagel", "🥖 Bread"],
+            "Alternative": "Cinnamon Sugar Bagels",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 20.0,
+                    "quantity": "Eight Bagels"
+                },
+                {
+                    "price": 30.0,
+                    "quantity": "Sixteen Bagels"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "DisplayName": "Chocolate Cake",
+            "Name": "Chocolate_Cake",
+            "Emoji": "🎂",
+            "DisplayPrice": "$15.00",
+            "Images": ["Chocolate_Cake.jpg"],
+            "Route": "/Item/Chocolate_Cake",
+            "Tags": ["🎂 Cake"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Cake"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "DisplayName": "Vanilla Cake",
+            "Name": "Vanilla_Cake",
+            "Emoji": "🎂",
+            "DisplayPrice": "$15.00",
+            "Images": ["Vanilla_Cake.jpg"],
+            "Route": "/Item/Vanilla_Cake",
+            "Tags": ["🎂 Cake"],
+            "Alternative": "",
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Cake"
+                }
+            ]
+        }
+    ]
 }

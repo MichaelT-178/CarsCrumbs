@@ -1,379 +1,413 @@
 {
-    "Ginger_Molasses_Cookies": {
-        "DisplayName": "Ginger Molasses Cookies",
-        "Name": "Ginger_Molasses_Cookies",
-        "Emoji": "🍯",
-        "DisplayPrice": "$12.00 - $24.00",
-        "Images": [
-            "GingerMolasses/GingerMolasses.jpg"
-        ],
-        "Route": "/Item/Ginger_Molasses_Cookies",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 12.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 24.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Banana_Bread": {
-        "DisplayName": "Banana Bread",
-        "Name": "Banana_Bread",
-        "Emoji": "🍌",
-        "DisplayPrice": "$8.00 - $16.00",
-        "Images": [
-            "BananaBread/BananaBread1.jpg",
-            "BananaBread/BananaBread2.jpg",
-            "BananaBread/BananaBread3.jpg"
-        ],
-        "Route": "/Item/Banana_Bread",
-        "Tags": ["🥧 Baked Good"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 8.0,
-                "quantity": "One Loaf"
-            },
-            {
-                "price": 16.0,
-                "quantity": "Two Loaves"
-            }
-        ]
-    },
-    "Blueberry_Zucchini": {
-        "DisplayName": "Blueberry Zucchini",
-        "Name": "Blueberry_Zucchini",
-        "Emoji": "🫐",
-        "DisplayPrice": "$6.00",
-        "Images": [
-            "BlueberryZucchini/BlueberryZucchini.jpg"
-        ],
-        "Route": "/Item/Blueberry_Zucchini",
-        "Tags": ["🥧 Baked Good"],
-        "Alternative": "Blueberry Zucchini bread, blueberries",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 6.0,
-                "quantity": "One Loaf"
-            }
-        ]
-    },
-    "Brown_Butter_Cookies": {
-        "DisplayName": "Brown Butter Cookies",
-        "Name": "Brown_Butter_Cookies",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": [
-            "BrownButterCookies/BrownButterCookies1.jpg",
-            "BrownButterCookies/BrownButterCookies2.jpg",
-            "BrownButterCookies/BrownButterCookies3.jpg"
-        ],
-        "Route": "/Item/Brown_Butter_Cookies",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "Brown Butter Chocolate Chip Cookies",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Cinnamon_Rolls": {
-        "DisplayName": "Cinnamon Rolls",
-        "Name": "Cinnamon_Rolls",
-        "Emoji": "🍂",
-        "DisplayPrice": "$5.00 - $30.00",
-        "Images": [
-            "CinnamonRolls/CinnamonRolls1.jpg",
-            "CinnamonRolls/CinnamonRolls2.jpg"
-        ],
-        "Route": "/Item/Cinnamon_Rolls",
-        "Tags": ["🥧 Baked Good"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 5.0,
-                "quantity": "One roll"
-            },
-            {
-                "price": 20.0,
-                "quantity": "Six rolls"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Twelve rolls"
-            }
-        ]
-    },
-    "Chocolate_Donut": {
-        "DisplayName": "Chocolate Donuts",
-        "Name": "Chocolate_Donut",
-        "Emoji": "🍫",
-        "DisplayPrice": "$10.00-$20.00",
-        "Images": [
-            "ChocolateDonuts/ChocolateDonut1.jpg",
-            "ChocolateDonuts/ChocolateDonut2.jpg"
-        ],
-        "Route": "/Item/Chocolate_Donut",
-        "Tags": ["🍩 Donut"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 10.0,
-                "quantity": "Twelve Donuts"
-            },
-            {
-                "price": 20.0,
-                "quantity": "Twenty-four Donuts"
-            }
-        ]
-    },
-    "Chocolate_Strawberries": {
-        "DisplayName": "Chocolate Strawberries",
-        "Name": "Chocolate_Strawberries",
-        "Emoji": "🍓",
-        "DisplayPrice": "$5.00-$10.00",
-        "Images": [
-            "ChocolateStrawberries/ChocolateStrawberries.jpg"
-        ],
-        "Route": "/Item/Chocolate_Strawberries",
-        "Tags": ["🍭 Sweets"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 5.0,
-                "quantity": "50 Berries"
-            },
-            {
-                "price": 10.0,
-                "quantity": "100 Berries"
-            }
-        ]
-    },
-    "Gingerbread_Latte_Cookies": {
-        "DisplayName": "Gingerbread Latte Cookies",
-        "Name": "Gingerbread_Latte_Cookies",
-        "Emoji": "☕",
-        "DisplayPrice": "$10.00 - $20.00",
-        "Images": [
-            "GingerbreadLatte/GingerbreadLatte.jpg"
-        ],
-        "Route": "/Item/Gingerbread_Latte_Cookies",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 10.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 20.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "French_Bread": {
-        "DisplayName": "French Bread",
-        "Name": "French_Bread",
-        "Emoji": "☁️",
-        "DisplayPrice": "$5.00",
-        "Images": [
-            "FrenchBread/FrenchBread.jpg"
-        ],
-        "Route": "/Item/French_Bread",
-        "Tags": ["🥖 Bread"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 5.0,
-                "quantity": "One Loaf"
-            }
-        ]
-    },
-    "Pumpkin_Donuts": {
-        "DisplayName": "Pumpkin Donuts",
-        "Name": "Pumpkin_Donuts",
-        "Emoji": "🎃",
-        "DisplayPrice": "$2.00 - $15.00",
-        "Images": [
-            "PumpkinDonuts/PumpkinDonuts1.jpg",
-            "PumpkinDonuts/PumpkinDonuts2.jpg",
-            "PumpkinDonuts/PumpkinDonuts3.jpg"
-        ],
-        "Route": "/Item/Pumpkin_Donuts",
-        "Tags": ["🍩 Donut"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 2.00,
-                "quantity": "One donut"
-            },
-            {
-                "price": 8.00,
-                "quantity": "Twelve donuts"
-            },
-            {
-                "price": 15.00,
-                "quantity": "Twenty Donuts"
-            }
-        ]
-    },
-    "Apple_Pie": {
-        "DisplayName": "Apple Pie",
-        "Name": "Apple_Pie",
-        "Emoji": "🍎",
-        "DisplayPrice": "$3.00 - $10.00",
-        "Images": [
-            "ApplePie/ApplePie.jpg"
-        ],
-        "Route": "/Item/Apple_Pie",
-        "Tags": ["🥧 Baked Good"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 3.0,
-                "quantity": "One slice"
-            },
-            {
-                "price": 10.0,
-                "quantity": "One pie"
-            }
-        ]
-    },
-    "Cake_Pops": {
-        "DisplayName": "Cake Pops",
-        "Name": "Cake_Pops",
-        "Emoji": "🍰",
-        "DisplayPrice": "$10.00",
-        "Images": [
-            "CakePops/CakePop1.jpg",
-            "CakePops/CakePop2.jpg"
-        ],
-        "Route": "/Item/Cake_Pops",
-        "Tags": ["🎂 Cake", "🍭 Sweets"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 10.0,
-                "quantity": "Six chocolate"
-            },
-            {
-                "price": 10.0,
-                "quantity": "Six vanilla"
-            }
-        ]
-    },
-    "Plain_Bagel": {
-        "DisplayName": "Plain Bagels",
-        "Name": "Plain_Bagel",
-        "Emoji": "🥯",
-        "DisplayPrice": "$20.00 - $30.00",
-        "Images": [
-            "PlainBagel/PlainBagel1.jpg",
-            "PlainBagel/PlainBagel2.jpg"
-        ],
-        "Route": "/Item/Plain_Bagel",
-        "Tags": ["🥯 Bagel", "🥖 Bread"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 20.0,
-                "quantity": "Eight Bagels"
-            },
-            {
-                "price": 30.0,
-                "quantity": "Sixteen Bagels"
-            }
-        ]
-    },
-    "Italian_Bread": {
-        "DisplayName": "Italian Bread",
-        "Name": "Italian_Bread",
-        "Emoji": "☁️",
-        "DisplayPrice": "$7.00 - $14.00",
-        "Images": [
-            "ItalianBread/ItalianBread1.jpg",
-            "ItalianBread/ItalianBread2.jpg",
-            "ItalianBread/ItalianBread3.jpg"
-        ],
-        "Route": "/Item/Italian_Bread",
-        "Tags": ["🥖 Bread"],
-        "Alternative": "",
-        "Instagram": true,
-        "Options": [
-            {
-                "price": 7.0,
-                "quantity": "One Loaf"
-            },
-            {
-                "price": 14.0,
-                "quantity": "Two Loaves"
-            }
-        ]
-    },
-    "Sugar_Cookie": {
-        "DisplayName": "Sugar Cookies",
-        "Name": "Sugar_Cookie",
-        "Emoji": "🍪",
-        "DisplayPrice": "$15.00 - $25.00",
-        "Images": [
-            "SugarCookie/SugarCookie.jpg"
-        ],
-        "Route": "/Item/Sugar_Cookie",
-        "Tags": ["🍪 Cookie"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "Six cookies"
-            },
-            {
-                "price": 25.0,
-                "quantity": "Twelve cookies"
-            }
-        ]
-    },
-    "Vanilla_Cake": {
-        "DisplayName": "Vanilla Cake",
-        "Name": "Vanilla_Cake",
-        "Emoji": "🎂",
-        "DisplayPrice": "$15.00",
-        "Images": [
-            "VanillaCake/VanillaCake1.jpg",
-            "VanillaCake/VanillaCake2.jpg"
-        ],
-        "Route": "/Item/Vanilla_Cake",
-        "Tags": ["🎂 Cake"],
-        "Alternative": "",
-        "Instagram": false,
-        "Options": [
-            {
-                "price": 15.0,
-                "quantity": "One Cake"
-            }
-        ]
-    }
+    "MenuItems": [
+        {
+            "id": 1,
+            "DisplayName": "Ginger Molasses Cookies",
+            "Name": "Ginger_Molasses_Cookies",
+            "Emoji": "🍯",
+            "DisplayPrice": "$12.00 - $24.00",
+            "Images": [
+                "GingerMolasses/GingerMolasses.jpg"
+            ],
+            "Route": "/Item/Ginger_Molasses_Cookies",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 12.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 24.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "DisplayName": "Banana Bread",
+            "Name": "Banana_Bread",
+            "Emoji": "🍌",
+            "DisplayPrice": "$8.00 - $16.00",
+            "Images": [
+                "BananaBread/BananaBread1.jpg",
+                "BananaBread/BananaBread2.jpg",
+                "BananaBread/BananaBread3.jpg"
+            ],
+            "Route": "/Item/Banana_Bread",
+            "Tags": ["🥧 Baked Good"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 8.0,
+                    "quantity": "One Loaf"
+                },
+                {
+                    "price": 16.0,
+                    "quantity": "Two Loaves"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "DisplayName": "Blueberry Zucchini",
+            "Name": "Blueberry_Zucchini",
+            "Emoji": "🫐",
+            "DisplayPrice": "$6.00",
+            "Images": [
+                "BlueberryZucchini/BlueberryZucchini.jpg"
+            ],
+            "Route": "/Item/Blueberry_Zucchini",
+            "Tags": ["🥧 Baked Good"],
+            "Alternative": "Blueberry Zucchini bread, blueberries",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 6.0,
+                    "quantity": "One Loaf"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "DisplayName": "Brown Butter Cookies",
+            "Name": "Brown_Butter_Cookies",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": [
+                "BrownButterCookies/BrownButterCookies1.jpg",
+                "BrownButterCookies/BrownButterCookies2.jpg",
+                "BrownButterCookies/BrownButterCookies3.jpg"
+            ],
+            "Route": "/Item/Brown_Butter_Cookies",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "Brown Butter Chocolate Chip Cookies",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "DisplayName": "Cinnamon Rolls",
+            "Name": "Cinnamon_Rolls",
+            "Emoji": "🍂",
+            "DisplayPrice": "$5.00 - $30.00",
+            "Images": [
+                "CinnamonRolls/CinnamonRolls1.jpg",
+                "CinnamonRolls/CinnamonRolls2.jpg"
+            ],
+            "Route": "/Item/Cinnamon_Rolls",
+            "Tags": ["🥧 Baked Good"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 5.0,
+                    "quantity": "One roll"
+                },
+                {
+                    "price": 20.0,
+                    "quantity": "Six rolls"
+                },
+                {
+                    "price": 30.0,
+                    "quantity": "Twelve rolls"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "DisplayName": "Chocolate Donuts",
+            "Name": "Chocolate_Donut",
+            "Emoji": "🍫",
+            "DisplayPrice": "$10.00-$20.00",
+            "Images": [
+                "ChocolateDonuts/ChocolateDonut1.jpg",
+                "ChocolateDonuts/ChocolateDonut2.jpg"
+            ],
+            "Route": "/Item/Chocolate_Donut",
+            "Tags": ["🍩 Donut"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 10.0,
+                    "quantity": "Twelve Donuts"
+                },
+                {
+                    "price": 20.0,
+                    "quantity": "Twenty-four Donuts"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "DisplayName": "Chocolate Strawberries",
+            "Name": "Chocolate_Strawberries",
+            "Emoji": "🍓",
+            "DisplayPrice": "$5.00-$10.00",
+            "Images": [
+                "ChocolateStrawberries/ChocolateStrawberries.jpg"
+            ],
+            "Route": "/Item/Chocolate_Strawberries",
+            "Tags": ["🍭 Sweets"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 5.0,
+                    "quantity": "50 Berries"
+                },
+                {
+                    "price": 10.0,
+                    "quantity": "100 Berries"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "DisplayName": "Gingerbread Latte Cookies",
+            "Name": "Gingerbread_Latte_Cookies",
+            "Emoji": "☕",
+            "DisplayPrice": "$10.00 - $20.00",
+            "Images": [
+                "GingerbreadLatte/GingerbreadLatte.jpg"
+            ],
+            "Route": "/Item/Gingerbread_Latte_Cookies",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 10.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 20.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "DisplayName": "French Bread",
+            "Name": "French_Bread",
+            "Emoji": "☁️",
+            "DisplayPrice": "$5.00",
+            "Images": [
+                "FrenchBread/FrenchBread.jpg"
+            ],
+            "Route": "/Item/French_Bread",
+            "Tags": ["🥖 Bread"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 5.0,
+                    "quantity": "One Loaf"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "DisplayName": "Pumpkin Donuts",
+            "Name": "Pumpkin_Donuts",
+            "Emoji": "🎃",
+            "DisplayPrice": "$2.00 - $15.00",
+            "Images": [
+                "PumpkinDonuts/PumpkinDonuts1.jpg",
+                "PumpkinDonuts/PumpkinDonuts2.jpg",
+                "PumpkinDonuts/PumpkinDonuts3.jpg"
+            ],
+            "Route": "/Item/Pumpkin_Donuts",
+            "Tags": ["🍩 Donut"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 2.00,
+                    "quantity": "One donut"
+                },
+                {
+                    "price": 8.00,
+                    "quantity": "Twelve donuts"
+                },
+                {
+                    "price": 15.00,
+                    "quantity": "Twenty Donuts"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "DisplayName": "Apple Pie",
+            "Name": "Apple_Pie",
+            "Emoji": "🍎",
+            "DisplayPrice": "$3.00 - $10.00",
+            "Images": [
+                "ApplePie/ApplePie.jpg"
+            ],
+            "Route": "/Item/Apple_Pie",
+            "Tags": ["🥧 Baked Good"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 3.0,
+                    "quantity": "One slice"
+                },
+                {
+                    "price": 10.0,
+                    "quantity": "One pie"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "DisplayName": "Cake Pops",
+            "Name": "Cake_Pops",
+            "Emoji": "🍰",
+            "DisplayPrice": "$10.00",
+            "Images": [
+                "CakePops/CakePop1.jpg",
+                "CakePops/CakePop2.jpg"
+            ],
+            "Route": "/Item/Cake_Pops",
+            "Tags": ["🎂 Cake", "🍭 Sweets"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 10.0,
+                    "quantity": "Six chocolate"
+                },
+                {
+                    "price": 10.0,
+                    "quantity": "Six vanilla"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "DisplayName": "Plain Bagels",
+            "Name": "Plain_Bagel",
+            "Emoji": "🥯",
+            "DisplayPrice": "$20.00 - $30.00",
+            "Images": [
+                "PlainBagel/PlainBagel1.jpg",
+                "PlainBagel/PlainBagel2.jpg"
+            ],
+            "Route": "/Item/Plain_Bagel",
+            "Tags": ["🥯 Bagel", "🥖 Bread"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 20.0,
+                    "quantity": "Eight Bagels"
+                },
+                {
+                    "price": 30.0,
+                    "quantity": "Sixteen Bagels"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "DisplayName": "Italian Bread",
+            "Name": "Italian_Bread",
+            "Emoji": "☁️",
+            "DisplayPrice": "$7.00 - $14.00",
+            "Images": [
+                "ItalianBread/ItalianBread1.jpg",
+                "ItalianBread/ItalianBread2.jpg",
+                "ItalianBread/ItalianBread3.jpg"
+            ],
+            "Route": "/Item/Italian_Bread",
+            "Tags": ["🥖 Bread"],
+            "Alternative": "",
+            "Instagram": true,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 7.0,
+                    "quantity": "One Loaf"
+                },
+                {
+                    "price": 14.0,
+                    "quantity": "Two Loaves"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "DisplayName": "Sugar Cookies",
+            "Name": "Sugar_Cookie",
+            "Emoji": "🍪",
+            "DisplayPrice": "$15.00 - $25.00",
+            "Images": [
+                "SugarCookie/SugarCookie.jpg"
+            ],
+            "Route": "/Item/Sugar_Cookie",
+            "Tags": ["🍪 Cookie"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "Six cookies"
+                },
+                {
+                    "price": 25.0,
+                    "quantity": "Twelve cookies"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "DisplayName": "Vanilla Cake",
+            "Name": "Vanilla_Cake",
+            "Emoji": "🎂",
+            "DisplayPrice": "$15.00",
+            "Images": [
+                "VanillaCake/VanillaCake1.jpg",
+                "VanillaCake/VanillaCake2.jpg"
+            ],
+            "Route": "/Item/Vanilla_Cake",
+            "Tags": ["🎂 Cake"],
+            "Alternative": "",
+            "Instagram": false,
+            "Rating": 5.0,
+            "Options": [
+                {
+                    "price": 15.0,
+                    "quantity": "One Cake"
+                }
+            ]
+        }
+    ]
 }

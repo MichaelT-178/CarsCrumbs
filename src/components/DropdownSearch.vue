@@ -16,7 +16,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -42,13 +41,15 @@ const filteredItems = computed(() => {
   if (!props.query) return [];
   const queryWords = props.query.toLowerCase().split(' ');
 
-  return menu.value.filter(item =>
-    queryWords.some(word =>
-      item.DisplayName.toLowerCase().includes(word) ||
-      item.Tags.some(tag => tag.toLowerCase().includes(word)) ||
-      (item.Alternative && item.Alternative.toLowerCase().includes(word))
+  return menu.value
+    .filter(item =>
+      queryWords.some(word =>
+        item.DisplayName.toLowerCase().includes(word) ||
+        item.Tags.some(tag => tag.toLowerCase().includes(word)) ||
+        (item.Alternative && item.Alternative.toLowerCase().includes(word))
+      )
     )
-  ).slice(0, 5);
+    .slice(0, 5);
 });
 
 const handleClick = (item) => {
@@ -59,18 +60,16 @@ const handleClick = (item) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = Object.values(MenuData.default);
+    menu.value = MenuData.default.MenuItems; // Update to reference `MenuItems` array
   } catch (error) {
-    console.error("Error loading menu data:", error);
+    console.error('Error loading menu data:', error);
   }
 };
 
 onMounted(() => {
   loadMenuData();
 });
-
 </script>
-
 
 <style scoped>
 .dropdown-menu {
@@ -106,5 +105,4 @@ onMounted(() => {
   background-color: #f0f0f0;
   color: black;
 }
-
 </style>

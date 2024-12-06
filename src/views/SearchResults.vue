@@ -55,17 +55,19 @@ const filteredItems = computed(() => {
 
   const query = searchQuery.value.toLowerCase();
 
-  return Object.values(jsonData.value).filter(
+  return jsonData.value.filter(
     (item) =>
       item.DisplayName.toLowerCase().includes(query) ||
-      item.DisplayName.toLowerCase().includes(query.slice(0, -1)) || // Remove possible "s" at the end
-      item.Alternative.toLowerCase().includes(query.slice(0, -1)) || // Remove possible "s" at the end
+      item.DisplayName.toLowerCase().includes(query.slice(0, -1)) ||
+      (item.Alternative && item.Alternative.toLowerCase().includes(query.slice(0, -1))) ||
       item.Tags.some((tag) => tag.toLowerCase().includes(query)) ||
-      item.Tags.some((tag) => tag.toLowerCase().includes(query.slice(0, -1))) // Remove possible "s" at the end
+      item.Tags.some((tag) => tag.toLowerCase().includes(query.slice(0, -1)))
   );
 });
 
-watch(() => route.query.search_query, (newQuery) => {
+watch(
+  () => route.query.search_query,
+  (newQuery) => {
     searchQuery.value = newQuery;
   }
 );
@@ -73,14 +75,13 @@ watch(() => route.query.search_query, (newQuery) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    jsonData.value = Object.values(MenuData.default);
+    jsonData.value = MenuData.default.MenuItems;
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
 };
 
-const getItemImage = (imageName) =>
-  new URL(`../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+const getItemImage = (imageName) => new URL(`../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
 
 const navigateToRoute = (route) => {
   if (route) {
