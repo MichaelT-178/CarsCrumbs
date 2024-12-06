@@ -49,8 +49,8 @@
           <p>CHECKOUT</p>
         </div>
       </div>
-
     </div>
+
   </div>  
 </template>
 

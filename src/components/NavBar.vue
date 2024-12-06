@@ -59,12 +59,14 @@
 
       <section 
         class="profile-person-group" 
-        @mouseover="showPersonHighlight = true" 
-        @mouseleave="showPersonHighlight = false"
+        @mouseover="toggleProfileDropdown(true)" 
+        @mouseleave="toggleProfileDropdown(false)"
       >
         <span class="material-symbols-outlined profile-person-icon">person</span>
 
-        <DropdownProfile :visible="showPersonHighlight" />
+        <DropdownProfile 
+          v-model:visible="showProfileHighlight" 
+          @close="hideDropdown" />
       </section>
     </div>
   </div>
@@ -72,7 +74,7 @@
   </div>
 
   <div 
-    v-if="showDropdown || showCartOverlay" 
+    v-if="showDropdown || showCartOverlay || showProfileOverlay" 
     class="overlay" 
     @click="hideDropdown"
   ></div>
@@ -130,7 +132,8 @@ const emit = defineEmits(['update:visible']);
 
 const showCartOverlay = ref(false);
 const showCartHighlight = ref(false);
-const showPersonHighlight = ref(false);
+const showProfileOverlay = ref(false);
+const showProfileHighlight = ref(false);
 
 const searchQuery = ref('');
 const showDropdown = ref(false);
@@ -141,13 +144,21 @@ const hideDropdown = () => {
   showDropdown.value = false;
   showCartOverlay.value = false;
   showCartHighlight.value = false;
+  showProfileOverlay.value = false;
+  showProfileHighlight.value = false;
   searchQuery.value = "";
   filteredResults.value = [];
 };
 
 const toggleCartDropdown = (state) => {
   showCartHighlight.value = state;
-  // showCartOverlay.value = state; UNCOMMENT THIS LINE TO DISPLAY OVERLAY
+  // showCartOverlay.value = state; //UNCOMMENT THIS LINE TO DISPLAY OVERLAY
+  emit('update:visible', state);
+};
+
+const toggleProfileDropdown = (state) => {
+  showProfileHighlight.value = state;
+  // showProfileOverlay.value = state; //UNCOMMENT THIS LINE TO DISPLAY OVERLAY
   emit('update:visible', state);
 };
 
