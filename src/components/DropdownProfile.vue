@@ -1,13 +1,8 @@
-Share
-
-
-You said:
 <template>
   <div 
     class="rectangle-background" 
     :class="{ 'is-visible': visible }"
   >
-
     <div v-if="true">
       <p class="not-signed-in-text">Not logged in</p>
       <div class="sign-in-btn" @click="goToOrderView">
@@ -15,10 +10,38 @@ You said:
       </div>
     </div>
     <div v-else> 
-      <p class="cart-info-header">{{ 1 }} {{ 1 }} in the cart</p>
-      <div class="cart-info-divider"></div>
 
-      <!-- Cart-item card -->
+      <div class="account-section">
+        <span class="material-symbols-outlined account-circle-icon">account_circle</span>
+      </div>
+
+
+
+      <div class="info-section">
+
+        <div class="info-item">
+          <span class="material-symbols-outlined favorite-icon">favorite</span>
+          <p>Favorites</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="info-item">
+          <span class="material-symbols-outlined order-history-icon">receipt_long</span>
+          <p>Order History</p>
+        </div>
+        <div class="divider"></div>
+        
+        <div class="info-item">
+          <span class="material-symbols-outlined review-icon">reviews</span>
+          <p>Reviews</p>
+        </div>
+        
+        <div class="divider"></div>
+
+      </div>
+
+
       <div class="button-container">
         <div class="profile-btn view-account-btn" @click="goToCartView">
           <p>VIEW ACCOUNT</p>
@@ -28,7 +51,6 @@ You said:
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -59,7 +81,6 @@ const goToCheckoutView = () => {
   emit('close');
 };
 
-
 </script>
 
 
@@ -70,11 +91,11 @@ const goToCheckoutView = () => {
   right: 0;
   width: 250px;
   min-height: 100px;
-  background-color: cyan;
+  background-color: white;
   z-index: 999;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: opacity 0.3s, visibility 0.3s;
   visibility: hidden;
@@ -98,6 +119,7 @@ const goToCheckoutView = () => {
   border-right: 7px solid transparent;
   border-bottom: 10px solid cyan;
 }
+
 
 .not-signed-in-text {
   position: absolute;
@@ -135,8 +157,58 @@ const goToCheckoutView = () => {
 }
 
 
+.account-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.account-circle-icon {
+  font-size: 70px;
+  color: #444;
+}
+
+.info-section {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.info-item:hover {
+  background-color: #e0e0e0;
+}
+
+.favorite-icon,
+.order-history-icon,
+.review-icon {
+  font-size: 24px;
+  color: #444;
+  margin-right: 10px;
+}
+
+.info-item p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #212121;
+  margin: 0;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+}
+
 .button-container {
-  margin-top: 100px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -157,7 +229,8 @@ const goToCheckoutView = () => {
   font-weight: bold;
   font-family: Josefin Sans;
   text-transform: uppercase;
-  margin-top: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .profile-btn:hover {
@@ -166,8 +239,6 @@ const goToCheckoutView = () => {
 
 .view-account-btn {
   background-color: #efefef;
-  margin-top: 5px;
-  margin-bottom: 5px;
   color: #444;
 }
 
@@ -178,7 +249,6 @@ const goToCheckoutView = () => {
 
 .sign-out-btn {
   background-color: #007BFF;
-  margin-top: 5px;
   margin-bottom: 15px;
 }
 
