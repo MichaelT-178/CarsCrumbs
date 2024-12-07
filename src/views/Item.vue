@@ -1,12 +1,12 @@
 <template>
-
+  
   <WordpressHeader 
     v-if="isSmallScreen" 
     class="wordpress-header" 
   />
 
   <div v-if="menuItem" class="menu-item-container">
-
+    
     <img :src="pic" class="item-pic" />
 
     <div class="item-info">
@@ -56,11 +56,21 @@
       <button class="scroll-button right-arrow" @click="scrollRight">❯</button>
     </div>
   </div>
-
-    <!-- Reviews Section -->
-    <div class="reviews-section">
-      <h2 class="related-title">Customer Reviews</h2>
-      <div v-if="filteredReviews.length" class="reviews-container">
+  
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <h2 class="reviews-header">Customer Reviews</h2>
+    
+    <hr class="reviews-header-divider" />
+      <ReviewPanel></ReviewPanel>
+    <div class="reviews-divider">
+      <span class="divider-title">Reviews</span>
+      <hr class="reviews-header-divider" />
+    </div>
+    
+    <!-- Reviews -->
+    <div class="reviews-container">
+      <div v-if="filteredReviews.length">
         <ReviewCard 
           v-for="(review, index) in filteredReviews" 
           :key="index" 
@@ -71,9 +81,8 @@
         <p>No reviews for this item yet.</p>
       </div>
     </div>
+  </div>
 
-  
-  
   <div class="bottom-section">
     <p>Copyright © 2024 Beanie Boo. All Rights Reserved.</p>
   </div>
@@ -90,6 +99,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
 import { folderRealOrTest } from "../data.config.js";
 import Reviews from "../assets/real_menu/Reviews.json";
+import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 
 const cart = useCartStore();
 const router = useRouter();
@@ -397,10 +407,48 @@ button:hover:enabled {
 }
 
 .reviews-section {
-  margin-top: -10px;
+  margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
   text-align: left;
+}
+
+.reviews-header {
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+}
+
+.reviews-divider {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.reviews-header-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #b1b1b1;
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.divider-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 650px) {
@@ -411,6 +459,9 @@ button:hover:enabled {
     padding-left: 20px;
   }
 
+  .reviews-header {
+    font-size: 36px;
+  }
 
   .item-pic {
     height: 305px;

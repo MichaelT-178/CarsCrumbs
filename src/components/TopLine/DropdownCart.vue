@@ -57,10 +57,10 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useCartStore } from '../stores/cart';
+import { useCartStore } from '../../stores/cart';
 import { useRouter } from 'vue-router';
-import { folderRealOrTest } from '../data.config';
-import { pluralize } from '../utils/helper';
+import { folderRealOrTest } from '../../data.config';
+import { pluralize } from '../../utils/helper';
 
 const cart = useCartStore();
 const router = useRouter();
@@ -91,7 +91,7 @@ const goToCheckoutView = () => {
 
 const getPicture = (item) =>{
   return computed(() => {
-    return new URL(`../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href;
+    return new URL(`../../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href;
   });
 }
 

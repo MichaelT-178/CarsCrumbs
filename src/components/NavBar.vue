@@ -20,7 +20,7 @@
       </span>
       <span v-else class="shortcut-text"></span>
 
-      <Dropdown
+      <DropdownSearch
         :query="searchQuery"
         :show="showDropdown"
         @close="hideDropdown"
@@ -119,10 +119,10 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import logo from "../assets/logos/purple-logo.png";
-import Dropdown from "./DropdownSearch.vue";
 import { useCartStore } from "../stores/cart.js";
-import DropdownCart from './DropdownCart.vue';
-import DropdownProfile from './DropdownProfile.vue';
+import DropdownSearch from "./TopLine/DropdownSearch.vue";
+import DropdownCart from './TopLine/DropdownCart.vue';
+import DropdownProfile from './TopLine/DropdownProfile.vue';
 
 const cart = useCartStore();
 
