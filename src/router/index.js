@@ -15,29 +15,35 @@ import SearchResults from '../views/SearchResults.vue';
 //Checkout
 import Checkout from '../views/Checkout.vue';
 
+//Write review
+import WriteReview from '../views/WriteReview.vue';
+
+// Account
+import Account from '../views/Account/Account.vue';
+
 const routes = [
 	{
 		path: '/',
 		component: Home
 	},
 	{
-		path: '/Order',
+		path: '/order',
 		component: Order
 	},
 	{
-		path: '/Cart',
+		path: '/cart',
 		component: Cart
 	},
 	{
-		path: '/About',
+		path: '/about',
 		component: About
 	},
 	{
-		path: '/ContactUs',
+		path: '/contact-us',
 		component: Contact
 	},
 	{
-		path: '/Item/:ItemName',
+		path: '/item/:ItemName',
 		name: 'ItemView',
 		component: Item,
 		props: true
@@ -49,9 +55,19 @@ const routes = [
 		props: (route) => ({ searchQuery: route.query.search_query })
 	},
 	{
-		path: '/Cart/Checkout',
+		path: '/cart/checkout',
 		component: Checkout
-	}
+	},
+	{
+		path: '/write-review',
+		component: WriteReview
+	},
+	{
+		path: '/account',
+		name: 'AccountView',
+		component: Account,
+		props: (route) => ({ tab: route.query.tab })
+	},
 ]
 
 const router = createRouter({

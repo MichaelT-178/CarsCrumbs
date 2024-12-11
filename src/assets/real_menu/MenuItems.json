@@ -9,7 +9,7 @@
             "Images": [
                 "GingerMolasses/GingerMolasses.jpg"
             ],
-            "Route": "/Item/Ginger_Molasses_Cookies",
+            "Route": "/item/Ginger_Molasses_Cookies",
             "Tags": ["🍪 Cookie"],
             "Alternative": "",
             "Instagram": true,
@@ -36,7 +36,7 @@
                 "BananaBread/BananaBread2.jpg",
                 "BananaBread/BananaBread3.jpg"
             ],
-            "Route": "/Item/Banana_Bread",
+            "Route": "/item/Banana_Bread",
             "Tags": ["🥧 Baked Good"],
             "Alternative": "",
             "Instagram": true,
@@ -61,7 +61,7 @@
             "Images": [
                 "BlueberryZucchini/BlueberryZucchini.jpg"
             ],
-            "Route": "/Item/Blueberry_Zucchini",
+            "Route": "/item/Blueberry_Zucchini",
             "Tags": ["🥧 Baked Good"],
             "Alternative": "Blueberry Zucchini bread, blueberries",
             "Instagram": true,
@@ -84,7 +84,7 @@
                 "BrownButterCookies/BrownButterCookies2.jpg",
                 "BrownButterCookies/BrownButterCookies3.jpg"
             ],
-            "Route": "/Item/Brown_Butter_Cookies",
+            "Route": "/item/Brown_Butter_Cookies",
             "Tags": ["🍪 Cookie"],
             "Alternative": "Brown Butter Chocolate Chip Cookies",
             "Instagram": true,
@@ -110,7 +110,7 @@
                 "CinnamonRolls/CinnamonRolls1.jpg",
                 "CinnamonRolls/CinnamonRolls2.jpg"
             ],
-            "Route": "/Item/Cinnamon_Rolls",
+            "Route": "/item/Cinnamon_Rolls",
             "Tags": ["🥧 Baked Good"],
             "Alternative": "",
             "Instagram": true,
@@ -140,7 +140,7 @@
                 "ChocolateDonuts/ChocolateDonut1.jpg",
                 "ChocolateDonuts/ChocolateDonut2.jpg"
             ],
-            "Route": "/Item/Chocolate_Donut",
+            "Route": "/item/Chocolate_Donut",
             "Tags": ["🍩 Donut"],
             "Alternative": "",
             "Instagram": false,
@@ -165,7 +165,7 @@
             "Images": [
                 "ChocolateStrawberries/ChocolateStrawberries.jpg"
             ],
-            "Route": "/Item/Chocolate_Strawberries",
+            "Route": "/item/Chocolate_Strawberries",
             "Tags": ["🍭 Sweets"],
             "Alternative": "",
             "Instagram": false,
@@ -190,7 +190,7 @@
             "Images": [
                 "GingerbreadLatte/GingerbreadLatte.jpg"
             ],
-            "Route": "/Item/Gingerbread_Latte_Cookies",
+            "Route": "/item/Gingerbread_Latte_Cookies",
             "Tags": ["🍪 Cookie"],
             "Alternative": "",
             "Instagram": true,
@@ -215,7 +215,7 @@
             "Images": [
                 "FrenchBread/FrenchBread.jpg"
             ],
-            "Route": "/Item/French_Bread",
+            "Route": "/item/French_Bread",
             "Tags": ["🥖 Bread"],
             "Alternative": "",
             "Instagram": false,
@@ -238,7 +238,7 @@
                 "PumpkinDonuts/PumpkinDonuts2.jpg",
                 "PumpkinDonuts/PumpkinDonuts3.jpg"
             ],
-            "Route": "/Item/Pumpkin_Donuts",
+            "Route": "/item/Pumpkin_Donuts",
             "Tags": ["🍩 Donut"],
             "Alternative": "",
             "Instagram": true,
@@ -267,7 +267,7 @@
             "Images": [
                 "ApplePie/ApplePie.jpg"
             ],
-            "Route": "/Item/Apple_Pie",
+            "Route": "/item/Apple_Pie",
             "Tags": ["🥧 Baked Good"],
             "Alternative": "",
             "Instagram": false,
@@ -293,7 +293,7 @@
                 "CakePops/CakePop1.jpg",
                 "CakePops/CakePop2.jpg"
             ],
-            "Route": "/Item/Cake_Pops",
+            "Route": "/item/Cake_Pops",
             "Tags": ["🎂 Cake", "🍭 Sweets"],
             "Alternative": "",
             "Instagram": false,
@@ -319,7 +319,7 @@
                 "PlainBagel/PlainBagel1.jpg",
                 "PlainBagel/PlainBagel2.jpg"
             ],
-            "Route": "/Item/Plain_Bagel",
+            "Route": "/item/Plain_Bagel",
             "Tags": ["🥯 Bagel", "🥖 Bread"],
             "Alternative": "",
             "Instagram": false,
@@ -346,7 +346,7 @@
                 "ItalianBread/ItalianBread2.jpg",
                 "ItalianBread/ItalianBread3.jpg"
             ],
-            "Route": "/Item/Italian_Bread",
+            "Route": "/item/Italian_Bread",
             "Tags": ["🥖 Bread"],
             "Alternative": "",
             "Instagram": true,
@@ -371,7 +371,7 @@
             "Images": [
                 "SugarCookie/SugarCookie.jpg"
             ],
-            "Route": "/Item/Sugar_Cookie",
+            "Route": "/item/Sugar_Cookie",
             "Tags": ["🍪 Cookie"],
             "Alternative": "",
             "Instagram": false,
@@ -397,7 +397,7 @@
                 "VanillaCake/VanillaCake1.jpg",
                 "VanillaCake/VanillaCake2.jpg"
             ],
-            "Route": "/Item/Vanilla_Cake",
+            "Route": "/item/Vanilla_Cake",
             "Tags": ["🎂 Cake"],
             "Alternative": "",
             "Instagram": false,

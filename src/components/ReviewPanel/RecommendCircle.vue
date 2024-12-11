@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <router-link to="/Cart" class="write-review-button">
+    <router-link to="/write-review" class="write-review-button">
       Write a review
     </router-link>
   </div>

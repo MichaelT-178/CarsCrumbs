@@ -75,17 +75,17 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 
 const goToOrderView = () => {
-  router.push('/Order');
+  router.push('/order');
   emit('close');
 };
 
 const goToCartView = () => {
-  router.push('/Cart');
+  router.push('/cart');
   emit('close');
 };
 
 const goToCheckoutView = () => {
-  router.push('/Cart/Checkout');
+  router.push('/cart/checkout');
   emit('close');
 };
 

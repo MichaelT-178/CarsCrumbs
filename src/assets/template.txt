@@ -5,7 +5,7 @@
         "DisplayPrice": "",
         "Images": [
         ],
-        "Route": "/Item/",
+        "Route": "/item/",
         "Tags": [],
         "Alternative": "",
         "Options": [

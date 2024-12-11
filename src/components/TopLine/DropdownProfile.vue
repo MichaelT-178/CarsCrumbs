@@ -5,7 +5,7 @@
   >
     <div v-if="false">
       <p class="not-signed-in-text">Not logged in</p>
-      <div class="profile-btn" @click="goToView('/Cart/Checkout')">
+      <div class="profile-btn" @click="goToView('/cart/checkout')">
         <p>SIGN IN</p>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <div class="info-section">
         <div 
           class="info-item" 
-          @click="goToView('/Order')"
+          @click="goToView('/account?tab=favorites')"
         >
           <span class="material-symbols-outlined favorite-icon">favorite</span>
           <p>Favorites</p>
@@ -30,7 +30,7 @@
 
         <div 
           class="info-item" 
-          @click="goToView('/About')"
+          @click="goToView('/account?tab=orderHistory')"
         >
           <span class="material-symbols-outlined order-history-icon">receipt_long</span>
           <p>Order History</p>
@@ -40,7 +40,7 @@
         
         <div 
           class="info-item" 
-          @click="goToView('/ContactUs')"
+          @click="goToView('/account?tab=reviews')"
         >
           <span class="material-symbols-outlined review-icon">reviews</span>
           <p>Reviews</p>
@@ -51,7 +51,7 @@
 
 
       <div class="button-container">
-        <div class="profile-btn view-account-btn" @click="goToView('/Cart')">
+        <div class="profile-btn view-account-btn" @click="goToView('account?tab=accountSettings')">
           <p>VIEW ACCOUNT</p>
         </div>
         <div class="profile-btn sign-out-btn" @click="signOut">

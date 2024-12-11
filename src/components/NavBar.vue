@@ -90,21 +90,21 @@
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/Order" class="tab-link">
+            <router-link to="/order" class="tab-link">
               <p>Order</p>
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/About" class="tab-link">
+            <router-link to="/about" class="tab-link">
               <p>About</p>
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/ContactUs" class="tab-link">
+            <router-link to="/contact-us" class="tab-link">
               <p>Contact Us</p>
             </router-link>
           </li>
-          <router-link to="/Cart">
+          <router-link to="/cart">
             <span class="material-symbols-outlined cart-icon">shopping_cart</span>
             <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
           </router-link>

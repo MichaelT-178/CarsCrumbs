@@ -35,7 +35,7 @@
           <img src="/linkedin.svg" alt="Linkedin" />
         </a>
       </div>
-      <router-link to="/ContactUs" class="contact-button">Contact Us</router-link>
+      <router-link to="/contact-us" class="contact-button">Contact Us</router-link>
     </div>
     <div class="footer-bottom">
       <p>© 2024 Cars Crumbs | Developed by <a :href="linkedin" target="_blank" class="bottom-linkedin-link">Michael Totaro</a></p>

@@ -5,7 +5,7 @@
         <Header titleText="Empty Cart" />
         <img class="logo" :src="CrumbsLogo" alt="logo" />
         <p class="empty-message">Your Cart Is Empty</p>
-        <router-link to="/Order" class="order-button">Order Now</router-link>
+        <router-link to="/order" class="order-button">Order Now</router-link>
       </div>
 
       <div class="cart-page" v-else>
@@ -35,7 +35,7 @@
           <h2>Order Summary</h2>
           <p class="summary-total">Total: ${{ cart.getTotal() }}.00</p>
           <p class="summary-items">Items: {{ cart.getItemCount() }}</p>
-          <router-link to="/Cart/Checkout" class="checkout-button">Checkout</router-link>
+          <router-link to="/cart/checkout" class="checkout-button">Checkout</router-link>
           <p class="reset-cart" @click="deleteCart">Reset Cart</p>
           <p class="insta-message">
             Dm <a href="https://ig.me/m/cars.crumbs" class="insta-link" target="_blank">@cars.crumbs</a> on Instagram to discuss alternative payment methods.
@@ -44,7 +44,7 @@
 
         <div v-if="isMobileScreen" class="order-summary-mobile-screen">
           <p class="summary-text">${{ cart.getTotal() }}.00 total • {{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</p>
-          <router-link to="/Cart/Checkout" class="checkout-button-mobile-screen">Checkout</router-link>
+          <router-link to="/cart/checkout" class="checkout-button-mobile-screen">Checkout</router-link>
         </div>
       </div>
     </div>

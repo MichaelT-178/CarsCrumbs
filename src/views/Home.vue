@@ -7,7 +7,7 @@
       <hr class="top-hr" />
       <p>We are a local bakery in Raleigh, NC specializing in pastries, cakes, and cookies.</p>
       <hr class="bottom-hr" />
-      <router-link to="/Order" class="order-button">Order Now</router-link>
+      <router-link to="/order" class="order-button">Order Now</router-link>
     </div>
   </div>
 

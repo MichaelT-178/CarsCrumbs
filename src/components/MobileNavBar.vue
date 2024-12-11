@@ -41,19 +41,19 @@
             <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
           </li>
           <li class="tab" @click="closeSidebar">
-            <router-link to="/Order">
+            <router-link to="/order">
               <span class="material-symbols-outlined">cookie</span><span class="tab-text">Order</span>
             </router-link>
             <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
           </li>
           <li class="tab" @click="closeSidebar">
-            <router-link to="/About">
+            <router-link to="/about">
               <span class="material-symbols-outlined">person</span><span class="tab-text">About</span>
             </router-link>
             <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
           </li>
           <li class="tab" @click="closeSidebar">
-            <router-link to="/ContactUs">
+            <router-link to="/contact-us">
               <span class="material-symbols-outlined">mail</span><span class="tab-text">Contact Us</span>
             </router-link>
             <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
@@ -82,7 +82,7 @@
       @mouseleave="resetMenuIconColor">
       menu
     </span>
-    <router-link to="/Cart">
+    <router-link to="/cart">
       <span class="material-symbols-outlined cart-icon">shopping_cart</span>
       <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
     </router-link>
