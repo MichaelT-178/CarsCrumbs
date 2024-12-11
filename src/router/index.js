@@ -60,7 +60,9 @@ const routes = [
 	},
 	{
 		path: '/write-review',
-		component: WriteReview
+		name: 'WriteReview',
+		component: WriteReview,
+		props: (route) => ({ itemName: route.query.itemName })
 	},
 	{
 		path: '/account',

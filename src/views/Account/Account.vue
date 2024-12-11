@@ -9,7 +9,6 @@
       </ul>
     </aside>
     <main class="content">
-      <p class="account-title">Account Dashboard</p>
       <component :is="currentView" />
     </main>
   </div>
@@ -20,26 +19,27 @@
 import { ref, computed, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import UserInfo from './UserInfo.vue';
+import AccountSettings from './AccountSettings.vue';
 import Favorites from './Favorites.vue';
 import OrderHistory from './OrderHistory.vue';
 import Reviews from './UserReviews.vue';
+import OrderDetails from './OrderDetails.vue';
 
 const route = useRoute();
 const router = useRouter();
 
 const currentTab = ref(route.query.tab || 'favorites');
 
-// Map tab names to components
 const tabComponents = {
+  accountSettings: AccountSettings,
   favorites: Favorites,
   orderHistory: OrderHistory,
   reviews: Reviews,
+  orderDetails: OrderDetails,
 };
 
 const currentView = computed(() => tabComponents[currentTab.value] || Favorites);
 
-// Update the query parameter when the user selects a tab
 const changeTab = (tab) => {
   if (currentTab.value !== tab) {
     currentTab.value = tab;
@@ -47,7 +47,6 @@ const changeTab = (tab) => {
   }
 };
 
-// Watch for changes in the route's query parameter
 watch(
   () => route.query.tab,
   (newTab) => {
@@ -67,7 +66,7 @@ watch(
   width: 240px;
   padding: 10px;
 	margin-right: 50px;
-	margin-top: 10px;
+	margin-top: 20px;
 	margin-left: 10px;
 }
 
@@ -82,12 +81,12 @@ watch(
 	margin-bottom: 5px;
   cursor: pointer;
   border: 1px solid transparent;
-	font-size: 22px;
+	font-size: 19px;
+  color: #1a1a1a;
 	font-family: "Josefin Sans", sans-serif;
 }
 
 .sidebar li:hover {
-	font-size: 24px;
 	font-weight: 600;
 }
 
@@ -95,21 +94,14 @@ watch(
 	background-color: lightskyblue;
 	border-radius: 8px;
 	font-weight: 600;
-	font-size: 24px;
 }
 
 .content {
   flex: 1;
 	margin-top: 40px;
 	border-left: 0.5px solid gray;
+  padding-left: 20px;
 	height: 100vh;
-}
-
-.account-title {
-  color: red;
-  font-family: Arial, sans-serif;
-  margin-bottom: 10px;
-  font-size: 24px;
 }
 
 </style>

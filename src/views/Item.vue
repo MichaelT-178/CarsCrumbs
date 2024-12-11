@@ -62,7 +62,7 @@
     <h2 class="reviews-header">Customer Reviews</h2>
     
     <hr class="reviews-header-divider" />
-      <ReviewPanel></ReviewPanel>
+      <ReviewPanel :item-name="props.ItemName" />
     <div class="reviews-divider">
       <span class="divider-title">Reviews</span>
       <hr class="reviews-header-divider" />

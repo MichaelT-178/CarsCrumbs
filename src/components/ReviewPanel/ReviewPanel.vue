@@ -1,27 +1,33 @@
 <template>
   <div class="reviews-layout">
     <div class="review-item">
-      <ReviewStats />
+      <ReviewStats :item-name="itemName" />
     </div>
     <div class="divider"></div>
     <div class="review-item">
-      <BarPercent />
+      <BarPercent :item-name="itemName" />
     </div>
     <div class="divider"></div>
     <div class="review-item">
-      <RecommendCircle />
+      <RecommendCircle :item-name="itemName" />
     </div>
   </div>
 </template>
-
 
 <script setup>
 import ReviewStats from "./ReviewStats.vue";
 import BarPercent from "./BarPercent.vue";
 import RecommendCircle from "./RecommendCircle.vue";
 
-</script>
+const props = defineProps({
+  itemName: {
+    type: String,
+    required: true,
+  },
+});
 
+// Use the itemName prop to fetch or display relevant data for the reviews.
+</script>
 
 <style scoped>
 .reviews-layout {
@@ -60,5 +66,4 @@ import RecommendCircle from "./RecommendCircle.vue";
     margin-top: -25px;
   }
 }
-
 </style>

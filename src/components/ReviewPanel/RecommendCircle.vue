@@ -18,7 +18,10 @@
       </div>
     </div>
 
-    <router-link to="/write-review" class="write-review-button">
+    <router-link
+      :to="{ path: '/write-review', query: { itemName: itemName } }"
+      class="write-review-button"
+    >
       Write a review
     </router-link>
   </div>
@@ -27,6 +30,13 @@
 
 <script setup>
 const recommendPercent = 58;
+
+const props = defineProps({
+  itemName: {
+    type: String,
+    required: true,
+  },
+});
 
 </script>
 
