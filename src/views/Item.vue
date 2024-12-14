@@ -149,7 +149,7 @@ import Reviews from "../assets/real_menu/Reviews.json";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 
 
-const hasReviews = false;
+const hasReviews = true;
 
 const cart = useCartStore();
 const router = useRouter();
@@ -502,8 +502,6 @@ button:hover:enabled {
   display: none;
 }
 
-
-
 .empty-reviews-divider {
   text-align: center;
   margin-top: 20px;
@@ -517,7 +515,7 @@ button:hover:enabled {
 }
 
 .custom-reviews-text {
-  margin: 10px 0; /* Add some spacing */
+  margin: 10px 0;
   text-align: center;
   font-size: 17px;
   font-family: 'Helvetica', sans-serif;

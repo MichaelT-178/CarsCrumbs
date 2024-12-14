@@ -5,7 +5,7 @@
         <ul>
           <li @click="changeTab('accountSettings')" :class="{ active: currentTab === 'accountSettings' }">Account Settings</li>
           <li @click="changeTab('favorites')" :class="{ active: currentTab === 'favorites' }">Favorites</li>
-          <li @click="changeTab('orderHistory')" :class="{ active: currentTab === 'orderHistory' }">Order History</li>
+          <li @click="changeTab('orderHistory')" :class="{ active: currentTab === 'orderHistory' || currentTab === 'orderDetails'}">Order History</li>
           <li @click="changeTab('reviews')" :class="{ active: currentTab === 'reviews' }">Reviews</li>
         </ul>
       </aside>
@@ -102,6 +102,8 @@ const currentTabComponent = computed(() => {
       return Favorites;
     case 'orderHistory':
       return OrderHistory;
+    case 'orderDetails':
+      return OrderDetails;
     case 'reviews':
       return Reviews;
     default:

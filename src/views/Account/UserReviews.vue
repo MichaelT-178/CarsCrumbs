@@ -8,10 +8,8 @@
 		</NoItems>
 	</div>
 	<div v-else>
-		 
+
 	</div>
-
-
 </template>
 
 
