@@ -7,13 +7,14 @@
       <img :src="getPicUrl(order.image)" alt="Order Image" class="order-image" />
     </div>
     <div class="card-details">
-      <p><strong>Cost:</strong> ${{ order.cost.toFixed(2) }}</p>
-      <p><strong>Quantity:</strong> {{ order.quantity }}</p>
-      <p><strong>Date:</strong> {{ order.date }}</p>
+      <p class="details"><strong>Cost:</strong> ${{ order.cost.toFixed(2) }}</p>
+      <p class="details"><strong>Quantity:</strong> {{ order.quantity }}</p>
     </div>
+    <router-link :to="order.route" class="reorder-button">
+      Reorder
+    </router-link>
   </div>
 </template>
-
 
 <script setup>
 import { defineProps } from 'vue';
@@ -28,9 +29,7 @@ defineProps({
 
 const getPicUrl = (imageName) =>
   new URL(`../../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
-
 </script>
-
 
 <style scoped>
 .order-card {
@@ -56,6 +55,11 @@ const getPicUrl = (imageName) =>
   margin: 0;
 }
 
+.details {
+  font-size: 16px;
+  padding-left: 10px;
+}
+
 .image-container {
   display: flex;
   justify-content: center;
@@ -72,11 +76,31 @@ const getPicUrl = (imageName) =>
 }
 
 .card-details {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
   font-size: 14px;
 }
 
 .card-details p {
   margin: 5px 0;
 }
+
+.reorder-button {
+  display: block;
+  margin: 10px auto;
+  padding: 4px 10px;
+  width: 100px;
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600px;
+  font-size: 18px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.reorder-button:hover {
+  background-color: #0056b3;
+}
+
 </style>

@@ -1,20 +1,24 @@
 {
     "OrderDetails": [
         {
-            "name": "Blueberry Zucchini",   
+            "name": "Blueberry Zucchini",
+            "route": "/item/Blueberry_Zucchini",
             "emoji": "🫐", 
             "cost": 8.0,   
             "date": "7-24-2024",  
             "quantity": "One Loaf",
-            "image": "BlueberryZucchini/BlueberryZucchini.jpg"
+            "image": "BlueberryZucchini/BlueberryZucchini.jpg",
+            "item_id": 3
         },
         {
-            "name": "Brown Butter Cookies", 
+            "name": "Brown Butter Cookies",
+            "route": "/item/Brown_Butter_Cookies",
             "emoji": "🍪", 
             "cost": 25.0,
             "date": "8-6-2024",
             "quantity": "Twelve cookies",
-            "image":  "BrownButterCookies/BrownButterCookies1.jpg"
+            "image":  "BrownButterCookies/BrownButterCookies1.jpg",
+            "item_id": 4
         }
     ]
 }

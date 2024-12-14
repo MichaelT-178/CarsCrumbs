@@ -14,7 +14,7 @@ import WordPressCircle from "../assets/other/WordPressCircle.png";
 const props = defineProps({
   titleText: {
     type: String,
-    required: true
+    required: false
   }
 });
 

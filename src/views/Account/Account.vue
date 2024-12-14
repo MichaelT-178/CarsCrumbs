@@ -117,6 +117,7 @@ const updateWindowSize = () => {
 };
 
 onMounted(() => {
+  window.scrollTo({ top: 0, behavior: "auto" });
   window.addEventListener('resize', updateWindowSize);
 });
 

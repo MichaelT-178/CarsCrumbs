@@ -1,8 +1,7 @@
 <template>
   
   <WordpressHeader 
-    v-if="isSmallScreen" 
-    class="wordpress-header" 
+    v-if="isSmallScreen"
   />
 
   <div v-if="menuItem" class="menu-item-container">
@@ -277,6 +276,8 @@ watch(
 );
 
 onMounted(() => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+
   updateScreenSize();
   loadMenuData();
   loadAllReviews();
@@ -570,10 +571,6 @@ button:hover:enabled {
 
 .bottom-section p {
   font-size: 17px;
-}
-
-.wordpress-header {
-  display: none;
 }
 
 .reviews-section {

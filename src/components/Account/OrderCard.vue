@@ -4,6 +4,7 @@
     <p class="date">{{ formatDate(props.item.Date) }}</p>
     <p class="total">{{ props.item.Total }}</p>
     <p class="id-num">#{{ props.item.ConfirmationNum }}</p>
+    <p class="successful-order">✅ Order Completed!</p>
     <div class="images">
       <img 
         v-for="(image, index) in limitedImages" 
@@ -46,14 +47,15 @@ const formatDate = (inputDate) => {
   return `${monthName} ${parseInt(day, 10)}, ${year}`;
 };
 
-// Ensure Image is always an array and limit to 4 items
 const limitedImages = computed(() => {
   const allImages = Array.isArray(props.item.Image) ? props.item.Image : [props.item.Image];
   return allImages.slice(0, 4);
 });
 
 const getPicUrl = (imageName) => new URL(`../../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+
 </script>
+
 
 <style scoped>
 .card {
@@ -89,7 +91,15 @@ const getPicUrl = (imageName) => new URL(`../../assets/${folderRealOrTest}/pics/
 .id-num,
 .total {
   color: #555555;
-  font-size: 14px;
+  font-size: 15px;
+}
+
+.id-num {
+  margin-top: 3px;
+}
+
+.successful-order {
+  margin-top: 4px;
 }
 
 .images {

@@ -6,7 +6,9 @@
             "DateAdded": "12-10-2024",
             "Name": "Carly S.",
             "Rating": 5,
-            "Text": "Wow this tasted so amazing everyone go to Cars Crumbs!!!"
+            "Text": "Wow this tasted so amazing everyone go to Cars Crumbs!!!",
+            "Item": "Blueberry Zucchini",
+            "Route": "/item/Blueberry_Zucchini"
         },
         {
             "id": 2,
@@ -14,7 +16,9 @@
             "DateAdded": "7-24-2024",
             "Name": "Sam P.",
             "Rating": 5,
-            "Text": "So sweet and fluffy. Everyone should go try cars crumbs fr fr."
+            "Text": "So sweet and fluffy. Everyone should go try cars crumbs fr fr.",
+            "Item": "Blueberry Zucchini",
+            "Route": "/item/Blueberry_Zucchini"
         }
     ]
 }

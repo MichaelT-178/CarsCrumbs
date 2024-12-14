@@ -1,7 +1,10 @@
 <template>
   <div>
     <p class="title">Order Details</p>
-    <router-link to="/account?tab=orderHistory" class="back-button">Back</router-link>
+    <div class="back-container">
+      <router-link to="/account?tab=orderHistory" class="back-button">Back</router-link>
+      <span class="date">• 12-4-2024</span>
+    </div>
     <div class="order-list">
       <PastOrderCard v-for="order in orders" :key="order.name" :order="order" />
     </div>
@@ -31,9 +34,14 @@ const orders = OrderDetails.OrderDetails;
   font-weight: 800;
 }
 
+.back-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .back-button {
   display: inline-block;
-  margin-bottom: 15px;
   color: blue;
   text-decoration: underline;
   cursor: pointer;
@@ -44,19 +52,25 @@ const orders = OrderDetails.OrderDetails;
   color: darkblue;
 }
 
+.date {
+  margin-left: 8px;
+  font-size: 16px;
+  color: black;
+  font-family: "Helvetica";
+}
+
 @media (max-width: 800px) {
   .title {
     margin-left: 10px;
     margin-top: 15px;
   }
 
-	.back-button {
-		margin-left: 10px;
-	}
+  .back-container {
+    margin-left: 10px;
+  }
 
   .order-card {
     margin-left: 10px;
   }
 }
-
 </style>

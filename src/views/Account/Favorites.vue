@@ -1,5 +1,5 @@
 <template>
-  <p class="title">FAVORITES</p>
+  <p class="title">Favorites</p>
 
   <div v-if="favoriteItems.length === 0">
     <NoItems
