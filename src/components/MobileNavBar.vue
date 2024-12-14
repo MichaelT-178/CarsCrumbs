@@ -1,27 +1,44 @@
 <template>
-  <!-- Search bar Dark overlay -->
   <div v-if="showDropdown" class="search-overlay" @click="hideDropdown"></div>
 
   <nav class="navbar" @keydown="handleKeydown">
     <!-- Dark overlay -->
     <div v-if="isSidebarOpen" class="overlay" @click="toggleSidebar"></div>
 
+    <!-- Top half -->
     <div class="top-navbar">
+      <span
+        class="material-icons menu-icon"
+        @click="toggleSidebar"
+        @mouseover="hoverMenuIcon"
+        @mouseleave="resetMenuIconColor"
+      >
+        menu
+      </span>
       <img :src="logoTwo" alt="Logo" class="logo" />
+      <router-link to="/account" class="profile-cart-wrapper">
+        <span class="material-symbols-outlined account-icon">account_circle</span>
+      </router-link>
+      <router-link to="/cart" class="profile-cart-wrapper">
+        <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+        <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
+      </router-link>
     </div>
 
+    <!-- Bottom half -->
     <div class="bottom-navbar">
       <div class="center-section">
         <div class="search-bar">
-          <input 
-            ref="searchInput" 
-            type="text" 
-            v-model="searchQuery" 
-            placeholder="Search..." 
-            @input="filterResults" 
-            @focus="showDropdown = true" 
+          <input
+            ref="searchInput"
+            type="text"
+            v-model="searchQuery"
+            placeholder="Search..."
+            @input="filterResults"
+            @focus="showDropdown = true"
             @keydown.enter="handleSearchEnter"
           />
+          <span class="material-symbols-outlined search-icon">search</span>
         </div>
       </div>
     </div>
@@ -65,29 +82,18 @@
 
     <!-- Dropdown search results -->
     <ul v-if="showDropdown && filteredResults.length" class="dropdown" @mousedown.prevent>
-      <li 
-        v-for="(result, index) in filteredResults" 
-        :key="index" 
-        class="result" 
+      <li
+        v-for="(result, index) in filteredResults"
+        :key="index"
+        class="result"
         @mousedown="handleItemClick(result)"
       >
         <span>{{ result.Emoji }}</span><span class="result-text">{{ result.DisplayName }}</span>
       </li>
     </ul>
-
-    <span 
-      class="material-icons menu-icon" 
-      @click="toggleSidebar" 
-      @mouseover="hoverMenuIcon" 
-      @mouseleave="resetMenuIconColor">
-      menu
-    </span>
-    <router-link to="/cart">
-      <span class="material-symbols-outlined cart-icon">shopping_cart</span>
-      <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
-    </router-link>
   </nav>
 </template>
+
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
@@ -108,15 +114,18 @@ const isSidebarOpen = ref(false);
 const menuIconColor = ref("white");
 
 const filterResults = () => {
+
   if (searchQuery.value) {
     const queryWords = searchQuery.value.toLowerCase().split(' ');
-    filteredResults.value = menu.value.filter(item => 
-      queryWords.some(word => 
+
+    filteredResults.value = menu.value.filter(item =>
+      queryWords.some(word =>
         item.DisplayName.toLowerCase().includes(word) ||
         (item.Tags && item.Tags.some(tag => tag.toLowerCase().includes(word))) ||
         (item.Alternative && item.Alternative.toLowerCase().includes(word))
       )
     ).slice(0, 5);
+
   } else {
     filteredResults.value = [];
   }
@@ -169,7 +178,7 @@ const handleKeydown = (event) => {
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = MenuData.default.MenuItems; // Updated to access the correct JSON structure
+    menu.value = MenuData.default.MenuItems;
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
@@ -183,11 +192,11 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown);
 });
+
 </script>
 
 
 <style scoped>
-
 html, body {
   margin: 0;
   padding: 0;
@@ -232,40 +241,68 @@ html, body {
 
 .top-navbar, .bottom-navbar {
   width: 100%;
-  padding: 4px 40px;
+  padding: 4px 0px;
+  position: relative;
+}
+
+.top-navbar {
+  width: 100%;
+  padding: 10px 40px 2px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
 }
 
 .logo {
   height: auto;
-  width: 100px;
+  width: 95px;
   margin: 0 auto;
   display: block;
-  /* border: 1px solid #000; */
   border-radius: 5px;
   margin-top: 3px;
 }
 
-.cart-icon, .menu-icon {
+.menu-icon, .cart-icon, .account-icon {
+  font-size: 27.5px;
   cursor: pointer;
-  font-size: 36px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
 
 .menu-icon {
-  left: 25px;
+  cursor: pointer;
+  color: var(--menu-icon-color, white);
+  transition: color 0.3s ease;
+}
+
+.account-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 54px;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.account-icon:hover {
+  color: #FFD700;
+}
+
+.menu-icon {
+  left: 12px;
   color: var(--menu-icon-color, white);
   transition: color 0.3s ease;
 }
 
 .menu-icon:hover {
- color: #FFD700;
+  color: #FFD700;
 }
 
 .cart-icon {
-  right: 25px;
+  right: 12px;
   color: white;
   transition: color 0.3s ease;
 }
@@ -276,12 +313,12 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 27.15px;  /* Increase number to move it down */
-  right: 16px;  /* Increase number to move it to the left */
+  top: 5px;
+  right: 4px; 
   background-color: #E50000;
   color: white;
   border-radius: 50%;
-  padding: 3px 6px;
+  padding: 2px 5px;
   font-size: 13px;
   display: flex;
   justify-content: center;
@@ -307,16 +344,27 @@ html, body {
 .search-bar {
   position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
-  width: 75%;
-  padding-bottom: 6px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 8px 20px 8px 15px;
+  border-radius: 25px;
   border: 1px solid black;
+  font-size: 16px;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  right: 15px;
+  font-size: 24px;
+  color: gray;
+  cursor: pointer;
 }
 
 .dropdown {
@@ -372,7 +420,7 @@ html, body {
 
 .sidebar-header {
   background-color: #620086;
-  padding: 15px 20px; /* First is vertical, second is horizontal */
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -406,20 +454,20 @@ html, body {
   transition: background-color 0.3s ease;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #2b2b2b; /* black */
+  border-bottom: 1px solid #2b2b2b;
 }
 
 .tab-text {
   position: relative;
   top: -4.25px;
   margin: 0;
-  color: #242424; /* black */
+  color: #242424;
 }
 
 .sidebar .tab span.material-symbols-outlined {
   font-size: 24px;
   margin-right: 12px;
-  color: #242424; /* black */
+  color: #242424;
 }
 
 #arrow {
@@ -471,7 +519,7 @@ html, body {
   font-size: 22px;
   text-align: center;
   padding: 5px 0;
-  color: #2b2b2b; /* Black */
+  color: #2b2b2b;
   margin-top: auto;
   margin-bottom: 15px;
   width: 100%;
@@ -490,6 +538,10 @@ html, body {
 @media (max-width: 400px) {
   .sidebar {
     width: 100%;
+  }
+
+  .search-bar {
+    width: 90%;
   }
 }
 

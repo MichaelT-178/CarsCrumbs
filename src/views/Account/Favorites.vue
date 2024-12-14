@@ -20,13 +20,15 @@ import NoItems from "./Empty.vue";
 import MenuItems from "../../assets/real_menu/MenuItems.json";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
 
-// Simulate fetching favorite items by filtering MenuItems
-// Replace this with actual logic for fetching user's favorite items
-const favoriteItemIds = ref([1, 3, 5]); // Example: User's favorite item IDs
+
+const favoriteItemIds = ref([1, 3, 5]);
+
 const favoriteItems = ref(MenuItems.MenuItems.filter(item =>
   favoriteItemIds.value.includes(item.id)
 ));
+
 </script>
+
 
 <style scoped>
 .title {
@@ -40,4 +42,17 @@ const favoriteItems = ref(MenuItems.MenuItems.filter(item =>
 .favorite-item {
   margin-bottom: 15px;
 }
+
+@media (max-width: 800px) {
+  .title {
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+
+  .favorite-item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
 </style>

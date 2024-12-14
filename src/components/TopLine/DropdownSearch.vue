@@ -3,6 +3,7 @@
     v-if="show && filteredItems.length" 
     class="dropdown-menu"
   >
+    <p class="menu-title">Menu</p>
     <ul>
       <li 
         v-for="(item, index) in filteredItems" 
@@ -104,6 +105,16 @@ onMounted(() => {
   padding: 10px 0;
   /* border: 1px solid #F2F2F2; */
   border-radius: 4px;
+}
+
+.menu-title {
+  font-size: 28px;
+  font-family: "Roboto Slab", cursive;
+  margin-left: 15px;
+  margin-right: 15px;
+  /* font-weight: 600; */
+  padding-bottom: 0px;
+  border-bottom: 1.5px solid #c7c7c7;
 }
 
 .dropdown-item {

@@ -153,4 +153,18 @@ const handleClick = (item) => {
   height: 24px;
 }
 
+@media (max-width: 1000px) {
+  .item-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  
+  .item-container {
+    width: 100%;
+  }
+
+}
+
 </style>

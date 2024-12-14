@@ -11,7 +11,25 @@
 
     <div class="item-info">
       <p class="title">{{ menuItem.DisplayName }}</p>
-      <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
+      <div class="rating-container">
+        <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
+        <p class="dividing-circle">•</p>
+
+        <div v-if="hasReviews">
+          <div class="rating-num-section">
+            <p class="rating-number" @click="scrollToReviews">22</p>
+            <span class="material-symbols-outlined down-arrow-icon">keyboard_arrow_down</span>
+          </div>
+        </div>
+        <div v-else>
+          <p 
+            class="first-review-text" 
+            @click="scrollToReviews">
+            Be the first to review
+          </p>
+        </div>
+
+      </div>
       <p class="price">Price: {{ menuItem.DisplayPrice }}</p>
 
       <label class="quantity-label">Quantity:</label>
@@ -56,30 +74,59 @@
       <button class="scroll-button right-arrow" @click="scrollRight">❯</button>
     </div>
   </div>
-  
-  <!-- Reviews Section -->
-  <div class="reviews-section">
-    <h2 class="reviews-header">Customer Reviews</h2>
     
-    <hr class="reviews-header-divider" />
-      <ReviewPanel :item-name="props.ItemName" />
-    <div class="reviews-divider">
-      <span class="divider-title">Reviews</span>
+  <div class="has-reviews" v-if="hasReviews">
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+      <h2 class="reviews-header">Customer Reviews</h2>
+      
       <hr class="reviews-header-divider" />
+        <ReviewPanel :item-name="props.ItemName" />
+      <div class="reviews-divider">
+        <span class="divider-title">Reviews</span>
+        <hr class="reviews-header-divider" />
+      </div>
+      
+      <!-- Reviews -->
+      <div class="reviews-container" ref="reviewsSection">
+        <div v-if="filteredReviews.length">
+          <ReviewCard 
+            v-for="(review, index) in filteredReviews" 
+            :key="index" 
+            :review="review" 
+          />
+        </div>
+        <div v-else>
+          <p>No reviews for this item yet.</p>
+        </div>
+      </div>
     </div>
-    
-    <!-- Reviews -->
-    <div class="reviews-container">
-      <div v-if="filteredReviews.length">
-        <ReviewCard 
-          v-for="(review, index) in filteredReviews" 
-          :key="index" 
-          :review="review" 
-        />
+  </div>
+  <div v-else>
+    <div class="reviews-section">
+      <div class="reviews-divider">
+        <span class="divider-title">Reviews</span>
+        <hr class="reviews-header-divider" />
+        
+        <div class="empty-review-section">
+          <p class="custom-reviews-title">No Customer Reviews Yet</p>
+          <StarRating 
+            :rating="0" 
+            :show-number="false" 
+            :starSize="56" 
+            class="empty-star-rating"
+            @click="goToWriteReview"
+          />
+          <p class="custom-reviews-text" ref="reviewsSection">Be the first person to rate this item!</p>
+        
+          <div
+            @click="goToWriteReview"
+            class="write-review-button">
+            Write a review
+          </div>
+        </div>
       </div>
-      <div v-else>
-        <p>No reviews for this item yet.</p>
-      </div>
+
     </div>
   </div>
 
@@ -101,6 +148,9 @@ import { folderRealOrTest } from "../data.config.js";
 import Reviews from "../assets/real_menu/Reviews.json";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 
+
+const hasReviews = false;
+
 const cart = useCartStore();
 const router = useRouter();
 const route = useRoute();
@@ -119,6 +169,13 @@ const selectedOption = ref(null);
 const relatedItems = ref([]);
 const isSmallScreen = ref(false);
 const filteredReviews = ref([]);
+const reviewsSection = ref(null);
+
+const scrollToReviews = () => {
+  if (reviewsSection.value) {
+    reviewsSection.value.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const loadAllReviews = () => {
   filteredReviews.value = Reviews.Reviews;
@@ -196,6 +253,14 @@ const goToItemPage = (item) => {
   });
 };
 
+const goToWriteReview = () => {
+  router.push({
+    path: '/write-review',
+    query: { itemName: props.ItemName },
+  });
+};
+
+
 const loadMenuData = async () => {
   try {
     const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
@@ -226,6 +291,10 @@ onUnmounted(() => {
 
 
 <style scoped>
+html {
+  scroll-behavior: smooth;
+}
+
 .menu-item-container {
   display: flex;
   align-items: center;
@@ -245,6 +314,68 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   text-align: left;
+}
+
+.empty-review-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0; 
+}
+
+.empty-star-rating:hover {
+  cursor: pointer;
+}
+
+.rating-container {
+  display: flex;
+  align-items: center;
+  /* gap: 10px; */
+}
+
+.rating-num-section {
+  display: flex;
+  color: #424242;
+  font-family: "Helvetica";
+}
+
+.dividing-circle {
+  margin-left: 5px;
+  margin-right: 1px;
+  margin-top: -5.5px;
+}
+
+.rating-number {
+  margin-top: -6.5px;
+  margin-left: 7px;
+}
+
+.first-review-text {
+  color: #424242;
+  font-family: "Helvetica";
+  margin-left: 6px;
+  margin-top: -7px
+}
+
+.first-review-text:hover {
+  color: #2d2d2d;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.down-arrow-icon {
+  font-size: 17px;
+  margin-top: -6px;
+}
+
+.rating-num-section:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.rating-number:hover {
+  text-decoration: underline;
 }
 
 .title {
@@ -371,6 +502,47 @@ button:hover:enabled {
   display: none;
 }
 
+
+
+.empty-reviews-divider {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.custom-reviews-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.custom-reviews-text {
+  margin: 10px 0; /* Add some spacing */
+  text-align: center;
+  font-size: 17px;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.write-review-button {
+  padding: 10px 23px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.write-review-button:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+
+
 .scroll-button {
   background: none;
   border: none;
@@ -440,6 +612,7 @@ button:hover:enabled {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: -8px;
 }
 
 .divider-title {

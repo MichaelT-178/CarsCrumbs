@@ -12,20 +12,23 @@
     <OrderCard 
       v-for="order in orders" 
       :key="order.id" 
+      class="order-card"
       :item="order" />
 
 		<p class="spacing"></p>
   </div>
 </template>
 
+
 <script setup>
 import NoItems from "./Empty.vue";
 import PastOrders from "../../assets/real_menu/PastOrders.json";
 import OrderCard from "../../components/Account/OrderCard.vue";
 
-// Load orders from JSON
 const orders = PastOrders.Orders;
+
 </script>
+
 
 <style scoped>
 .title {
@@ -39,4 +42,16 @@ const orders = PastOrders.Orders;
 .spacing {
 	padding-bottom: 50px;
 }
+
+@media (max-width: 800px) {
+  .title {
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+
+  .order-card {
+    margin-left: 10px;
+  }
+}
+
 </style>

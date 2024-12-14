@@ -104,4 +104,11 @@ const getPicUrl = (imageName) => new URL(`../../assets/${folderRealOrTest}/pics/
   object-fit: cover;
   border-radius: 4px;
 }
+
+@media (max-width: 800px) {
+  .card {
+    max-width: 90%;
+  }
+}
+
 </style>
