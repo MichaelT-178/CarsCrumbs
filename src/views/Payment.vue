@@ -1,8 +1,6 @@
 <template>
   <div class="checkout-container">
     <form id="payment-form" @submit.prevent="handlePayment">
-      <h2 class="title">Secure Checkout</h2>
-
       <label for="card-number" class="input-label">Card Number</label>
       <div class="input-field card-number-container">
         <div id="card-number" class="stripe-element"></div>
@@ -62,7 +60,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
+import axiosInstance from '../lib/axios';
 
 const stripe = ref(null);
 const elements = ref(null);
@@ -94,7 +92,7 @@ const handlePayment = async () => {
   isProcessing.value = true;
 
   try {
-    const { data } = await axios.post('http://localhost:3000/create-payment-intent', {
+    const { data } = await axiosInstance.post('/create-payment-intent/', {
       amount: 5000,
       currency: 'usd',
     });
