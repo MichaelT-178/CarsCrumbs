@@ -116,7 +116,7 @@ const handlePayment = async () => {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   box-sizing: border-box;
 }
