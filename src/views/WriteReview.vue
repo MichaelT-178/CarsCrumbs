@@ -7,12 +7,15 @@
 </template>
 
 <script setup>
+import MenuItems from "../../src/assets/real_menu/MenuItems.json";
+
 const props = defineProps({
   itemName: {
     type: String,
     required: true,
   },
 });
+
 </script>
 
 <style scoped>

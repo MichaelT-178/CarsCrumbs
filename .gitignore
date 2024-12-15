@@ -26,3 +26,4 @@ dist-ssr
 Changes.txt
 refactor.md
 unused
+.env
