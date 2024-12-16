@@ -88,7 +88,8 @@ onUnmounted(() => {
   margin: 1rem 0;
   border-radius: 8px;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #ddd;
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05); */
   width: 90%;
 }
 
