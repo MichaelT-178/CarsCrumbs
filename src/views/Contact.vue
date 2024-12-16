@@ -81,9 +81,9 @@
 		  referrerpolicy="no-referrer-when-downgrade"
 		></iframe>
 		<div class="contact-info">
-		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">location_on</span> Washington Ave 2910</p>
-		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">call</span> +1 (704) 999-9999</p>
-		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">mail</span> crumbs@gmail.com</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">location_on</span>Raleigh, North Carolina</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">call</span>+1 (704) 999-9999</p>
+		  <p class="info-txt"><span class="material-symbols-outlined purple-icon">mail</span>Carscrumbs@gmail.com</p>
 		</div>
 		<div class="social-section">
 		  <h2>Socials</h2>

@@ -21,7 +21,10 @@ import WriteReview from '../views/WriteReview.vue';
 // Account
 import Account from '../views/Account/Account.vue';
 
+// Payment 
 import Payment from '../views/Payment.vue';
+
+import PaymentSuccess from '../views/PaymentSuccess.vue';
 
 const routes = [
 	{
@@ -47,6 +50,11 @@ const routes = [
 	{
 		path: '/payment',
 		component: Payment
+	},
+	{
+		path: '/payment-success',
+		name: 'PaymentSuccess',
+		component: PaymentSuccess
 	},
 	{
 		path: '/item/:ItemName',
