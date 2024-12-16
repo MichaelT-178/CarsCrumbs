@@ -2,7 +2,7 @@
   <div class="checkout-container">
     <form id="payment-form" @submit.prevent="handlePayment">
       <label for="card-number" class="input-label">Card Number</label>
-      <div class="input-field card-number-container">
+      <div class="input-field card-number-container" :class="{ error: fieldErrors.cardNumber }">
         <div id="card-number" class="stripe-element"></div>
         <div class="card-icons">
           <img
@@ -23,25 +23,29 @@
           />
         </div>
       </div>
+      <p v-if="fieldErrors.cardNumber" class="field-error">{{ fieldErrors.cardNumber }}</p>
 
       <div class="row">
         <div class="field-container">
           <label for="card-expiry" class="input-label">Expiration Date</label>
-          <div id="card-expiry" class="input-field"></div>
+          <div id="card-expiry" class="input-field" :class="{ error: fieldErrors.cardExpiry }"></div>
+          <p v-if="fieldErrors.cardExpiry" class="field-error">{{ fieldErrors.cardExpiry }}</p>
         </div>
         <div class="field-container">
           <div class="security-code-form">
-            <label for="card-cvc" class="input-label">Security code</label>
-            <div class="input-field cvc-container">
+            <label for="card-cvc" class="input-label">Security Code</label>
+            <div class="input-field cvc-container" :class="{ error: fieldErrors.cardCvc }">
               <div id="card-cvc" class="stripe-element"></div>
               <img src="/cvc.svg" alt="CVC" class="cvc-icon" />
             </div>
+            <p v-if="fieldErrors.cardCvc" class="field-error">{{ fieldErrors.cardCvc }}</p>
           </div>
         </div>
       </div>
 
-      <label for="zip-code" class="input-label">ZIP Code</label>
-      <div id="zip-code" class="input-field"></div>
+      <label for="postal-code" class="input-label">ZIP Code</label>
+      <div id="postal-code" class="input-field" :class="{ error: fieldErrors.postalCode }"></div>
+      <p v-if="fieldErrors.postalCode" class="field-error">{{ fieldErrors.postalCode }}</p>
 
       <button type="submit" class="pay-button" :disabled="isProcessing">
         {{ isProcessing ? 'Processing...' : 'Pay' }}
@@ -57,6 +61,7 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
@@ -67,9 +72,15 @@ const elements = ref(null);
 const cardNumber = ref(null);
 const cardExpiry = ref(null);
 const cardCvc = ref(null);
-const zipCode = ref(null);
+const postalCode = ref(null);
 const isProcessing = ref(false);
 const errorMessage = ref('');
+const fieldErrors = ref({
+  cardNumber: '',
+  cardExpiry: '',
+  cardCvc: '',
+  postalCode: ''
+});
 
 onMounted(async () => {
   stripe.value = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_TEST_KEY);
@@ -77,16 +88,29 @@ onMounted(async () => {
 
   cardNumber.value = elements.value.create('cardNumber');
   cardNumber.value.mount('#card-number');
+  cardNumber.value.on('change', handleElementChange('cardNumber'));
 
   cardExpiry.value = elements.value.create('cardExpiry');
   cardExpiry.value.mount('#card-expiry');
+  cardExpiry.value.on('change', handleElementChange('cardExpiry'));
 
   cardCvc.value = elements.value.create('cardCvc');
   cardCvc.value.mount('#card-cvc');
+  cardCvc.value.on('change', handleElementChange('cardCvc'));
 
-  zipCode.value = elements.value.create('postalCode');
-  zipCode.value.mount('#zip-code');
+  postalCode.value = elements.value.create('postalCode');
+  postalCode.value.mount('#postal-code');
+  postalCode.value.on('change', (event) => {
+    console.log("THIS CHANGED");
+  });
+
+
+
 });
+
+const handleElementChange = (field) => (event) => {
+  fieldErrors.value[field] = event.error ? event.error.message : '';
+};
 
 const handlePayment = async () => {
   isProcessing.value = true;
@@ -114,9 +138,12 @@ const handlePayment = async () => {
     isProcessing.value = false;
   }
 };
+
 </script>
 
+
 <style scoped>
+
 * {
   box-sizing: border-box;
 }
@@ -234,6 +261,17 @@ const handlePayment = async () => {
   height: auto;
 }
 
+.input-field.error {
+  border-color: #df1b41;
+}
+
+.field-error {
+  color: #df1b41;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
 #card-number {
   flex: 1;
   padding-right: 50px;
@@ -294,4 +332,5 @@ const handlePayment = async () => {
     max-width: 350px;
   }
 }
+
 </style>
