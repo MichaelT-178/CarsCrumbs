@@ -44,7 +44,12 @@
       </div>
 
       <label for="postal-code" class="input-label">ZIP Code</label>
-      <div id="postal-code" class="input-field" :class="{ error: fieldErrors.postalCode }"></div>
+      <div 
+        id="postal-code" 
+        class="input-field" 
+        placeholder="12345"
+        :class="{ error: fieldErrors.postalCode }">
+      </div>
       <p v-if="fieldErrors.postalCode" class="field-error">{{ fieldErrors.postalCode }}</p>
 
       <button type="submit" class="pay-button" :disabled="isProcessing">
@@ -88,32 +93,82 @@ onMounted(async () => {
 
   cardNumber.value = elements.value.create('cardNumber');
   cardNumber.value.mount('#card-number');
-  cardNumber.value.on('change', handleElementChange('cardNumber'));
 
   cardExpiry.value = elements.value.create('cardExpiry');
   cardExpiry.value.mount('#card-expiry');
-  cardExpiry.value.on('change', handleElementChange('cardExpiry'));
 
   cardCvc.value = elements.value.create('cardCvc');
   cardCvc.value.mount('#card-cvc');
-  cardCvc.value.on('change', handleElementChange('cardCvc'));
 
-  postalCode.value = elements.value.create('postalCode');
-  postalCode.value.mount('#postal-code');
-  postalCode.value.on('change', (event) => {
-    console.log("THIS CHANGED");
+  postalCode.value = elements.value.create('postalCode', {
+    placeholder: '12345', 
   });
 
-
-
+  postalCode.value.mount('#postal-code');
+  
 });
 
-const handleElementChange = (field) => (event) => {
-  fieldErrors.value[field] = event.error ? event.error.message : '';
+
+// on change doesn't work for all the fields
+// This is more explicit and customizable
+const validateFields = () => {
+  let hasErrors = false;
+
+  // Validate Card Number
+  if (!cardNumber.value) {
+    fieldErrors.value.cardNumber = 'Card Number is required.';
+    hasErrors = true;
+  } else if (!cardNumber.value._complete) {
+    fieldErrors.value.cardNumber = 'Please enter a valid Card Number.';
+    hasErrors = true;
+  } else {
+    fieldErrors.value.cardNumber = '';
+  }
+
+  // Validate Expiry
+  if (!cardExpiry.value) {
+    fieldErrors.value.cardExpiry = 'Expiration Date is required.';
+    hasErrors = true;
+  } else if (!cardExpiry.value._complete) {
+    fieldErrors.value.cardExpiry = 'Please enter a valid Expiration Date.';
+    hasErrors = true;
+  } else {
+    fieldErrors.value.cardExpiry = '';
+  }
+
+  // Validate CVC
+  if (!cardCvc.value) {
+    fieldErrors.value.cardCvc = 'Security Code is required.';
+    hasErrors = true;
+  } else if (!cardCvc.value._complete) {
+    fieldErrors.value.cardCvc = 'Please enter a valid Security Code.';
+    hasErrors = true;
+  } else {
+    fieldErrors.value.cardCvc = '';
+  }
+
+  // Validate Postal Code
+  if (!postalCode.value) {
+    fieldErrors.value.postalCode = 'ZIP Code is required.';
+    hasErrors = true;
+  } else if (!postalCode.value._complete) {
+    fieldErrors.value.postalCode = 'Please enter a valid ZIP Code.';
+    hasErrors = true;
+  } else {
+    fieldErrors.value.postalCode = '';
+  }
+
+  return !hasErrors;
 };
 
 const handlePayment = async () => {
   isProcessing.value = true;
+  errorMessage.value = '';
+
+  if (!validateFields()) {
+    isProcessing.value = false;
+    return;
+  }
 
   try {
     const { data } = await axiosInstance.post('/create-payment-intent/', {
@@ -240,7 +295,7 @@ const handlePayment = async () => {
 }
 
 .error {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   color: red;
   text-align: center;
   font-size: 0.9rem;
