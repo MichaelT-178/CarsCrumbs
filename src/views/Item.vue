@@ -308,7 +308,10 @@ html {
 .item-pic {
   width: 300px;
   height: 300px;
-  border: 1.5px solid gray;
+  /* border: 1.5px solid gray; */
+  border: 1.5px solid #b4b2b2;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .item-info {
