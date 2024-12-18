@@ -222,6 +222,18 @@ const handleSubmit = () => {
     console.log("Written Review:", writtenReview.value);
     console.log("Star Rating:", starRating.value);
     console.log("Would recommend:", recommend.value);
+    console.log(recommend.value == "yes")
+
+//     {
+//     "item_id": 3,
+//     "user_id": 1, USER ID int
+//     "header_text": reviewHeadline.value if reviewHeadline.value else "",
+//     "star_rating": starRating.value,
+//     "would_recommend": recommend.value == "yes",
+//     "full_name": displayName.value if displayName.value else "",
+//     "review_text": writtenReview.value if writtenReview.value else "",
+//     "date": "12-10-2024" TODAYS DATE
+// }
   }
 };
 
