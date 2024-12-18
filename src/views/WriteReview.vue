@@ -35,10 +35,6 @@
           ></StarRating>
         </label>
         <div v-if="starRating > 0">
-          <p class="thanks-for-review-text">Thanks for rating this item!</p>
-          <!-- <button @click="handleEarlySubmit" class="submit-early-button">
-            Submit Now
-          </button> -->
         </div>
         <p v-if="starRatingError" style="color: red; margin-top: -5px; margin-bottom: 20px; font-weight: 500;">Required</p>
         
