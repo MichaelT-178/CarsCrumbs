@@ -137,7 +137,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from "vue";
-import MenuCard from "../components/MenuCard.vue";
+import MenuCard from "../components/RecommendCard.vue";
 import WordpressHeader from "../components/Header.vue";
 import StarRating from "../components/StarRating.vue";
 import ReviewCard from "../components/ReviewCard.vue";

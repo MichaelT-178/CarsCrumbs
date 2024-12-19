@@ -1,30 +1,40 @@
 <template>
-  <div class="menu-card">
+  <div class="menu-item">
     <img :src="pic" :alt="item.DisplayName" class="menu-image" />
-    <h2 class="menu-name">{{ item.DisplayName }}</h2>
-    <div class="menu-tags">
-      <span
-        v-for="tag in item.Tags"
-        :key="tag"
-        class="menu-tag"
-        :class="{'no-hover': disableTagHover, 'tag-hovered': hovered === tag && !disableTagHover}"
-        @click="tagClicked(tag)"
-        @mouseover="handleMouseOver(tag)"
-        @mouseleave="handleMouseLeave"
-      >{{ tag }}</span>
-    </div>
-    <p class="menu-price">{{ item.DisplayPrice }}</p>
-    <div class="flex-spacer"></div>
-    <div class="button-container">
-      <button class="order-button" @click="openSideView">Order Now</button>
+    <div class="menu-info">
+      <h2 class="menu-name">{{ item.DisplayName }}</h2>
+
+      <StarRating :rating="item.Rating"/>
+
+      <p class="menu-price">{{ item.DisplayPrice }}</p>
+
+      <div class="button-heart">
+        <button class="order-button" @click="openSideView">Order Now</button>
+        <div v-if="isHearted">
+          <img 
+            src="/heart-filled.svg" 
+            class="material-symbols-outlined favorite-icon"
+            @click="toggleHeart"
+          />
+        </div>
+        <div v-else>
+          <span
+          class="material-symbols-outlined favorite-icon"
+          :class="{ hearted: isHearted }"
+          @click="toggleHeart"
+        >
+          favorite
+        </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref, computed } from "vue";
-import { folderRealOrTest } from "../data.config";
+import { computed, ref } from "vue";
+import StarRating from "./StarRating.vue";
 
 const props = defineProps({
   item: {
@@ -39,141 +49,96 @@ const props = defineProps({
       Tags: [],
     }),
   },
-  disableTagHover: {
-    type: Boolean,
-    default: false,
-  },
 });
-
-const emit = defineEmits(["tag-clicked", "open-side-view"]);
 
 const pic = computed(() => {
   if (props.item.Images && props.item.Images.length > 0) {
-    return new URL(`../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
+    return `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
   }
 
-  return new URL("../assets/placeholder.png", import.meta.url).href;
+  return "";
 });
 
-const hovered = ref(null);
+const isHearted = ref(false);
 
-const tagClicked = (tag) => {
-  emit("tag-clicked", tag);
-};
-
-const handleMouseOver = (tag) => {
-  if (!props.disableTagHover) {
-    hovered.value = tag;
-  }
-};
-
-const handleMouseLeave = () => {
-  if (!props.disableTagHover) {
-    hovered.value = null;
-  }
-};
+const emit = defineEmits(["open-side-view"]);
 
 const openSideView = () => {
   emit("open-side-view", props.item);
 };
 
+const toggleHeart = () => {
+  isHearted.value = !isHearted.value;
+};
 </script>
 
 
+
 <style scoped>
-.menu-card {
-  border: 1.5px solid #3D3D3D;
-  padding-bottom: 12px;
-  max-width: 230px;
-  text-align: center;
-  border-radius: 8px;
-  background-color: white;
+.menu-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
 }
 
 .menu-image {
-  width: 100%;
-  height: 150px;
+  width: 250px;
   object-fit: cover;
-  border-radius: 8px 8px 0 0;
+  height: 250px;
+  border-radius: 8px;
+}
+
+.menu-info {
+  margin-top: 12px;
+  width: 100%;
 }
 
 .menu-name {
+  font-size: 18px;
   font-weight: bold;
-  margin-top: 8px;
-}
-
-.menu-tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   margin: 8px 0;
-}
-
-.menu-tag {
-  background-color: #f0f0f0;
-  border-radius: 50px;
-  padding: 4px 12px;
-  margin: 4px 4px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, border 0.3s ease;
-}
-
-.menu-tag:hover,
-.menu-tag.tag-hovered {
-  background-color: #A5A5A5;
-  color: white;
-}
-
-.menu-tag:active {
-  background-color: lightseagreen;
-  color: white;
-}
-
-.menu-tag.no-hover:hover {
-  background-color: #f0f0f0;
-  color: black;
-  cursor: default;
+  margin-top: 1px;
 }
 
 .menu-price {
-  margin-top: -3px;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-  margin-bottom: 12px;
-}
-
-.flex-spacer {
-  flex-grow: 1;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 15px;
+  margin-bottom: 8px;
 }
 
 .order-button {
-  margin-top: 8px;
-  padding: 6px 22px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 25px;
+  padding: 6px 16px;
+  font-size: 14px;
   cursor: pointer;
-  font-size: 15px;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  width: 65%;
   transition: background-color 0.3s ease;
-  margin-bottom: 2px;
 }
 
 .order-button:hover {
   background-color: #0056b3;
 }
 
-@media (max-width: 550px) {
-  .menu-card {
-    max-width: 500px;
-    width: 300px;
-  }
+.favorite-icon {
+  position: absolute;
+  top: 260px;
+  right: -5px;
+  font-size: 27px;
+  color: black;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  fill: black;
+}
+
+.favorite-icon.hearted {
+  color: red;
 }
 
 </style>
+

@@ -54,10 +54,9 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-// import MenuCard from '../components/MenuCard.vue';
-import MenuCard from '../components/NewMenuCard.vue';
+import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
-import { folderRealOrTest } from '../data.config';
+import axiosInstance from '../lib/axios';
 
 const menu = ref([]);
 const tagsData = ref([]);
@@ -107,20 +106,22 @@ const capitalizeFirstLetter = (string) => {
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = MenuData.default.MenuItems;
-
-    const TagData = await import(`../assets/${folderRealOrTest}/Tags.json`);
-    tagsData.value = Object.values(TagData.default.Tags);
+    const response = await axiosInstance.get('/get_menu');
+    const data = response.data;
+    menu.value = data.MenuItems || [];
+    tagsData.value = Object.values(data.Tags || []);
   } catch (error) {
-    console.error('Error loading menu data:', error);
+    console.error('Error fetching menu data:', error);
   }
 };
 
 onMounted(() => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+
   loadMenuData();
 
   const hash = window.location.hash.replace('#', '');
+  
   if (hash) {
     selectedTag.value = capitalizeFirstLetter(hash);
   }

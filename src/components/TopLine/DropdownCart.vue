@@ -59,7 +59,6 @@
 import { computed } from 'vue';
 import { useCartStore } from '../../stores/cart';
 import { useRouter } from 'vue-router';
-import { folderRealOrTest } from '../../data.config';
 import { pluralize } from '../../utils/helper';
 
 const cart = useCartStore();
@@ -89,11 +88,9 @@ const goToCheckoutView = () => {
   emit('close');
 };
 
-const getPicture = (item) =>{
-  return computed(() => {
-    return new URL(`../../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href;
-  });
-}
+const getPicture = (item) => {
+  return computed(() => `https://crumb-pics.s3.us-east-1.amazonaws.com/${item.Images[0]}`);
+};
 
 const deleteItem = (itemId) => {
   cart.deleteItem(itemId);

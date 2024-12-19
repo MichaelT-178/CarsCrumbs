@@ -57,7 +57,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useCartStore } from "../stores/cart.js";
-import { folderRealOrTest } from "../data.config";
 
 const cart = useCartStore();
 
@@ -72,7 +71,6 @@ const emit = defineEmits(["close"]);
 
 const menuItem = ref(null);
 const pic = ref("");
-const picLoaded = ref(false);
 const selectedOption = ref(null);
 const contentVisible = ref(false);
 
@@ -89,15 +87,8 @@ const handleKeydown = (event) => {
 const updateMenuItem = () => {
   if (props.item) {
     menuItem.value = props.item;
-    pic.value = new URL(
-      `../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`,
-      import.meta.url
-    ).href;
+    pic.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
   }
-};
-
-const onImageLoaded = () => {
-  picLoaded.value = true;
 };
 
 const addItem = () => {
@@ -126,6 +117,7 @@ onUnmounted(() => {
 });
 
 </script>
+
 
 
 <style scoped>
