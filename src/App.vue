@@ -31,6 +31,7 @@ const updateWindowSize = () => {
 };
 
 onMounted(() => {
+  authStore.setSpecialNavBar(false);
   window.addEventListener('resize', updateWindowSize);
 });
 
