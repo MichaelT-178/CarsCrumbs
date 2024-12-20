@@ -1,8 +1,6 @@
 <template>
   
-  <WordpressHeader 
-    v-if="isSmallScreen"
-  />
+  <WordpressHeader v-if="isSmallScreen" />
 
   <div v-if="menuItem" class="menu-item-container">
     
@@ -14,9 +12,9 @@
         <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
         <p class="dividing-circle">•</p>
 
-        <div v-if="hasReviews">
+        <div v-if="itemReviews.length">
           <div class="rating-num-section">
-            <p class="rating-number" @click="scrollToReviews">22</p>
+            <p class="rating-number" @click="scrollToReviews">{{ itemReviews.length }}</p>
             <span class="material-symbols-outlined down-arrow-icon">keyboard_arrow_down</span>
           </div>
         </div>
@@ -74,13 +72,16 @@
     </div>
   </div>
     
-  <div class="has-reviews" v-if="hasReviews">
+  <div class="has-reviews" v-if="itemReviews.length">
     <!-- Reviews Section -->
     <div class="reviews-section">
       <h2 class="reviews-header">Customer Reviews</h2>
       
       <hr class="reviews-header-divider" />
-        <ReviewPanel :item-name="props.ItemName" />
+        <ReviewPanel
+          :review-stats="itemStats"
+          :item-name="props.ItemName" 
+        />
       <div class="reviews-divider">
         <span class="divider-title">Reviews</span>
         <hr class="reviews-header-divider" />
@@ -88,9 +89,9 @@
       
       <!-- Reviews -->
       <div class="reviews-container" ref="reviewsSection">
-        <div v-if="filteredReviews.length">
+        <div v-if="itemReviews.length">
           <ReviewCard 
-            v-for="(review, index) in filteredReviews" 
+            v-for="(review, index) in itemReviews" 
             :key="index" 
             :review="review" 
           />
@@ -117,7 +118,7 @@
             @click="goToWriteReview"
           />
           <p class="custom-reviews-text" ref="reviewsSection">Be the first person to rate this item!</p>
-        
+
           <div
             @click="goToWriteReview"
             class="write-review-button">
@@ -141,18 +142,16 @@ import MenuCard from "../components/RecommendCard.vue";
 import WordpressHeader from "../components/Header.vue";
 import StarRating from "../components/StarRating.vue";
 import ReviewCard from "../components/ReviewCard.vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
-import { folderRealOrTest } from "../data.config.js";
-import Reviews from "../assets/real_menu/Reviews.json";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 
+//New 
+import axiosInstance from "../lib/axios.js";
 
-const hasReviews = true;
 
 const cart = useCartStore();
 const router = useRouter();
-const route = useRoute();
 
 const props = defineProps({
   ItemName: {
@@ -167,7 +166,8 @@ const pic = ref("");
 const selectedOption = ref(null);
 const relatedItems = ref([]);
 const isSmallScreen = ref(false);
-const filteredReviews = ref([]);
+const itemReviews = ref([]);
+const itemStats = ref(null);
 const reviewsSection = ref(null);
 
 const scrollToReviews = () => {
@@ -176,27 +176,38 @@ const scrollToReviews = () => {
   }
 };
 
-const loadAllReviews = () => {
-  filteredReviews.value = Reviews.Reviews;
+const loadAllReviews = async () => {
+  try {
+    const response = await axiosInstance.get(`get_reviews_and_stats_by_item_name/${props.ItemName}`);
+    const data = response.data;
+
+    itemReviews.value = data.reviews || [];
+    itemStats.value = data.review_stats || null;
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+  }
 };
 
 const updateScreenSize = () => {
   isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
 };
 
-const updateMenuItem = () => {
-  const itemName = props.ItemName;
+const updateMenuItem = async () => {
+  try {
+    const response = await axiosInstance.get(`get_menu_item_by_name/${props.ItemName}`);
+    menuItem.value = response.data;
 
-  menuItem.value = jsonData.value.find((item) => item.Name === itemName) || null;
+    if (menuItem.value && menuItem.value.Images.length) {
+      pic.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${menuItem.value.Images[0]}`;
 
-  if (menuItem.value) {
-    pic.value = new URL(`../assets/${folderRealOrTest}/pics/${menuItem.value.Images[0]}`, import.meta.url).href;
+      findRelatedItems(menuItem.value);
 
-    findRelatedItems(menuItem.value);
-
-    if (menuItem.value.Options.length === 1) {
-      selectedOption.value = menuItem.value.Options[0];
+      if (menuItem.value.Options.length === 1) {
+        selectedOption.value = menuItem.value.Options[0];
+      }
     }
+  } catch (error) {
+    console.error("Error fetching menu item:", error);
   }
 };
 
@@ -253,26 +264,53 @@ const goToItemPage = (item) => {
 };
 
 const goToWriteReview = () => {
-  router.push({
-    path: '/write-review',
-    query: { itemName: props.ItemName },
-  });
+
+  if (false) {
+    router.push({
+      path: '/write-review',
+      query: { itemName: props.ItemName },
+    });
+  } else {
+    router.push({ 
+      path: '/sign-in', 
+      query: { 
+        successRoute: 'write-review',
+        successRouteProp: JSON.stringify({ itemName: props.ItemName })
+      } 
+    });
+  }
 };
 
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    jsonData.value = MenuData.default.MenuItems;
+    const response = await axiosInstance.get(`get_menu/`);
+    jsonData.value = response.data.MenuItems;
     updateMenuItem();
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
 };
 
+// watch(
+//   () => route.params.ItemName, 
+//   () => updateMenuItem()
+// );
+
 watch(
-  () => route.params.ItemName, 
-  () => updateMenuItem()
+  () => props.ItemName,
+  async (newItemName, oldItemName) => {
+    if (newItemName !== oldItemName) {
+      menuItem.value = null;
+      itemReviews.value = [];
+
+      pic.value = "";
+      selectedOption.value = null;
+
+      await updateMenuItem();
+      await loadAllReviews();
+    }
+  }
 );
 
 onMounted(() => {

@@ -39,7 +39,6 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useCartStore } from "../stores/cart.js";
-import { folderRealOrTest } from "../data.config.js";
 
 const cart = useCartStore();
 

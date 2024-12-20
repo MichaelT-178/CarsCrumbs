@@ -6,7 +6,7 @@
         :key="rating" 
         class="rating-bar"
       >
-      <span class="rating-label">{{ rating }} stars</span>
+        <span class="rating-label">{{ rating }} stars</span>
         <div class="bar-container">
           <div 
             class="bar-fill" 
@@ -21,18 +21,43 @@
 
 
 <script setup>
+import { computed } from 'vue';
 
-const ratingPercentages = {
-  5: 70,
-  4: 10,
-  3: 5,
-  2: 7,
-  1: 6,
-};
 
-const orderedRatings = Object.entries(ratingPercentages).sort(
-  ([a], [b]) => b - a
-);
+const props = defineProps({
+  ratingDistributions: {
+    type: Object,
+    required: true,
+    default: () => ({})
+  }
+});
+
+
+const orderedRatings = computed(() => {
+  const total = Object.values(props.ratingDistributions).reduce((sum, count) => sum + count, 0);
+
+  const percentages = Object.entries(props.ratingDistributions).map(([key, value]) => {
+    const stars = convertRatingKey(key);
+    const percent = total > 0 ? ((value / total) * 100) : 0;
+
+    return [stars, percent];
+  });
+
+  return percentages.sort(([a], [b]) => b - a);
+});
+
+
+function convertRatingKey(key) {
+  const mapping = {
+    One: 1,
+    Two: 2,
+    Three: 3,
+    Four: 4,
+    Five: 5
+  };
+
+  return mapping[key] || key;
+}
 
 </script>
 

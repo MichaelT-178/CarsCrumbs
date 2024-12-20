@@ -1,15 +1,27 @@
 <template>
   <div class="reviews-layout">
     <div class="review-item">
-      <ReviewStats :item-name="itemName" />
+      <!-- Review Stats -->
+      <ReviewStats 
+        :avg-num-of-stars="reviewStats.avg_num_of_stars"
+        :num-of-ratings="reviewStats.num_of_ratings"
+      />
     </div>
     <div class="divider"></div>
     <div class="review-item">
-      <BarPercent :item-name="itemName" />
+      <!-- Bar Percent Middle -->
+      <BarPercent 
+        :rating-distributions="reviewStats.rating_distributions"
+      />
     </div>
     <div class="divider"></div>
     <div class="review-item">
-      <RecommendCircle :item-name="itemName" />
+      <!-- Recommend Circle -->
+      <RecommendCircle 
+        :percent-recommended="reviewStats.percent_recommended"
+        :num-of-recommendations="reviewStats.num_of_recommendations"
+        :item-name="itemName" 
+      />
     </div>
   </div>
 </template>
@@ -20,6 +32,10 @@ import BarPercent from "./BarPercent.vue";
 import RecommendCircle from "./RecommendCircle.vue";
 
 const props = defineProps({
+  reviewStats: {
+    type: Object,
+    required: true,
+  },
   itemName: {
     type: String,
     required: true,

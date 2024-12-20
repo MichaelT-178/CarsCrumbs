@@ -2,7 +2,7 @@
   <div class="review-card">
 
     <div class="review-header">
-      <h3>{{ review.Header }}</h3>
+      <h3>{{ review.review_headline }}</h3>
       <span 
         class="report-review desktop-only"
         @click="reportReview"
@@ -12,29 +12,29 @@
     </div>
 
     <div class="rating-section">
-      <StarRating :rating="review.Rating" :show-number="false" />
+      <StarRating :rating="review.star_rating" :show-number="false" />
 
       <div class="recommendation-container">
         <div class="divider"></div>
         <span 
           class="material-symbols-outlined" 
-          :class="{ 'thumbs-up': wouldRecommend, 'thumbs-down': !wouldRecommend }">
-          {{ wouldRecommend ? 'thumb_up' : 'thumb_down' }}
+          :class="{ 'thumbs-up': review.would_recommend, 'thumbs-down': !review.would_recommend }">
+          {{ review.would_recommend ? 'thumb_up' : 'thumb_down' }}
         </span>
         <span 
           class="recommendation-text" 
-          :class="wouldRecommend ? 'positive' : 'negative' ">
-          {{ wouldRecommend ? 'Would Recommend' : 'Would Not Recommend' }}
+          :class="review.would_recommend ? 'positive' : 'negative' ">
+          {{ review.would_recommend ? 'Would Recommend' : 'Would Not Recommend' }}
         </span>
       </div>
     </div>
 
     <p class="name-date">
-      {{ review.Name }}
+      {{ review.display_name }}
       <span class="separator">•</span>
-      {{ review.DateAdded }}
+      {{ review.date_added }}
     </p>
-    <p class="text-review">{{ review.Text }}</p>
+    <p class="text-review">{{ review.written_review }}</p>
 
     <div class="dynamic-report-review mobile-only">
       <span 

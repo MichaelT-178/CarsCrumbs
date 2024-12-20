@@ -17,7 +17,6 @@
 </template>
 
 <script setup>
-import { folderRealOrTest } from '../../data.config';
 
 defineProps({
   order: {
@@ -26,8 +25,8 @@ defineProps({
   }
 });
 
-const getPicUrl = (imageName) =>
-  new URL(`../../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+const getPicUrl = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
+
 </script>
 
 <style scoped>

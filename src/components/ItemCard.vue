@@ -23,7 +23,6 @@
 <script setup>
 import { computed } from 'vue';
 import { useCartStore } from '../stores/cart';
-import { folderRealOrTest } from '../data.config';
 
 const cart = useCartStore();
 
@@ -35,9 +34,7 @@ const props = defineProps({
 });
 
 const getPicture = (item) => {
-  return computed(() => {
-    return new URL(`../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href;
-  });
+  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${item.Images[0]}`
 };
 
 const deleteItem = (itemId) => {

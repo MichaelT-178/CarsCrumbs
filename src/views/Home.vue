@@ -252,11 +252,12 @@ const menu = jsonData.value["Items"];
   text-align: center;
   overflow: hidden;
   margin: 2rem 0;
+  height: 270px;
 }
 
 .baking-supplies {
   width: 100%;
-  height: 250px;
+  height: 270px;
   object-fit: cover;
 }
 
@@ -287,10 +288,10 @@ const menu = jsonData.value["Items"];
 
 .order-section {
   text-align: center;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  margin-top: 2rem;
-  border-top: 1px solid #ddd;
+  padding: 20px;
+  /* background-color: #f9f9f9; */
+  margin-top: -5px;
+  /* border-top: 1px solid #ddd; */
 }
 
 .order-section h1 {

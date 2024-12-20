@@ -20,7 +20,6 @@
 
 <script setup>
 import { computed } from 'vue';
-import { folderRealOrTest } from '../../data.config';
 
 const props = defineProps({
   item: {
@@ -52,7 +51,7 @@ const limitedImages = computed(() => {
   return allImages.slice(0, 4);
 });
 
-const getPicUrl = (imageName) => new URL(`../../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+const getPicUrl = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
 
 </script>
 

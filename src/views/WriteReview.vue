@@ -122,6 +122,7 @@ import MenuItems from "../../src/assets/real_menu/MenuItems.json";
 import StarRating from "../components/StarRating.vue";
 import WordpressHeader from "../components/Header.vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../lib/axios";
 
 const props = defineProps({
   itemName: {
@@ -146,14 +147,13 @@ const reviewHeadlineError = ref(false);
 const recommendError = ref(false);
 const writtenReviewError = ref(false);
 
-const selectedItem = computed(() =>
-  MenuItems.MenuItems.find((item) => item.Name === props.itemName) || null
-);
+const selectedItem = ref(null);
 
-if (selectedItem.value) {
-  imageUrl.value = new URL(`../assets/real_menu/pics/${selectedItem.value.Images[0]}`,
-    import.meta.url
-  ).href;
+const loadReviewItem = async () => {
+  const menuItem = await axiosInstance.get(`get_menu_item_by_name/${props.itemName}`);
+  selectedItem.value = menuItem.data;
+
+  imageUrl.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${selectedItem.value.Images[0]}`;
 }
 
 const handleResize = () => {
@@ -271,6 +271,8 @@ watch(recommend, (newValue) => {
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
   window.addEventListener("resize", handleResize);
+
+  loadReviewItem();
 });
 
 onUnmounted(() => {

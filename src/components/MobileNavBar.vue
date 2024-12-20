@@ -15,7 +15,7 @@
       >
         menu
       </span>
-      <img :src="logoTwo" alt="Logo" class="logo" />
+      <img :src="PurpleLogo" alt="Logo" class="logo" />
       <router-link to="/account" class="profile-cart-wrapper">
         <span class="material-symbols-outlined account-icon">account_circle</span>
       </router-link>
@@ -97,10 +97,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import logoTwo from "../assets/logos/purple-logo.png";
-import { folderRealOrTest } from '../data.config.js';
+import PurpleLogo from "../assets/logos/purple-logo.png";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
+import axiosInstance from '../lib/axios.js';
 
 const router = useRouter();
 const cart = useCartStore();
@@ -114,7 +114,6 @@ const isSidebarOpen = ref(false);
 const menuIconColor = ref("white");
 
 const filterResults = () => {
-
   if (searchQuery.value) {
     const queryWords = searchQuery.value.toLowerCase().split(' ');
 
@@ -177,8 +176,8 @@ const handleKeydown = (event) => {
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(`../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = MenuData.default.MenuItems;
+    const response = await axiosInstance.get('/get_menu/');
+    menu.value = response.data.MenuItems;
   } catch (error) {
     console.error("Error loading menu data:", error);
   }
@@ -313,8 +312,8 @@ html, body {
 
 .cart-badge {
   position: absolute;
-  top: 5px;
-  right: 4px; 
+  top: 7px;
+  right: 4.5px; 
   background-color: #E50000;
   color: white;
   border-radius: 50%;
@@ -323,9 +322,9 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 20px;
-  height: 20px;
-  z-index: 1000;
+  min-width: 18px;
+  height: 18px;
+  z-index: 998;
 }
 
 .cart-badge.hidden {

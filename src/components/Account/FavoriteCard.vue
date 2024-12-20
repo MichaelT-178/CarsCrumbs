@@ -52,7 +52,6 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { folderRealOrTest } from '../../data.config';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -82,7 +81,7 @@ const toggleFavorite = () => {
 };
 
 const getPicUrl = computed(() => {
-  return new URL(`../../assets/${folderRealOrTest}/pics/${props.item.Images[0]}`, import.meta.url).href;
+  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
 });
 
 const handleClick = (item) => {

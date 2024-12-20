@@ -4,39 +4,67 @@
       <div
         class="circle"
         :style="{
-          background: `conic-gradient(#00A200 ${recommendPercent}%, #e0e0e0 ${recommendPercent}%)`
+          background: `conic-gradient(#00A200 ${percentRecommended}%, #e0e0e0 ${percentRecommended}%)`
         }"
       >
         <div class="circle-inner">
-          {{ recommendPercent }}
+          {{ percentRecommended }}
         </div>
       </div>
 
       <div class="text-content">
-        <div class="recommend-text">{{ recommendPercent }}% would recommend</div>
-        <div class="recommend-count">12 recommendations</div>
+        <div class="recommend-text">{{ percentRecommended }}% would recommend</div>
+        <div class="recommend-count">{{ numOfRecommendations }} recommendations</div>
       </div>
     </div>
 
-    <router-link
-      :to="{ path: '/write-review', query: { itemName: itemName } }"
+    <div
+      @click="goToWriteReview"
       class="write-review-button"
     >
       Write a review
-    </router-link>
+    </div>
   </div>
 </template>
 
 
 <script setup>
-const recommendPercent = 58;
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps({
+  percentRecommended: {
+    type: Number,
+    required: true
+  },
+  numOfRecommendations: {
+    type: Number,
+    required: true
+  },
   itemName: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
+
+const goToWriteReview = () => {
+
+  if (false) {
+      router.push({
+        path: '/write-review',
+        query: { itemName: props.ItemName },
+      });
+    } else {
+      router.push({ 
+        path: '/sign-in', 
+        query: { 
+          successRoute: 'write-review',
+          successRouteProp: JSON.stringify({ itemName: props.itemName })
+        } 
+      });
+    }
+};
 
 </script>
 
@@ -44,7 +72,7 @@ const props = defineProps({
 <style scoped>
 .recommendation-container {
   display: flex;
-  width: 300px;
+  width: 301px;
   flex-direction: column;
   align-items: flex-start;
 }

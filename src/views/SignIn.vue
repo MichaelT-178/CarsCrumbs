@@ -49,36 +49,66 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { mergeProps, ref } from "vue";
 import CircleLogo from "../assets/logos/CircleLogo.png";
 import { onMounted, onUnmounted } from "vue";
 import { useAuthStore } from "../stores/auth";
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const authStore = useAuthStore();
 const router = useRouter();
+
+
+const route = useRoute();
+
+const successRoute = route.query.successRoute || "/";
+const successRouteProp = route.query.successRouteProp
+                       ? JSON.parse(route.query.successRouteProp)
+                       : null;
+
+
 
 const email = ref("");
 const password = ref("");
 const emailError = ref("");
 const passwordError = ref("");
 
+// "review_stats": {
+//     "avg_num_of_stars": 5.0,
+//     "num_of_ratings": 2,
+//     "percent_recommended": 100.0,
+//     "num_of_recommendations": 2,
+//     "rating_distributions": {
+//       "One": 0,
+//       "Two": 0,
+//       "Five": 2,
+//       "Four": 0,
+//       "Three": 0
+//     }
+//   }
+
 const signIn = () => {
-  emailError.value = "";
-  passwordError.value = "";
 
-  if (!email.value) {
-    emailError.value = "Email is required";
-  }
-  if (!password.value) {
-    passwordError.value = "Password is required";
-  }
+  router.push({ 
+    path: successRoute,
+    query: successRouteProp
+  });
 
-  if (email.value && password.value) {
-    console.log("SIGN IN");
-    console.log("Email:", email.value);
-    console.log("Password:", password.value);
-  }
+  // emailError.value = "";
+  // passwordError.value = "";
+
+  // if (!email.value) {
+  //   emailError.value = "Email is required";
+  // }
+  // if (!password.value) {
+  //   passwordError.value = "Password is required";
+  // }
+
+  // if (email.value && password.value) {
+  //   console.log("SIGN IN");
+  //   console.log("Email:", email.value);
+  //   console.log("Password:", password.value);
+  // }
 };
 
 const createAccount = () => {

@@ -39,7 +39,6 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Header from "../components/Header.vue";
 import ShrugGuy from "../assets/other/Shrug.png";
-import { folderRealOrTest } from "../data.config";
 
 const jsonData = ref([]);
 const route = useRoute();
@@ -81,7 +80,7 @@ const loadMenuData = async () => {
   }
 };
 
-const getItemImage = (imageName) => new URL(`../assets/${folderRealOrTest}/pics/${imageName}`, import.meta.url).href;
+const getItemImage = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
 
 const navigateToRoute = (route) => {
   if (route) {

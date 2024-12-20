@@ -2,18 +2,18 @@
   <div class="customer-reviews">
     <div class="rating-summary">
       <div class="average-rating">
-        <h1>{{ averageRating }}</h1>
+        <h1>{{ avgNumOfStars.toFixed(1) }}</h1>
       </div>
       <div class="rating-details">
         <div class="rating-star">
           <StarRating 
-            :rating="averageRating" 
+            :rating="avgNumOfStars" 
             :show-number="false"
             :star-size="28"
           />
         </div>
         <div class="rating-count">
-          <span>80 star {{ pluralize("rating", 2)}}</span>
+          <span>{{ numOfRatings }} star {{ pluralize("rating", 2)}}</span>
         </div>
       </div>
     </div>
@@ -25,7 +25,17 @@
 import StarRating from "../StarRating.vue";
 import { pluralize } from "../../utils/helper";
 
-const averageRating = 4.6;
+const props = defineProps({
+  avgNumOfStars: {
+    type: Number,
+    required: true,
+  },
+  numOfRatings: {
+    type: Number,
+    required: true,
+  },
+
+});
 
 </script>
 
