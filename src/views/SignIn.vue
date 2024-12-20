@@ -49,7 +49,7 @@
 
 
 <script setup>
-import { mergeProps, ref } from "vue";
+import { ref } from "vue";
 import CircleLogo from "../assets/logos/CircleLogo.png";
 import { onMounted, onUnmounted } from "vue";
 import { useAuthStore } from "../stores/auth";
@@ -72,20 +72,6 @@ const email = ref("");
 const password = ref("");
 const emailError = ref("");
 const passwordError = ref("");
-
-// "review_stats": {
-//     "avg_num_of_stars": 5.0,
-//     "num_of_ratings": 2,
-//     "percent_recommended": 100.0,
-//     "num_of_recommendations": 2,
-//     "rating_distributions": {
-//       "One": 0,
-//       "Two": 0,
-//       "Five": 2,
-//       "Four": 0,
-//       "Three": 0
-//     }
-//   }
 
 const signIn = () => {
 
