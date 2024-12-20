@@ -24,7 +24,15 @@ import Account from '../views/Account/Account.vue';
 // Payment 
 import Payment from '../views/Payment.vue';
 
+// Payment Success
 import PaymentSuccess from '../views/PaymentSuccess.vue';
+
+// Sign In
+import SignIn from "../views/SignIn.vue";
+
+// CreateAccount
+import CreateAccount from '../views/CreateAccount.vue';
+
 
 const routes = [
 	{
@@ -55,6 +63,14 @@ const routes = [
 		path: '/payment-success',
 		name: 'PaymentSuccess',
 		component: PaymentSuccess
+	},
+	{
+		path: '/sign-in',
+		component: SignIn
+	},
+	{
+		path: '/create-account',
+		component: CreateAccount
 	},
 	{
 		path: '/item/:ItemName',
