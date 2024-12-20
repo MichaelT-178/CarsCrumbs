@@ -12,7 +12,7 @@
   </div>
 
   <div class="items-section">
-    <h1>Our Products</h1>
+    <h1 class="our-products-text">Our Products</h1>
     <div class="product-grid">
       <div
         class="product-card"
@@ -345,9 +345,100 @@ const menu = jsonData.value["Items"];
   margin-top: 1.5rem;
 }
 
+@media (max-width: 920px) {
+  .image-container {
+    height: 450px;
+  }
+  .text-overlay {
+    font-size: 35px;
+    max-width: 90%;
+  }
+
+  .order-button {
+    padding: 12px 100px;
+  }
+  .rectangle {
+    width: 100px;
+  }
+  
+  .top-hr {
+    width: 65%;
+  }
+  
+  .bottom-hr {
+    width: 35%;
+  }
+}
+
 @media (max-width: 768px) {
   .product-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .image-container {
+    height: 380px;
+  }
+
+  .dark-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .text-overlay {
+    font-size: 32px;
+    max-width: 95%;
+    top: 80px;
+  }
+
+  .order-button {
+    padding: 10px 90px;
+  }
+
+  .rectangle {
+    width: 100px;
+  }
+}
+
+@media (max-width: 450px) {
+  .our-products-text {
+    font-size: 25px;
+    margin-bottom: -18px;
+  }
+
+  .image-container {
+    height: 300px;
+  }
+
+  .cinnamon-roll-image {
+    width: 300px;
+  }
+
+  .text-overlay {
+    font-size: 26.1px;
+    max-width: 100%;
+    top: 10px;
+  }
+
+  .order-button {
+    padding: 12px 35px;
+    font-size: 20px;
+    margin-top: -5px;
+  }
+
+  .rectangle {
+    width: 80px;
+    top: 44px;
+  }
+
+  .top-hr {
+    width: 60%;
+    margin-top: 40px;
+  }
+
+  .bottom-hr {
+    width: 25%;
+    margin-top: 15px;
   }
 }
 

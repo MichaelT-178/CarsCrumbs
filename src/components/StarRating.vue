@@ -41,7 +41,6 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-// Props
 const props = defineProps({
   rating: {
     type: Number,
@@ -62,18 +61,15 @@ const props = defineProps({
   },
 });
 
-// Emit function
 const emit = defineEmits(['update:modelValue']);
 
-// Reactive state
-const emittedRating = ref(props.rating); // Stores the current rating
-const hoverRating = ref(0); // Stores the hovered star rating
+const emittedRating = ref(props.rating); 
+const hoverRating = ref(0); 
 
-// Computed values
-const displayedRating = computed(() => hoverRating.value || emittedRating.value); // Determines the rating to display
-const formattedRating = computed(() => displayedRating.value.toFixed(1)); // Formats the displayed rating to 1 decimal place
+const displayedRating = computed(() => hoverRating.value || emittedRating.value); 
+const formattedRating = computed(() => displayedRating.value.toFixed(1)); 
 
-// Functions
+
 const getStarFill = (star) => {
   const ratingToUse = hoverRating.value || emittedRating.value;
 
@@ -90,27 +86,24 @@ const getStarFill = (star) => {
 
 const getGradientOffset = (fraction) => `${fraction * 100}%`;
 
-// Event handlers
 const hoverStar = (star) => {
   if (props.editable) {
-    hoverRating.value = star; // Update hover rating
+    hoverRating.value = star; 
   }
 };
 
 const resetHover = () => {
-  hoverRating.value = 0; // Clear hover rating
+  hoverRating.value = 0; 
 };
 
 const selectStar = (star) => {
   if (props.editable) {
-    emittedRating.value = star; // Set the selected rating
-    emit('update:modelValue', star); // Emit the selected rating
+    emittedRating.value = star;
+    emit('update:modelValue', star);
   }
 };
 
 </script>
-
-
 
 
 <style scoped>

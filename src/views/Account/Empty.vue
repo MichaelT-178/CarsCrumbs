@@ -6,6 +6,7 @@
   </div>
 </template>
 
+
 <script setup>
 import ShrugGuy from "../../assets/other/Shrug.png";
 
@@ -20,6 +21,7 @@ defineProps({
   },
 });
 </script>
+
 
 <style scoped>
 .title {
@@ -51,9 +53,9 @@ defineProps({
 }
 
 .msg {
-  width: 400px; /* Set smaller width */
+  width: 400px;
   font-size: 22px;
-  margin: 0 auto; /* Center the text horizontally */
+  margin: 0 auto;
   text-align: center;
 }
 
