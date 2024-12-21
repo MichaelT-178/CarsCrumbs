@@ -301,6 +301,8 @@ watch(
   () => props.ItemName,
   async (newItemName, oldItemName) => {
     if (newItemName !== oldItemName) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       menuItem.value = null;
       itemReviews.value = [];
 

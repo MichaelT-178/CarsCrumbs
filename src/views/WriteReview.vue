@@ -118,7 +118,6 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
-import MenuItems from "../../src/assets/real_menu/MenuItems.json";
 import StarRating from "../components/StarRating.vue";
 import WordpressHeader from "../components/Header.vue";
 import { useRouter } from "vue-router";

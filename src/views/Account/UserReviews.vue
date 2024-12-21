@@ -17,7 +17,7 @@
 <script setup>
 import NoItems from "./Empty.vue";
 import UserReviewCard from "../../components/Account/UserReviewCard.vue";
-import ReviewsData from "../../assets/real_menu/Reviews.json";
+import ReviewsData from "../../assets/old_data/real_menu/Reviews.json";
 
 const userReviews = ReviewsData.Reviews;
 

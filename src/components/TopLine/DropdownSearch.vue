@@ -33,7 +33,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { folderRealOrTest } from '../../data.config';
+import axiosInstance from '../../lib/axios';
 
 const props = defineProps({
   query: {
@@ -65,7 +65,7 @@ const filteredItems = computed(() => {
     )
     .map(item => ({
       ...item,
-      imageUrl: new URL(`../../assets/${folderRealOrTest}/pics/${item.Images[0]}`, import.meta.url).href,
+      imageUrl: `https://crumb-pics.s3.us-east-1.amazonaws.com/${item.Images[0]}`,
     }))
     .slice(0, 5);
 });
@@ -77,8 +77,8 @@ const handleClick = (item) => {
 
 const loadMenuData = async () => {
   try {
-    const MenuData = await import(`../../assets/${folderRealOrTest}/MenuItems.json`);
-    menu.value = MenuData.default.MenuItems;
+    const response = await axiosInstance.get("get_menu/");
+    menu.value = response.data.MenuItems;
   } catch (error) {
     console.error('Error loading menu data:', error);
   }

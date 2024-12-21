@@ -13,7 +13,7 @@
 
 
 <script setup>
-import OrderDetails from "../../assets/real_menu/OrderDetails.json";
+import OrderDetails from "../../assets/old_data/real_menu/OrderDetails.json";
 import PastOrderCard from "../../components/Account/PastOrderCard.vue";
 
 const orders = OrderDetails.OrderDetails;

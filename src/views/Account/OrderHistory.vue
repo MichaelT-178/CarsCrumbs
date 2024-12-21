@@ -22,7 +22,7 @@
 
 <script setup>
 import NoItems from "./Empty.vue";
-import PastOrders from "../../assets/real_menu/PastOrders.json";
+import PastOrders from "../../assets/old_data/real_menu/PastOrders.json";
 import OrderCard from "../../components/Account/OrderHistoryCard.vue";
 
 const orders = PastOrders.Orders;

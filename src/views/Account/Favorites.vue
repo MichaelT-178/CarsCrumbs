@@ -17,7 +17,7 @@
 <script setup>
 import { ref } from "vue";
 import NoItems from "./Empty.vue";
-import MenuItems from "../../assets/real_menu/MenuItems.json";
+import MenuItems from "../../assets/old_data/real_menu/MenuItems.json";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
 
 
