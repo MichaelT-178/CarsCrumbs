@@ -2,10 +2,10 @@
   <p class="title">Account Settings</p>
   <div class="account-info">
     <div class="view-mode" v-if="!isEditing">
-			<p>
+      <p>
         <strong>Full Name:</strong>
         <br />
-        {{ account.firstName }} {{ account.lastName}}
+        {{ account.firstName }} {{ account.lastName }}
       </p>
       <p>
         <strong>Username:</strong>
@@ -59,50 +59,82 @@
       </label>
       <label>
         <span>Phone Number:</span>
-        <input 
-          v-model="editAccount.phone_number" 
-          type="text" 
-          @input="maskPhoneNumber" 
+        <input
+          v-model="editAccount.phone_number"
+          type="text"
+          @input="maskPhoneNumber"
           placeholder="(XXX) XXX-XXXX"
         />
-      </label>
-      <label>
-        <span>Number of Points:</span>
-        <input v-model.number="editAccount.numOfPoints" type="number" />
       </label>
       <div class="button-group">
         <button class="primary-button" @click="saveChanges">Save</button>
         <button class="secondary-button" @click="cancelEdit">Cancel</button>
       </div>
     </div>
-
   </div>
 </template>
 
+
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
+import axiosInstance from "../../lib/axios";
+import { useAuthStore } from "../../stores/auth";
+
+const authStore = useAuthStore();
 
 const account = reactive({
-  username: "john_doe",
-  firstName: "John",
-  lastName: "Doe",
-  email: "john.doe@example.com",
-  phone_number: "(814) 920-1238",
-  numOfPoints: 100,
-  birthday: "01-01-1990",
+  firstName: "",
+  lastName: "",
+  username: "",
+  email: "",
+  phone_number: "",
+  numOfPoints: 0,
+  birthday: "",
 });
 
 const isEditing = ref(false);
 const editAccount = reactive({ ...account });
+const userId = authStore.getUserId();
+
+const fetchAccountData = async () => {
+  try {
+    const response = await axiosInstance.get(`/get_user_by_id/${userId}/`);
+    const user = response.data.user;
+
+    Object.assign(account, {
+      firstName: user.first_name,
+      lastName: user.last_name,
+      username: user.username,
+      email: user.email,
+      phone_number: user.phone_number,
+      birthday: user.birthday,
+    });
+
+  } catch (error) {
+    console.error("Failed to fetch user data:", error);
+  }
+};
 
 const editMode = () => {
   isEditing.value = true;
   Object.assign(editAccount, account);
 };
 
-const saveChanges = () => {
-  Object.assign(account, editAccount);
-  isEditing.value = false;
+const saveChanges = async () => {
+  try {
+    const response = await axiosInstance.put("/modify_user/", {
+      id: userId,
+      firstName: editAccount.firstName,
+      lastName: editAccount.lastName,
+      username: editAccount.username,
+      email: editAccount.email,
+      phoneNumber: editAccount.phone_number,
+    });
+    Object.assign(account, response.data.user);
+    isEditing.value = false;
+  } catch (error) {
+    console.error("Failed to save changes:", error);
+  }
 };
 
 const maskPhoneNumber = (event) => {
@@ -113,10 +145,8 @@ const maskPhoneNumber = (event) => {
   } else if (input.length > 6) {
     input = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 10)}`;
   }
-
   editAccount.phone_number = input;
 };
-
 
 const cancelEdit = () => {
   isEditing.value = false;
@@ -125,6 +155,8 @@ const cancelEdit = () => {
 const deleteAccount = () => {
   alert("Account deleted!");
 };
+
+onMounted(fetchAccountData);
 
 </script>
 

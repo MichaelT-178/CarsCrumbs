@@ -3,9 +3,9 @@
     class="rectangle-background" 
     :class="{ 'is-visible': visible }"
   >
-    <div v-if="false">
+    <div v-if="!isLoggedIn">
       <p class="not-signed-in-text">Not logged in</p>
-      <div class="profile-btn" @click="goToView('/cart/checkout')">
+      <div class="profile-btn" @click="goToView('/sign-in')">
         <p>SIGN IN</p>
       </div>
     </div>
@@ -64,8 +64,11 @@
 
 
 <script setup>
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../stores/auth';
 
+const authStore = useAuthStore();
 const router = useRouter();
 
 defineProps({
@@ -77,13 +80,16 @@ defineProps({
 
 const emit = defineEmits(['close']);
 
+const isLoggedIn = computed(() => authStore.getIsLoggedIn());
+
 const goToView = (path) => {
   router.push(path);
   emit('close');
 };
 
 const signOut = () => {
-  console.error("SIGNED OUT");
+  console.error('SIGNED OUT');
+  authStore.logout();
 };
 
 </script>

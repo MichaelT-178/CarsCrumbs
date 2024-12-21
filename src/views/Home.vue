@@ -76,7 +76,7 @@
 
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import MenuData from "../assets/home/HomePage.json";
 import HomeCookies from "../assets/home/HomeCookies.png";
 import CrumbsFooter from "../components/Footer.vue";
@@ -85,6 +85,10 @@ import CinnamonRoll from "../assets/home/CinnamonRoll.jpg";
 
 const jsonData = ref(MenuData);
 const menu = jsonData.value["Items"];
+
+onMounted(() => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+})
 
 </script>
 

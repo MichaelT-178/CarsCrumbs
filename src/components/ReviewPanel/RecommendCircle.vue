@@ -30,7 +30,9 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { useAuthStore } from "../../stores/auth";
 
+const authStore = useAuthStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -50,7 +52,7 @@ const props = defineProps({
 
 const goToWriteReview = () => {
 
-  if (false) {
+  if (authStore.getIsLoggedIn()) {
       router.push({
         path: '/write-review',
         query: { itemName: props.ItemName },

@@ -145,12 +145,11 @@ import ReviewCard from "../components/ReviewCard.vue";
 import { useRouter } from "vue-router";
 import { useCartStore } from "../stores/cart.js";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
-
-//New 
 import axiosInstance from "../lib/axios.js";
-
+import { useAuthStore } from "../stores/auth.js";
 
 const cart = useCartStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 const props = defineProps({
@@ -265,7 +264,7 @@ const goToItemPage = (item) => {
 
 const goToWriteReview = () => {
 
-  if (false) {
+  if (authStore.getIsLoggedIn()) {
     router.push({
       path: '/write-review',
       query: { itemName: props.ItemName },
@@ -280,7 +279,6 @@ const goToWriteReview = () => {
     });
   }
 };
-
 
 const loadMenuData = async () => {
   try {

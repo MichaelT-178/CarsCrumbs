@@ -14,18 +14,31 @@
   </div>
 </template>
 
+
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
-import MenuItems from "../../assets/old_data/real_menu/MenuItems.json";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
+import axiosInstance from "../../lib/axios";
+import { useAuthStore } from "../../stores/auth";
 
+const authStore = useAuthStore();
+const userId = authStore.getUserId();
+const favoriteItems = ref([]);
 
-const favoriteItemIds = ref([1, 3, 5]);
+const fetchFavorites = async () => {
+  try {
+    const response = await axiosInstance.get(`/get_favorites/${userId}/`);
+    favoriteItems.value = response.data;
+  } catch (error) {
+    console.error("Error fetching favorite items:", error);
+    favoriteItems.value = [];
+  }
+};
 
-const favoriteItems = ref(MenuItems.MenuItems.filter(item =>
-  favoriteItemIds.value.includes(item.id)
-));
+onMounted(() => {
+  fetchFavorites();
+});
 
 </script>
 

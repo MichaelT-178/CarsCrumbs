@@ -55,6 +55,7 @@ import CircleLogo from "../assets/logos/CircleLogo.png";
 import { onMounted, onUnmounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from 'vue-router';
+import axiosInstance from "../lib/axios";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -67,36 +68,54 @@ const successRouteProp = route.query.successRouteProp
                        ? JSON.parse(route.query.successRouteProp)
                        : null;
 
-
-
 const email = ref("");
 const password = ref("");
 const emailError = ref("");
 const passwordError = ref("");
 
-const signIn = () => {
+const signIn = async () => {
 
-  router.push({ 
-    path: successRoute,
-    query: successRouteProp
-  });
+  emailError.value = "";
+  passwordError.value = "";
 
-  // emailError.value = "";
-  // passwordError.value = "";
+  if (!email.value) {
+    emailError.value = "Email is required";
+  }
+  if (!password.value) {
+    passwordError.value = "Password is required";
+  }
 
-  // if (!email.value) {
-  //   emailError.value = "Email is required";
-  // }
-  // if (!password.value) {
-  //   passwordError.value = "Password is required";
-  // }
+  if (email.value && password.value) {
+    console.log("SIGN IN");
+    console.log("Email:", email.value);
+    console.log("Password:", password.value);
 
-  // if (email.value && password.value) {
-  //   console.log("SIGN IN");
-  //   console.log("Email:", email.value);
-  //   console.log("Password:", password.value);
-  // }
+    const loginData = {
+      email_or_username: email.value,
+      password: password.value
+    }
+
+    try {
+      const response = await axiosInstance.post("/login_user/", loginData);
+      console.log("Login successful:", response.data.user.id);
+      
+      authStore.login(response.data);
+
+      router.push({
+        path: successRoute,
+        query: successRouteProp,
+      });
+    } catch (error) {
+      handleLoginError(error);
+    }
+
+  }
 };
+
+const handleLoginError = (error) => {
+  alert("ERROR OCCURRED!!!!!");
+  console.log(error);
+}
 
 const createAccount = () => {
   console.log("CREATE ACCOUNT");

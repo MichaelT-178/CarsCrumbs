@@ -47,6 +47,7 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import Datepicker from '@vuepic/vue-datepicker';
@@ -54,6 +55,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import YellowSquareLogo from "../assets/logos/yellow-square-logo.png";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from "vue-router";
+import axiosInstance from "../lib/axios";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -126,7 +128,7 @@ const handleInput = (field) => {
   }
 };
 
-const createAccount = () => {
+const createAccount = async () => {
   let isValid = true;
 
   const firstNameField = fields.value[0];
@@ -156,7 +158,28 @@ const createAccount = () => {
   console.log(`Password: ${passwordField.value}`);
   console.log(`Birthday: ${formatBirthday(birthday.value)}`);
 
-  alert("Account Successfully created!");
+  const newUser = {
+    firstName: firstNameField.value.trim(),
+    lastName: lastNameField.value.trim(),
+    email: emailField.value.trim(),
+    phoneNumber: phoneNumberField.value.trim(),
+    username: usernameField.value.trim(),
+    password: passwordField.value.trim(),
+    birthday: formatBirthday(birthday.value)
+  }
+
+  try {
+    const response = await axiosInstance.post("create_user/", newUser);
+    console.log("User creation successful:", response.data);
+    alert("Account Successfully created!");
+    authStore.login(response.data);
+  } catch (error) {
+    if (error.response) {
+      alert("ERROR OCCURRED!");
+    } else {
+      alert("An unexpected error occurred");
+    }
+  }
 
   router.push({
     path: successRoute,
@@ -174,7 +197,7 @@ const formatBirthday = (date) => {
   const day = String(d.getDate()).padStart(2, "0");
   const year = d.getFullYear();
 
-  return `${month}-${day}-${year}`;
+  return `${year}-${month}-${day}`;
 };
 
 
