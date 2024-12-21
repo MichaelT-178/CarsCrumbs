@@ -44,6 +44,7 @@
       class="create-account-btn"
       @click="createAccount"
     >Create Account</button>
+    <div @click="backToHome" class="home-link">Back to Home</div>
   </div>
 </template>
 
@@ -101,6 +102,10 @@ const createAccount = () => {
   console.log("CREATE ACCOUNT");
   router.push("/create-account");
 };
+
+const backToHome = () => {
+  router.push('/');
+}
 
 onMounted(() => {
   authStore.setSpecialNavBar(true);
@@ -215,6 +220,18 @@ button.create-account-btn:hover {
 
 .input-field.invalid {
   border-color: red;
+}
+
+.home-link {
+  color: #0041c2;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.home-link:hover {
+  color: #00308f;
 }
 
 @media (max-width: 520px) {

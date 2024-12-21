@@ -209,6 +209,8 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+	window.scrollTo({ top: 0, behavior: "auto" });
+	
   window.addEventListener('resize', handleResize);
 });
 

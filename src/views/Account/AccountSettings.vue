@@ -18,6 +18,11 @@
         {{ account.email }}
       </p>
       <p>
+        <strong>Phone Number:</strong>
+        <br />
+        {{ account.phone_number }}
+      </p>
+      <p>
         <strong>Number of Points:</strong>
         <br />
         {{ account.numOfPoints }}
@@ -53,6 +58,15 @@
         <input v-model="editAccount.email" type="email" />
       </label>
       <label>
+        <span>Phone Number:</span>
+        <input 
+          v-model="editAccount.phone_number" 
+          type="text" 
+          @input="maskPhoneNumber" 
+          placeholder="(XXX) XXX-XXXX"
+        />
+      </label>
+      <label>
         <span>Number of Points:</span>
         <input v-model.number="editAccount.numOfPoints" type="number" />
       </label>
@@ -61,6 +75,7 @@
         <button class="secondary-button" @click="cancelEdit">Cancel</button>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -72,8 +87,9 @@ const account = reactive({
   firstName: "John",
   lastName: "Doe",
   email: "john.doe@example.com",
+  phone_number: "(814) 920-1238",
   numOfPoints: 100,
-  birthday: "1990-01-01",
+  birthday: "01-01-1990",
 });
 
 const isEditing = ref(false);
@@ -89,6 +105,19 @@ const saveChanges = () => {
   isEditing.value = false;
 };
 
+const maskPhoneNumber = (event) => {
+  let input = event.target.value.replace(/\D/g, "");
+
+  if (input.length > 3 && input.length <= 6) {
+    input = `(${input.slice(0, 3)}) ${input.slice(3)}`;
+  } else if (input.length > 6) {
+    input = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6, 10)}`;
+  }
+
+  editAccount.phone_number = input;
+};
+
+
 const cancelEdit = () => {
   isEditing.value = false;
 };
@@ -98,6 +127,7 @@ const deleteAccount = () => {
 };
 
 </script>
+
 
 <style scoped>
 .account-info {
@@ -202,7 +232,7 @@ button {
 
 @media (max-width: 800px) {
   .title {
-    margin-left: 10px;
+    text-align: center;
     margin-top: 15px;
   }
 
@@ -210,6 +240,11 @@ button {
 		width: 350px;
 		margin-left: 10px;
 	}
+
+  .account-info {
+    margin: 0 auto;
+    margin-bottom: 50px;
+  }
 }
 
 </style>

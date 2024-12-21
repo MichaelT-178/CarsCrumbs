@@ -26,6 +26,20 @@
         <p v-if="field.error" class="error-text">{{ field.error }}</p>
       </div>
 
+      <p class="birthday-text">*Enter your birthday to receive special offers on your special day!</p>
+      
+      <Datepicker 
+        v-model="birthday" 
+        id="pickup-date" 
+        :enable-time="false" 
+        :month-change-on-scroll="false"
+        :enable-time-picker="false"
+        format="MM-dd-yyyy"
+        :class="['birthday-date-picker', { invalid: birthdayError }]"
+        auto-apply
+      />
+      <p v-if="birthdayError" class="error-text">{{ birthdayError }}</p>
+
       <button class="create-account-btn" type="submit">Create Account</button>
     </form>
 
@@ -33,9 +47,10 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import YellowSquareLogo from "../assets/logos/yellow-square-logo.png";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from "vue-router";
@@ -58,9 +73,12 @@ const fields = ref([
   { key: "password", value: "", type: "password", placeholder: "*Password", error: "" },
 ]);
 
+const birthday = ref('');
+const birthdayError = ref('');
+
 const validateField = (field) => {
   if (!field.value.trim()) {
-    field.error = `${field.placeholder.replace("*", "").trim()} is required.`;
+    field.error = `${field.placeholder.replace("*", "").trim().replace(" (XXX) XXX-XXXX", "")} is required.`;
     return false;
   }
 
@@ -85,6 +103,14 @@ const validateField = (field) => {
   return true;
 };
 
+const validateBirthday = () => {
+  if (!birthday.value) {
+    birthdayError.value = 'Birthday is required.';
+    return false;
+  }
+  birthdayError.value = '';
+  return true;
+};
 
 const handleInput = (field) => {
   if (field.key === "phoneNumber") {
@@ -100,21 +126,57 @@ const handleInput = (field) => {
   }
 };
 
-
 const createAccount = () => {
   let isValid = true;
 
-  fields.value.forEach((field) => {
-    if (!validateField(field)) isValid = false;
-  });
+  const firstNameField = fields.value[0];
+  const lastNameField = fields.value[1];
+  const emailField = fields.value[2];
+  const phoneNumberField = fields.value[3];
+  const usernameField = fields.value[4];
+  const passwordField = fields.value[5];
+
+  if (!validateField(firstNameField)) isValid = false;
+  if (!validateField(lastNameField)) isValid = false;
+  if (!validateField(emailField)) isValid = false;
+  if (!validateField(phoneNumberField)) isValid = false;
+  if (!validateField(usernameField)) isValid = false;
+  if (!validateField(passwordField)) isValid = false;
+  if (!validateBirthday()) isValid = false;
 
   if (!isValid) return;
+
+  // Print field values and birthday
+  console.log("Account Details:");
+  console.log(`First Name: ${firstNameField.value}`);
+  console.log(`Last Name: ${lastNameField.value}`);
+  console.log(`Email: ${emailField.value}`);
+  console.log(`Phone Number: ${phoneNumberField.value}`);
+  console.log(`Username: ${usernameField.value}`);
+  console.log(`Password: ${passwordField.value}`);
+  console.log(`Birthday: ${formatBirthday(birthday.value)}`);
+
+  alert("Account Successfully created!");
 
   router.push({
     path: successRoute,
     query: successRouteProp,
   });
 };
+
+const formatBirthday = (date) => {
+  if (!date) {
+    return ""
+  }
+
+  const d = new Date(date);
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const year = d.getFullYear();
+
+  return `${month}-${day}-${year}`;
+};
+
 
 const signIn = () => {
   router.push("/sign-in");
@@ -184,6 +246,27 @@ onUnmounted(() => {
   border-color: red;
 }
 
+.birthday-date-picker {
+  border: 1px solid darkslategray;
+  /* margin-bottom: 16px; */
+  width: 500px;
+  margin: 0 auto;
+  /* height: 300px; */
+}
+
+.birthday-date-picker.invalid {
+  border-color: red !important;
+}
+
+.birthday-text {
+  text-align: left;
+  color: #525252;
+  font-size: 18px;
+  margin: 0 auto;
+  width: 500px;
+  padding-bottom: 5px;
+}
+
 .error-text {
   color: red;
   font-size: 16px;
@@ -196,6 +279,7 @@ button.create-account-btn {
   width: 500px;
   padding: 15px;
   font-size: 16px;
+  margin-top: 15px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -220,13 +304,33 @@ button.create-account-btn:hover {
 
 @media (max-width: 520px) {
   .text-container,
+  button.create-account-btn {
+    max-width: 90%;
+  }
+
   .input-field {
+    max-width: 340px;
+  }
+
+  .birthday-text {
+    padding-bottom: 10px;
+  }
+
+  .birthday-text,
+  .birthday-date-picker {
     width: 340px;
+    margin: 0 auto;
   }
 
   button.create-account-btn {
     width: 340px;
+    margin-top: 20px;
   }
+  
+  button.create-account-btn:hover {
+    background-color: #0056b3;
+  }
+
 }
 
 </style>
