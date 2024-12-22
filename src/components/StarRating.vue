@@ -18,7 +18,7 @@
         :style="{ width: `${starSize}px`, height: `${starSize}px` }"
       >
         <defs>
-          <linearGradient :id="'partial-fill-' + star">
+          <linearGradient :id="'partial-fill-' + star + '-' + uniqueId">
             <stop
               v-if="star === Math.ceil(displayedRating) && displayedRating % 1 !== 0"
               :offset="getGradientOffset(displayedRating % 1)"
@@ -37,9 +37,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, computed } from 'vue';
+
+// EXPLANATION BELOW at the bottom of the file
+const uniqueId = `star-rating-${Math.random().toString(36).slice(2, 11)}`;
 
 const props = defineProps({
   rating: {
@@ -69,7 +71,6 @@ const hoverRating = ref(0);
 const displayedRating = computed(() => hoverRating.value || emittedRating.value); 
 const formattedRating = computed(() => displayedRating.value.toFixed(1)); 
 
-
 const getStarFill = (star) => {
   const ratingToUse = hoverRating.value || emittedRating.value;
 
@@ -78,10 +79,10 @@ const getStarFill = (star) => {
   }
 
   if (star === Math.ceil(ratingToUse) && ratingToUse % 1 !== 0) {
-    return `url(#partial-fill-${star})`; // Partial fill for fractional ratings
+    return `url(#partial-fill-${star}-${uniqueId})`; // Partial fill for fractional ratings
   }
 
-  return "#c9c9c9"; // Grey for unselected stars
+  return "#c9c9c9";
 };
 
 const getGradientOffset = (fraction) => `${fraction * 100}%`;
@@ -123,4 +124,19 @@ const selectStar = (star) => {
   font-weight: 600;
   color: #414141;
 }
+
 </style>
+
+<!-- The issue with the second StarRating component not showing the fractional 
+rating (4.5) correctly likely stems from how Vue's reactivity and 
+updates are handled. Specifically, the linearGradient element in the 
+SVG is dynamic and relies on the :id and :offset bindings to create 
+the fractional star. However, SVG elements in Vue often require 
+careful handling to ensure their updates propagate correctly.
+
+Here’s a breakdown of what might be causing the problem:
+
+1. Dynamic id Binding Conflict
+The id for the linearGradient element is dynamically generated as 'partial-fill-' + star. 
+This can result in duplicate id values when there are multiple StarRating 
+components on the page. SVG defs require unique id values for gradients to work properly. -->
