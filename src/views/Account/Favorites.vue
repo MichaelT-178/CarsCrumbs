@@ -9,7 +9,7 @@
   </div>
   <div v-else>
     <div v-for="item in favoriteItems" :key="item.id" class="favorite-item">
-      <FavoriteCard :item="item" />
+      <FavoriteCard :item="item" @favorite-toggle="handleFavoriteToggle" />
     </div>
   </div>
 </template>
@@ -33,6 +33,14 @@ const fetchFavorites = async () => {
   } catch (error) {
     console.error("Error fetching favorite items:", error);
     favoriteItems.value = [];
+  }
+};
+
+const handleFavoriteToggle = ({ item, isFavorite }) => {
+  if (!isFavorite) {
+    favoriteItems.value = favoriteItems.value.filter(
+      (favorite) => favorite.id !== item.id
+    );
   }
 };
 

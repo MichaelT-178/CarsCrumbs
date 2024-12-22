@@ -32,7 +32,7 @@
     <p class="name-date">
       {{ review.display_name }}
       <span class="separator">•</span>
-      {{ review.date_added }}
+      {{ formatDate(review.date_added) }}
     </p>
     <p class="text-review">{{ review.written_review }}</p>
 
@@ -60,9 +60,13 @@ defineProps({
   },
 });
 
-const wouldRecommend = true;
 const isReported = ref(false);
 const isMobile = ref(false);
+
+const formatDate = (date) => {
+  const dateList = date.split("-");
+  return `${dateList[1]}-${dateList[2]}-${dateList[0]}`;
+}
 
 const reportReview = () => {
   if (!isReported.value) {

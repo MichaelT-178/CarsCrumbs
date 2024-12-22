@@ -4,27 +4,27 @@
     <div class="menu-info">
       <h2 class="menu-name">{{ item.DisplayName }}</h2>
 
-      <StarRating :rating="item.Rating"/>
+      <StarRating :rating="item.Rating" />
 
       <p class="menu-price">{{ item.DisplayPrice }}</p>
 
       <div class="button-heart">
         <button class="order-button" @click="openSideView">Order Now</button>
         <div v-if="isHearted">
-          <img 
-            src="/heart-filled.svg" 
+          <img
+            src="/heart-filled.svg"
             class="material-symbols-outlined favorite-icon"
             @click="toggleHeart"
           />
         </div>
         <div v-else>
           <span
-          class="material-symbols-outlined favorite-icon"
-          :class="{ hearted: isHearted }"
-          @click="toggleHeart"
-        >
-          favorite
-        </span>
+            class="material-symbols-outlined favorite-icon"
+            :class="{ hearted: isHearted }"
+            @click="toggleHeart"
+          >
+            favorite
+          </span>
         </div>
       </div>
     </div>
@@ -33,8 +33,10 @@
 
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
+import axiosInstance from "../lib/axios";
 import StarRating from "./StarRating.vue";
+import { useAuthStore } from "../stores/auth";
 
 const props = defineProps({
   item: {
@@ -55,23 +57,76 @@ const pic = computed(() => {
   if (props.item.Images && props.item.Images.length > 0) {
     return `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
   }
-
+  
   return "";
 });
 
 const isHearted = ref(false);
-
 const emit = defineEmits(["open-side-view"]);
 
 const openSideView = () => {
   emit("open-side-view", props.item);
 };
 
-const toggleHeart = () => {
-  isHearted.value = !isHearted.value;
-};
-</script>
 
+const authStore = useAuthStore();
+const userId = authStore.getUserId();
+
+const fetchFavoriteState = async () => {
+  if (!userId) return;
+
+  try {
+    const response = await axiosInstance.get(`/check_favorite/`, {
+      params: { user_id: userId, item_id: props.item.id },
+    });
+
+    isHearted.value = response.data.is_favorited;
+  } catch (error) {
+    console.error("Error checking favorite state:", error.response?.data?.detail || error.message);
+  }
+};
+
+const toggleHeart = async () => {
+  if (!userId) {
+    alert("You need to be logged in to favorite items.");
+    return;
+  }
+
+  try {
+    // Try Block
+    if (isHearted.value) {
+      const response = await axiosInstance.delete("/delete_favorite/", {
+        data: { user_id: userId, item_id: props.item.id },
+      });
+
+      console.log(response.data.detail);
+    } else {
+      const response = await axiosInstance.post("/add_favorite/", {
+        user_id: userId,
+        item_id: props.item.id,
+      });
+
+      console.log(response.data.detail);
+    }
+
+    isHearted.value = !isHearted.value;
+     // Try Block
+
+  } catch (error) {
+    console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
+
+    if (!isHearted.value && error.response?.data?.detail === "Favorite already exists.") {
+      isHearted.value = true;
+    } else {
+      alert("Failed to toggle favorite. Please try again.");
+    }
+  }
+
+};
+
+onMounted(fetchFavoriteState);
+
+</script>
 
 
 <style scoped>

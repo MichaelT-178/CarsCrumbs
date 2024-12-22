@@ -8,12 +8,12 @@
         }"
       >
         <div class="circle-inner">
-          {{ percentRecommended }}
+          {{ Math.round(percentRecommended) }}
         </div>
       </div>
 
       <div class="text-content">
-        <div class="recommend-text">{{ percentRecommended }}% would recommend</div>
+        <div class="recommend-text">{{ Math.round(percentRecommended) }}% would recommend</div>
         <div class="recommend-count">{{ numOfRecommendations }} recommendations</div>
       </div>
     </div>
@@ -55,7 +55,7 @@ const goToWriteReview = () => {
   if (authStore.getIsLoggedIn()) {
       router.push({
         path: '/write-review',
-        query: { itemName: props.ItemName },
+        query: { itemName: props.itemName },
       });
     } else {
       router.push({ 
@@ -141,6 +141,7 @@ const goToWriteReview = () => {
 
 .write-review-button:hover {
   background-color: #0056b3;
+  cursor: pointer;
 }
 
 @media (max-width: 1000px) {

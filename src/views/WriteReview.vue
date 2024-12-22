@@ -117,11 +117,12 @@
 
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import StarRating from "../components/StarRating.vue";
 import WordpressHeader from "../components/Header.vue";
 import { useRouter } from "vue-router";
 import axiosInstance from "../lib/axios";
+import { useAuthStore } from "../stores/auth";
 
 const props = defineProps({
   itemName: {
@@ -129,6 +130,9 @@ const props = defineProps({
     required: true,
   },
 });
+
+const authStore = useAuthStore();
+const userId = authStore.getUserId();
 
 const imageUrl = ref("");
 const isSmallScreen = ref(window.innerWidth < 800);
@@ -215,24 +219,19 @@ const handleSubmit = () => {
   }
 
   if (isValid) {
-    console.log("SUBMIT");
-    console.log("Display Name:", displayName.value);
-    console.log("Review Headline:", reviewHeadline.value);
-    console.log("Written Review:", writtenReview.value);
-    console.log("Star Rating:", starRating.value);
-    console.log("Would recommend:", recommend.value);
-    console.log(recommend.value == "yes")
+    const reviewData = {
+      item_id: selectedItem.value.id,
+      user_id: userId,
+      display_name: displayName.value,
+      review_headline: reviewHeadline.value,
+      written_review: writtenReview.value,
+      star_rating: starRating.value,
+      would_recommend: recommend.value == "yes"
+    }
 
-//     {
-//     "item_id": 3,
-//     "user_id": 1, USER ID int
-//     "header_text": reviewHeadline.value if reviewHeadline.value else "",
-//     "star_rating": starRating.value,
-//     "would_recommend": recommend.value == "yes",
-//     "full_name": displayName.value if displayName.value else "",
-//     "review_text": writtenReview.value if writtenReview.value else "",
-//     "date": "12-10-2024" TODAYS DATE
-// }
+    axiosInstance.post('add_review/', reviewData);
+    alert("Review posted successfully!")
+    router.push(`item/${props.itemName}/`)
   }
 };
 

@@ -13,7 +13,7 @@
             :style="{ width: percent + '%' }"
           ></div>
         </div>
-        <span class="percent-label">{{ percent }}%</span>
+        <span class="percent-label">{{ Math.round(percent) }}%</span>
       </div>
     </div>
   </div>

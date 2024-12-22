@@ -117,6 +117,12 @@ const handleLoginError = (error) => {
   console.log(error);
 }
 
+const handleKeyPress = (event) => {
+  if (event.key === "Enter") {
+    signIn();
+  }
+};
+
 const createAccount = () => {
   console.log("CREATE ACCOUNT");
   router.push("/create-account");
@@ -128,10 +134,12 @@ const backToHome = () => {
 
 onMounted(() => {
   authStore.setSpecialNavBar(true);
+  window.addEventListener("keydown", handleKeyPress);
 });
 
 onUnmounted(() => {
   authStore.setSpecialNavBar(false);
+  window.removeEventListener("keydown", handleKeyPress);
 });
 
 </script>

@@ -2,19 +2,19 @@
   <div class="item-container">
     <img 
       :src="getPicUrl" 
-      :alt="item.DisplayName" 
+      :alt="displayName" 
       class="item-image" 
     />
     <div class="item-info">
       <div class="item-name">
-        {{ item.DisplayName }} {{ item.Emoji }}
+        {{ displayName }} {{ emoji }}
       </div>
       <div class="item-price">
-        {{ item.DisplayPrice }}
+        {{ displayPrice }}
       </div>
       <span 
         class="buy-now-link" 
-        @click="() => handleClick(item)"
+        @click="() => handleClick(route)"
       >
         Buy Now
       </span>
@@ -51,8 +51,10 @@
 
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, onMounted } from "vue";
+import axiosInstance from "../../lib/axios";
+import { useAuthStore } from "../../stores/auth";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 
@@ -61,32 +63,103 @@ const props = defineProps({
     type: Object,
     required: true,
     default: () => ({
-      Name: "",
-      Emoji: "",
-      Price: 0.0,
-      Images: [],
-      Route: "",
-      Tags: [],
+      id: 0,
+      user: 0,
+      item: {
+        id: 0,
+        display_name: "",
+        name: "",
+        avg_num_of_stars: 0,
+        num_of_ratings: 0,
+        emoji: "",
+        display_price: "",
+        route: "",
+        image: {
+          id: 0,
+          original_filename: "",
+          stored_filename: "",
+        },
+      },
     }),
   },
 });
 
-const emit = defineEmits(['favorite-toggle']);
+const emit = defineEmits(["favorite-toggle"]);
+
+const {
+  display_name: displayName,
+  emoji,
+  display_price: displayPrice,
+  route,
+  image,
+} = props.item.item;
 
 const isFavorite = ref(false);
-
-const toggleFavorite = () => {
-  isFavorite.value = !isFavorite.value;
-  emit('favorite-toggle', { item: props.item, isFavorite: isFavorite.value });
-};
+const authStore = useAuthStore();
+const userId = authStore.getUserId();
 
 const getPicUrl = computed(() => {
-  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
+  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${image.stored_filename}`;
 });
 
-const handleClick = (item) => {
-  router.push(item.Route);
+const handleClick = (route) => {
+  router.push(route);
 };
+
+
+const fetchFavoriteState = async () => {
+  if (!userId) return;
+
+  try {
+    const response = await axiosInstance.get(`/check_favorite/`, {
+      params: { user_id: userId, item_id: props.item.item.id },
+    });
+
+    isFavorite.value = response.data.is_favorited;
+  } catch (error) {
+    console.error("Error fetching favorite state:", error.response?.data?.detail || error.message);
+  }
+};
+
+
+const toggleFavorite = async () => {
+  if (!userId) {
+    alert("You need to be logged in to favorite items.");
+    return;
+  }
+
+  try {
+    if (isFavorite.value) {
+      // Remove from favorites
+      const response = await axiosInstance.delete("/delete_favorite/", {
+        data: { user_id: userId, item_id: props.item.item.id },
+      });
+
+      console.log(response.data.detail);
+    } else {
+      // Add to favorites
+      const response = await axiosInstance.post("/add_favorite/", {
+        user_id: userId,
+        item_id: props.item.item.id,
+      });
+
+      console.log(response.data.detail);
+    }
+
+    isFavorite.value = !isFavorite.value;
+    emit("favorite-toggle", { item: props.item, isFavorite: isFavorite.value });
+  } catch (error) {
+    console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
+
+    if (!isFavorite.value && error.response?.data?.detail === "Favorite already exists.") {
+      isFavorite.value = true;
+    } else {
+      alert("Failed to toggle favorite. Please try again.");
+    }
+  }
+};
+
+onMounted(fetchFavoriteState);
 
 </script>
 

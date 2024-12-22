@@ -2,7 +2,7 @@
   <div class="review-card">
 
     <div class="review-header">
-      <h3>{{ review.Header }}</h3>
+      <h3>{{ review.review_headline }}</h3>
       <span 
         class="material-symbols-outlined delete-icon"
         @click="deleteReview"
@@ -12,61 +12,85 @@
     </div>
 
     <div class="rating-section">
-      <StarRating :rating="review.Rating" :show-number="false" />
+      <StarRating :rating="review.star_rating" :show-number="false" />
 
       <div class="recommendation-container">
         <div class="divider"></div>
         <span 
           class="material-symbols-outlined" 
-          :class="{ 'thumbs-up': wouldRecommend, 'thumbs-down': !wouldRecommend }">
-          {{ wouldRecommend ? 'thumb_up' : 'thumb_down' }}
+          :class="{ 'thumbs-up': review.would_recommend, 'thumbs-down': !review.would_recommend }">
+          {{ review.would_recommend ? 'thumb_up' : 'thumb_down' }}
         </span>
         <span 
           class="recommendation-text" 
-          :class="wouldRecommend ? 'positive' : 'negative' ">
-          {{ wouldRecommend ? 'Would Recommend' : 'Would Not Recommend' }}
+          :class="review.would_recommend ? 'positive' : 'negative' ">
+          {{ review.would_recommend ? 'Would Recommend' : 'Would Not Recommend' }}
         </span>
       </div>
     </div>
 
     <p class="name-date">
-      {{ review.DateAdded }}
+      {{ formatDate(review.date_added) }}
     </p>
-    <p class="text-review">{{ review.Text }}</p>
+    <p class="text-review">{{ review.written_review }}</p>
 
-    <!-- See Product-->
     <router-link
-      :to="review.Route"
+      :to="`/item/${review.item_name}`"
       class="item-link"
     >
-    {{ review.Item }}
+    {{ review.item_name.replace("_", " ") }}
     </router-link>
   </div>
 </template>
 
 
-
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import StarRating from "../../components/StarRating.vue";
+import axiosInstance from "../../lib/axios";
+import { useAuthStore } from "../../stores/auth";
 
-defineProps({
+const authStore = useAuthStore();
+
+const props = defineProps({
   review: {
     type: Object,
     required: true,
   },
 });
 
-const wouldRecommend = true;
+const emits = defineEmits(['reviewDeleted']);
+
+const reviewId = props.review.id;
+const userId = authStore.getUserId();
+
 const isMobile = ref(false);
 
 const handleResize = () => {
   isMobile.value = window.innerWidth <= 550;
 };
 
-const deleteReview = () => {
-  console.log("Review Deleted");
-}
+const deleteReview = async () => {
+  const reviewData = {
+    user_id: userId,
+    review_id: reviewId,
+  };
+
+  try {
+    await axiosInstance.delete('delete_review/', { data: reviewData });
+
+    alert("REVIEW DELETED SUCCESSFULLY!!!!!");
+    emits('reviewDeleted', reviewId);
+  } catch (error) {
+    console.error("Error deleting review:", error.response?.data || error.message);
+    alert("FAILED");
+  }
+};
+
+const formatDate = (date) => {
+  const dateList = date.split("-");
+  return `${dateList[1]}-${dateList[2]}-${dateList[0]}`;
+};
 
 onMounted(() => {
   handleResize();
