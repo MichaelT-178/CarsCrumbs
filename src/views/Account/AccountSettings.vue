@@ -153,7 +153,7 @@ const cancelEdit = () => {
 };
 
 const deleteAccount = () => {
-  alert("Account deleted!");
+  alert("Account deleted pressed! (Not actually deleted)");
 };
 
 onMounted(fetchAccountData);

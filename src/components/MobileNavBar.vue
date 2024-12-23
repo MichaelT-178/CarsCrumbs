@@ -16,9 +16,9 @@
         menu
       </span>
       <img :src="PurpleLogo" alt="Logo" class="logo" />
-      <router-link to="/account" class="profile-cart-wrapper">
+      <div @click="goToAccount" class="profile-cart-wrapper">
         <span class="material-symbols-outlined account-icon">account_circle</span>
-      </router-link>
+      </div>
       <router-link to="/cart" class="profile-cart-wrapper">
         <span class="material-symbols-outlined cart-icon">shopping_cart</span>
         <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
@@ -76,7 +76,19 @@
             <span class="material-symbols-outlined" id="arrow">arrow_forward_ios</span>
           </li>
         </ul>
-        <p class="logo-tag">@CarsCrumbs</p>
+
+        <div class="sidebar-footer">
+          <div v-if="authStore.getIsLoggedIn()">
+            <p class="sign-out"
+            @click="signOut">Sign Out</p>
+          </div>
+          <div v-else>
+            <p 
+              class="sign-in"
+              @click="signIn">Sign In</p>
+          </div>
+        </div>
+
       </div>
     </transition>
 
@@ -101,9 +113,11 @@ import PurpleLogo from "../assets/logos/purple-logo.png";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
 import axiosInstance from '../lib/axios.js';
+import { useAuthStore } from '../stores/auth.js';
 
 const router = useRouter();
 const cart = useCartStore();
+const authStore = useAuthStore();
 
 const menu = ref([]);
 const searchQuery = ref('');
@@ -146,9 +160,36 @@ const hideDropdown = () => {
 };
 
 const handleItemClick = (item) => {
-  router.push(item.Route);
+  let path = item.Route;
+  
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+
+  router.push(path);
   hideDropdown();
 };
+
+const goToAccount = () => {
+
+  if (authStore.getIsLoggedIn()) {
+    router.push("/account");
+  } else {
+    router.push("/sign-in");
+  }
+
+  hideDropdown();
+}
+
+const signIn = () => {
+  router.push("/sign-in");
+}
+
+const signOut = () => {
+  authStore.logout();
+  alert("LOGGED OUT SUCCESSFULLY!!!");
+  closeSidebar();
+}
 
 const handleSearchEnter = () => {
   router.push({ name: 'SearchResults', query: { search_query: searchQuery.value.trim() } });
@@ -414,7 +455,6 @@ html, body {
   z-index: 1001;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .sidebar-header {
@@ -514,7 +554,15 @@ html, body {
   transform: translateX(-100%);
 }
 
-.logo-tag {
+.sidebar-footer {
+  margin-top: auto;
+  padding-bottom: 12.5px;
+  background-color: #F2F2F2;
+  text-align: center;
+}
+
+.sign-in,
+.sign-out {
   font-size: 22px;
   text-align: center;
   padding: 5px 0;
@@ -522,6 +570,13 @@ html, body {
   margin-top: auto;
   margin-bottom: 15px;
   width: 100%;
+}
+
+.sign-in:hover,
+.sign-out:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 @media (max-width: 500px) {

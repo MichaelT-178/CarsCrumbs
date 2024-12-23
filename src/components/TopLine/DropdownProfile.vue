@@ -83,6 +83,10 @@ const emit = defineEmits(['close']);
 const isLoggedIn = computed(() => authStore.getIsLoggedIn());
 
 const goToView = (path) => {
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+  
   router.push(path);
   emit('close');
 };

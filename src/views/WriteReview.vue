@@ -59,7 +59,7 @@
             type="text"
             placeholder="Enter a title for your review (optional)"
             v-model="reviewHeadline"
-            maxlength="30"
+            maxlength="35"
           />
           <p v-if="reviewHeadlineError" class="text-field-error">
             Required (max 30 characters)
@@ -228,10 +228,19 @@ const handleSubmit = () => {
       star_rating: starRating.value,
       would_recommend: recommend.value == "yes"
     }
-
-    axiosInstance.post('add_review/', reviewData);
-    alert("Review posted successfully!")
-    router.push(`item/${props.itemName}/`)
+    
+    // axiosInstance.post('add_review/', reviewData);
+    // alert("Review posted successfully!")
+    axiosInstance.post('add_review/', reviewData)
+      .then(() => {
+        alert("Review posted successfully!");
+        router.push(`/item/${props.itemName}/`);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.error(error.response.data.error);
+        alert(`Failed to post review. Error: ${error.message}`);
+      });
   }
 };
 

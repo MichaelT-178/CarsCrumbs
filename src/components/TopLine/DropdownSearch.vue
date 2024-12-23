@@ -71,7 +71,13 @@ const filteredItems = computed(() => {
 });
 
 const handleClick = (item) => {
-  router.push(item.Route);
+  let path = item.Route;
+  
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+  
+  router.push(path);
   emit('close');
 };
 

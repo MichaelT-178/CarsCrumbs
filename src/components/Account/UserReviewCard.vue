@@ -38,7 +38,7 @@
       :to="`/item/${review.item_name}`"
       class="item-link"
     >
-    {{ review.item_name.replace("_", " ") }}
+    {{ review.item_name.replace(/_/g, " ") }}
     </router-link>
   </div>
 </template>

@@ -103,6 +103,10 @@ const getPicUrl = computed(() => {
 });
 
 const handleClick = (route) => {
+  if (!route.startsWith('/')) {
+    route = '/' + route;
+  }
+
   router.push(route);
 };
 

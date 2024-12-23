@@ -2,7 +2,7 @@
   <div class="menu-item">
     <img :src="pic" :alt="item.DisplayName" class="menu-image" />
     <div class="menu-info">
-      <h2 class="menu-name">{{ item.DisplayName }}</h2>
+      <h2 class="menu-name-link" @click="goToItem">{{ item.DisplayName }}</h2>
 
       <StarRating :rating="item.Rating" />
 
@@ -37,6 +37,9 @@ import { computed, ref, onMounted } from "vue";
 import axiosInstance from "../lib/axios";
 import StarRating from "./StarRating.vue";
 import { useAuthStore } from "../stores/auth";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps({
   item: {
@@ -124,6 +127,16 @@ const toggleHeart = async () => {
 
 };
 
+const goToItem = () => {
+  let path = props.item.Route;
+
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+
+  router.push(path);
+}
+
 onMounted(fetchFavoriteState);
 
 </script>
@@ -152,11 +165,16 @@ onMounted(fetchFavoriteState);
   width: 100%;
 }
 
-.menu-name {
+.menu-name-link {
   font-size: 18px;
   font-weight: bold;
   margin: 8px 0;
   margin-top: 1px;
+}
+
+.menu-name-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .menu-price {

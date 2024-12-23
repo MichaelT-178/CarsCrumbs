@@ -36,7 +36,7 @@
 
     <div class="divider-container">
       <div class="line"></div>
-      <p class="dont-have-account-text">Don't have an account?</p>
+      <p class="dont-have-account-text" @click="forgotPassword">Forgot password?</p>
       <div class="line"></div>
     </div>
 
@@ -123,6 +123,10 @@ const handleKeyPress = (event) => {
   }
 };
 
+const forgotPassword = () => {
+  alert("FORGOT PASSWORD PRESSED");
+}
+
 const createAccount = () => {
   console.log("CREATE ACCOUNT");
   router.push("/create-account");
@@ -191,6 +195,11 @@ onUnmounted(() => {
   font-size: 17px;
   padding-left: 7px;
   padding-right: 7px;
+}
+
+.dont-have-account-text:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .divider-container {

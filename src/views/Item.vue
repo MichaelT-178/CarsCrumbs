@@ -257,7 +257,13 @@ const scrollRight = () => {
 };
 
 const goToItemPage = (item) => {
-  router.push(item.Route).then(() => {
+  let path = item.Route;
+  
+  if (!path.startsWith('/')) {
+    path = '/' + path;
+  }
+
+  router.push(path).then(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 };

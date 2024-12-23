@@ -85,27 +85,27 @@
       <div class="tabs">
         <ul>
           <li class="tab">
-            <router-link to="/" class="tab-link">
+            <router-link to="/" class="tab-link" @click="hideDropdown">
               <p>Home</p>
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/order" class="tab-link">
+            <router-link to="/order" class="tab-link" @click="hideDropdown">
               <p>Order</p>
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/about" class="tab-link">
+            <router-link to="/about" class="tab-link" @click="hideDropdown">
               <p>About</p>
             </router-link>
           </li>
           <li class="tab">
-            <router-link to="/contact-us" class="tab-link">
+            <router-link to="/contact-us" class="tab-link" @click="hideDropdown">
               <p>Contact Us</p>
             </router-link>
           </li>
           <router-link to="/cart">
-            <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+            <span class="material-symbols-outlined cart-icon" @click="hideDropdown">shopping_cart</span>
             <span v-if="cart.getItemCount() > 0" class="cart-badge">{{ cart.getItemCount() }}</span>
           </router-link>
         </ul>
