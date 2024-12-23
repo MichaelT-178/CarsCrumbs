@@ -27,7 +27,7 @@
 			/>
 		  </div>
 		  <div class="form-group">
-			<label for="email">Email<span style="color: #EF0000;"> *</span></label>
+			<label for="email" >Email<span style="color: #EF0000;"> *</span></label>
 			<input 
 			  type="email" 
 			  id="email" 
@@ -36,13 +36,15 @@
 			/>
 		  </div>
 			<div class="form-group">
-			<label for="phone">Phone Number<span style="color: #EF0000;"> *</span></label>
-			<input 
-			  type="phone" 
-			  id="phone" 
-			  v-model="formData.phone" 
-			  required 
-			/>
+				<label for="phone">Phone Number<span style="color: #EF0000;"> *</span></label>
+				<input 
+					type="text" 
+					id="phone" 
+					v-model="formData.phone" 
+					@input="formatPhone" 
+					maxlength="14" 
+					required 
+				/>
 		  </div>
 		  <div class="form-group">
 			<label for="message">Message<span style="color: #EF0000;"> *</span></label>
@@ -204,6 +206,30 @@ const submitForm = () => {
 		})
 };
 
+const formatPhone = (event) => {
+  let input = event.target.value.replace(/\D/g, '');
+
+  if (input.length > 10) {
+		input = input.slice(0, 10);
+	}
+
+	switch (true) {
+    case input.length > 6:
+      event.target.value = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6)}`;
+      break;
+    case input.length > 3:
+      event.target.value = `(${input.slice(0, 3)}) ${input.slice(3)}`;
+      break;
+    case input.length > 0:
+      event.target.value = `(${input}`;
+      break;
+    default:
+      event.target.value = '';
+  }
+
+  formData.value.phone = event.target.value;
+};
+
 const handleResize = () => {
   isSmallScreen.value = window.innerWidth < 550;
 };
@@ -237,6 +263,7 @@ onUnmounted(() => {
 .insta-link {
 	color: purple;
 	text-decoration: none;
+	font-size: 18px;
 }
 
 .insta-link:hover {
@@ -258,6 +285,10 @@ onUnmounted(() => {
 	background-color: #F2F2F2; */
 	border: 1.5px solid purple;
 	background-color: lightskyblue;
+}
+
+.form-group label {
+	font-size: 17px;
 }
 
 .info-container {
@@ -310,6 +341,7 @@ onUnmounted(() => {
 #message {
 	width: 100%;
 	height: 200px;
+	font-family: 'Arial', sans-serif;
 	border-radius: 6px;
 }
 
@@ -484,7 +516,7 @@ button.clicked {
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		font-size: 16px;
+		font-size: 18px;
 		margin: 10px 0;
 		margin-top: -10px;
 		line-height: 1.5;
