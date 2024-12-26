@@ -1,0 +1,32 @@
+{
+    "image_color": [
+        {
+            "image": "yellow-square-logo.png",
+            "color": "#f3e7a4"
+        },
+        {
+            "image": "purple-logo.png",
+            "color": "#620086"
+        },
+        {
+            "image": "",
+            "color": ""
+        },
+        {
+            "image": "",
+            "color": ""
+        },
+        {
+            "image": "",
+            "color": ""
+        },
+        {
+            "image": "",
+            "color": ""
+        },
+        {
+            "image": "",
+            "color": ""
+        }
+    ]
+}
