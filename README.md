@@ -8,7 +8,11 @@ This is the only repository on my Github that doesn't actually have the source c
 <br>
 <br>
 If you're interested in collaborating on this project, feel free to dm me on [LinkedIn](https://www.linkedin.com/in/michael-totaro-72857722a/) to discuss it further.
-
+<br>
+<br>
+This is the link to my older sisters original Wordpress site -> https://carscrumbsbakery.wordpress.com/. I took inspiration from it for my website.
+<br>
+<br>
 ## Technologies Used
 - Vue.js 
 - Django
