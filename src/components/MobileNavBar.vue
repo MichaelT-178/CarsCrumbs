@@ -327,10 +327,6 @@ html, body {
   transition: color 0.3s ease;
 }
 
-.account-icon:hover {
-  color: #FFD700;
-}
-
 .menu-icon {
   left: 12px;
   color: var(--menu-icon-color, white);
@@ -345,10 +341,6 @@ html, body {
   right: 12px;
   color: white;
   transition: color 0.3s ease;
-}
-
-.cart-icon:hover {
-  color: #FFD700;
 }
 
 .cart-badge {
@@ -590,9 +582,13 @@ html, body {
 }
 
 @media (max-width: 400px) {
-  .sidebar {
-    width: 100%;
-  }
+  /* .sidebar {
+    width: 300px;
+  } */
+/*    
+  .menu-icon:hover {
+    color: red;
+  } */
 
   .search-bar {
     width: 90%;
