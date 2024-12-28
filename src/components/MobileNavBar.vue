@@ -34,8 +34,8 @@
             type="text"
             v-model="searchQuery"
             placeholder="Search..."
+            @focus="focusSearchBar"
             @input="filterResults"
-            @focus="showDropdown = true"
             @keydown.enter="handleSearchEnter"
           />
           <span class="material-symbols-outlined search-icon">search</span>
@@ -153,11 +153,25 @@ const closeSidebar = () => {
   isSidebarOpen.value = false;
 };
 
-const hideDropdown = () => {
-  showDropdown.value = false;
-  searchQuery.value = "";
-  filteredResults.value = [];
+const focusSearchBar = () => {
+  if (document.activeElement === searchInput.value) {
+    showDropdown.value = true;
+  }
 };
+
+const hideDropdown = () => {
+  if (document.activeElement !== searchInput.value) {
+    showDropdown.value = false;
+    searchQuery.value = "";
+    filteredResults.value = [];
+  }
+};
+
+// const hideDropdown = () => {
+//   showDropdown.value = false;
+//   searchQuery.value = "";
+//   filteredResults.value = [];
+// };
 
 const handleItemClick = (item) => {
   let path = item.Route;
@@ -227,9 +241,16 @@ const loadMenuData = async () => {
 onMounted(() => {
   loadMenuData();
   window.addEventListener('keydown', handleKeydown);
+
+  document.addEventListener('click', (event) => {
+    if (!searchInput.value.contains(event.target)) {
+      hideDropdown();
+    }
+  });
 });
 
 onUnmounted(() => {
+  document.removeEventListener('click', hideDropdown);
   window.removeEventListener('keydown', handleKeydown);
 });
 
