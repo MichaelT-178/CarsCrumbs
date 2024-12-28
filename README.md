@@ -12,7 +12,6 @@ If you're interested in collaborating on this project, feel free to dm me on [Li
 <br>
 This is the link to my older sisters original Wordpress site -> https://carscrumbsbakery.wordpress.com/. I took inspiration from it for this website.
 <br>
-<br>
 ## Technologies Used
 - Vue.js 
 - Django
