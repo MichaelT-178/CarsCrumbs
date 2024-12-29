@@ -1,0 +1,28 @@
+{
+    "urls": [
+        {
+            "url": "http://carscrumbs.com/",
+            "status": "Indexed",
+            "error": "None",
+            "date": "Dec 26, 2024, 12:25:28 AM"
+        },
+        {
+            "url": "https://carscrumbs.com/",
+            "status": "Not indexed",
+            "error": "Page is not indexed: Redirect error",
+            "date": "Dec 29, 2024, 12:47:23 PM"
+        },
+        {
+            "url": "http://www.carscrumbs.com/",
+            "status": "Not indexed",
+            "error": "Page is not indexed: Redirect error",
+            "date": "Dec 29, 2024, 3:28:18 PM"
+        },
+        {
+            "url": "https://www.carscrumbs.com/",
+            "status": "Indexed",
+            "error": "None",
+            "date": "Dec 29, 2024, 3:27:21 PM"
+        }
+    ]
+}
