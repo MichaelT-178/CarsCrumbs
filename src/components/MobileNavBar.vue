@@ -1,5 +1,10 @@
 <template>
-  <div v-if="showDropdown" class="search-overlay" @click="hideDropdown"></div>
+  <!-- <div v-if="showDropdown" class="search-overlay" @click="hideDropdown"></div> -->
+  <div 
+    v-if="showDropdown && searchQuery.length > 0" 
+    class="search-overlay" 
+    @click="hideDropdown">
+  </div>
 
   <nav class="navbar" @keydown="handleKeydown">
     <!-- Dark overlay -->
