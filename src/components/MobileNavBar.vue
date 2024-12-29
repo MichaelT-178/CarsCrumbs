@@ -178,15 +178,29 @@ const hideDropdown = () => {
 //   filteredResults.value = [];
 // };
 
+// const handleItemClick = (item) => {
+//   let path = item.Route;
+  
+//   if (!path.startsWith('/')) {
+//     path = '/' + path;
+//   }
+
+//   router.push(path);
+//   hideDropdown();
+// };
+
 const handleItemClick = (item) => {
   let path = item.Route;
-  
+
   if (!path.startsWith('/')) {
     path = '/' + path;
   }
 
   router.push(path);
+
   hideDropdown();
+  searchQuery.value = "";
+  searchInput.value.blur();
 };
 
 const goToAccount = () => {
