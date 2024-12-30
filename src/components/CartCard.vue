@@ -17,7 +17,7 @@
             {{ tag }}
           </span>
         </div>
-        <p class="item-description">{{ item.Quantity }} • <span class="item-cost">${{ item.Cost }}</span></p>
+        <p class="item-description">{{ item.Quantity }} • <span class="item-cost">${{ item.Cost.toFixed(2) }}</span></p>
         <!-- <p class="item-price">{{ `$${item.Cost}.00` }}</p> -->
       </div>
     </div>

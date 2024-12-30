@@ -21,7 +21,7 @@
             {{ item.DisplayName }} {{ item.Emoji }}
           </div>
           <div class="item-price">
-            {{ item.DisplayPrice }}
+            {{ item.DisplayPrice.toFixed(2) }}
           </div>
         </div>
       </li>
