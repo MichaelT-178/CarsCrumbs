@@ -39,9 +39,13 @@ export const useCartStore = defineStore('cart', () => {
   }
   
   function getTotal() {
-    //CSC 434 function ❤️
-    return items.value.reduce((total, item) => total + item.Cost, 0);
+    return items.value.reduce((total, item) => total + (parseFloat(item.Cost) || 0), 0);
   }
+  
+  // function getTotal() {
+  //   //CSC 434 function ❤️
+  //   return items.value.reduce((total, item) => total + item.Cost, 0);
+  // }
 
   function getCartDetails(date = null) {
     //Include date for receipt
