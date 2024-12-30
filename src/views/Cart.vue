@@ -290,8 +290,8 @@ onUnmounted(() => {
 .cart-header-underline {
   width: 98%;
   height: 1.5px;
-  background-color: purple;
-  /* background-color: #999999; */
+  /* background-color: purple; */
+  background-color: red;
   margin-top: 5px;
   margin-bottom: 20px;
 }
