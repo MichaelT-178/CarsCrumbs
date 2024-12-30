@@ -35,7 +35,7 @@
         />
         <div class="item-details">
           <p class="item-name">{{ item.DisplayName }}</p>
-          <p class="item-quantity">{{ item.Quantity }} • ${{ item.Cost }}.00</p>
+          <p class="item-quantity">{{ item.Quantity }} • ${{ item.Cost }}</p>
         </div>
       </div>
       <!-- END: Cart-item card -->

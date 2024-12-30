@@ -41,7 +41,9 @@
 
         <div class="cart-profile-inner-container">
           <span class="material-symbols-outlined profile-cart-icon">shopping_cart</span>
-          <p class="profile-section-text">${{ cart.getTotal() }}.00</p>
+          <p class="profile-section-text">
+            {{ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart.getTotal()) }}
+          </p>
           <span v-if="showCartHighlight" class="material-symbols-outlined profile-down-arrow-icon">
             keyboard_arrow_up
           </span>
