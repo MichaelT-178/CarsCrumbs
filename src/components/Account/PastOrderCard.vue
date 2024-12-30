@@ -7,7 +7,7 @@
       <img :src="getPicUrl(order.image)" alt="Order Image" class="order-image" />
     </div>
     <div class="card-details">
-      <p class="details"><strong>Cost:</strong> ${{ order.cost.toFixed(2) }}</p>
+      <p class="details"><strong>Cost:</strong> ${{ (parseFloat(order.cost) || 0).toFixed(2) }}</p>
       <p class="details"><strong>Quantity:</strong> {{ order.quantity }}</p>
     </div>
     <router-link :to="order.route" class="reorder-button">

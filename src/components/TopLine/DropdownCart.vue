@@ -35,7 +35,7 @@
         />
         <div class="item-details">
           <p class="item-name">{{ item.DisplayName }}</p>
-          <p class="item-quantity">{{ item.Quantity }} • ${{ item.Cost.toFixed(2) }}</p>
+          <p class="item-quantity">{{ item.Quantity }} • ${{ (parseFloat(order.cost) || 0).toFixed(2) }}</p>
         </div>
       </div>
       <!-- END: Cart-item card -->
