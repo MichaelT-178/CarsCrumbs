@@ -35,7 +35,9 @@
         <!-- Order Summary for mobile screens  -->
         <div v-if="!isMobileScreen" class="order-summary">
           <h2>Order Summary</h2>
-          <p class="summary-total">Total: ${{ cart.getTotal() }}.00</p>
+          <p class="summary-total">
+            Total: {{ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart.getTotal()) }}
+          </p>
           <p class="summary-items">Items: {{ cart.getItemCount() }}</p>
           <router-link to="/cart/checkout" class="checkout-button">Checkout</router-link>
           <p class="reset-cart" @click="deleteCart">Reset Cart</p>
