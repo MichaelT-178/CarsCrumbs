@@ -47,7 +47,7 @@
         </div>
 
         <div v-if="isMobileScreen" class="order-summary-mobile-screen">
-          <p class="summary-text">${{ cart.getTotal() }}.00 total • {{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</p>
+          <p class="summary-text">{{ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart.getTotal()) }} total • {{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</p>
           <router-link to="/cart/checkout" class="checkout-button-mobile-screen">Checkout</router-link>
         </div>
       </div>
