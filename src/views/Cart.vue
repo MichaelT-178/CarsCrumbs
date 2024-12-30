@@ -14,7 +14,9 @@
             <div>
               <h1 class="cart-title">Cart</h1>
               <p class="cart-summary">
-                <span class="cart-summary-total">${{ cart.getTotal() }}.00 total</span> •
+                <span class="cart-summary-total">
+                  {{ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cart.getTotal()) }} total
+                </span> •
                 <span class="cart-summary-items">{{ cart.getItemCount() }} item{{ cart.getItemCount() > 1 ? "s" : "" }}</span>
               </p>
               <div class="cart-header-underline"></div>
