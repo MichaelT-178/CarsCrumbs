@@ -54,6 +54,10 @@ const props = defineProps({
       Tags: [],
     }),
   },
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const pic = computed(() => {
@@ -64,7 +68,7 @@ const pic = computed(() => {
   return "";
 });
 
-const isHearted = ref(false);
+const isHearted = ref(props.isFavorite);
 const emit = defineEmits(["open-side-view"]);
 
 const openSideView = () => {
@@ -72,22 +76,9 @@ const openSideView = () => {
 };
 
 
+
 const authStore = useAuthStore();
 const userId = authStore.getUserId();
-
-const fetchFavoriteState = async () => {
-  if (!userId) return;
-
-  try {
-    const response = await axiosInstance.get(`/check_favorite/`, {
-      params: { user_id: userId, item_id: props.item.id },
-    });
-
-    isHearted.value = response.data.is_favorited;
-  } catch (error) {
-    console.error("Error checking favorite state:", error.response?.data?.detail || error.message);
-  }
-};
 
 const toggleHeart = async () => {
   if (!userId) {
@@ -136,8 +127,6 @@ const goToItem = () => {
 
   router.push(path);
 }
-
-onMounted(fetchFavoriteState);
 
 </script>
 

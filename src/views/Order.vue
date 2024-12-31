@@ -28,9 +28,17 @@
         v-for="(item, key) in filteredItems"
         :key="key"
         :item="item"
+        :isFavorite="isFavorite(item.id)"
         @tag-clicked="updateFilter"
         @open-side-view="openSideView"
       />
+      <!-- <MenuCard
+        v-for="(item, key) in filteredItems"
+        :key="key"
+        :item="item"
+        @tag-clicked="updateFilter"
+        @open-side-view="openSideView"
+      /> -->
     </div>
     
     <!-- SideView and dark overlay -->
@@ -57,6 +65,7 @@ import { ref, computed, onMounted, watch } from 'vue';
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 import axiosInstance from '../lib/axios';
+import { useAuthStore } from '../stores/auth';
 
 const menu = ref([]);
 const tagsData = ref([]);
@@ -64,6 +73,8 @@ const selectedTag = ref('No Filter');
 const searchQuery = ref('');
 const showSideView = ref(false);
 const selectedItem = ref(null);
+
+const authStore = useAuthStore();
 
 const allEmojis = computed(() => tagsData.value.map(tag => tag.emoji));
 
@@ -84,6 +95,21 @@ const filteredItems = computed(() => {
 
   return items;
 });
+
+const favoriteIds = ref([]);
+
+const loadFavoriteIds = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`/get_favorite_ids/${userId}`);
+    favoriteIds.value = response.data.favorite_item_ids || [];
+  } catch (error) {
+    console.error('Error fetching favorite IDs:', error);
+  }
+};
+
+const isFavorite = (itemId) => {
+  return favoriteIds.value.includes(itemId);
+};
 
 const updateFilter = (tag) => {
   const emojiRegex = new RegExp(`[${allEmojis.value.join('')}]`, 'g');
@@ -119,6 +145,7 @@ onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
 
   loadMenuData();
+  loadFavoriteIds(authStore.getUserId());
 
   const hash = window.location.hash.replace('#', '');
   
