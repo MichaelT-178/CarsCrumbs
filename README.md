@@ -19,5 +19,5 @@ This is the link to my older sisters original Wordpress site -> https://carscrum
 - PostgreSQL
 - Stripe
 - JavaScript, HTML, CSS
-- AWS 
+- AWS (Amplify, EC2, RDS, S3)
 - Cloudflare
