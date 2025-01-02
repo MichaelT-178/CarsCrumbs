@@ -15,6 +15,9 @@
         <span class="material-symbols-outlined account-circle-icon">account_circle</span>
       </div>
 
+      <div class="name-section">
+        <p>Hi, {{ authStore.getFirstName() }}</p>
+      </div>
 
       <div class="info-section">
         <div 
@@ -176,6 +179,19 @@ const signOut = () => {
   align-items: center;
   width: 100%;
   margin-top: 15px;
+}
+
+.name-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.name-section p {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .account-circle-icon {
