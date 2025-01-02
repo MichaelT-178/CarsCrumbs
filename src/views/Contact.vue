@@ -15,7 +15,7 @@
 	  <!-- Left side -->
 	  <div class="form-container">
 		<h2 class="contact-title" v-if="!isSmallScreen">Contact Us</h2>
-		<p class="dm-info" v-if="!isSmallScreen">You can also DM us on Instagram <a href="https://ig.me/m/cars.crumbs" class="insta-link" target="_blank">@cars.crumbs</a></p>
+		<p class="dm-info" v-if="!isSmallScreen">You can also DM us on Instagram <span class="insta-link">@<a href="https://ig.me/m/cars.crumbs" target="_blank">cars.crumbs</a></span></p>
 		<form @submit.prevent="submitForm">
 		  <div class="form-group">
 			<label for="name">Name<span style="color: #EF0000;"> *</span></label>
@@ -260,18 +260,24 @@ onUnmounted(() => {
 	margin-top: -30px;
 }
 
-.insta-link {
+.insta-link, 
+.insta-link a {
 	color: purple;
 	text-decoration: none;
-	font-size: 18px;
+	font-size: 19px;
 }
 
-.insta-link:hover {
+.insta-link:hover,
+.insta-link:hover a {
 	color: #610061;
+}
+
+.insta-link:hover a {
 	text-decoration: underline;
 }
 
-.insta-link:active {
+.insta-link:active,
+.insta-link:active p {
 	color: #D400D4;
 }
 
@@ -315,7 +321,7 @@ onUnmounted(() => {
 }
 
 .dm-info {
-	font-size: 16px;
+	font-size: 17px;
 	margin-bottom: 20px;
 }
 
