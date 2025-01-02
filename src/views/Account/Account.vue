@@ -16,7 +16,7 @@
   </div>
   <div v-else>
     <nav v-if="!isTabSelected">
-      <p>My Account</p>
+      <p>{{ authStore.getFirstName() }}'s Account</p>
       <div class="nav-item">
         <router-link class="router-link" :to="{ path: '/account', query: { tab: 'accountSettings' } }">
           Account Settings
@@ -53,6 +53,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { useAuthStore } from '../../stores/auth';
 
 import AccountSettings from './AccountSettings.vue';
 import Favorites from './Favorites.vue';
@@ -62,6 +63,7 @@ import OrderDetails from './OrderDetails.vue';
 
 const route = useRoute();
 const router = useRouter();
+const authStore = useAuthStore();
 
 const isMobile = ref(window.innerWidth <= 800);
 const isTabSelected = computed(() => !!route.query.tab);

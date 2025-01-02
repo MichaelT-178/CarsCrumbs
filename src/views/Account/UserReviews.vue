@@ -7,7 +7,7 @@
   
   <div v-else-if="userReviews.length === 0">
     <NoItems 
-      message="You don't have any reviews! Go buy something and leave a review!"
+      message="You haven't left any reviews yet! Go buy something and leave a review!"
       buttonText="Order Now">
     </NoItems>
   </div>

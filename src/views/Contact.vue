@@ -491,7 +491,7 @@ button.clicked {
 	font-size: 17px;
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1119px) {
 	.contact-container {
 		flex-direction: column;
 		align-items: center;
