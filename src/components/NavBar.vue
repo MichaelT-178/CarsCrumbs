@@ -232,8 +232,7 @@ html, body {
 .top-line {
   width: 100%;
   height: 40px;
-  /* background-color: #3E0054; */
-  background-color: red;
+  background-color: #3E0054;
   position: fixed;
   top: 0;
   z-index: 1002;
