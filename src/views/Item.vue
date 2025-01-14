@@ -12,9 +12,9 @@
         <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
         <p class="dividing-circle">•</p>
 
-        <div v-if="itemReviews.length">
+        <div v-if="itemStats.num_of_ratings">
           <div class="rating-num-section">
-            <p class="rating-number" @click="scrollToReviews">{{ itemReviews.length }}</p>
+            <p class="rating-number" @click="scrollToReviews">{{ itemStats.num_of_ratings }}</p>
             <span class="material-symbols-outlined down-arrow-icon">keyboard_arrow_down</span>
           </div>
         </div>
