@@ -62,7 +62,7 @@ const props = defineProps({
 
 const pic = computed(() => {
   if (props.item.Images && props.item.Images.length > 0) {
-    return `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
+    return `../../src/assets/new_images/${props.item.Images[0]}`;
   }
   
   return "";

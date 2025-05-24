@@ -64,8 +64,8 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
-import axiosInstance from '../lib/axios';
 import { useAuthStore } from '../stores/auth';
+import MenuData from '../../src/assets/new_data/menu.json';
 
 const menu = ref([]);
 const tagsData = ref([]);
@@ -100,8 +100,10 @@ const favoriteIds = ref([]);
 
 const loadFavoriteIds = async (userId) => {
   try {
-    const response = await axiosInstance.get(`/get_favorite_ids/${userId}`);
-    favoriteIds.value = response.data.favorite_item_ids || [];
+    // Assuming this still uses your backend
+    const response = await fetch(`/get_favorite_ids/${userId}`);
+    const data = await response.json();
+    favoriteIds.value = data.favorite_item_ids || [];
   } catch (error) {
     console.error('Error fetching favorite IDs:', error);
   }
@@ -130,21 +132,11 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-const loadMenuData = async () => {
-  try {
-    const response = await axiosInstance.get('/get_menu');
-    const data = response.data;
-    menu.value = data.MenuItems || [];
-    tagsData.value = Object.values(data.Tags || []);
-  } catch (error) {
-    console.error('Error fetching menu data:', error);
-  }
-};
-
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
 
-  loadMenuData();
+  menu.value = MenuData.MenuItems || [];
+  tagsData.value = MenuData.Tags || [];
   loadFavoriteIds(authStore.getUserId());
 
   const hash = window.location.hash.replace('#', '');
