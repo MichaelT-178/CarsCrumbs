@@ -21,7 +21,7 @@
       >
         <div class="card-content">
           <img
-            :src="`https://crumb-pics.s3.us-east-1.amazonaws.com/${menuItem.Picture}`"
+            :src="`../../src/assets/new_images/${menuItem.Picture}`"
             :alt="menuItem.Name"
             class="product-image"
           />

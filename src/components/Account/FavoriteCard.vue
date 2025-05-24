@@ -99,7 +99,7 @@ const authStore = useAuthStore();
 const userId = authStore.getUserId();
 
 const getPicUrl = computed(() => {
-  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${image.stored_filename}`;
+  return `../../../src/assets/new_images/${image.stored_filename}`;
 });
 
 const handleClick = (route) => {

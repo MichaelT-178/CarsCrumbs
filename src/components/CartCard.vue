@@ -62,7 +62,7 @@ const props = defineProps({
   },
 });
 
-const pic = computed(() => `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`);
+const pic = computed(() => `../../src/assets/new_images/${props.item.Images[0]}`);
 
 const hovered = ref(null);
 const hoverDelete = ref(false);

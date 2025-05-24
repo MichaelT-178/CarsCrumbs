@@ -87,7 +87,7 @@ const handleKeydown = (event) => {
 const updateMenuItem = () => {
   if (props.item) {
     menuItem.value = props.item;
-    pic.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${props.item.Images[0]}`;
+    pic.value = `../../src/assets/new_images/${props.item.Images[0]}`;
   }
 };
 

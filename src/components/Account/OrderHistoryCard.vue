@@ -51,7 +51,7 @@ const limitedImages = computed(() => {
   return allImages.slice(0, 4);
 });
 
-const getPicUrl = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
+const getPicUrl = (imageName) => `../../../src/assets/new_images/${imageName}`;
 
 </script>
 

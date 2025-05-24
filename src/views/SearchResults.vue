@@ -81,7 +81,7 @@ const loadMenuData = async () => {
   }
 };
 
-const getItemImage = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
+const getItemImage = (imageName) => `../../src/assets/new_images/${imageName}`;
 
 const navigateToRoute = (route) => {
   if (!route.startsWith('/')) {

@@ -34,7 +34,7 @@ const props = defineProps({
 });
 
 const getPicture = (item) => {
-  return `https://crumb-pics.s3.us-east-1.amazonaws.com/${item.Images[0]}`
+  return `../../src/assets/new_images/${item.Images[0]}`
 };
 
 const deleteItem = (itemId) => {

@@ -435,8 +435,8 @@
             "Emoji": "🎂",
             "DisplayPrice": "$15.00",
             "Images": [
-                "VanillaCake/VanillaCake.jpg",
-                "VanillaCake/VanillaCake.jpg"
+                "VanillaCake/VanillaCake1.jpg",
+                "VanillaCake/VanillaCake2.jpg"
             ],
             "Route": "/item/Vanilla_Cake",
             "Tags": [],

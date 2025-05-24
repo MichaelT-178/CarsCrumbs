@@ -34,7 +34,7 @@
 
 <script setup>
 import { computed, ref, onMounted } from "vue";
-import axiosInstance from "../lib/axios";
+// import axiosInstance from "../lib/axios";
 import StarRating from "./StarRating.vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter } from "vue-router";
@@ -80,43 +80,43 @@ const openSideView = () => {
 const authStore = useAuthStore();
 const userId = authStore.getUserId();
 
-const toggleHeart = async () => {
-  if (!userId) {
-    alert("You need to be logged in to favorite items.");
-    return;
-  }
+// const toggleHeart = async () => {
+//   if (!userId) {
+//     alert("You need to be logged in to favorite items.");
+//     return;
+//   }
 
-  try {
-    // Try Block
-    if (isHearted.value) {
-      const response = await axiosInstance.delete("/delete_favorite/", {
-        data: { user_id: userId, item_id: props.item.id },
-      });
+//   try {
+//     // Try Block
+//     if (isHearted.value) {
+//       const response = await axiosInstance.delete("/delete_favorite/", {
+//         data: { user_id: userId, item_id: props.item.id },
+//       });
 
-      console.log(response.data.detail);
-    } else {
-      const response = await axiosInstance.post("/add_favorite/", {
-        user_id: userId,
-        item_id: props.item.id,
-      });
+//       console.log(response.data.detail);
+//     } else {
+//       const response = await axiosInstance.post("/add_favorite/", {
+//         user_id: userId,
+//         item_id: props.item.id,
+//       });
 
-      console.log(response.data.detail);
-    }
+//       console.log(response.data.detail);
+//     }
 
-    isHearted.value = !isHearted.value;
-     // Try Block
+//     isHearted.value = !isHearted.value;
+//      // Try Block
 
-  } catch (error) {
-    console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
+//   } catch (error) {
+//     console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
 
-    if (!isHearted.value && error.response?.data?.detail === "Favorite already exists.") {
-      isHearted.value = true;
-    } else {
-      alert("Failed to toggle favorite. Please try again.");
-    }
-  }
+//     if (!isHearted.value && error.response?.data?.detail === "Favorite already exists.") {
+//       isHearted.value = true;
+//     } else {
+//       alert("Failed to toggle favorite. Please try again.");
+//     }
+//   }
 
-};
+// };
 
 const goToItem = () => {
   let path = props.item.Route;

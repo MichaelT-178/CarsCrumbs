@@ -25,7 +25,7 @@ defineProps({
   }
 });
 
-const getPicUrl = (imageName) => `https://crumb-pics.s3.us-east-1.amazonaws.com/${imageName}`;
+const getPicUrl = (imageName) => `../../../src/assets/new_images/${imageName}`;
 
 </script>
 

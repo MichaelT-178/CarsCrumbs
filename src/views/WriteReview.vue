@@ -156,7 +156,7 @@ const loadReviewItem = async () => {
   const menuItem = await axiosInstance.get(`get_menu_item_by_name/${props.itemName}`);
   selectedItem.value = menuItem.data;
 
-  imageUrl.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${selectedItem.value.Images[0]}`;
+  imageUrl.value = `../../src/assets/new_images/${selectedItem.value.Images[0]}`;
 }
 
 const handleResize = () => {
