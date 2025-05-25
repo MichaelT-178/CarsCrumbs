@@ -1,0 +1,179 @@
+{
+    "reviews": [
+        {
+            "item_name": "Ginger_Molasses_Cookies",
+            "reviews": [
+                {
+                    "id": 2,
+                    "display_name": "Merideth",
+                    "review_headline": "Super delicious",
+                    "star_rating": 5,
+                    "date_added": "2024-12-25",
+                    "written_review": "Wow this tasted so good!!!!!!!",
+                    "would_recommend": true
+                }
+            ],
+            "review_stats": {
+                "avg_num_of_stars": 5.0,
+                "num_of_ratings": 1,
+                "percent_recommended": 100.0,
+                "num_of_recommendations": 1,
+                "rating_distributions": {
+                    "One": 0,
+                    "Two": 0,
+                    "Five": 1,
+                    "Four": 0,
+                    "Three": 0
+                }
+            }
+        },
+        {
+            "item_name": "Banana_Bread",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Blueberry_Zucchini",
+            "reviews": [
+                {
+                    "id": 9,
+                    "display_name": "Miguel",
+                    "review_headline": "Tastes Delicious!",
+                    "star_rating": 5,
+                    "date_added": "2025-01-08",
+                    "written_review": "Super yum!",
+                    "would_recommend": true
+                }
+            ],
+            "review_stats": {
+                "avg_num_of_stars": 5.0,
+                "num_of_ratings": 1,
+                "percent_recommended": 100.0,
+                "num_of_recommendations": 1,
+                "rating_distributions": {
+                    "One": 0,
+                    "Two": 0,
+                    "Five": 1,
+                    "Four": 0,
+                    "Three": 0
+                }
+            }
+        },
+        {
+            "item_name": "Brown_Butter_Cookies",
+            "reviews": [],
+            "review_stats": {
+                "avg_num_of_stars": 5.0,
+                "num_of_ratings": 1,
+                "percent_recommended": 100.0,
+                "num_of_recommendations": 1,
+                "rating_distributions": {
+                    "One": 0,
+                    "Two": 0,
+                    "Five": 1,
+                    "Four": 0,
+                    "Three": 0
+                }
+            }
+        },
+        {
+            "item_name": "Cinnamon_Rolls",
+            "reviews": [
+                {
+                    "id": 4,
+                    "display_name": "Moto38",
+                    "review_headline": "Cinnamon!",
+                    "star_rating": 5,
+                    "date_added": "2024-12-25",
+                    "written_review": "Best cinnamon rolls in Raleigh",
+                    "would_recommend": true
+                }
+            ],
+            "review_stats": {
+                "avg_num_of_stars": 5.0,
+                "num_of_ratings": 1,
+                "percent_recommended": 100.0,
+                "num_of_recommendations": 1,
+                "rating_distributions": {
+                    "One": 0,
+                    "Two": 0,
+                    "Five": 1,
+                    "Four": 0,
+                    "Three": 0
+                }
+            }
+        },
+        {
+            "item_name": "Chocolate_Donut",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Gingerbread_Latte_Cookies",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "French_Bread",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Pumpkin_Donuts",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Apple_Pie",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Cake_Pops",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Plain_Bagel",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Italian_Bread",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Sugar_Cookie",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        },
+        {
+            "item_name": "Vanilla_Cake",
+            "reviews": [],
+            "review_stats": {
+                "error": "No review stats found for this item."
+            }
+        }
+    ]
+}

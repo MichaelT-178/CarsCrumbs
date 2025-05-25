@@ -1,40 +1,36 @@
 <template>
-  
   <WordpressHeader v-if="isSmallScreen" />
 
   <div v-if="menuItem" class="menu-item-container">
-    
     <img :src="pic" class="item-pic" />
 
     <div class="item-info">
       <p class="title">{{ menuItem.DisplayName }}</p>
       <div class="rating-container">
-        <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22"/>
+        <StarRating :rating="menuItem.Rating" :show-number="false" :starSize="22" />
         <p class="dividing-circle">•</p>
 
-        <div v-if="itemStats.num_of_ratings">
+        <div v-if="itemStats?.num_of_ratings">
           <div class="rating-num-section">
             <p class="rating-number" @click="scrollToReviews">{{ itemStats.num_of_ratings }}</p>
             <span class="material-symbols-outlined down-arrow-icon">keyboard_arrow_down</span>
           </div>
         </div>
         <div v-else>
-          <p 
-            class="first-review-text" 
-            @click="scrollToReviews">
+          <p class="first-review-text" @click="scrollToReviews">
             Be the first to review
           </p>
         </div>
-
       </div>
+
       <p class="price">Price: {{ menuItem.DisplayPrice }}</p>
 
       <label class="quantity-label">Quantity:</label>
-      
+
       <div class="options-row">
         <div v-for="(option, index) in menuItem.Options" :key="index" class="option-radio">
           <label class="radio-label">
-            <input type="radio" v-model="selectedOption" :value="option" class="radio-input">
+            <input type="radio" v-model="selectedOption" :value="option" class="radio-input" />
             <span class="custom-radio">{{ option.quantity }} - ${{ option.price }}</span>
           </label>
         </div>
@@ -45,19 +41,15 @@
       </button>
     </div>
   </div>
-
   <div v-else>
     <p>Item not found</p>
   </div>
-
 
   <!-- Try our Other Items -->
   <div class="related-items-container">
     <p class="related-title">Try our Other Items</p>
     <div class="scrollable-container">
-
       <button class="scroll-button left-arrow" @click="scrollLeft">❮</button>
-      
       <div class="related-items-grid">
         <MenuCard
           v-for="(item, index) in relatedItems"
@@ -67,38 +59,22 @@
           @click="goToItemPage(item)"
         />
       </div>
-      
       <button class="scroll-button right-arrow" @click="scrollRight">❯</button>
     </div>
   </div>
-    
+
   <div class="has-reviews" v-if="itemReviews.length">
     <!-- Reviews Section -->
     <div class="reviews-section">
       <h2 class="reviews-header">Customer Reviews</h2>
-      
       <hr class="reviews-header-divider" />
-        <ReviewPanel
-          :review-stats="itemStats"
-          :item-name="props.ItemName" 
-        />
+      <ReviewPanel :review-stats="itemStats" :item-name="props.ItemName" />
       <div class="reviews-divider">
         <span class="divider-title">Reviews</span>
         <hr class="reviews-header-divider" />
       </div>
-      
-      <!-- Reviews -->
       <div class="reviews-container" ref="reviewsSection">
-        <div v-if="itemReviews.length">
-          <ReviewCard 
-            v-for="(review, index) in itemReviews" 
-            :key="index" 
-            :review="review" 
-          />
-        </div>
-        <div v-else>
-          <p>No reviews for this item yet.</p>
-        </div>
+        <ReviewCard v-for="(review, index) in itemReviews" :key="index" :review="review" />
       </div>
     </div>
   </div>
@@ -107,26 +83,23 @@
       <div class="reviews-divider">
         <span class="divider-title">Reviews</span>
         <hr class="reviews-header-divider" />
-        
         <div class="empty-review-section">
           <p class="custom-reviews-title">No Customer Reviews Yet</p>
-          <StarRating 
-            :rating="0" 
-            :show-number="false" 
-            :starSize="56" 
+          <StarRating
+            :rating="0"
+            :show-number="false"
+            :starSize="56"
             class="empty-star-rating"
             @click="goToWriteReview"
           />
-          <p class="custom-reviews-text" ref="reviewsSection">Be the first person to rate this item!</p>
-
-          <div
-            @click="goToWriteReview"
-            class="write-review-button">
+          <p class="custom-reviews-text" ref="reviewsSection">
+            Be the first person to rate this item!
+          </p>
+          <div @click="goToWriteReview" class="write-review-button">
             Write a review
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -135,18 +108,19 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import MenuCard from "../components/RecommendCard.vue";
 import WordpressHeader from "../components/Header.vue";
 import StarRating from "../components/StarRating.vue";
 import ReviewCard from "../components/ReviewCard.vue";
-import { useRouter } from "vue-router";
-import { useCartStore } from "../stores/cart.js";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
-import axiosInstance from "../lib/axios.js";
+import { useCartStore } from "../stores/cart.js";
 import { useAuthStore } from "../stores/auth.js";
+// import axiosInstance from "../lib/axios";
+import MenuData from "../../src/assets/new_data/menu.json";
+import ReviewData from "../../src/assets/new_data/reviews.json";
 
 const cart = useCartStore();
 const authStore = useAuthStore();
@@ -155,8 +129,8 @@ const router = useRouter();
 const props = defineProps({
   ItemName: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 });
 
 const jsonData = ref([]);
@@ -175,15 +149,18 @@ const scrollToReviews = () => {
   }
 };
 
-const loadAllReviews = async () => {
-  try {
-    const response = await axiosInstance.get(`get_reviews_and_stats_by_item_name/${props.ItemName}`);
-    const data = response.data;
+// UPDATED: Use static ReviewData
+const loadAllReviews = () => {
+  const itemReviewBlock = ReviewData.reviews.find(
+    review => review.item_name === props.ItemName
+  );
 
-    itemReviews.value = data.reviews || [];
-    itemStats.value = data.review_stats || null;
-  } catch (error) {
-    console.error("Error fetching reviews:", error);
+  if (itemReviewBlock) {
+    itemReviews.value = itemReviewBlock.reviews || [];
+    itemStats.value = itemReviewBlock.review_stats || null;
+  } else {
+    itemReviews.value = [];
+    itemStats.value = null;
   }
 };
 
@@ -191,38 +168,30 @@ const updateScreenSize = () => {
   isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
 };
 
-const updateMenuItem = async () => {
-  try {
-    const response = await axiosInstance.get(`get_menu_item_by_name/${props.ItemName}`);
-    menuItem.value = response.data;
+const updateMenuItem = () => {
+  const matchedItem = jsonData.value.find(item => item.Name === props.ItemName);
 
-    if (menuItem.value && menuItem.value.Images.length) {
-      pic.value = `../../src/assets/new_images/${menuItem.value.Images[0]}`;
-
-      findRelatedItems(menuItem.value);
-
-      if (menuItem.value.Options.length === 1) {
-        selectedOption.value = menuItem.value.Options[0];
-      }
+  if (matchedItem) {
+    menuItem.value = matchedItem;
+    if (matchedItem.Images.length > 0) {
+      pic.value = `../../src/assets/new_images/${matchedItem.Images[0]}`;
     }
-  } catch (error) {
-    console.error("Error fetching menu item:", error);
+    findRelatedItems(matchedItem);
+    if (matchedItem.Options.length === 1) {
+      selectedOption.value = matchedItem.Options[0];
+    }
+  } else {
+    console.error(`No menu item found matching name: ${props.ItemName}`);
   }
 };
 
 const findRelatedItems = (currentItem) => {
   const taggedItems = jsonData.value.filter(
-    (item) =>
-      item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
-      item.Name !== currentItem.Name
+    item => item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name
   );
-
   const otherItems = jsonData.value.filter(
-    (item) =>
-      !item.Tags.some((tag) => currentItem.Tags.includes(tag)) &&
-      item.Name !== currentItem.Name
+    item => !item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name
   );
-
   relatedItems.value = [...taggedItems, ...otherItems];
 };
 
@@ -231,9 +200,8 @@ const addItem = () => {
     cart.addItem({
       ...menuItem.value,
       Cost: selectedOption.value.price,
-      Quantity: selectedOption.value.quantity,
+      Quantity: selectedOption.value.quantity
     });
-
     alert("Item Successfully Added to Cart!");
   }
 };
@@ -241,78 +209,50 @@ const addItem = () => {
 const scrollLeft = () => {
   const container = document.querySelector(".related-items-grid");
   const cardWidth = container.offsetWidth / 2;
-  container.scrollBy({
-    left: -cardWidth,
-    behavior: "smooth",
-  });
+  container.scrollBy({ left: -cardWidth, behavior: "smooth" });
 };
 
 const scrollRight = () => {
   const container = document.querySelector(".related-items-grid");
   const cardWidth = container.offsetWidth / 2;
-  container.scrollBy({
-    left: cardWidth,
-    behavior: "smooth",
-  });
+  container.scrollBy({ left: cardWidth, behavior: "smooth" });
 };
 
 const goToItemPage = (item) => {
   let path = item.Route;
-  
-  if (!path.startsWith('/')) {
-    path = '/' + path;
-  }
-
+  if (!path.startsWith("/")) path = "/" + path;
   router.push(path).then(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 };
 
 const goToWriteReview = () => {
-
   if (authStore.getIsLoggedIn()) {
-    router.push({
-      path: '/write-review',
-      query: { itemName: props.ItemName },
-    });
+    router.push({ path: "/write-review", query: { itemName: props.ItemName } });
   } else {
-    router.push({ 
-      path: '/sign-in', 
-      query: { 
-        successRoute: 'write-review',
+    router.push({
+      path: "/sign-in",
+      query: {
+        successRoute: "write-review",
         successRouteProp: JSON.stringify({ itemName: props.ItemName })
-      } 
+      }
     });
   }
 };
 
-const loadMenuData = async () => {
-  try {
-    const response = await axiosInstance.get(`get_menu/`);
-    jsonData.value = response.data.MenuItems;
-    updateMenuItem();
-  } catch (error) {
-    console.error("Error loading menu data:", error);
-  }
+const loadMenuData = () => {
+  jsonData.value = MenuData.MenuItems || [];
 };
-
-// watch(
-//   () => route.params.ItemName, 
-//   () => updateMenuItem()
-// );
 
 watch(
   () => props.ItemName,
   async (newItemName, oldItemName) => {
     if (newItemName !== oldItemName) {
       window.scrollTo({ top: 0, behavior: "smooth" });
-
       menuItem.value = null;
       itemReviews.value = [];
-
       pic.value = "";
       selectedOption.value = null;
-
       await updateMenuItem();
       await loadAllReviews();
     }
@@ -321,9 +261,9 @@ watch(
 
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
-
   updateScreenSize();
   loadMenuData();
+  updateMenuItem();
   loadAllReviews();
   window.addEventListener("resize", updateScreenSize);
 });
@@ -331,8 +271,9 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", updateScreenSize);
 });
-
 </script>
+
+
 
 
 <style scoped>
