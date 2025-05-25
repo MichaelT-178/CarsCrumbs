@@ -121,8 +121,8 @@ import { ref, watch, onMounted, onUnmounted } from "vue";
 import StarRating from "../components/StarRating.vue";
 import WordpressHeader from "../components/Header.vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../lib/axios";
 import { useAuthStore } from "../stores/auth";
+import MenuData from "../../src/assets/new_data/menu.json";
 
 const props = defineProps({
   itemName: {
@@ -152,12 +152,18 @@ const writtenReviewError = ref(false);
 
 const selectedItem = ref(null);
 
-const loadReviewItem = async () => {
-  const menuItem = await axiosInstance.get(`get_menu_item_by_name/${props.itemName}`);
-  selectedItem.value = menuItem.data;
+const loadReviewItem = () => {
+  const item = MenuData.MenuItems.find(
+    (item) => item.Name === props.itemName
+  );
 
-  imageUrl.value = `../../src/assets/new_images/${selectedItem.value.Images[0]}`;
-}
+  if (item) {
+    selectedItem.value = item;
+    imageUrl.value = `/src/assets/new_images/${item.Images[0]}`;
+  } else {
+    console.error(`Item with name ${props.itemName} not found in MenuData.`);
+  }
+};
 
 const handleResize = () => {
   isSmallScreen.value = window.innerWidth < 800;
@@ -193,26 +199,22 @@ const handleSubmit = () => {
   }
 
   if (isAnyFieldFilled()) {
-    // Validate display name
     if (!displayName.value.trim()) {
       displayNameError.value = true;
       isValid = false;
     }
 
-    // Validate review headline
     if (!reviewHeadline.value.trim()) {
       reviewHeadlineError.value = true;
       isValid = false;
     }
 
-    // Validate written review
     if (!writtenReview.value.trim()) {
       writtenReviewError.value = true;
       isValid = false;
     }
   }
 
-  // Validate recommendation
   if (!recommend.value) {
     recommendError.value = true;
     isValid = false;
@@ -226,67 +228,47 @@ const handleSubmit = () => {
       review_headline: reviewHeadline.value,
       written_review: writtenReview.value,
       star_rating: starRating.value,
-      would_recommend: recommend.value == "yes"
-    }
-    
-    // axiosInstance.post('add_review/', reviewData);
-    // alert("Review posted successfully!")
-    axiosInstance.post('add_review/', reviewData)
-      .then(() => {
-        alert("Review posted successfully!");
-        router.push(`/item/${props.itemName}/`);
-      })
-      .catch((error) => {
-        console.log(error);
-        console.error(error.response.data.error);
-        alert(`Failed to post review. Error: ${error.message}`);
-      });
+      would_recommend: recommend.value === "yes"
+    };
+
+    // Submit logic here (e.g., send to server)
+    // alert("Review submitted successfully!");
+    // router.push(`/item/${props.itemName}`);
   }
 };
 
-// Watch for changes to remove errors
-watch(starRating, (newValue) => {
-  if (newValue > 0) {
-    starRatingError.value = false;
-  }
+// Watch for changes to remove validation errors dynamically
+watch(starRating, (val) => {
+  if (val > 0) starRatingError.value = false;
 });
 
-watch(displayName, (newValue) => {
-  if (newValue.trim()) {
-    displayNameError.value = false;
-  }
+watch(displayName, (val) => {
+  if (val.trim()) displayNameError.value = false;
 });
 
-watch(reviewHeadline, (newValue) => {
-  if (newValue.trim()) {
-    reviewHeadlineError.value = false;
-  }
+watch(reviewHeadline, (val) => {
+  if (val.trim()) reviewHeadlineError.value = false;
 });
 
-watch(writtenReview, (newValue) => {
-  if (newValue.trim()) {
-    writtenReviewError.value = false;
-  }
+watch(writtenReview, (val) => {
+  if (val.trim()) writtenReviewError.value = false;
 });
 
-watch(recommend, (newValue) => {
-  if (newValue) {
-    recommendError.value = false;
-  }
+watch(recommend, (val) => {
+  if (val) recommendError.value = false;
 });
 
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
   window.addEventListener("resize", handleResize);
-
   loadReviewItem();
 });
 
 onUnmounted(() => {
   window.removeEventListener("resize", handleResize);
 });
-
 </script>
+
 
 
 <style scoped>

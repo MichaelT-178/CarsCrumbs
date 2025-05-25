@@ -77,7 +77,6 @@ const props = defineProps({
         image: {
           id: 0,
           original_filename: "",
-          stored_filename: "",
         },
       },
     }),
@@ -92,14 +91,14 @@ const {
   display_price: displayPrice,
   route,
   image,
-} = props.item.item;
+} = props.item;
 
 const isFavorite = ref(false);
 const authStore = useAuthStore();
 const userId = authStore.getUserId();
 
 const getPicUrl = computed(() => {
-  return `../../../src/assets/new_images/${image.stored_filename}`;
+  return `../../../src/assets/new_images/${image.original_filename}`;
 });
 
 const handleClick = (route) => {
@@ -112,17 +111,7 @@ const handleClick = (route) => {
 
 
 const fetchFavoriteState = async () => {
-  if (!userId) return;
 
-  try {
-    // const response = await axiosInstance.get(`/check_favorite/`, {
-    //   params: { user_id: userId, item_id: props.item.item.id },
-    // });
-
-    isFavorite.value = response.data.is_favorited;
-  } catch (error) {
-    console.error("Error fetching favorite state:", error.response?.data?.detail || error.message);
-  }
 };
 
 
@@ -136,7 +125,7 @@ const toggleFavorite = async () => {
     if (isFavorite.value) {
       // Remove from favorites
       const response = await axiosInstance.delete("/delete_favorite/", {
-        data: { user_id: userId, item_id: props.item.item.id },
+        data: { user_id: userId, item_id: props.item.id },
       });
 
       console.log(response.data.detail);
@@ -144,7 +133,7 @@ const toggleFavorite = async () => {
       // Add to favorites
       const response = await axiosInstance.post("/add_favorite/", {
         user_id: userId,
-        item_id: props.item.item.id,
+        item_id: props.item.id,
       });
 
       console.log(response.data.detail);

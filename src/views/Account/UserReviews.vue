@@ -24,8 +24,8 @@
 import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
 import UserReviewCard from "../../components/Account/UserReviewCard.vue";
-// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
+import UserInfo from "../../../src/assets/new_data/user_info.json";
 
 const userReviews = ref([]);
 const loading = ref(true);
@@ -33,9 +33,7 @@ const authStore = useAuthStore();
 
 const fetchUserReviews = async () => {
   try {
-    const userId = authStore.getUserId();
-    // const response = await axiosInstance.get(`/get_reviews_by_user_id/${userId}`);
-    userReviews.value = response.data.reviews;
+    userReviews.value = UserInfo.Reviews;
   } catch (error) {
     console.error("Error fetching user reviews:", error);
   } finally {
@@ -44,13 +42,13 @@ const fetchUserReviews = async () => {
 };
 
 const removeReview = (reviewId) => {
-  userReviews.value = userReviews.value.filter((review) => review.id !== reviewId);
+  console.log("DELETE REVIEW");
+  // userReviews.value = userReviews.value.filter((review) => String(review.id) !== String(reviewId));
 };
 
 onMounted(() => {
   fetchUserReviews();
 });
-
 </script>
 
 

@@ -19,8 +19,8 @@
 import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
-// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
+import UserInfo from "../../../src/assets/new_data/user_info.json";
 
 const authStore = useAuthStore();
 const userId = authStore.getUserId();
@@ -28,8 +28,12 @@ const favoriteItems = ref([]);
 
 const fetchFavorites = async () => {
   try {
-    // const response = await axiosInstance.get(`/get_favorites/${userId}/`);
-    favoriteItems.value = response.data;
+    // Filter UserInfo.Favorites by matching userId and map to item structure
+    favoriteItems.value = UserInfo.Favorites
+      .filter(fav => String(fav.user) === String(userId))
+      .map(fav => fav.item);
+
+    console.log(favoriteItems);
   } catch (error) {
     console.error("Error fetching favorite items:", error);
     favoriteItems.value = [];
@@ -47,8 +51,8 @@ const handleFavoriteToggle = ({ item, isFavorite }) => {
 onMounted(() => {
   fetchFavorites();
 });
-
 </script>
+
 
 
 <style scoped>

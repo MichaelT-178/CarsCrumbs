@@ -77,42 +77,36 @@
 
 <script setup>
 import { reactive, ref, onMounted } from "vue";
-// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 
 const authStore = useAuthStore();
 
+const isEditing = ref(false);
+
+// Clone the reactive user object from authStore
 const account = reactive({
-  firstName: "",
-  lastName: "",
-  username: "",
-  email: "",
-  phone_number: "",
-  numOfPoints: 0,
-  birthday: "",
+  firstName: authStore.getFirstName(),
+  lastName: authStore.getLastName(),
+  username: authStore.getUsername(),
+  email: authStore.getEmail(),
+  phone_number: authStore.getPhoneNumber(),
+  birthday: authStore.getBirthday(),
+  numOfPoints: 0, // Update this if you have a point system
 });
 
-const isEditing = ref(false);
+// Used for editing before confirming changes
 const editAccount = reactive({ ...account });
-const userId = authStore.getUserId();
 
-const fetchAccountData = async () => {
-  try {
-    // const response = await axiosInstance.get(`/get_user_by_id/${userId}/`);
-    const user = response.data.user;
-
-    Object.assign(account, {
-      firstName: user.first_name,
-      lastName: user.last_name,
-      username: user.username,
-      email: user.email,
-      phone_number: user.phone_number,
-      birthday: user.birthday,
-    });
-
-  } catch (error) {
-    console.error("Failed to fetch user data:", error);
-  }
+const fetchAccountData = () => {
+  // This only syncs once, since there's no backend call
+  Object.assign(account, {
+    firstName: authStore.getFirstName(),
+    lastName: authStore.getLastName(),
+    username: authStore.getUsername(),
+    email: authStore.getEmail(),
+    phone_number: authStore.getPhoneNumber(),
+    birthday: authStore.getBirthday(),
+  });
 };
 
 const editMode = () => {
@@ -120,26 +114,31 @@ const editMode = () => {
   Object.assign(editAccount, account);
 };
 
-const saveChanges = async () => {
-  try {
-    // const response = await axiosInstance.put("/modify_user/", {
-    //   id: userId,
-    //   firstName: editAccount.firstName,
-    //   lastName: editAccount.lastName,
-    //   username: editAccount.username,
-    //   email: editAccount.email,
-    //   phoneNumber: editAccount.phone_number,
-    // });
-    Object.assign(account, response.data.user);
-    isEditing.value = false;
-  } catch (error) {
-    console.error("Failed to save changes:", error);
-  }
+const saveChanges = () => {
+  // This should call an API or backend to persist changes,
+  // but we’ll just simulate it and update authStore manually
+  authStore.login({
+    user: {
+      id: authStore.getUserId(),
+      first_name: editAccount.firstName,
+      last_name: editAccount.lastName,
+      username: editAccount.username,
+      email: editAccount.email,
+      phone_number: editAccount.phone_number,
+      birthday: editAccount.birthday,
+    },
+  });
+
+  Object.assign(account, editAccount);
+  isEditing.value = false;
+};
+
+const cancelEdit = () => {
+  isEditing.value = false;
 };
 
 const maskPhoneNumber = (event) => {
   let input = event.target.value.replace(/\D/g, "");
-
   if (input.length > 3 && input.length <= 6) {
     input = `(${input.slice(0, 3)}) ${input.slice(3)}`;
   } else if (input.length > 6) {
@@ -148,17 +147,13 @@ const maskPhoneNumber = (event) => {
   editAccount.phone_number = input;
 };
 
-const cancelEdit = () => {
-  isEditing.value = false;
-};
-
 const deleteAccount = () => {
   alert("Account deleted pressed! (Not actually deleted)");
 };
 
 onMounted(fetchAccountData);
-
 </script>
+
 
 
 <style scoped>

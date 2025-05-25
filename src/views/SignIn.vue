@@ -7,7 +7,11 @@
     />
     <div class="text-container">
       <p class="welcome-text">Welcome to Cars Crumbs</p>
-      <p class="sign-in-text">Sign in to your account</p>
+      <p class="sign-in-text">Sign in to your account 
+        <span style="color: blue">
+        (JUST PRESS THE SIGN IN BUTTON)
+        </span>
+      </p>
     </div>
     <div>
       <input 
@@ -55,7 +59,7 @@ import CircleLogo from "../assets/logos/CircleLogo.png";
 import { onMounted, onUnmounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from 'vue-router';
-// import axiosInstance from "../lib/axios";
+import axiosInstance from "../lib/axios";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -78,28 +82,44 @@ const signIn = async () => {
   emailError.value = "";
   passwordError.value = "";
 
-  if (!email.value) {
-    emailError.value = "Email is required";
-  }
-  if (!password.value) {
-    passwordError.value = "Password is required";
-  }
+  // if (!email.value) {
+  //   emailError.value = "Email is required";
+  // }
+  // if (!password.value) {
+  //   passwordError.value = "Password is required";
+  // }
 
-  if (email.value && password.value) {
-    console.log("SIGN IN");
-    console.log("Email:", email.value);
-    console.log("Password:", password.value);
 
-    const loginData = {
-      email_or_username: email.value,
-      password: password.value
-    }
+    // console.log("SIGN IN");
+    // console.log("Email:", email.value);
+    // console.log("Password:", password.value);
+
+    // const loginData = {
+    //   email_or_username: email.value,
+    //   password: password.value
+    // }
 
     try {
-      // const response = await axiosInstance.post("/login_user/", loginData);
-      console.log("Login successful:", response.data.user.id);
+      //const response = await axiosInstance.post("/login_user/", loginData);
+
+      const response = {
+        message: "Login successful!",
+        user: {
+          id: 1,
+          first_name: "John",
+          last_name: "Smith",
+          email: "jsmith@gmail.com",
+          phone_number: "None",
+          username: "john871",
+          birthday: "1995-02-13",
+          is_staff: false,
+          is_superuser: false
+        }
+      }
+
+      console.log("Login successful:", response.user.id);
       
-      authStore.login(response.data);
+      authStore.login(response);
 
       router.push({
         path: successRoute,
@@ -109,7 +129,6 @@ const signIn = async () => {
       handleLoginError(error);
     }
 
-  }
 };
 
 const handleLoginError = (error) => {
