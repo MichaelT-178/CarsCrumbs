@@ -1,0 +1,45 @@
+{
+    "Favorites": [
+        {
+            "id": 35,
+            "user": 1,
+            "item": {
+                "id": 3,
+                "display_name": "Blueberry Zucchini",
+                "name": "Blueberry_Zucchini",
+                "avg_num_of_stars": 5.0,
+                "num_of_ratings": 1,
+                "emoji": "🫐",
+                "display_price": "$6.00",
+                "route": "/item/Blueberry_Zucchini",
+                "image": {
+                    "id": 6,
+                    "original_filename": "BlueberryZucchini/BlueberryZucchini.jpg",
+                    "stored_filename": "BlueberryZucchini/03b1396584ff4ad1b475fc1b10962812.jpg"
+                }
+            }
+        }
+    ],
+    "Reviews": [
+        {
+            "id": 9,
+            "display_name": "Miguel",
+            "review_headline": "Tastes Delicious!",
+            "star_rating": 5,
+            "date_added": "2025-01-08",
+            "written_review": "Super yum!",
+            "item_name": "Blueberry_Zucchini",
+            "would_recommend": true
+        },
+        {
+            "id": 10,
+            "display_name": "",
+            "review_headline": "",
+            "star_rating": 5,
+            "date_added": "2025-01-14",
+            "written_review": "",
+            "item_name": "Brown_Butter_Cookies",
+            "would_recommend": true
+        }
+    ]
+}
