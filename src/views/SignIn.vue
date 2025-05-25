@@ -80,52 +80,35 @@ const signIn = async () => {
 
   emailError.value = "";
   passwordError.value = "";
-
-  // if (!email.value) {
-  //   emailError.value = "Email is required";
-  // }
-  // if (!password.value) {
-  //   passwordError.value = "Password is required";
-  // }
-
-
-    // console.log("SIGN IN");
-    // console.log("Email:", email.value);
-    // console.log("Password:", password.value);
-
-    // const loginData = {
-    //   email_or_username: email.value,
-    //   password: password.value
-    // }
-
-    try {
-
-      const response = {
-        message: "Login successful!",
-        user: {
-          id: 1,
-          first_name: "John",
-          last_name: "Smith",
-          email: "jsmith@gmail.com",
-          phone_number: "None",
-          username: "john871",
-          birthday: "1995-02-13",
-          is_staff: false,
-          is_superuser: false
-        }
+  
+  try {
+    const response = {
+      message: "Login successful!",
+      user: {
+        id: 1,
+        first_name: "John",
+        last_name: "Smith",
+        email: "jsmith@gmail.com",
+        phone_number: "None",
+        username: "john871",
+        birthday: "1995-02-13",
+        is_staff: false,
+        is_superuser: false
       }
-
-      console.log("Login successful:", response.user.id);
-      
-      authStore.login(response);
-
-      router.push({
-        path: successRoute,
-        query: successRouteProp,
-      });
-    } catch (error) {
-      handleLoginError(error);
     }
+    
+    console.log("Login successful:", response.user.id);
+    
+    authStore.login(response);
+
+    router.push({
+      path: successRoute,
+      query: successRouteProp,
+    });
+    
+  } catch (error) {
+    handleLoginError(error);
+  }
 
 };
 

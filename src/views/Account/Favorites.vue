@@ -1,58 +1,46 @@
 <template>
   <p class="title">Favorites</p>
 
-  <div v-if="favoriteItems.length === 0">
+  <div v-if="favoritesStore.favoriteItems.length === 0">
     <NoItems
       message="You don't have any favorite items! Go to the menu and add some!"
-      buttonText="Add Now">
-    </NoItems>
+      buttonText="Add Now"
+    />
   </div>
   <div v-else>
-    <div v-for="item in favoriteItems" :key="item.id" class="favorite-item">
-      <FavoriteCard :item="item" @favorite-toggle="handleFavoriteToggle" />
+    <div
+      v-for="item in favoritesStore.favoriteItems"
+      :key="item.id"
+      class="favorite-item"
+    >
+      <FavoriteCard
+        :item="item"
+        @favorite-toggle="handleFavoriteToggle"
+      />
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
 import { useAuthStore } from "../../stores/auth";
-import UserInfo from "../../../src/assets/new_data/user_info.json";
+import { useFavoritesStore } from "../../stores/favorites";
 
 const authStore = useAuthStore();
+const favoritesStore = useFavoritesStore();
 const userId = authStore.getUserId();
-const favoriteItems = ref([]);
-
-const fetchFavorites = async () => {
-  try {
-    // Filter UserInfo.Favorites by matching userId and map to item structure
-    favoriteItems.value = UserInfo.Favorites
-      .filter(fav => String(fav.user) === String(userId))
-      .map(fav => fav.item);
-
-    console.log(favoriteItems);
-  } catch (error) {
-    console.error("Error fetching favorite items:", error);
-    favoriteItems.value = [];
-  }
-};
 
 const handleFavoriteToggle = ({ item, isFavorite }) => {
   if (!isFavorite) {
-    favoriteItems.value = favoriteItems.value.filter(
-      (favorite) => favorite.id !== item.id
-    );
+    favoritesStore.removeFavorite(item.id);
   }
 };
 
-onMounted(() => {
-  fetchFavorites();
-});
-</script>
+favoritesStore.loadFavorites(userId);
 
+</script>
 
 
 <style scoped>
@@ -79,5 +67,4 @@ onMounted(() => {
     margin-right: 10px;
   }
 }
-
 </style>

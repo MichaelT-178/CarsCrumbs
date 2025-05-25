@@ -33,18 +33,23 @@
 
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import StarRating from "./StarRating.vue";
 import { useAuthStore } from "../stores/auth";
-import { useRouter } from "vue-router";
+import { useFavoritesStore } from "../stores/favorites";
 
 const router = useRouter();
+const authStore = useAuthStore();
+const favoritesStore = useFavoritesStore();
+const userId = authStore.getUserId();
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
     default: () => ({
+      id: 0,
       Name: "",
       Emoji: "",
       Price: 0.0,
@@ -53,79 +58,40 @@ const props = defineProps({
       Tags: [],
     }),
   },
-  isFavorite: {
-    type: Boolean,
-    default: false,
-  },
 });
+
+const emit = defineEmits(["open-side-view"]);
 
 const pic = computed(() => {
-  if (props.item.Images && props.item.Images.length > 0) {
-    return `../../src/assets/new_images/${props.item.Images[0]}`;
-  }
-  
-  return "";
+  return props.item.Images?.[0]
+    ? `../../src/assets/new_images/${props.item.Images[0]}`
+    : "";
 });
 
-const isHearted = ref(props.isFavorite);
-const emit = defineEmits(["open-side-view"]);
+const isHearted = computed(() => favoritesStore.isFavorite(props.item.id));
+
+const toggleHeart = () => {
+  if (!userId) {
+    alert("You need to be logged in to favorite items.");
+    return;
+  }
+
+  if (isHearted.value) {
+    favoritesStore.removeFavorite(props.item.id);
+  } else {
+    favoritesStore.addFavorite(props.item);
+  }
+};
+
+const goToItem = () => {
+  let path = props.item.Route;
+  if (!path.startsWith("/")) path = "/" + path;
+  router.push(path);
+};
 
 const openSideView = () => {
   emit("open-side-view", props.item);
 };
-
-
-
-const authStore = useAuthStore();
-const userId = authStore.getUserId();
-
-// const toggleHeart = async () => {
-//   if (!userId) {
-//     alert("You need to be logged in to favorite items.");
-//     return;
-//   }
-
-//   try {
-//     // Try Block
-//     if (isHearted.value) {
-//       const response = await axiosInstance.delete("/delete_favorite/", {
-//         data: { user_id: userId, item_id: props.item.id },
-//       });
-
-//       console.log(response.data.detail);
-//     } else {
-//       const response = await axiosInstance.post("/add_favorite/", {
-//         user_id: userId,
-//         item_id: props.item.id,
-//       });
-
-//       console.log(response.data.detail);
-//     }
-
-//     isHearted.value = !isHearted.value;
-//      // Try Block
-
-//   } catch (error) {
-//     console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
-
-//     if (!isHearted.value && error.response?.data?.detail === "Favorite already exists.") {
-//       isHearted.value = true;
-//     } else {
-//       alert("Failed to toggle favorite. Please try again.");
-//     }
-//   }
-
-// };
-
-const goToItem = () => {
-  let path = props.item.Route;
-
-  if (!path.startsWith('/')) {
-    path = '/' + path;
-  }
-
-  router.push(path);
-}
 
 </script>
 

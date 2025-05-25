@@ -51,96 +51,61 @@
 
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
-import { useAuthStore } from "../../stores/auth";
+import { computed } from "vue";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "../../stores/auth";
+import { useFavoritesStore } from "../../stores/favorites";
 
 const router = useRouter();
+const authStore = useAuthStore();
+const favoritesStore = useFavoritesStore();
+const userId = authStore.getUserId();
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
-    default: () => ({
-      id: 0,
-      user: 0,
-      item: {
-        id: 0,
-        display_name: "",
-        name: "",
-        avg_num_of_stars: 0,
-        num_of_ratings: 0,
-        emoji: "",
-        display_price: "",
-        route: "",
-        image: {
-          id: 0,
-          original_filename: "",
-        },
-      },
-    }),
   },
 });
 
 const emit = defineEmits(["favorite-toggle"]);
 
 const {
-  display_name: displayName,
-  emoji,
-  display_price: displayPrice,
-  route,
-  image,
+  DisplayName: displayName,
+  DisplayPrice: displayPrice,
+  Emoji: emoji,
+  Route: route,
+  Images,
+  id: itemId
 } = props.item;
 
-const isFavorite = ref(false);
-const authStore = useAuthStore();
-const userId = authStore.getUserId();
-
 const getPicUrl = computed(() => {
-  return `../../../src/assets/new_images/${image.original_filename}`;
+  return `../../../src/assets/new_images/${Images[0]}`;
 });
 
-const handleClick = (route) => {
-  if (!route.startsWith('/')) {
-    route = '/' + route;
-  }
+const isFavorite = computed(() => favoritesStore.isFavorite(itemId));
 
+const handleClick = (route) => {
+  if (!route.startsWith("/")) {
+    route = "/" + route;
+  }
   router.push(route);
 };
 
-
-const fetchFavoriteState = async () => {
-
-};
-
-
-const toggleFavorite = async () => {
+const toggleFavorite = () => {
   if (!userId) {
     alert("You need to be logged in to favorite items.");
     return;
   }
 
-  try {
-    if (isFavorite.value) {
-      console.log(response.data.detail);
-    } else {
-      console.log(response.data.detail);
-    }
-
-    isFavorite.value = !isFavorite.value;
-    emit("favorite-toggle", { item: props.item, isFavorite: isFavorite.value });
-  } catch (error) {
-    console.error("Error toggling favorite:", error.response?.data?.detail || error.message);
-
-    if (!isFavorite.value && error.response?.data?.detail === "Favorite already exists.") {
-      isFavorite.value = true;
-    } else {
-      alert("Failed to toggle favorite. Please try again.");
-    }
+  if (isFavorite.value) {
+    favoritesStore.removeFavorite(itemId);
+  } else {
+    favoritesStore.addFavorite(props.item);
   }
-};
 
-onMounted(fetchFavoriteState);
+  emit("favorite-toggle", { item: props.item, isFavorite: isFavorite.value });
+};
 
 </script>
 
@@ -213,11 +178,8 @@ onMounted(fetchFavoriteState);
 }
 
 @media (max-width: 800px) {
-  
   .item-container {
     width: 100%;
   }
-
 }
-
 </style>
