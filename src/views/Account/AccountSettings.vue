@@ -77,7 +77,7 @@
 
 <script setup>
 import { reactive, ref, onMounted } from "vue";
-import axiosInstance from "../../lib/axios";
+// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 
 const authStore = useAuthStore();
@@ -98,7 +98,7 @@ const userId = authStore.getUserId();
 
 const fetchAccountData = async () => {
   try {
-    const response = await axiosInstance.get(`/get_user_by_id/${userId}/`);
+    // const response = await axiosInstance.get(`/get_user_by_id/${userId}/`);
     const user = response.data.user;
 
     Object.assign(account, {

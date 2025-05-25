@@ -24,7 +24,7 @@
 import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
 import UserReviewCard from "../../components/Account/UserReviewCard.vue";
-import axiosInstance from "../../lib/axios";
+// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 
 const userReviews = ref([]);
@@ -34,7 +34,7 @@ const authStore = useAuthStore();
 const fetchUserReviews = async () => {
   try {
     const userId = authStore.getUserId();
-    const response = await axiosInstance.get(`/get_reviews_by_user_id/${userId}`);
+    // const response = await axiosInstance.get(`/get_reviews_by_user_id/${userId}`);
     userReviews.value = response.data.reviews;
   } catch (error) {
     console.error("Error fetching user reviews:", error);

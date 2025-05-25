@@ -1,6 +1,11 @@
 # Crumbs
 Cars Crumbs Website
 
+# VALID TEST LOGIN 
+
+username: Michael 
+password: password
+
 ## Commands to run when you clone
 
 ```

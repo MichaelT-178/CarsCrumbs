@@ -75,7 +75,7 @@ watch(
 
 
 const loadMenuData = () => {
-  menu.value = MenuData.MenuItems;
+  jsonData.value = MenuData.MenuItems;
 };
 
 // const loadMenuData = async () => {

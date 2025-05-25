@@ -8,7 +8,7 @@
     </span>
 
     <img 
-      :src="getPicture(item).value" 
+      :src="getPicture(item)" 
       alt="Cart item picture" 
       class="item-picture"
     />

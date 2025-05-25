@@ -70,7 +70,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { loadStripe } from '@stripe/stripe-js';
-import axiosInstance from '../../lib/axios';
+// import axiosInstance from '../../lib/axios';
 
 const stripe = ref(null);
 const elements = ref(null);
@@ -171,20 +171,20 @@ const handlePayment = async () => {
   }
 
   try {
-    const { data } = await axiosInstance.post('/create-payment-intent/', {
-      amount: 5000,
-      currency: 'usd',
-    });
+    // const { data } = await axiosInstance.post('/create-payment-intent/', {
+    //   amount: 5000,
+    //   currency: 'usd',
+    // });
 
-    const { error, paymentIntent } = await stripe.value.confirmCardPayment(data.clientSecret, {
-      payment_method: {
-        card: cardNumber.value,
-      },
-    });
+    // const { error, paymentIntent } = await stripe.value.confirmCardPayment(data.clientSecret, {
+    //   payment_method: {
+    //     card: cardNumber.value,
+    //   },
+    // });
 
-    if (error) {
-      throw new Error(error.message);
-    }
+    // if (error) {
+    //   throw new Error(error.message);
+    // }
 
     alert(`Payment succeeded! PaymentIntent ID: ${paymentIntent.id}`);
   } catch (error) {

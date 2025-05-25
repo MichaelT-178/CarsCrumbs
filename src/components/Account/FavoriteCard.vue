@@ -52,7 +52,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import axiosInstance from "../../lib/axios";
+// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 import { useRouter } from "vue-router";
 
@@ -115,9 +115,9 @@ const fetchFavoriteState = async () => {
   if (!userId) return;
 
   try {
-    const response = await axiosInstance.get(`/check_favorite/`, {
-      params: { user_id: userId, item_id: props.item.item.id },
-    });
+    // const response = await axiosInstance.get(`/check_favorite/`, {
+    //   params: { user_id: userId, item_id: props.item.item.id },
+    // });
 
     isFavorite.value = response.data.is_favorited;
   } catch (error) {
