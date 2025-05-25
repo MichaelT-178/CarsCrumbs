@@ -6,7 +6,7 @@
             "Description": "Enjoy our soft, chewy, fresh, homemade cookies straight out of the oven!",
             "Color": "purple",
             "Link": "Order#cookie",
-            "Picture": "BrownButterCookies/be445e791fd449ed97f0d21ff178405e.jpg"
+            "Picture": "BrownButterCookies/BrownButterCookies1.jpg"
         },
         {   
             "id": 2,
@@ -14,7 +14,7 @@
             "Description": "Try our warm, freshly baked goods, crafted with love and the finest ingredients!",
             "Color": "red",
             "Link": "order#baked good",
-            "Picture": "BlueberryZucchini/03b1396584ff4ad1b475fc1b10962812.jpg"
+            "Picture": "BlueberryZucchini/BlueberryZucchini1.jpg"
         },
         {   
             "id": 3,
@@ -22,7 +22,7 @@
             "Description": "Savor our assortment of soft, fluffy, freshly baked bread and bagels.",
             "Color": "green",
             "Link": "Order#bread",
-            "Picture": "ItalianBread/d91db6dfb18a4f71bf5c1c9c628094d7.jpg"
+            "Picture": "ItalianBread/ItalianBread2.jpg"
         },
         {   
             "id": 4,
@@ -30,7 +30,7 @@
             "Description": "Indulge in our rich and moist cake baked to perfection and perfect for any celebration!",
             "Color": "teal",
             "Link": "Order#cake",
-            "Picture": "VanillaCake/d7cf7c813c9245dc9f0272b0b4fd4232.jpg"
+            "Picture": "VanillaCake/VanillaCake1.jpg"
         }
     ]
 }
