@@ -118,7 +118,6 @@ import ReviewCard from "../components/ReviewCard.vue";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useAuthStore } from "../stores/auth.js";
-// import axiosInstance from "../lib/axios";
 import MenuData from "../../src/assets/new_data/menu.json";
 import ReviewData from "../../src/assets/new_data/reviews.json";
 

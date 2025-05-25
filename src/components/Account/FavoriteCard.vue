@@ -52,7 +52,6 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 import { useRouter } from "vue-router";
 
@@ -123,19 +122,8 @@ const toggleFavorite = async () => {
 
   try {
     if (isFavorite.value) {
-      // Remove from favorites
-      const response = await axiosInstance.delete("/delete_favorite/", {
-        data: { user_id: userId, item_id: props.item.id },
-      });
-
       console.log(response.data.detail);
     } else {
-      // Add to favorites
-      const response = await axiosInstance.post("/add_favorite/", {
-        user_id: userId,
-        item_id: props.item.id,
-      });
-
       console.log(response.data.detail);
     }
 

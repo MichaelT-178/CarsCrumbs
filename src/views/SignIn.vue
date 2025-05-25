@@ -59,7 +59,6 @@ import CircleLogo from "../assets/logos/CircleLogo.png";
 import { onMounted, onUnmounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from 'vue-router';
-import axiosInstance from "../lib/axios";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -100,7 +99,6 @@ const signIn = async () => {
     // }
 
     try {
-      //const response = await axiosInstance.post("/login_user/", loginData);
 
       const response = {
         message: "Login successful!",

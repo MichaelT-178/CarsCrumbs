@@ -34,7 +34,6 @@
 
 <script setup>
 import { computed, ref, onMounted } from "vue";
-// import axiosInstance from "../lib/axios";
 import StarRating from "./StarRating.vue";
 import { useAuthStore } from "../stores/auth";
 import { useRouter } from "vue-router";

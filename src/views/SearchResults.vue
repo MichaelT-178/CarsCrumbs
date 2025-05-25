@@ -39,7 +39,6 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Header from "../components/Header.vue";
 import ShrugGuy from "../assets/other/Shrug.png";
-// import axiosInstance from "../lib/axios";
 import MenuData from '../../src/assets/new_data/menu.json';
 
 const jsonData = ref([]);
@@ -77,15 +76,6 @@ watch(
 const loadMenuData = () => {
   jsonData.value = MenuData.MenuItems;
 };
-
-// const loadMenuData = async () => {
-//   try {
-//     const menuData = await axiosInstance.get('get_menu/');
-//     jsonData.value = menuData.data.MenuItems;
-//   } catch (error) {
-//     console.error("Error loading menu data:", error);
-//   }
-// };
 
 const getItemImage = (imageName) => `../../src/assets/new_images/${imageName}`;
 
