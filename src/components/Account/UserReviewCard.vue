@@ -47,7 +47,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import StarRating from "../../components/StarRating.vue";
-import axiosInstance from "../../lib/axios";
+// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 
 const authStore = useAuthStore();
@@ -77,7 +77,7 @@ const deleteReview = async () => {
   };
 
   try {
-    await axiosInstance.delete('delete_review/', { data: reviewData });
+    // await axiosInstance.delete('delete_review/', { data: reviewData });
 
     alert("REVIEW DELETED SUCCESSFULLY!!!!!");
     emits('reviewDeleted', reviewId);

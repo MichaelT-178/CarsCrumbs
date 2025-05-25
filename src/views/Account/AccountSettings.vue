@@ -122,14 +122,14 @@ const editMode = () => {
 
 const saveChanges = async () => {
   try {
-    const response = await axiosInstance.put("/modify_user/", {
-      id: userId,
-      firstName: editAccount.firstName,
-      lastName: editAccount.lastName,
-      username: editAccount.username,
-      email: editAccount.email,
-      phoneNumber: editAccount.phone_number,
-    });
+    // const response = await axiosInstance.put("/modify_user/", {
+    //   id: userId,
+    //   firstName: editAccount.firstName,
+    //   lastName: editAccount.lastName,
+    //   username: editAccount.username,
+    //   email: editAccount.email,
+    //   phoneNumber: editAccount.phone_number,
+    // });
     Object.assign(account, response.data.user);
     isEditing.value = false;
   } catch (error) {

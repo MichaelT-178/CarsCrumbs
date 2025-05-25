@@ -117,8 +117,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import PurpleLogo from "../assets/logos/purple-logo.png";
 import { useRouter } from 'vue-router';
 import { useCartStore } from "../stores/cart.js";
-import axiosInstance from '../lib/axios.js';
+// import axiosInstance from '../lib/axios.js';
 import { useAuthStore } from '../stores/auth.js';
+import MenuData from '../../src/assets/new_data/menu.json';
 
 const router = useRouter();
 const cart = useCartStore();
@@ -248,14 +249,18 @@ const handleKeydown = (event) => {
   }
 };
 
-const loadMenuData = async () => {
-  try {
-    const response = await axiosInstance.get('/get_menu/');
-    menu.value = response.data.MenuItems;
-  } catch (error) {
-    console.error("Error loading menu data:", error);
-  }
+const loadMenuData = () => {
+  menu.value = MenuData.MenuItems;
 };
+
+// const loadMenuData = async () => {
+//   try {
+//     const response = await axiosInstance.get('/get_menu/');
+//     menu.value = response.data.MenuItems;
+//   } catch (error) {
+//     console.error("Error loading menu data:", error);
+//   }
+// };
 
 onMounted(() => {
   loadMenuData();

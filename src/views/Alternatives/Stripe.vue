@@ -20,7 +20,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
-import axiosInstance from "../lib/axios";
+// import axiosInstance from "../lib/axios";
 import { useRouter } from 'vue-router';
 
 const amount = 49.99;
@@ -44,18 +44,18 @@ onMounted(async () => {
   stripe = await stripePromise;
 
   try {
-    const response = await axiosInstance.post("/create-payment-intent/", {
-      amount: convertToSubcurrency(amount),
-    });
+    // const response = await axiosInstance.post("/create-payment-intent/", {
+    //   amount: convertToSubcurrency(amount),
+    // });
 
-    clientSecret.value = response.data.clientSecret;
+    // clientSecret.value = response.data.clientSecret;
 
-    const options = {
-      clientSecret: clientSecret.value,
-      appearance: {
-        theme: "stripe",
-      },
-    };
+    // const options = {
+    //   clientSecret: clientSecret.value,
+    //   appearance: {
+    //     theme: "stripe",
+    //   },
+    // };
 
     elements = stripe.elements(options);
 

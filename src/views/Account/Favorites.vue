@@ -19,7 +19,7 @@
 import { ref, onMounted } from "vue";
 import NoItems from "./Empty.vue";
 import FavoriteCard from "../../components/Account/FavoriteCard.vue";
-import axiosInstance from "../../lib/axios";
+// import axiosInstance from "../../lib/axios";
 import { useAuthStore } from "../../stores/auth";
 
 const authStore = useAuthStore();
@@ -28,7 +28,7 @@ const favoriteItems = ref([]);
 
 const fetchFavorites = async () => {
   try {
-    const response = await axiosInstance.get(`/get_favorites/${userId}/`);
+    // const response = await axiosInstance.get(`/get_favorites/${userId}/`);
     favoriteItems.value = response.data;
   } catch (error) {
     console.error("Error fetching favorite items:", error);

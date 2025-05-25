@@ -197,7 +197,7 @@ const updateMenuItem = async () => {
     menuItem.value = response.data;
 
     if (menuItem.value && menuItem.value.Images.length) {
-      pic.value = `https://crumb-pics.s3.us-east-1.amazonaws.com/${menuItem.value.Images[0]}`;
+      pic.value = `../../src/assets/new_images/${menuItem.value.Images[0]}`;
 
       findRelatedItems(menuItem.value);
 

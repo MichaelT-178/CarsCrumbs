@@ -20,7 +20,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { loadStripe } from "@stripe/stripe-js";
-import axiosInstance from "../lib/axios";
+// import axiosInstance from "../lib/axios";
 import { useRouter } from 'vue-router';
 import { convertToSubcurrency } from "../utils/helper";
 
@@ -41,25 +41,26 @@ onMounted(async () => {
   stripe = await stripePromise;
 
   try {
-    const response = await axiosInstance.post("/create-payment-intent/", {
-      amount: convertToSubcurrency(amount),
-    });
+    console.log("Cool");
+    // const response = await axiosInstance.post("/create-payment-intent/", {
+    //   amount: convertToSubcurrency(amount),
+    // });
 
-    clientSecret.value = response.data.clientSecret;
+    // clientSecret.value = response.data.clientSecret;
 
-    const options = {
-      clientSecret: clientSecret.value,
-      appearance: {
-        theme: "stripe",
-      },
-    };
+    // const options = {
+    //   clientSecret: clientSecret.value,
+    //   appearance: {
+    //     theme: "stripe",
+    //   },
+    // };
 
-    elements = stripe.elements(options);
+    // elements = stripe.elements(options);
 
-    const paymentElement = elements.create("payment");
-    paymentElement.mount("#payment-element");
+    // const paymentElement = elements.create("payment");
+    // paymentElement.mount("#payment-element");
 
-    isFormValid.value = true;
+    // isFormValid.value = true;
   } catch (error) {
     message.value = "Failed to load payment details.";
     console.error(error);

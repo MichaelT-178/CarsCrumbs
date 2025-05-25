@@ -55,7 +55,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import YellowSquareLogo from "../assets/logos/yellow-square-logo.png";
 import { useAuthStore } from "../stores/auth";
 import { useRouter, useRoute } from "vue-router";
-import axiosInstance from "../lib/axios";
+// import axiosInstance from "../lib/axios";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -169,7 +169,7 @@ const createAccount = async () => {
   }
 
   try {
-    const response = await axiosInstance.post("create_user/", newUser);
+    // const response = await axiosInstance.post("create_user/", newUser);
     console.log("User creation successful:", response.data);
     alert("Account Successfully created!");
     authStore.login(response.data);
