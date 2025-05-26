@@ -33,7 +33,7 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import MenuData from '../../../assets/new_data/menu.json';
+import MenuData from "../../../src/assets/new_data/menu.json";
 
 const props = defineProps({
   query: {
