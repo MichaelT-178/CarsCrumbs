@@ -78,7 +78,7 @@ const loadMenuData = () => {
 };
 
 const getItemImage = (imageName) => {
-  return new URL(`../../assets/new_images/${imageName}`, import.meta.url).href;
+  return new URL(`../assets/new_images/${imageName}`, import.meta.url).href;
 };
 
 const navigateToRoute = (route) => {

@@ -67,7 +67,7 @@ const filteredItems = computed(() => {
       let imageUrl = '';
 
       try {
-        imageUrl = new URL(`../../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+        imageUrl = new URL(`../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
       } catch (e) {
         console.warn('Image not found:', item.Images[0]);
         imageUrl = '';
@@ -106,12 +106,13 @@ onMounted(() => {
   top: calc(100% + 5px);
   left: 0;
   width: 100%;
-  max-width: 485px;
+  width: 485px;
   background-color: #F2F2F2;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   z-index: 1003;
   padding: 10px 0;
+  /* border: 1px solid #F2F2F2; */
   border-radius: 4px;
 }
 
@@ -120,6 +121,7 @@ onMounted(() => {
   font-family: "Roboto Slab", cursive;
   margin-left: 15px;
   margin-right: 15px;
+  /* font-weight: 600; */
   padding-bottom: 0px;
   border-bottom: 1.5px solid #c7c7c7;
 }
@@ -156,6 +158,7 @@ onMounted(() => {
 .item-info {
   display: flex;
   flex-direction: column;
+  right: 100px;
 }
 
 .item-name {

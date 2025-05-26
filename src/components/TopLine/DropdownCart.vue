@@ -90,7 +90,7 @@ const goToCheckoutView = () => {
 
 const getPicture = (item) => {
   return computed(() => {
-    return new URL(`../../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+    return new URL(`../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
   });
 };
 

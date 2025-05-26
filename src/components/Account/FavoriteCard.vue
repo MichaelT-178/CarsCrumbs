@@ -80,7 +80,7 @@ const {
 } = props.item;
 
 const getPicUrl = computed(() =>
-  new URL(`../../../assets/new_images/${Images[0]}`, import.meta.url).href
+  new URL(`../../assets/new_images/${Images[0]}`, import.meta.url).href
 );
 
 const isFavorite = computed(() => favoritesStore.isFavorite(itemId));

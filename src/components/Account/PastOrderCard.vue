@@ -26,7 +26,7 @@ defineProps({
 });
 
 const getPicUrl = (imageName) => {
-  return new URL(`../../../assets/new_images/${imageName}`, import.meta.url).href;
+  return new URL(`../../assets/new_images/${imageName}`, import.meta.url).href;
 };
 
 </script>
