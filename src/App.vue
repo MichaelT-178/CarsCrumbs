@@ -54,8 +54,8 @@ const mainClass = computed(() => {
 }
 
 html, body {
-  background-color: #F2F2F2;
-  /* background-color: #00b3ad; */
+  /* background-color: #F2F2F2; */
+  background-color: #00b3ad;
 }
 
 .alternative-purple-header {
