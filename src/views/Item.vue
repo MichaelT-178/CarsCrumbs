@@ -167,15 +167,22 @@ const updateScreenSize = () => {
   isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
 };
 
+
 const updateMenuItem = () => {
   const matchedItem = jsonData.value.find(item => item.Name === props.ItemName);
 
   if (matchedItem) {
     menuItem.value = matchedItem;
-    if (matchedItem.Images.length > 0) {
-      pic.value = `../../src/assets/new_images/${matchedItem.Images[0]}`;
+
+    try {
+      pic.value = new URL(`../assets/new_images/${matchedItem.Images[0]}`, import.meta.url).href;
+    } catch (e) {
+      console.warn(`Failed to load image: ${matchedItem.Images[0]}`);
+      pic.value = '';
     }
+
     findRelatedItems(matchedItem);
+
     if (matchedItem.Options.length === 1) {
       selectedOption.value = matchedItem.Options[0];
     }
@@ -183,6 +190,7 @@ const updateMenuItem = () => {
     console.error(`No menu item found matching name: ${props.ItemName}`);
   }
 };
+
 
 const findRelatedItems = (currentItem) => {
   const taggedItems = jsonData.value.filter(

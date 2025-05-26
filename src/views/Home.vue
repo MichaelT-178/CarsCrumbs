@@ -21,7 +21,7 @@
       >
         <div class="card-content">
           <img
-            :src="`../../src/assets/new_images/${menuItem.Picture}`"
+            :src="menuItem.imageUrl"
             :alt="menuItem.Name"
             class="product-image"
           />
@@ -84,13 +84,20 @@ import BakingSupplies from "../assets/home/BakingSupplies.jpg";
 import CinnamonRoll from "../assets/home/CinnamonRoll.jpg";
 
 const jsonData = ref(MenuData);
-const menu = jsonData.value["Items"];
+
+const menu = jsonData.value["Items"].map((item) => {
+  return {
+    ...item,
+    imageUrl: new URL(`../assets/new_images/${item.Picture}`, import.meta.url).href,
+  };
+});
 
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
-})
+});
 
 </script>
+
 
 
 <style scoped>

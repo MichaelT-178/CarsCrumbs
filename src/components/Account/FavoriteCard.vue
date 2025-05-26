@@ -79,9 +79,9 @@ const {
   id: itemId
 } = props.item;
 
-const getPicUrl = computed(() => {
-  return `../../../src/assets/new_images/${Images[0]}`;
-});
+const getPicUrl = computed(() =>
+  new URL(`../../../assets/new_images/${Images[0]}`, import.meta.url).href
+);
 
 const isFavorite = computed(() => favoritesStore.isFavorite(itemId));
 

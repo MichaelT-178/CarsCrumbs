@@ -34,7 +34,12 @@ const props = defineProps({
 });
 
 const getPicture = (item) => {
-  return `../../src/assets/new_images/${item.Images[0]}`
+  try {
+    return new URL(`../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+  } catch (e) {
+    console.warn('Image not found:', item.Images[0]);
+    return '';
+  }
 };
 
 const deleteItem = (itemId) => {

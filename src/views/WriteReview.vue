@@ -159,7 +159,13 @@ const loadReviewItem = () => {
 
   if (item) {
     selectedItem.value = item;
-    imageUrl.value = `/src/assets/new_images/${item.Images[0]}`;
+
+    try {
+      imageUrl.value = new URL(`../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+    } catch (e) {
+      console.error("Failed to load image:", item.Images[0]);
+      imageUrl.value = "";
+    }
   } else {
     console.error(`Item with name ${props.itemName} not found in MenuData.`);
   }

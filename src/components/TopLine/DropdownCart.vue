@@ -89,7 +89,9 @@ const goToCheckoutView = () => {
 };
 
 const getPicture = (item) => {
-  return computed(() => `../../../src/assets/new_images/${item.Images[0]}`);
+  return computed(() => {
+    return new URL(`../../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+  });
 };
 
 const deleteItem = (itemId) => {

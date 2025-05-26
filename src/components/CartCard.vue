@@ -62,7 +62,17 @@ const props = defineProps({
   },
 });
 
-const pic = computed(() => `../../src/assets/new_images/${props.item.Images[0]}`);
+const pic = computed(() => {
+  const imageName = props.item.Images[0];
+  
+  try {
+    return new URL(`../assets/new_images/${imageName}`, import.meta.url).href;
+  } catch (e) {
+    console.warn("Image not found:", imageName);
+    return '';
+  }
+});
+
 
 const hovered = ref(null);
 const hoverDelete = ref(false);

@@ -63,9 +63,14 @@ const props = defineProps({
 const emit = defineEmits(["open-side-view"]);
 
 const pic = computed(() => {
-  return props.item.Images?.[0]
-    ? `../../src/assets/new_images/${props.item.Images[0]}`
-    : "";
+  try {
+    return props.item.Images?.[0]
+      ? new URL(`../assets/new_images/${props.item.Images[0]}`, import.meta.url).href
+      : "";
+  } catch (e) {
+    console.warn("Image not found:", props.item.Images?.[0]);
+    return "";
+  }
 });
 
 const isHearted = computed(() => favoritesStore.isFavorite(props.item.id));

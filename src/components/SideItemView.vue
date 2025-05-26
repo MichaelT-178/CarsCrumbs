@@ -87,9 +87,16 @@ const handleKeydown = (event) => {
 const updateMenuItem = () => {
   if (props.item) {
     menuItem.value = props.item;
-    pic.value = `../../src/assets/new_images/${props.item.Images[0]}`;
+
+    try {
+      pic.value = new URL(`../assets/new_images/${props.item.Images[0]}`, import.meta.url).href
+    } catch (e) {
+      console.warn("Image failed to load:", props.item.Images?.[0]);
+      pic.value = new URL("../assets/other/placeholder.png", import.meta.url).href;
+    }
   }
 };
+
 
 const addItem = () => {
   if (selectedOption.value) {

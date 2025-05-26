@@ -51,7 +51,11 @@ const limitedImages = computed(() => {
   return allImages.slice(0, 4);
 });
 
-const getPicUrl = (imageName) => `../../../src/assets/new_images/${imageName}`;
+const getPicUrl = (imageName) => {
+  return new URL(`../../../assets/new_images/${imageName}`, import.meta.url).href;
+}
+
+
 
 </script>
 

@@ -77,7 +77,9 @@ const loadMenuData = () => {
   jsonData.value = MenuData.MenuItems;
 };
 
-const getItemImage = (imageName) => `../../src/assets/new_images/${imageName}`;
+const getItemImage = (imageName) => {
+  return new URL(`../../assets/new_images/${imageName}`, import.meta.url).href;
+};
 
 const navigateToRoute = (route) => {
   if (!route.startsWith('/')) {
