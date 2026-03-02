@@ -1,10 +1,7 @@
 # Crumbs
-Cars Crumbs Website
+## [Link to Website](https://carscrumbs.com/)
 
-# VALID TEST LOGIN 
-
-username: Michael 
-password: password
+This is the repo for the Cars Crumbs website. Written in Vue + vite. This website doesn't have a backend.
 
 ## Commands to run when you clone
 
