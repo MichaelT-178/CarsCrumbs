@@ -85,7 +85,7 @@
     <router-link to="/">
       <img :src="logo" alt="Logo" class="logo" />
     </router-link>
-    
+
     <div class="right-section">
       <div class="tabs">
         <ul>
@@ -235,7 +235,8 @@ html, body {
 .top-line {
   width: 100%;
   height: 40px;
-  background-color: #3E0054;
+  /* background-color: #3E0054; */
+  background-color: red;
   position: fixed;
   top: 0;
   z-index: 1002;
