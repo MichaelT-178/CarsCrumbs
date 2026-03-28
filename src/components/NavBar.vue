@@ -82,7 +82,10 @@
   ></div>
 
   <nav class="navbar">
-    <img :src="logo" alt="Logo" class="logo" />
+    <router-link to="/">
+      <img :src="logo" alt="Logo" class="logo" />
+    </router-link>
+    
     <div class="right-section">
       <div class="tabs">
         <ul>
