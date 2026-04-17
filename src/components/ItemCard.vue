@@ -8,20 +8,23 @@
     </span>
 
     <img 
-      :src="getPicture(item)" 
+      v-if="item.imageUrl"
+      :src="item.imageUrl" 
       alt="Cart item picture" 
       class="item-picture"
     />
+
     <div class="item-details">
       <p class="item-name">{{ item.DisplayName }}</p>
-      <p class="item-quantity">{{ item.Quantity }} • ${{ item.Cost }}.00</p>
+      <p class="item-quantity">
+        {{ item.Quantity }} • ${{ (parseFloat(item.Cost) || 0).toFixed(2) }}
+      </p>
     </div>
   </div>
 </template>
 
 
 <script setup>
-import { computed } from 'vue';
 import { useCartStore } from '../stores/cart';
 
 const cart = useCartStore();
@@ -33,21 +36,11 @@ const props = defineProps({
   },
 });
 
-const getPicture = (item) => {
-  try {
-    return new URL(`../assets/new_images/${item.Images[0]}`, import.meta.url).href;
-  } catch (e) {
-    console.warn('Image not found:', item.Images[0]);
-    return '';
-  }
-};
-
 const deleteItem = (itemId) => {
   cart.deleteItem(itemId);
 };
 
 </script>
-
 
 
 <style scoped>

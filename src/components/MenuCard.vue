@@ -1,22 +1,34 @@
 <template>
   <div class="menu-item">
-    <img :src="pic" :alt="item.DisplayName" class="menu-image" />
+    <img
+      v-if="item.imageUrl"
+      :src="item.imageUrl"
+      :alt="item.DisplayName"
+      class="menu-image"
+    />
+
     <div class="menu-info">
-      <h2 class="menu-name-link" @click="goToItem">{{ item.DisplayName }}</h2>
+      <h2 class="menu-name-link" @click="goToItem">
+        {{ item.DisplayName }}
+      </h2>
 
       <StarRating :rating="item.Rating" />
 
       <p class="menu-price">{{ item.DisplayPrice }}</p>
 
       <div class="button-heart">
-        <button class="order-button" @click="openSideView">Order Now</button>
+        <button class="order-button" @click="openSideView">
+          Order Now
+        </button>
+
         <div v-if="isHearted">
           <img
             src="/heart-filled.svg"
-            class="material-symbols-outlined favorite-icon"
+            class="favorite-icon"
             @click="toggleHeart"
           />
         </div>
+
         <div v-else>
           <span
             class="material-symbols-outlined favorite-icon"
@@ -42,40 +54,24 @@ import { useFavoritesStore } from "../stores/favorites";
 const router = useRouter();
 const authStore = useAuthStore();
 const favoritesStore = useFavoritesStore();
-const userId = authStore.getUserId();
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
-    default: () => ({
-      id: 0,
-      Name: "",
-      Emoji: "",
-      Price: 0.0,
-      Images: [],
-      Route: "",
-      Tags: [],
-    }),
   },
 });
 
 const emit = defineEmits(["open-side-view"]);
 
-const pic = computed(() => {
-  try {
-    return props.item.Images?.[0]
-      ? new URL(`../assets/new_images/${props.item.Images[0]}`, import.meta.url).href
-      : "";
-  } catch (e) {
-    console.warn("Image not found:", props.item.Images?.[0]);
-    return "";
-  }
-});
 
-const isHearted = computed(() => favoritesStore.isFavorite(props.item.id));
+const isHearted = computed(() =>
+  favoritesStore.isFavorite(props.item.id)
+);
 
 const toggleHeart = () => {
+  const userId = authStore.getUserId?.();
+
   if (!userId) {
     alert("You need to be logged in to favorite items.");
     return;
@@ -88,9 +84,14 @@ const toggleHeart = () => {
   }
 };
 
+
 const goToItem = () => {
-  let path = props.item.Route;
-  if (!path.startsWith("/")) path = "/" + path;
+  let path = props.item.Route || "";
+
+  if (!path.startsWith("/")) {
+    path = "/" + path;
+  }
+
   router.push(path);
 };
 
@@ -114,8 +115,8 @@ const openSideView = () => {
 
 .menu-image {
   width: 250px;
-  object-fit: cover;
   height: 250px;
+  object-fit: cover;
   border-radius: 8px;
 }
 
@@ -171,6 +172,4 @@ const openSideView = () => {
 .favorite-icon.hearted {
   color: red;
 }
-
 </style>
-

@@ -2,7 +2,11 @@
   <WordpressHeader v-if="isSmallScreen" />
 
   <div v-if="menuItem" class="menu-item-container">
-    <img :src="pic" class="item-pic" />
+    <img
+      v-if="menuItem?.imageUrl"
+      :src="menuItem.imageUrl"
+      class="item-pic"
+    />
 
     <div class="item-info">
       <p class="title">{{ menuItem.DisplayName }}</p>
@@ -108,6 +112,7 @@
   </div>
 </template>
 
+
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRouter } from "vue-router";
@@ -118,8 +123,8 @@ import ReviewCard from "../components/ReviewCard.vue";
 import ReviewPanel from "../components/ReviewPanel/ReviewPanel.vue";
 import { useCartStore } from "../stores/cart.js";
 import { useAuthStore } from "../stores/auth.js";
-import MenuData from "../../src/assets/new_data/menu.json";
-import ReviewData from "../../src/assets/new_data/reviews.json";
+import MenuData from "../assets/new_data/menu.json";
+import ReviewData from "../assets/new_data/reviews.json";
 
 const cart = useCartStore();
 const authStore = useAuthStore();
@@ -134,7 +139,6 @@ const props = defineProps({
 
 const jsonData = ref([]);
 const menuItem = ref(null);
-const pic = ref("");
 const selectedOption = ref(null);
 const relatedItems = ref([]);
 const isSmallScreen = ref(false);
@@ -142,13 +146,34 @@ const itemReviews = ref([]);
 const itemStats = ref(null);
 const reviewsSection = ref(null);
 
+const imageModules = import.meta.glob('../assets/new_images/**/*', {
+  eager: true,
+  import: 'default',
+});
+
+
+const getImageUrl = (item) => {
+  const firstImage = item.Images?.[0];
+  const path = firstImage ? `../assets/new_images/${firstImage}` : null;
+  return path ? imageModules[path] : '';
+};
+
+
 const scrollToReviews = () => {
   if (reviewsSection.value) {
     reviewsSection.value.scrollIntoView({ behavior: "smooth" });
   }
 };
 
-// UPDATED: Use static ReviewData
+const updateScreenSize = () => {
+  isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
+};
+
+
+const loadMenuData = () => {
+  jsonData.value = MenuData.MenuItems || [];
+};
+
 const loadAllReviews = () => {
   const itemReviewBlock = ReviewData.reviews.find(
     review => review.item_name === props.ItemName
@@ -163,55 +188,90 @@ const loadAllReviews = () => {
   }
 };
 
-const updateScreenSize = () => {
-  isSmallScreen.value = window.matchMedia("(max-width: 650px)").matches;
-};
-
 
 const updateMenuItem = () => {
-  const matchedItem = jsonData.value.find(item => item.Name === props.ItemName);
+  const matchedItem = jsonData.value.find(
+    item => item.Name === props.ItemName
+  );
 
-  if (matchedItem) {
-    menuItem.value = matchedItem;
-
-    try {
-      pic.value = new URL(`../assets/new_images/${matchedItem.Images[0]}`, import.meta.url).href;
-    } catch (e) {
-      console.warn(`Failed to load image: ${matchedItem.Images[0]}`);
-      pic.value = '';
-    }
-
-    findRelatedItems(matchedItem);
-
-    if (matchedItem.Options.length === 1) {
-      selectedOption.value = matchedItem.Options[0];
-    }
-  } else {
+  if (!matchedItem) {
     console.error(`No menu item found matching name: ${props.ItemName}`);
+    return;
+  }
+
+  menuItem.value = {
+    ...matchedItem,
+    imageUrl: getImageUrl(matchedItem)
+  };
+
+  findRelatedItems(matchedItem);
+
+  if (matchedItem.Options.length === 1) {
+    selectedOption.value = matchedItem.Options[0];
   }
 };
 
 
 const findRelatedItems = (currentItem) => {
   const taggedItems = jsonData.value.filter(
-    item => item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name
+    item =>
+      item.Tags.some(tag => currentItem.Tags.includes(tag)) &&
+      item.Name !== currentItem.Name
   );
+
   const otherItems = jsonData.value.filter(
-    item => !item.Tags.some(tag => currentItem.Tags.includes(tag)) && item.Name !== currentItem.Name
+    item =>
+      !item.Tags.some(tag => currentItem.Tags.includes(tag)) &&
+      item.Name !== currentItem.Name
   );
-  relatedItems.value = [...taggedItems, ...otherItems];
+
+  relatedItems.value = [...taggedItems, ...otherItems].map(item => ({
+    ...item,
+    imageUrl: getImageUrl(item)
+  }));
 };
 
+
 const addItem = () => {
-  if (selectedOption.value) {
-    cart.addItem({
-      ...menuItem.value,
-      Cost: selectedOption.value.price,
-      Quantity: selectedOption.value.quantity
+  if (!selectedOption.value) return;
+
+  cart.addItem({
+    ...menuItem.value,
+    imageUrl: menuItem.value.imageUrl,
+    Cost: selectedOption.value.price,
+    Quantity: selectedOption.value.quantity
+  });
+
+  alert("Item Successfully Added to Cart!");
+};
+
+
+const goToItemPage = (item) => {
+  let path = item.Route;
+  if (!path.startsWith("/")) path = "/" + path;
+
+  router.push(path).then(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+};
+
+const goToWriteReview = () => {
+  if (authStore.getIsLoggedIn()) {
+    router.push({
+      path: "/write-review",
+      query: { itemName: props.ItemName }
     });
-    alert("Item Successfully Added to Cart!");
+  } else {
+    router.push({
+      path: "/sign-in",
+      query: {
+        successRoute: "write-review",
+        successRouteProp: JSON.stringify({ itemName: props.ItemName })
+      }
+    });
   }
 };
+
 
 const scrollLeft = () => {
   const container = document.querySelector(".related-items-grid");
@@ -225,32 +285,6 @@ const scrollRight = () => {
   container.scrollBy({ left: cardWidth, behavior: "smooth" });
 };
 
-const goToItemPage = (item) => {
-  let path = item.Route;
-  if (!path.startsWith("/")) path = "/" + path;
-  router.push(path).then(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-};
-
-const goToWriteReview = () => {
-  if (authStore.getIsLoggedIn()) {
-    router.push({ path: "/write-review", query: { itemName: props.ItemName } });
-  } else {
-    router.push({
-      path: "/sign-in",
-      query: {
-        successRoute: "write-review",
-        successRouteProp: JSON.stringify({ itemName: props.ItemName })
-      }
-    });
-  }
-};
-
-const loadMenuData = () => {
-  jsonData.value = MenuData.MenuItems || [];
-};
-
 watch(
   () => props.ItemName,
   async (newItemName, oldItemName) => {
@@ -258,10 +292,10 @@ watch(
       window.scrollTo({ top: 0, behavior: "smooth" });
       menuItem.value = null;
       itemReviews.value = [];
-      pic.value = "";
       selectedOption.value = null;
-      await updateMenuItem();
-      await loadAllReviews();
+
+      updateMenuItem();
+      loadAllReviews();
     }
   }
 );
@@ -278,9 +312,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", updateScreenSize);
 });
+
 </script>
-
-
 
 
 <style scoped>

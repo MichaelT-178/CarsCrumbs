@@ -65,7 +65,8 @@ import { ref, computed, onMounted, watch } from 'vue';
 import MenuCard from '../components/MenuCard.vue';
 import SideView from '../components/SideItemView.vue';
 import { useAuthStore } from '../stores/auth';
-import MenuData from '../../src/assets/new_data/menu.json';
+import MenuData from '../assets/new_data/menu.json';
+
 
 const menu = ref([]);
 const tagsData = ref([]);
@@ -73,8 +74,16 @@ const selectedTag = ref('No Filter');
 const searchQuery = ref('');
 const showSideView = ref(false);
 const selectedItem = ref(null);
+const favoriteIds = ref([]);
 
 const authStore = useAuthStore();
+
+
+const imageModules = import.meta.glob('../assets/new_images/**/*', {
+  eager: true,
+  import: 'default',
+});
+
 
 const allEmojis = computed(() => tagsData.value.map(tag => tag.emoji));
 
@@ -83,26 +92,31 @@ const filteredItems = computed(() => {
 
   if (selectedTag.value !== 'No Filter') {
     items = items.filter(item =>
-      item.Tags.some(tag => tag.includes(selectedTag.value))
+      item.Tags?.some(tag => tag.includes(selectedTag.value))
     );
   }
 
   if (searchQuery.value.trim()) {
     items = items.filter(item =>
-      item.DisplayName.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
+      item.DisplayName?.toLowerCase().includes(searchQuery.value.toLowerCase().trim())
     );
   }
 
   return items;
 });
 
-const favoriteIds = ref([]);
 
 const loadFavoriteIds = async (userId) => {
   try {
-    // Assuming this still uses your backend
     const response = await fetch(`/get_favorite_ids/${userId}`);
-    const data = await response.json();
+    const text = await response.text();
+
+    if (text.startsWith('<!doctype') || text.startsWith('<html')) {
+      console.warn('No backend detected, skipping favorites');
+      return;
+    }
+
+    const data = JSON.parse(text);
     favoriteIds.value = data.favorite_item_ids || [];
   } catch (error) {
     console.error('Error fetching favorite IDs:', error);
@@ -135,16 +149,46 @@ const capitalizeFirstLetter = (string) => {
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
 
-  menu.value = MenuData.MenuItems || [];
+  const rawMenu = MenuData.MenuItems || [];
+
+  menu.value = rawMenu.map((item) => {
+    const firstImage = item.Images?.[0];
+
+    if (!firstImage) {
+      console.warn("No images for item:", item);
+      return {
+        ...item,
+        imageUrl: '',
+      };
+    }
+
+    const imagePath = `../assets/new_images/${firstImage}`;
+    const resolvedImage = imageModules[imagePath];
+
+    if (!resolvedImage) {
+      console.warn("Missing image file:", imagePath);
+    }
+
+    return {
+      ...item,
+      imageUrl: resolvedImage || '',
+    };
+  });
+
   tagsData.value = MenuData.Tags || [];
-  loadFavoriteIds(authStore.getUserId());
+
+  const userId = authStore.getUserId?.();
+  if (userId) {
+    loadFavoriteIds(userId);
+  }
 
   const hash = window.location.hash.replace('#', '');
-  
+
   if (hash) {
     selectedTag.value = capitalizeFirstLetter(hash);
   }
 });
+
 
 watch(selectedTag, (newTag) => {
   const hash = newTag === 'No Filter' ? '' : `#${newTag.toLowerCase()}`;

@@ -48,6 +48,14 @@ const searchQuery = ref(route.query.search_query || "");
 
 const resultText = computed(() => `Search Results for "${searchQuery.value || ""}"`);
 
+const imageModules = import.meta.glob(
+  '../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
+);
+
 const filteredItems = computed(() => {
   if (!searchQuery.value) {
     return [];
@@ -78,7 +86,8 @@ const loadMenuData = () => {
 };
 
 const getItemImage = (imageName) => {
-  return new URL(`../assets/new_images/${imageName}`, import.meta.url).href;
+  const fullPath = `../assets/new_images/${imageName}`;
+  return imageModules[fullPath] || '';
 };
 
 const navigateToRoute = (route) => {

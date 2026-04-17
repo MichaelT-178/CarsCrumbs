@@ -1,6 +1,11 @@
 <template>
   <div class="menu-card">
-    <img :src="pic" :alt="item.DisplayName" class="menu-image" />
+    <img
+      v-if="item.imageUrl"
+      :src="item.imageUrl"
+      :alt="item.DisplayName"
+      class="menu-image"
+    />
     <h2 class="menu-name">{{ item.DisplayName }}</h2>
     <div class="menu-tags">
       <span
@@ -23,7 +28,7 @@
 
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   item: {
@@ -46,19 +51,6 @@ const props = defineProps({
 
 const emit = defineEmits(["tag-clicked", "open-side-view"]);
 
-const pic = computed(() => {
-  try {
-    if (props.item.Images?.[0]) {
-      return new URL(`../assets/new_images/${props.item.Images[0]}`, import.meta.url).href;
-    } else {
-      return new URL("../assets/other/placeholder.png", import.meta.url).href;
-    }
-    
-  } catch (e) {
-    console.warn("Image load failed:", props.item.Images?.[0]);
-    return new URL("../assets/other/placeholder.png", import.meta.url).href;
-  }
-});
 
 const hovered = ref(null);
 

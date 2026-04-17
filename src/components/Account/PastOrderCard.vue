@@ -25,8 +25,19 @@ defineProps({
   }
 });
 
+const imageModules = import.meta.glob(
+  '../../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
+);
+
 const getPicUrl = (imageName) => {
-  return new URL(`../../assets/new_images/${imageName}`, import.meta.url).href;
+  if (!imageName) return '';
+
+  const fullPath = `../../assets/new_images/${imageName}`;
+  return imageModules[fullPath] || '';
 };
 
 </script>

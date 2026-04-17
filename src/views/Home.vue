@@ -83,19 +83,25 @@ import CrumbsFooter from "../components/Footer.vue";
 import BakingSupplies from "../assets/home/BakingSupplies.jpg";
 import CinnamonRoll from "../assets/home/CinnamonRoll.jpg";
 
+const imageModules = import.meta.glob("../assets/new_images/**/*", {
+  eager: true,
+  import: "default",
+});
+
 const jsonData = ref(MenuData);
 
-const menu = jsonData.value["Items"].map((item) => {
+const menu = jsonData.value.Items.map((item) => {
+  const imagePath = `../assets/new_images/${item.Picture}`;
+
   return {
     ...item,
-    imageUrl: new URL(`../assets/new_images/${item.Picture}`, import.meta.url).href,
+    imageUrl: imageModules[imagePath],
   };
 });
 
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: "auto" });
 });
-
 </script>
 
 

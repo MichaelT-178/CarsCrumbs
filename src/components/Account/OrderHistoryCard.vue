@@ -35,6 +35,14 @@ const props = defineProps({
   },
 });
 
+const imageModules = import.meta.glob(
+  '../../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
+);
+
 const formatDate = (inputDate) => {
   const months = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -52,10 +60,11 @@ const limitedImages = computed(() => {
 });
 
 const getPicUrl = (imageName) => {
-  return new URL(`../../assets/new_images/${imageName}`, import.meta.url).href;
-}
+  if (!imageName) return '';
 
-
+  const fullPath = `../../assets/new_images/${imageName}`;
+  return imageModules[fullPath] || '';
+};
 
 </script>
 

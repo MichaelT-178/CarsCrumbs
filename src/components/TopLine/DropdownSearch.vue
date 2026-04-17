@@ -35,6 +35,11 @@ import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import MenuData from "../../../src/assets/new_data/menu.json";
 
+const imageModules = import.meta.glob('../../assets/new_images/**/*', {
+  eager: true,
+  import: 'default',
+});
+
 const props = defineProps({
   query: {
     type: String,
@@ -50,6 +55,33 @@ const emit = defineEmits(['close']);
 const router = useRouter();
 const menu = ref([]);
 
+
+const loadMenuData = () => {
+  const rawMenu = MenuData.MenuItems || [];
+
+  menu.value = rawMenu.map((item) => {
+    const firstImage = item.Images?.[0];
+
+    if (!firstImage) {
+      console.warn("No images for item:", item);
+      return { ...item, imageUrl: '' };
+    }
+
+    const imagePath = `../../assets/new_images/${firstImage}`;
+    const resolvedImage = imageModules[imagePath];
+
+    if (!resolvedImage) {
+      console.warn("Missing image:", imagePath);
+    }
+
+    return {
+      ...item,
+      imageUrl: resolvedImage || '',
+    };
+  });
+};
+
+
 const filteredItems = computed(() => {
   if (!props.query) return [];
 
@@ -63,20 +95,9 @@ const filteredItems = computed(() => {
         (item.Alternative && item.Alternative.toLowerCase().includes(word))
       )
     )
-    .map(item => {
-      let imageUrl = '';
-
-      try {
-        imageUrl = new URL(`../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
-      } catch (e) {
-        console.warn('Image not found:', item.Images[0]);
-        imageUrl = '';
-      }
-
-      return { ...item, imageUrl };
-    })
     .slice(0, 5);
 });
+
 
 const handleClick = (item) => {
   let path = item.Route;
@@ -87,10 +108,6 @@ const handleClick = (item) => {
 
   router.push(path);
   emit('close');
-};
-
-const loadMenuData = () => {
-  menu.value = MenuData.MenuItems || [];
 };
 
 onMounted(() => {

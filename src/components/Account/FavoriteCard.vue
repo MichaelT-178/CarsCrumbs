@@ -79,9 +79,18 @@ const {
   id: itemId
 } = props.item;
 
-const getPicUrl = computed(() =>
-  new URL(`../../assets/new_images/${Images[0]}`, import.meta.url).href
+const imageModules = import.meta.glob(
+  '../../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
 );
+
+const getPicUrl = computed(() => {
+  const fullPath = `../../assets/new_images/${Images[0]}`;
+  return imageModules[fullPath] || '';
+});
 
 const isFavorite = computed(() => favoritesStore.isFavorite(itemId));
 

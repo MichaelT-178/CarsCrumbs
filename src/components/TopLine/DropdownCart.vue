@@ -73,6 +73,14 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 
+const imageModules = import.meta.glob(
+  '../../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
+);
+
 const goToOrderView = () => {
   router.push('/order');
   emit('close');
@@ -90,7 +98,10 @@ const goToCheckoutView = () => {
 
 const getPicture = (item) => {
   return computed(() => {
-    return new URL(`../../assets/new_images/${item.Images[0]}`, import.meta.url).href;
+    if (!item.Images?.length) return '';
+
+    const fullPath = `../../assets/new_images/${item.Images[0]}`;
+    return imageModules[fullPath] || '';
   });
 };
 

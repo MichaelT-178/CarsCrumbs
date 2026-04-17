@@ -62,15 +62,19 @@ const props = defineProps({
   },
 });
 
-const pic = computed(() => {
-  const imageName = props.item.Images[0];
-  
-  try {
-    return new URL(`../assets/new_images/${imageName}`, import.meta.url).href;
-  } catch (e) {
-    console.warn("Image not found:", imageName);
-    return '';
+const imageModules = import.meta.glob(
+  '../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
   }
+);
+
+const pic = computed(() => {
+  if (!props.item.Images?.length) return '';
+
+  const fullPath = `../assets/new_images/${props.item.Images[0]}`;
+  return imageModules[fullPath] || '';
 });
 
 

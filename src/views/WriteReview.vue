@@ -143,6 +143,19 @@ const starRating = ref(0);
 const recommend = ref("");
 const router = useRouter();
 
+const imageModules = import.meta.glob(
+  '../assets/new_images/**/*',
+  {
+    eager: true,
+    import: 'default'
+  }
+);
+
+const getImageUrl = (path) => {
+  const fullPath = `../assets/new_images/${path}`;
+  return imageModules[fullPath] || '';
+};
+
 // Validation messages and styles
 const starRatingError = ref(false);
 const displayNameError = ref(false);
@@ -160,12 +173,7 @@ const loadReviewItem = () => {
   if (item) {
     selectedItem.value = item;
 
-    try {
-      imageUrl.value = new URL(`../assets/new_images/${item.Images[0]}`, import.meta.url).href;
-    } catch (e) {
-      console.error("Failed to load image:", item.Images[0]);
-      imageUrl.value = "";
-    }
+    imageUrl.value = getImageUrl(item.Images?.[0]);
   } else {
     console.error(`Item with name ${props.itemName} not found in MenuData.`);
   }
