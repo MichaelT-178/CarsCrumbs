@@ -6,12 +6,12 @@
             "item": {
                 "id": 3,
                 "display_name": "Blueberry Zucchini",
-                "name": "Blueberry_Zucchini",
+                "name": "blueberry-zucchini",
                 "avg_num_of_stars": 5.0,
                 "num_of_ratings": 1,
                 "emoji": "🫐",
                 "display_price": "$6.00",
-                "route": "/item/Blueberry_Zucchini",
+                "route": "/item/blueberry-zucchini",
                 "image": {
                     "id": 6,
                     "original_filename": "BlueberryZucchini/BlueberryZucchini1.jpg"
@@ -27,7 +27,7 @@
             "star_rating": 5,
             "date_added": "2025-01-08",
             "written_review": "Super yum!",
-            "item_name": "Blueberry_Zucchini",
+            "item_name": "blueberry-zucchini",
             "would_recommend": true
         },
         {
@@ -37,7 +37,7 @@
             "star_rating": 5,
             "date_added": "2025-01-14",
             "written_review": "",
-            "item_name": "Brown_Butter_Cookies",
+            "item_name": "brown-butter-cookies",
             "would_recommend": true
         }
     ]

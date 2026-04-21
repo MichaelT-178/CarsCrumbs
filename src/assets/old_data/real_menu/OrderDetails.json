@@ -2,7 +2,7 @@
     "OrderDetails": [
         {
             "name": "Blueberry Zucchini",
-            "route": "/item/Blueberry_Zucchini",
+            "route": "/item/blueberry-zucchini",
             "emoji": "🫐", 
             "cost": 8.0,   
             "date": "7-24-2024",  
@@ -12,7 +12,7 @@
         },
         {
             "name": "Brown Butter Cookies",
-            "route": "/item/Brown_Butter_Cookies",
+            "route": "/item/brown-butter-cookies",
             "emoji": "🍪", 
             "cost": 25.0,
             "date": "8-6-2024",

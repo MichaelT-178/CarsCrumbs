@@ -8,7 +8,7 @@
             "Rating": 5,
             "Text": "Wow this tasted so amazing everyone go to Cars Crumbs!!!",
             "Item": "Blueberry Zucchini",
-            "Route": "/item/Blueberry_Zucchini"
+            "Route": "/item/blueberry-zucchini"
         },
         {
             "id": 2,
@@ -18,7 +18,7 @@
             "Rating": 5,
             "Text": "So sweet and fluffy. Everyone should go try cars crumbs fr fr.",
             "Item": "Blueberry Zucchini",
-            "Route": "/item/Blueberry_Zucchini"
+            "Route": "/item/blueberry-zucchini"
         }
     ]
 }

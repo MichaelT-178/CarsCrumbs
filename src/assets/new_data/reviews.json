@@ -1,7 +1,7 @@
 {
     "reviews": [
         {
-            "item_name": "Ginger_Molasses_Cookies",
+            "item_name": "ginger-molasses-cookies",
             "reviews": [
                 {
                     "id": 2,
@@ -28,14 +28,14 @@
             }
         },
         {
-            "item_name": "Banana_Bread",
+            "item_name": "banana-bread",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Blueberry_Zucchini",
+            "item_name": "blueberry-zucchini",
             "reviews": [
                 {
                     "id": 9,
@@ -62,7 +62,7 @@
             }
         },
         {
-            "item_name": "Brown_Butter_Cookies",
+            "item_name": "brown-butter-cookies",
             "reviews": [],
             "review_stats": {
                 "avg_num_of_stars": 5.0,
@@ -79,7 +79,7 @@
             }
         },
         {
-            "item_name": "Cinnamon_Rolls",
+            "item_name": "cinnamon-rolls",
             "reviews": [
                 {
                     "id": 4,
@@ -106,70 +106,70 @@
             }
         },
         {
-            "item_name": "Chocolate_Donut",
+            "item_name": "chocolate-donut",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Gingerbread_Latte_Cookies",
+            "item_name": "gingerbread-latte-cookies",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "French_Bread",
+            "item_name": "french-bread",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Pumpkin_Donuts",
+            "item_name": "pumpkin-donuts",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Apple_Pie",
+            "item_name": "apple-pie",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Cake_Pops",
+            "item_name": "cake-pops",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Plain_Bagel",
+            "item_name": "plain-bagel",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Italian_Bread",
+            "item_name": "italian-bread",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Sugar_Cookie",
+            "item_name": "sugar-cookie",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."
             }
         },
         {
-            "item_name": "Vanilla_Cake",
+            "item_name": "vanilla-cake",
             "reviews": [],
             "review_stats": {
                 "error": "No review stats found for this item."

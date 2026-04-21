@@ -40,13 +40,13 @@
         {
             "id": 1,
             "DisplayName": "Ginger Molasses Cookies",
-            "Name": "Ginger_Molasses_Cookies",
+            "Name": "ginger-molasses-cookies",
             "Emoji": "🍯",
             "DisplayPrice": "$12.00 - $24.00",
             "Images": [
                 "GingerMolasses/GingerMolasses1.jpg"
             ],
-            "Route": "/item/Ginger_Molasses_Cookies",
+            "Route": "/item/ginger-molasses-cookies",
             "Tags": [
                 "🍪 Cookie"
             ],
@@ -67,7 +67,7 @@
         {
             "id": 2,
             "DisplayName": "Banana Bread",
-            "Name": "Banana_Bread",
+            "Name": "banana-bread",
             "Emoji": "🍌",
             "DisplayPrice": "$8.00 - $16.00",
             "Images": [
@@ -75,7 +75,7 @@
                 "BananaBread/BananaBread2.jpg",
                 "BananaBread/BananaBread3.jpg"
             ],
-            "Route": "/item/Banana_Bread",
+            "Route": "/item/banana-bread",
             "Tags": [
                 "🥧 Baked Good"
             ],
@@ -96,13 +96,13 @@
         {
             "id": 3,
             "DisplayName": "Blueberry Zucchini",
-            "Name": "Blueberry_Zucchini",
+            "Name": "blueberry-zucchini",
             "Emoji": "🫐",
             "DisplayPrice": "$6.00",
             "Images": [
                 "BlueberryZucchini/BlueberryZucchini1.jpg"
             ],
-            "Route": "/item/Blueberry_Zucchini",
+            "Route": "/item/blueberry-zucchini",
             "Tags": [
                 "🥧 Baked Good"
             ],
@@ -119,7 +119,7 @@
         {
             "id": 4,
             "DisplayName": "Brown Butter Cookies",
-            "Name": "Brown_Butter_Cookies",
+            "Name": "brown-butter-cookies",
             "Emoji": "🍪",
             "DisplayPrice": "$15.00 - $25.00",
             "Images": [
@@ -127,7 +127,7 @@
                 "BrownButterCookies/BrownButterCookies2.jpg",
                 "BrownButterCookies/BrownButterCookies3.jpg"
             ],
-            "Route": "/item/Brown_Butter_Cookies",
+            "Route": "/item/brown-butter-cookies",
             "Tags": [
                 "🍪 Cookie"
             ],
@@ -148,14 +148,14 @@
         {
             "id": 5,
             "DisplayName": "Cinnamon Rolls",
-            "Name": "Cinnamon_Rolls",
+            "Name": "cinnamon-rolls",
             "Emoji": "🍂",
             "DisplayPrice": "$5.00 - $30.00",
             "Images": [
                 "CinnamonRolls/CinnamonRolls1.jpg",
                 "CinnamonRolls/CinnamonRolls2.jpg"
             ],
-            "Route": "/item/Cinnamon_Rolls",
+            "Route": "/item/cinnamon-rolls",
             "Tags": [
                 "🥧 Baked Good"
             ],
@@ -180,14 +180,14 @@
         {
             "id": 6,
             "DisplayName": "Chocolate Donuts",
-            "Name": "Chocolate_Donut",
+            "Name": "chocolate-donut",
             "Emoji": "🍫",
             "DisplayPrice": "$10.00-$20.00",
             "Images": [
                 "ChocolateDonuts/ChocolateDonuts1.jpg",
                 "ChocolateDonuts/ChocolateDonuts2.jpg"
             ],
-            "Route": "/item/Chocolate_Donut",
+            "Route": "/item/chocolate-donut",
             "Tags": [
                 "🍩 Donut"
             ],
@@ -208,13 +208,13 @@
         {
             "id": 7,
             "DisplayName": "Gingerbread Latte Cookies",
-            "Name": "Gingerbread_Latte_Cookies",
+            "Name": "gingerbread-latte-cookies",
             "Emoji": "☕",
             "DisplayPrice": "$10.00 - $20.00",
             "Images": [
                 "GingerbreadLatte/GingerbreadLatte1.jpg"
             ],
-            "Route": "/item/Gingerbread_Latte_Cookies",
+            "Route": "/item/gingerbread-latte-cookies",
             "Tags": [
                 "🍪 Cookie"
             ],
@@ -235,13 +235,13 @@
         {
             "id": 8,
             "DisplayName": "French Bread",
-            "Name": "French_Bread",
+            "Name": "french-bread",
             "Emoji": "☁️",
             "DisplayPrice": "$5.00",
             "Images": [
                 "FrenchBread/FrenchBread1.jpg"
             ],
-            "Route": "/item/French_Bread",
+            "Route": "/item/french-bread",
             "Tags": [
                 "🥖 Bread"
             ],
@@ -258,7 +258,7 @@
         {
             "id": 9,
             "DisplayName": "Pumpkin Donuts",
-            "Name": "Pumpkin_Donuts",
+            "Name": "pumpkin-donuts",
             "Emoji": "🎃",
             "DisplayPrice": "$2.00 - $15.00",
             "Images": [
@@ -266,7 +266,7 @@
                 "PumpkinDonuts/PumpkinDonuts2.jpg",
                 "PumpkinDonuts/PumpkinDonuts3.jpg"
             ],
-            "Route": "/item/Pumpkin_Donuts",
+            "Route": "/item/pumpkin-donuts",
             "Tags": [
                 "🍩 Donut"
             ],
@@ -291,13 +291,13 @@
         {
             "id": 10,
             "DisplayName": "Apple Pie",
-            "Name": "Apple_Pie",
+            "Name": "apple-pie",
             "Emoji": "🍎",
             "DisplayPrice": "$3.00 - $10.00",
             "Images": [
                 "ApplePie/ApplePie1.jpg"
             ],
-            "Route": "/item/Apple_Pie",
+            "Route": "/item/apple-pie",
             "Tags": [
                 "🥧 Baked Good"
             ],
@@ -318,14 +318,14 @@
         {
             "id": 11,
             "DisplayName": "Cake Pops",
-            "Name": "Cake_Pops",
+            "Name": "cake-pops",
             "Emoji": "🍰",
             "DisplayPrice": "$10.00",
             "Images": [
                 "CakePops/CakePops1.jpg",
                 "CakePops/CakePops2.jpg"
             ],
-            "Route": "/item/Cake_Pops",
+            "Route": "/item/cake-pops",
             "Tags": [
                 "🍭 Sweets"
             ],
@@ -346,14 +346,14 @@
         {
             "id": 12,
             "DisplayName": "Plain Bagels",
-            "Name": "Plain_Bagel",
+            "Name": "plain-bagel",
             "Emoji": "🥯",
             "DisplayPrice": "$20.00 - $30.00",
             "Images": [
                 "PlainBagel/PlainBagel1.jpg",
                 "PlainBagel/PlainBagel2.jpg"
             ],
-            "Route": "/item/Plain_Bagel",
+            "Route": "/item/plain-bagel",
             "Tags": [
                 "🥖 Bread",
                 "🥯 Bagel"
@@ -375,7 +375,7 @@
         {
             "id": 13,
             "DisplayName": "Italian Bread",
-            "Name": "Italian_Bread",
+            "Name": "italian-bread",
             "Emoji": "☁️",
             "DisplayPrice": "$7.00 - $14.00",
             "Images": [
@@ -383,7 +383,7 @@
                 "ItalianBread/ItalianBread2.jpg",
                 "ItalianBread/ItalianBread3.jpg"
             ],
-            "Route": "/item/Italian_Bread",
+            "Route": "/item/italian-bread",
             "Tags": [
                 "🥖 Bread"
             ],
@@ -404,13 +404,13 @@
         {
             "id": 14,
             "DisplayName": "Sugar Cookies",
-            "Name": "Sugar_Cookie",
+            "Name": "sugar-cookie",
             "Emoji": "🍪",
             "DisplayPrice": "$15.00 - $25.00",
             "Images": [
                 "SugarCookie/SugarCookie1.jpg"
             ],
-            "Route": "/item/Sugar_Cookie",
+            "Route": "/item/sugar-cookie",
             "Tags": [
                 "🍪 Cookie"
             ],
@@ -431,14 +431,14 @@
         {
             "id": 15,
             "DisplayName": "Vanilla Cake",
-            "Name": "Vanilla_Cake",
+            "Name": "vanilla-cake",
             "Emoji": "🎂",
             "DisplayPrice": "$15.00",
             "Images": [
                 "VanillaCake/VanillaCake1.jpg",
                 "VanillaCake/VanillaCake2.jpg"
             ],
-            "Route": "/item/Vanilla_Cake",
+            "Route": "/item/vanilla-cake",
             "Tags": [],
             "Alternative": "",
             "Instagram": true,
