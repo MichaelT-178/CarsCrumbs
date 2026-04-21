@@ -20,7 +20,7 @@
       </span>
       <span v-else class="shortcut-text"></span>
 
-      <DropdownSearch
+      <SearchDropdown
         :query="searchQuery"
         :show="showDropdown"
         @close="hideDropdown"
@@ -52,7 +52,7 @@
           </span>
         </div>
         
-        <DropdownCart 
+        <CartDropdown 
           v-model:visible="showCartHighlight"
           @close="hideDropdown"
         />
@@ -66,7 +66,7 @@
       >
         <span class="material-symbols-outlined profile-person-icon">person</span>
 
-        <DropdownProfile 
+        <ProfileDropdown 
           v-model:visible="showProfileHighlight" 
           @close="hideDropdown" />
       </section>
@@ -125,9 +125,9 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import logo from "../assets/logos/purple-logo.png";
 import { useCartStore } from "../stores/cart.js";
-import DropdownSearch from "./TopLine/DropdownSearch.vue";
-import DropdownCart from './TopLine/DropdownCart.vue';
-import DropdownProfile from './TopLine/DropdownProfile.vue';
+import SearchDropdown from "./TopLine/SearchDropdown.vue";
+import CartDropdown from './TopLine/CartDropdown.vue';
+import ProfileDropdown from './TopLine/ProfileDropdown.vue';
 
 const cart = useCartStore();
 
