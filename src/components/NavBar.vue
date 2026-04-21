@@ -9,7 +9,10 @@
         class="top-search-bar" 
         placeholder="Search"
         @focus="showDropdown = true"
-        @keydown.enter="handleSearchEnter"
+
+        @keydown.down.prevent="moveDown"
+        @keydown.up.prevent="moveUp"
+        @keydown.enter.prevent="handleEnter"
       />
       <span 
         v-if="searchQuery" 
@@ -21,10 +24,11 @@
       <span v-else class="shortcut-text"></span>
 
       <SearchDropdown
-        :query="searchQuery"
+        :items="filteredItems"
         :show="showDropdown"
+        :activeIndex="keyboardIndex"
+        @updateIndex="keyboardIndex = $event"
         @close="hideDropdown"
-        @keydown.enter="handleSearchEnter"
       />
 
     </div>
@@ -121,18 +125,22 @@
 
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import logo from "../assets/logos/purple-logo.png";
 import { useCartStore } from "../stores/cart.js";
 import SearchDropdown from "./TopLine/SearchDropdown.vue";
 import CartDropdown from './TopLine/CartDropdown.vue';
 import ProfileDropdown from './TopLine/ProfileDropdown.vue';
+import MenuData from "../assets/new_data/menu.json";
+
+const imageModules = import.meta.glob('../assets/new_images/**/*', {
+  eager: true,
+  import: 'default',
+});
 
 const cart = useCartStore();
-
 const router = useRouter();
-
 const emit = defineEmits(['update:visible']);
 
 const showCartOverlay = ref(false);
@@ -142,8 +150,46 @@ const showProfileHighlight = ref(false);
 
 const searchQuery = ref('');
 const showDropdown = ref(false);
-const filteredResults = ref([]);
 const searchInput = ref(null);
+const keyboardIndex = ref(-1);
+
+const menu = ref([]);
+
+const loadMenuData = () => {
+  const rawMenu = MenuData.MenuItems || [];
+
+  menu.value = rawMenu.map((item) => {
+    const firstImage = item.Images?.[0];
+
+    if (!firstImage) {
+      return { ...item, imageUrl: '' };
+    }
+
+    const imagePath = `../assets/new_images/${firstImage}`;
+    const resolvedImage = imageModules[imagePath];
+
+    return {
+      ...item,
+      imageUrl: resolvedImage || '',
+    };
+  });
+};
+
+const filteredItems = computed(() => {
+  if (!searchQuery.value.trim()) return [];
+
+  const queryWords = searchQuery.value.toLowerCase().trim().split(/\s+/);
+
+  return menu.value
+    .filter((item) =>
+      queryWords.some((word) =>
+        item.DisplayName.toLowerCase().includes(word) ||
+        item.Tags.some((tag) => tag.toLowerCase().includes(word)) ||
+        (item.Alternative && item.Alternative.toLowerCase().includes(word))
+      )
+    )
+    .slice(0, 5);
+});
 
 const hideDropdown = () => {
   showDropdown.value = false;
@@ -152,24 +198,68 @@ const hideDropdown = () => {
   showProfileOverlay.value = false;
   showProfileHighlight.value = false;
   searchQuery.value = "";
-  filteredResults.value = [];
+  keyboardIndex.value = -1;
 };
 
 const toggleCartDropdown = (state) => {
   showCartHighlight.value = state;
-  // showCartOverlay.value = state; //UNCOMMENT THIS LINE TO DISPLAY OVERLAY
   emit('update:visible', state);
 };
 
 const toggleProfileDropdown = (state) => {
   showProfileHighlight.value = state;
-  // showProfileOverlay.value = state; //UNCOMMENT THIS LINE TO DISPLAY OVERLAY
   emit('update:visible', state);
+};
+
+const moveDown = () => {
+  if (!filteredItems.value.length) return;
+
+  if (keyboardIndex.value < filteredItems.value.length - 1) {
+    keyboardIndex.value++;
+  } else {
+    keyboardIndex.value = 0;
+  }
+};
+
+const moveUp = () => {
+  if (!filteredItems.value.length) return;
+
+  if (keyboardIndex.value > 0) {
+    keyboardIndex.value--;
+  } else {
+    keyboardIndex.value = filteredItems.value.length - 1;
+  }
+};
+
+const handleEnter = () => {
+  if (keyboardIndex.value >= 0 && filteredItems.value[keyboardIndex.value]) {
+    let path = filteredItems.value[keyboardIndex.value].Route;
+
+    if (!path.startsWith('/')) {
+      path = '/' + path;
+    }
+
+    router.push(path);
+    hideDropdown();
+    searchInput.value?.blur();
+    return;
+  }
+
+  if (searchQuery.value.trim()) {
+    router.push({
+      name: 'SearchResults',
+      query: { search_query: searchQuery.value.trim() },
+    });
+
+    hideDropdown();
+    searchInput.value?.blur();
+  }
 };
 
 const clearSearchField = () => {
   searchQuery.value = "";
-  searchInput.value.blur();
+  keyboardIndex.value = -1;
+  searchInput.value?.blur();
 };
 
 const keysPressed = new Set();
@@ -178,17 +268,12 @@ const handleKeydown = (event) => {
   keysPressed.add(event.code);
 
   if (
-    (keysPressed.has('AltLeft') || keysPressed.has('AltRight') 
-    || keysPressed.has('MetaLeft') || keysPressed.has('MetaRight'))
-    && keysPressed.has('KeyS')
+    (keysPressed.has('AltLeft') || keysPressed.has('AltRight') ||
+     keysPressed.has('MetaLeft') || keysPressed.has('MetaRight')) &&
+    keysPressed.has('KeyS')
   ) {
     event.preventDefault();
-
-    if (searchInput.value) {
-      searchInput.value.focus();
-    } else {
-      console.error("searchInput is null");
-    }
+    searchInput.value?.focus();
   }
 };
 
@@ -199,19 +284,13 @@ const handleKeyup = (event) => {
   }
 };
 
-const handleSearchEnter = () => {
-  if (searchQuery.value.trim()) {
-    router.push({
-      name: 'SearchResults',
-      query: { search_query: searchQuery.value.trim() },
-    });
-
-    hideDropdown();
-    searchInput.value.blur();
-  }
-};
+watch(searchQuery, (newValue) => {
+  keyboardIndex.value = -1;
+  showDropdown.value = !!newValue.trim();
+});
 
 onMounted(() => {
+  loadMenuData();
   window.addEventListener('keydown', handleKeydown);
   window.addEventListener('keyup', handleKeyup);
 });

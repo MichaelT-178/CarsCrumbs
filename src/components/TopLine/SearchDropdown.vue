@@ -1,14 +1,16 @@
 <template>
   <div 
-    v-if="show && filteredItems.length" 
+    v-if="show && items.length" 
     class="dropdown-menu"
   >
     <p class="menu-title">Menu</p>
     <ul>
       <li 
-        v-for="(item, index) in filteredItems" 
+        v-for="(item, index) in items" 
         :key="index" 
         class="dropdown-item"
+        :class="{ active: index === activeIndex }"
+        @mouseenter="emit('updateIndex', index)"
         @click="handleClick(item)"
       >
         <img 
@@ -29,75 +31,26 @@
   </div>
 </template>
 
-
 <script setup>
-import { computed, ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import MenuData from "../../../src/assets/new_data/menu.json";
-
-const imageModules = import.meta.glob('../../assets/new_images/**/*', {
-  eager: true,
-  import: 'default',
-});
 
 const props = defineProps({
-  query: {
-    type: String,
-    default: '',
+  items: {
+    type: Array,
+    default: () => [],
   },
   show: {
     type: Boolean,
     default: false,
   },
+  activeIndex: {
+    type: Number,
+    default: -1,
+  },
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'updateIndex']);
 const router = useRouter();
-const menu = ref([]);
-
-
-const loadMenuData = () => {
-  const rawMenu = MenuData.MenuItems || [];
-
-  menu.value = rawMenu.map((item) => {
-    const firstImage = item.Images?.[0];
-
-    if (!firstImage) {
-      console.warn("No images for item:", item);
-      return { ...item, imageUrl: '' };
-    }
-
-    const imagePath = `../../assets/new_images/${firstImage}`;
-    const resolvedImage = imageModules[imagePath];
-
-    if (!resolvedImage) {
-      console.warn("Missing image:", imagePath);
-    }
-
-    return {
-      ...item,
-      imageUrl: resolvedImage || '',
-    };
-  });
-};
-
-
-const filteredItems = computed(() => {
-  if (!props.query) return [];
-
-  const queryWords = props.query.toLowerCase().split(' ');
-
-  return menu.value
-    .filter(item =>
-      queryWords.some(word =>
-        item.DisplayName.toLowerCase().includes(word) ||
-        item.Tags.some(tag => tag.toLowerCase().includes(word)) ||
-        (item.Alternative && item.Alternative.toLowerCase().includes(word))
-      )
-    )
-    .slice(0, 5);
-});
-
 
 const handleClick = (item) => {
   let path = item.Route;
@@ -109,27 +62,19 @@ const handleClick = (item) => {
   router.push(path);
   emit('close');
 };
-
-onMounted(() => {
-  loadMenuData();
-});
-
 </script>
-
 
 <style scoped>
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
-  width: 100%;
   width: 485px;
   background-color: #F2F2F2;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   z-index: 1003;
   padding: 10px 0;
-  /* border: 1px solid #F2F2F2; */
   border-radius: 4px;
 }
 
@@ -138,7 +83,6 @@ onMounted(() => {
   font-family: "Roboto Slab", cursive;
   margin-left: 15px;
   margin-right: 15px;
-  /* font-weight: 600; */
   padding-bottom: 0px;
   border-bottom: 1.5px solid #c7c7c7;
 }
@@ -154,13 +98,8 @@ onMounted(() => {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.dropdown-item:focus {
-  outline: 2px solid #FFD700;
-  background-color: #FFD700;
-  color: black;
-}
-
-.dropdown-item:hover {
+.dropdown-item:hover,
+.dropdown-item.active {
   background-color: #dbd8d8;
   color: black;
 }
@@ -188,5 +127,4 @@ onMounted(() => {
   color: #5a5959;
   margin-top: 2px;
 }
-
 </style>
