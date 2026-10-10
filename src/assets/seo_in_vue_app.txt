@@ -1,0 +1,115 @@
+1. Install the following library.
+
+npm install @unhead/vue
+
+2. In main.js
+
+import { createApp } from 'vue'
+import { createHead } from '@unhead/vue/client'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+const head = createHead()
+
+app.use(router)
+app.use(head)
+
+app.mount('#app')
+
+3. In App.vue add the following 
+
+<template>
+  <RouterView />
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useHead, useSeoMeta } from '@unhead/vue'
+
+const route = useRoute()
+
+const title = 'Example Website'
+
+const description =
+  'Example Website is a platform offering useful information, resources, and services to its visitors.'
+
+const image =
+  'https://example.com/screenshots/CurrentPreview.png'
+
+const canonical = computed(() =>
+  `https://example.com${route.path}`
+)
+
+useSeoMeta({
+  title,
+  description,
+
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: image,
+  ogImageWidth: 1200,
+  ogImageHeight: 627,
+  ogImageType: 'image/png',
+  ogUrl: canonical,
+  ogType: 'website',
+  ogSiteName: 'Example Website',
+
+  twitterCard: 'summary_large_image',
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: image
+})
+
+useHead({
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.png'
+    },
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+      sizes: '32x32'
+    },
+    {
+      rel: 'canonical',
+      href: canonical
+    }
+  ]
+})
+</script>
+
+
+4. In index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Example Website</title>
+
+  <meta
+    name="description"
+    content="Example Website is a platform offering useful information, resources, and services to its visitors."
+  />
+
+  <link rel="icon" href="/favicon.ico" />
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
+
+5. Maybe add a sitemap
