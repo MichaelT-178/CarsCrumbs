@@ -17,6 +17,8 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useHead, useSeoMeta } from '@unhead/vue';
 import NavBar from "./components/NavBar.vue";
 import MobileNavBar from "./components/MobileNavBar.vue";
 import { useAuthStore } from './stores/auth';
@@ -25,7 +27,59 @@ import PurpleLogo from './assets/logos/purple-logo.png';
 const isMobile = ref(window.innerWidth <= 800);
 
 const authStore = useAuthStore();
+const route = useRoute();
 
+// SEO
+const title = 'CarsCrumbs';
+
+const description = 'CarsCrumbs is a fictional bakery based in Raleigh, North Carolina, offering delicious baked goods.';
+
+const image = 'https://carscrumbs.com/screenshots/CarsCrumbsPreview.png';
+
+const canonical = computed(() =>
+  `https://carscrumbs.com${route.path}`
+);
+
+useSeoMeta({
+  title,
+  description,
+
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: image,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageType: 'image/png',
+  ogUrl: canonical,
+  ogType: 'website',
+  ogSiteName: 'CarsCrumbs',
+
+  twitterCard: 'summary_large_image',
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: image
+});
+
+useHead({
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: '/favicon.png'
+    },
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+      sizes: '32x32'
+    },
+    {
+      rel: 'canonical',
+      href: canonical
+    }
+  ]
+});
+
+// Existing functionality
 const updateWindowSize = () => {
   isMobile.value = window.innerWidth <= 800;
 };
